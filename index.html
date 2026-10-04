@@ -107,11 +107,207 @@
 </footer>
 
 <script>
+const translations = {
+  en: {
+    pill: "INTERNATIONAL BUSINESS FINANCING",
+    title: "Capital for your next <strong>business move.</strong>",
+    hero: "Access a streamlined digital financing experience built for eligible businesses seeking growth capital from <b>$20,000 to $50,000.</b>",
+    start: "Start an application",
+    calculate: "Calculate payment",
+    overview: "FINANCING OVERVIEW",
+    available: "Available financing range",
+    interest: "Illustrative annual interest",
+    term: "Illustrative term",
+    estimate: "Estimate your payment",
+    financing: "FINANCING",
+    designed: "Designed around your business.",
+    process: "HOW IT WORKS",
+    why: "THE GLOBALBRIDGE APPROACH",
+    apply: "READY TO START?",
+    signin: "Sign in",
+    applyNow: "Apply now"
+  },
+
+  pt: {
+    pill: "FINANCIAMENTO EMPRESARIAL INTERNACIONAL",
+    title: "Capital para o seu próximo <strong>movimento empresarial.</strong>",
+    hero: "Aceda a uma experiência de financiamento digital criada para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>",
+    start: "Iniciar candidatura",
+    calculate: "Calcular pagamento",
+    overview: "VISÃO GERAL DO FINANCIAMENTO",
+    available: "Intervalo de financiamento disponível",
+    interest: "Taxa de juro anual indicativa",
+    term: "Prazo indicativo",
+    estimate: "Estimar o seu pagamento",
+    financing: "FINANCIAMENTO",
+    designed: "Pensado para o seu negócio.",
+    process: "COMO FUNCIONA",
+    why: "A ABORDAGEM GLOBALBRIDGE",
+    apply: "PRONTO PARA COMEÇAR?",
+    signin: "Iniciar sessão",
+    applyNow: "Candidatar-se"
+  },
+
+  vi: {
+    pill: "TÀI TRỢ DOANH NGHIỆP QUỐC TẾ",
+    title: "Nguồn vốn cho <strong>bước tiến kinh doanh tiếp theo.</strong>",
+    hero: "Tiếp cận trải nghiệm tài trợ kỹ thuật số dành cho các doanh nghiệp đủ điều kiện đang tìm kiếm nguồn vốn tăng trưởng từ <b>$20.000 đến $50.000.</b>",
+    start: "Bắt đầu hồ sơ",
+    calculate: "Tính khoản thanh toán",
+    overview: "TỔNG QUAN TÀI TRỢ",
+    available: "Khoản tài trợ khả dụng",
+    interest: "Lãi suất hàng năm minh họa",
+    term: "Thời hạn minh họa",
+    estimate: "Ước tính khoản thanh toán",
+    financing: "TÀI TRỢ",
+    designed: "Được thiết kế cho doanh nghiệp của bạn.",
+    process: "CÁCH THỨC HOẠT ĐỘNG",
+    why: "CÁCH TIẾP CẬN CỦA GLOBALBRIDGE",
+    apply: "SẴN SÀNG BẮT ĐẦU?",
+    signin: "Đăng nhập",
+    applyNow: "Đăng ký ngay"
+  },
+
+  fa: {
+    pill: "تأمین مالی کسب‌وکار بین‌المللی",
+    title: "سرمایه برای <strong>گام بعدی کسب‌وکار شما.</strong>",
+    hero: "به یک تجربه تأمین مالی دیجیتال برای کسب‌وکارهای واجد شرایط دسترسی داشته باشید و برای سرمایه رشد از <b>$20,000 تا $50,000</b> درخواست دهید.",
+    start: "شروع درخواست",
+    calculate: "محاسبه پرداخت",
+    overview: "نمای کلی تأمین مالی",
+    available: "محدوده تأمین مالی",
+    interest: "نرخ سود سالانه نمونه",
+    term: "مدت نمونه",
+    estimate: "برآورد پرداخت شما",
+    financing: "تأمین مالی",
+    designed: "طراحی‌شده برای کسب‌وکار شما.",
+    process: "نحوه کار",
+    why: "رویکرد GLOBALBRIDGE",
+    apply: "آماده شروع هستید؟",
+    signin: "ورود",
+    applyNow: "درخواست اکنون"
+  },
+
+  id: {
+    pill: "PEMBIAYAAN BISNIS INTERNASIONAL",
+    title: "Modal untuk <strong>langkah bisnis Anda berikutnya.</strong>",
+    hero: "Nikmati pengalaman pembiayaan digital yang dirancang untuk bisnis yang memenuhi syarat dan membutuhkan modal pertumbuhan sebesar <b>$20.000 hingga $50.000.</b>",
+    start: "Mulai pengajuan",
+    calculate: "Hitung pembayaran",
+    overview: "RINGKASAN PEMBIAYAAN",
+    available: "Kisaran pembiayaan tersedia",
+    interest: "Suku bunga tahunan ilustratif",
+    term: "Jangka waktu ilustratif",
+    estimate: "Perkirakan pembayaran",
+    financing: "PEMBIAYAAN",
+    designed: "Dirancang untuk bisnis Anda.",
+    process: "CARA KERJA",
+    why: "PENDEKATAN GLOBALBRIDGE",
+    apply: "SIAP UNTUK MEMULAI?",
+    signin: "Masuk",
+    applyNow: "Ajukan sekarang"
+  },
+
+  fr: {
+    pill: "FINANCEMENT D'ENTREPRISE INTERNATIONAL",
+    title: "Des capitaux pour votre <strong>prochain projet professionnel.</strong>",
+    hero: "Accédez à une expérience de financement numérique conçue pour les entreprises éligibles recherchant un capital de croissance de <b>$20 000 à $50 000.</b>",
+    start: "Commencer une demande",
+    calculate: "Calculer le paiement",
+    overview: "APERÇU DU FINANCEMENT",
+    available: "Montant de financement disponible",
+    interest: "Taux d'intérêt annuel indicatif",
+    term: "Durée indicative",
+    estimate: "Estimer votre paiement",
+    financing: "FINANCEMENT",
+    designed: "Conçu pour votre entreprise.",
+    process: "COMMENT ÇA MARCHE",
+    why: "L'APPROCHE GLOBALBRIDGE",
+    apply: "PRÊT À COMMENCER ?",
+    signin: "Se connecter",
+    applyNow: "Faire une demande"
+  },
+
+  fi: {
+    pill: "KANSAINVÄLINEN YRITYSRAHOITUS",
+    title: "Pääomaa yrityksesi <strong>seuraavaan askeleeseen.</strong>",
+    hero: "Käytä digitaalista rahoituspalvelua, joka on suunniteltu tukikelpoisille yrityksille, jotka etsivät kasvurahoitusta <b>$20 000–$50 000.</b>",
+    start: "Aloita hakemus",
+    calculate: "Laske maksu",
+    overview: "RAHOITUKSEN YLEISKATSAUS",
+    available: "Saatavilla oleva rahoitus",
+    interest: "Ohjeellinen vuosikorko",
+    term: "Ohjeellinen laina-aika",
+    estimate: "Arvioi maksusi",
+    financing: "RAHOITUS",
+    designed: "Suunniteltu yrityksellesi.",
+    process: "NÄIN SE TOIMII",
+    why: "GLOBALBRIDGEN LÄHESTYMISTAPA",
+    apply: "VALMIS ALOITTAMAAN?",
+    signin: "Kirjaudu sisään",
+    applyNow: "Hae nyt"
+  },
+
+  es: {
+    pill: "FINANCIACIÓN EMPRESARIAL INTERNACIONAL",
+    title: "Capital para su próximo <strong>movimiento empresarial.</strong>",
+    hero: "Acceda a una experiencia de financiación digital diseñada para empresas elegibles que buscan capital de crecimiento de <b>$20.000 a $50.000.</b>",
+    start: "Iniciar solicitud",
+    calculate: "Calcular pago",
+    overview: "RESUMEN DE FINANCIACIÓN",
+    available: "Rango de financiación disponible",
+    interest: "Tasa de interés anual ilustrativa",
+    term: "Plazo ilustrativo",
+    estimate: "Estimar su pago",
+    financing: "FINANCIACIÓN",
+    designed: "Diseñado para su negocio.",
+    process: "CÓMO FUNCIONA",
+    why: "EL ENFOQUE GLOBALBRIDGE",
+    apply: "¿LISTO PARA EMPEZAR?",
+    signin: "Iniciar sesión",
+    applyNow: "Solicitar ahora"
+  }
+};
+
 function changeLanguage(language) {
-  if (language === "pt") {
-    document.querySelector(".pill").innerHTML = "<span></span> FINANCIAMENTO EMPRESARIAL INTERNACIONAL";
-    document.querySelector(".hero h1").innerHTML = "Capital para o seu próximo <strong>movimento empresarial.</strong>";
-    document.querySelector(".hero-text").innerHTML = "Aceda a uma experiência de financiamento digital criada para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>";
+  const t = translations[language];
+  if (!t) return;
+
+  document.querySelector(".pill").innerHTML = "<span></span> " + t.pill;
+  document.querySelector(".hero h1").innerHTML = t.title;
+  document.querySelector(".hero-text").innerHTML = t.hero;
+
+  document.querySelector(".actions .btn").innerHTML =
+    t.start + " <span>→</span>";
+
+  document.querySelector(".ghost").textContent = t.calculate;
+
+  document.querySelector(".card-head span").textContent = t.overview;
+
+  document.querySelector(".muted").textContent = t.available;
+
+  document.querySelectorAll(".row")[0].querySelector("span").textContent = t.interest;
+  document.querySelectorAll(".row")[1].querySelector("span").textContent = t.term;
+
+  document.querySelector(".card-link").innerHTML =
+    t.estimate + " <span>→</span>";
+
+  document.querySelector("#financing .eyebrow").textContent = t.financing;
+  document.querySelector("#financing h2").textContent = t.designed;
+
+  document.querySelector("#process .eyebrow").textContent = t.process;
+  document.querySelector("#why .eyebrow").textContent = t.why;
+  document.querySelector("#apply .eyebrow").textContent = t.apply;
+
+  document.querySelector(".nav-actions a[href='login.html']").textContent = t.signin;
+  document.querySelector(".nav-actions .btn.small").textContent = t.applyNow;
+
+  document.documentElement.lang = language;
+
+  if (language === "fa") {
+    document.documentElement.dir = "rtl";
+  } else {
+    document.documentElement.dir = "ltr";
   }
 }
 </script>
