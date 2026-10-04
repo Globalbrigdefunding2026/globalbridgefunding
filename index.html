@@ -108,7 +108,11 @@
 
 <script>
 function changeLanguage(language) {
-  alert("Language selected: " + language.toUpperCase());
+  if (language === "pt") {
+    document.querySelector(".pill").innerHTML = "<span></span> FINANCIAMENTO EMPRESARIAL INTERNACIONAL";
+    document.querySelector(".hero h1").innerHTML = "Capital para o seu próximo <strong>movimento empresarial.</strong>";
+    document.querySelector(".hero-text").innerHTML = "Aceda a uma experiência de financiamento digital criada para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>";
+  }
 }
 </script>
 
