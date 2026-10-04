@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sign In | GlobalBridgeFunding</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f8fc;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #071a35;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #36c2ff;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 55px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 36px;
+      border-radius: 16px;
+      box-shadow: 0 10px 35px rgba(20, 40, 70, .10);
+    }
+
+    h1 {
+      color: #071a35;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #667085;
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: #24344d;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d6dee9;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #36c2ff;
+    }
+
+    .forgot {
+      text-align: right;
+      margin-top: -10px;
+      margin-bottom: 24px;
+    }
+
+    .forgot a {
+      color: #087ea4;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      background: #36c2ff;
+      color: #071a35;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 25px 0;
+      color: #98a2b3;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #e1e7ef;
+      flex: 1;
+    }
+
+    .create {
+      text-align: center;
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .create a {
+      color: #087ea4;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .notice {
+      background: #eef8fc;
+      border-left: 4px solid #36c2ff;
+      padding: 12px;
+      margin-bottom: 23px;
+      font-size: 13px;
+      color: #536477;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #7b8797;
+      font-size: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 27px 21px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Global<span>Bridge</span>Funding
+    </div>
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
+
+  </header>
+
+  <main class="container">
+
+    <div class="card">
+
+      <h1>Welcome back</h1>
+
+      <p class="intro">
+        Sign in to access your GlobalBridgeFunding account.
+      </p>
+
+      <div class="notice">
+        Use the email address associated with your account.
+      </div>
+
+      <form>
+
+        <div class="field">
+
+          <label for="email">
+            Email address
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+        <div class="field">
+
+          <label for="password">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+        <div class="forgot">
+          <a href="#">
+            Forgot your password?
+          </a>
+        </div>
+
+        <button type="submit">
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="divider">
+        OR
+      </div>
+
+      <div class="create">
+        Don't have an account?
+        <a href="register.html">
+          Create an account
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 GlobalBridgeFunding. All rights reserved.
+  </footer>
+
+</body>
+</html>
