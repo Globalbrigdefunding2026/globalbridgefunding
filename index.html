@@ -126,6 +126,10 @@ const translations = {
     apply: "READY TO START?",
     signin: "Sign in",
     applyNow: "Apply now"
+navFinancing: "Financing",
+navProcess: "How it works",
+navWhy: "Why us",
+navSupport: "Support"
   },
 
   pt: {
@@ -146,6 +150,10 @@ const translations = {
     apply: "PRONTO PARA COMEÇAR?",
     signin: "Iniciar sessão",
     applyNow: "Candidatar-se"
+    navFinancing: "Financiamento",
+navProcess: "Como funciona",
+navWhy: "Porquê nós",
+navSupport: "Suporte"
   },
 
   vi: {
@@ -166,6 +174,10 @@ const translations = {
     apply: "SẴN SÀNG BẮT ĐẦU?",
     signin: "Đăng nhập",
     applyNow: "Đăng ký ngay"
+    navFinancing: "Tài trợ",
+navProcess: "Cách thức hoạt động",
+navWhy: "Vì sao chọn chúng tôi",
+navSupport: "Hỗ trợ"
   },
 
   fa: {
@@ -186,6 +198,10 @@ const translations = {
     apply: "آماده شروع هستید؟",
     signin: "ورود",
     applyNow: "درخواست اکنون"
+    navFinancing: "تأمین مالی",
+navProcess: "نحوه کار",
+navWhy: "چرا ما",
+navSupport: "پشتیبانی"
   },
 
   id: {
@@ -206,6 +222,10 @@ const translations = {
     apply: "SIAP UNTUK MEMULAI?",
     signin: "Masuk",
     applyNow: "Ajukan sekarang"
+    navFinancing: "Pembiayaan",
+navProcess: "Cara kerja",
+navWhy: "Mengapa kami",
+navSupport: "Dukungan"
   },
 
   fr: {
@@ -226,6 +246,10 @@ const translations = {
     apply: "PRÊT À COMMENCER ?",
     signin: "Se connecter",
     applyNow: "Faire une demande"
+    navFinancing: "Financement",
+navProcess: "Comment ça marche",
+navWhy: "Pourquoi nous",
+navSupport: "Assistance"
   },
 
   fi: {
@@ -246,6 +270,10 @@ const translations = {
     apply: "VALMIS ALOITTAMAAN?",
     signin: "Kirjaudu sisään",
     applyNow: "Hae nyt"
+    navFinancing: "Rahoitus",
+navProcess: "Näin se toimii",
+navWhy: "Miksi me",
+navSupport: "Tuki"
   },
 
   es: {
@@ -266,6 +294,10 @@ const translations = {
     apply: "¿LISTO PARA EMPEZAR?",
     signin: "Iniciar sesión",
     applyNow: "Solicitar ahora"
+    navFinancing: "Financiación",
+navProcess: "Cómo funciona",
+navWhy: "Por qué nosotros",
+navSupport: "Soporte"
   }
 };
 
@@ -303,6 +335,10 @@ function changeLanguage(language) {
 
   document.querySelector(".nav-actions a[href='login.html']").textContent = t.signin;
   document.querySelector(".nav-actions .btn.small").textContent = t.applyNow;
+  document.querySelector("nav a:nth-child(1)").textContent = t.navFinancing;
+document.querySelector("nav a:nth-child(2)").textContent = t.navProcess;
+document.querySelector("nav a:nth-child(3)").textContent = t.navWhy;
+document.querySelector("nav a:nth-child(4)").textContent = t.navSupport;
 
   document.documentElement.lang = language;
 
