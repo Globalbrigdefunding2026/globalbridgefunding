@@ -232,6 +232,9 @@
 
     <section class="grid">
 
+
+      <!-- FINANCING -->
+
       <div class="card">
 
         <h2>Financing</h2>
@@ -240,12 +243,14 @@
           Review available financing options and begin an application.
         </p>
 
-        <a href="#">
+        <a href="financing.html">
           View Financing
         </a>
 
       </div>
 
+
+      <!-- KYC -->
 
       <div class="card">
 
@@ -262,6 +267,8 @@
       </div>
 
 
+      <!-- WALLET -->
+
       <div class="card">
 
         <h2>Wallet</h2>
@@ -276,6 +283,8 @@
 
       </div>
 
+
+      <!-- TRANSACTIONS -->
 
       <div class="card">
 
@@ -292,6 +301,8 @@
       </div>
 
 
+      <!-- PROFILE -->
+
       <div class="card">
 
         <h2>Profile</h2>
@@ -306,6 +317,8 @@
 
       </div>
 
+
+      <!-- SUPPORT -->
 
       <div class="card">
 
@@ -329,23 +342,46 @@
       <h2>Account Information</h2>
 
       <div class="account-row">
+
         <span>Name</span>
-        <span id="accountName">Loading...</span>
+
+        <span id="accountName">
+          Loading...
+        </span>
+
       </div>
 
+
       <div class="account-row">
+
         <span>Email</span>
-        <span id="accountEmail">Loading...</span>
+
+        <span id="accountEmail">
+          Loading...
+        </span>
+
       </div>
 
+
       <div class="account-row">
+
         <span>Country</span>
-        <span id="accountCountry">Loading...</span>
+
+        <span id="accountCountry">
+          Loading...
+        </span>
+
       </div>
 
+
       <div class="account-row">
+
         <span>Preferred language</span>
-        <span id="accountLanguage">Loading...</span>
+
+        <span id="accountLanguage">
+          Loading...
+        </span>
+
       </div>
 
     </section>
@@ -354,11 +390,12 @@
 
 
   <footer>
+
     © 2026 GlobalBridgeFunding. All rights reserved.
+
   </footer>
 
 
-  <!-- Supabase library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -370,8 +407,9 @@
     const SUPABASE_KEY =
       "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
 
+
     const supabaseClient =
-      supabase.createClient(
+      window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
       );
@@ -386,20 +424,18 @@
       } = await supabaseClient.auth.getUser();
 
 
-      /*
-       * If there is no logged-in user,
-       * send them back to the login page.
-       */
-
       if (!user) {
 
-        window.location.href = "login.html";
+        window.location.href =
+          "login.html";
 
         return;
+
       }
 
 
-      const metadata = user.user_metadata || {};
+      const metadata =
+        user.user_metadata || {};
 
 
       const firstName =
@@ -407,6 +443,7 @@
 
       const lastName =
         metadata.last_name || "";
+
 
       const fullName =
         `${firstName} ${lastName}`.trim();
@@ -454,7 +491,8 @@
 
         await supabaseClient.auth.signOut();
 
-        window.location.href = "login.html";
+        window.location.href =
+          "login.html";
 
       }
     );
