@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Financing | GlobalBridgeFunding</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f8fc;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #071a35;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #36c2ff;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 7px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #071a35, #0b315b);
+      color: white;
+      border-radius: 18px;
+      padding: 42px 35px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 35px solid rgba(54,194,255,.10);
+      right: -70px;
+      top: -70px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 650px;
+      line-height: 1.7;
+      color: #d8e8f6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .terms {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .term-card {
+      background: white;
+      padding: 23px 18px;
+      border-radius: 13px;
+      box-shadow: 0 8px 25px rgba(20,40,70,.07);
+    }
+
+    .term-card small {
+      display: block;
+      color: #7b8797;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .term-card strong {
+      color: #071a35;
+      font-size: 20px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+    }
+
+    .card h2 {
+      color: #071a35;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .card-intro {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #24344d;
+      margin-bottom: 9px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d6dee9;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="number"]:focus {
+      border-color: #36c2ff;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 8px;
+      accent-color: #36c2ff;
+      cursor: pointer;
+    }
+
+    .range-values {
+      display: flex;
+      justify-content: space-between;
+      color: #7b8797;
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    .result {
+      background: #eef8fc;
+      border-left: 4px solid #36c2ff;
+      border-radius: 7px;
+      padding: 18px;
+      margin-top: 5px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid #dcebf1;
+      font-size: 14px;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .result-row span:first-child {
+      color: #667085;
+    }
+
+    .result-row span:last-child {
+      color: #071a35;
+      font-weight: 800;
+    }
+
+    .total {
+      font-size: 18px !important;
+      color: #087ea4 !important;
+    }
+
+    .apply-button {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+      padding: 15px;
+      background: #36c2ff;
+      color: #071a35;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .apply-button:hover {
+      opacity: .92;
+    }
+
+    .features {
+      margin-top: 25px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 13px;
+      padding: 14px 0;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .feature:last-child {
+      border-bottom: none;
+    }
+
+    .check {
+      width: 25px;
+      height: 25px;
+      min-width: 25px;
+      border-radius: 50%;
+      background: #e8f7fb;
+      color: #087ea4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 800;
+    }
+
+    .feature strong {
+      display: block;
+      color: #24344d;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .feature p {
+      color: #7b8797;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .notice {
+      margin-top: 22px;
+      background: #f8fafc;
+      border: 1px solid #e5eaf0;
+      border-radius: 9px;
+      padding: 15px;
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #7b8797;
+      font-size: 12px;
+    }
+
+    @media (max-width: 850px) {
+
+      .terms {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      header {
+        padding: 16px 20px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .back {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+
+      .container {
+        margin-top: 22px;
+      }
+
+      .hero {
+        padding: 30px 23px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .terms {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .term-card {
+        padding: 18px 14px;
+      }
+
+      .term-card strong {
+        font-size: 17px;
+      }
+
+      .card {
+        padding: 22px 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Global<span>Bridge</span>Funding
+    </div>
+
+    <a href="dashboard.html" class="back">
+      ← Dashboard
+    </a>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="hero">
+
+      <h1>Business Financing</h1>
+
+      <p>
+        Explore financing options designed to support eligible businesses
+        with access to working capital and business growth funding.
+      </p>
+
+    </section>
+
+
+    <section class="terms">
+
+      <div class="term-card">
+        <small>Financing Amount</small>
+        <strong>$20,000 – $50,000</strong>
+      </div>
+
+      <div class="term-card">
+        <small>Annual Interest</small>
+        <strong>10%</strong>
+      </div>
+
+      <div class="term-card">
+        <small>Repayment Term</small>
+        <strong>2 Years</strong>
+      </div>
+
+      <div class="term-card">
+        <small>Collateral</small>
+        <strong>No Collateral</strong>
+      </div>
+
+    </section>
+
+
+    <section class="main-grid">
+
+
+      <!-- LEFT SIDE -->
+
+      <div class="card">
+
+        <h2>Financing Calculator</h2>
+
+        <p class="card-intro">
+          Adjust the financing amount below to view an estimated
+          repayment calculation based on the stated annual rate
+          and two-year term.
+        </p>
+
+
+        <div class="field">
+
+          <label for="amount">
+            Financing Amount (USD)
+          </label>
+
+          <input
+            type="number"
+            id="amount"
+            min="20000"
+            max="50000"
+            step="1000"
+            value="20000"
+          >
+
+          <input
+            type="range"
+            id="amountRange"
+            min="20000"
+            max="50000"
+            step="1000"
+            value="20000"
+          >
+
+          <div class="range-values">
+            <span>$20,000</span>
+            <span>$50,000</span>
+          </div>
+
+        </div>
+
+
+        <div class="result">
+
+          <div class="result-row">
+            <span>Financing amount</span>
+            <span id="resultAmount">$20,000</span>
+          </div>
+
+          <div class="result-row">
+            <span>Annual interest rate</span>
+            <span>10%</span>
+          </div>
+
+          <div class="result-row">
+            <span>Term</span>
+            <span>24 months</span>
+          </div>
+
+          <div class="result-row">
+            <span>Estimated interest</span>
+            <span id="interest">$4,000</span>
+          </div>
+
+          <div class="result-row">
+            <span>Total estimated repayment</span>
+            <span class="total" id="total">$24,000</span>
+          </div>
+
+          <div class="result-row">
+            <span>Estimated monthly repayment</span>
+            <span class="total" id="monthly">$1,000</span>
+          </div>
+
+        </div>
+
+
+        <a
+          href="application.html"
+          class="apply-button"
+        >
+          Continue to Apply
+        </a>
+
+      </div>
+
+
+      <!-- RIGHT SIDE -->
+
+      <div class="card">
+
+        <h2>Financing Features</h2>
+
+        <p class="card-intro">
+          Applications are reviewed individually and remain subject
+          to eligibility, verification and approval requirements.
+        </p>
+
+
+        <div class="features">
+
+          <div class="feature">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>$20,000 to $50,000</strong>
+
+              <p>
+                Financing amounts within the stated business
+                financing range.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>10% Annual Interest</strong>
+
+              <p>
+                The calculator uses the stated annual interest
+                rate for the estimated repayment calculation.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>Two-Year Term</strong>
+
+              <p>
+                The stated financing term is 24 months.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>No Collateral</strong>
+
+              <p>
+                The stated financing structure does not require
+                collateral, subject to applicable eligibility
+                and approval requirements.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="feature">
+
+            <div class="check">✓</div>
+
+            <div>
+              <strong>Application Review</strong>
+
+              <p>
+                Applications are subject to account verification,
+                information review and approval.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="notice">
+
+          <strong>Important:</strong>
+          Calculator figures are estimates based on simple annual
+          interest and do not constitute a financing approval or
+          binding offer. Final terms, eligibility and repayment
+          obligations are determined during the application and
+          approval process.
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    © 2026 GlobalBridgeFunding. All rights reserved.
+
+  </footer>
+
+
+  <script>
+
+    const amountInput =
+      document.getElementById("amount");
+
+    const amountRange =
+      document.getElementById("amountRange");
+
+    const resultAmount =
+      document.getElementById("resultAmount");
+
+    const interest =
+      document.getElementById("interest");
+
+    const total =
+      document.getElementById("total");
+
+    const monthly =
+      document.getElementById("monthly");
+
+
+    function formatCurrency(value) {
+
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0
+        }
+      ).format(value);
+
+    }
+
+
+    function calculate() {
+
+      let amount =
+        Number(amountInput.value);
+
+
+      if (amount < 20000) {
+        amount = 20000;
+      }
+
+      if (amount > 50000) {
+        amount = 50000;
+      }
+
+
+      amountInput.value = amount;
+      amountRange.value = amount;
+
+
+      /*
+       * Simple annual-interest calculation:
+       *
+       * Interest = Principal × 10% × 2 years
+       *
+       * Total = Principal + Interest
+       *
+       * Monthly = Total ÷ 24 months
+       */
+
+      const annualRate = 0.10;
+      const years = 2;
+      const months = 24;
+
+
+      const estimatedInterest =
+        amount * annualRate * years;
+
+
+      const estimatedTotal =
+        amount + estimatedInterest;
+
+
+      const estimatedMonthly =
+        estimatedTotal / months;
+
+
+      resultAmount.textContent =
+        formatCurrency(amount);
+
+
+      interest.textContent =
+        formatCurrency(estimatedInterest);
+
+
+      total.textContent =
+        formatCurrency(estimatedTotal);
+
+
+      monthly.textContent =
+        formatCurrency(estimatedMonthly);
+
+    }
+
+
+    amountInput.addEventListener(
+      "input",
+      calculate
+    );
+
+
+    amountRange.addEventListener(
+      "input",
+      function() {
+
+        amountInput.value =
+          amountRange.value;
+
+        calculate();
+
+      }
+    );
+
+
+    calculate();
+
+  </script>
+
+</body>
+</html>
