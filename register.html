@@ -370,41 +370,6 @@
 
 <script>
 const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
-const SUPABASE_KEY = const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-const registerForm = document.querySelector("form");
-
-registerForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-
-  const email = document.querySelector('[name="email"]').value;
-  const password = document.querySelector('[name="password"]').value;
-
-  if (!email || !password) {
-    alert("Please enter your email and password.");
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-  });
-
-  if (error) {
-    alert(error.message);
-    return;
-  }
-
-  alert("Account created successfully. Please check your email to confirm your account.");
-});
-</script>
-<script>
-const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
 const SUPABASE_KEY = const SUPABASE_KEY = "sb_publishable_...your actual key...";
 
 const supabaseClient = supabase.createClient(
@@ -439,6 +404,7 @@ registerForm.addEventListener("submit", async function(event) {
 
   alert("Account created successfully. Please check your email to confirm your account.");
 });
+
 </script>
 </body>
 </html>
