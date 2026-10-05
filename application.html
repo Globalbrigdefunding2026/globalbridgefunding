@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Financing Application | GlobalBridgeFunding</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f8fc;
+      color: #172033;
+    }
+
+    header {
+      background: #071a35;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #36c2ff;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,.4);
+      padding: 9px 14px;
+      border-radius: 7px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .intro {
+      margin-bottom: 25px;
+    }
+
+    .intro h1 {
+      color: #071a35;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .intro p {
+      color: #667085;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      color: #071a35;
+      font-size: 20px;
+      margin-bottom: 7px;
+    }
+
+    .card-intro {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 23px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #24344d;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d6dee9;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      background: white;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #36c2ff;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .summary {
+      background: #eef8fc;
+      border-left: 4px solid #36c2ff;
+      padding: 17px;
+      border-radius: 7px;
+      margin-bottom: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .summary-row span:first-child {
+      color: #667085;
+    }
+
+    .summary-row span:last-child {
+      color: #071a35;
+      font-weight: 700;
+    }
+
+    .notice {
+      background: #f8fafc;
+      border: 1px solid #e4e9ef;
+      padding: 15px;
+      border-radius: 8px;
+      color: #667085;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .checkbox input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .checkbox label {
+      font-weight: 400;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #36c2ff;
+      color: #071a35;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .7;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 7px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff1f1;
+      color: #a42626;
+      border-left: 4px solid #d64545;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #7b8797;
+      font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 16px 20px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .back {
+        font-size: 12px;
+      }
+
+      .container {
+        margin-top: 25px;
+      }
+
+      .intro h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        padding: 22px 19px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Global<span>Bridge</span>Funding
+    </div>
+
+    <a href="dashboard.html" class="back">
+      ← Dashboard
+    </a>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="intro">
+
+      <h1>Financing Application</h1>
+
+      <p>
+        Complete the information below to continue your
+        financing application.
+      </p>
+
+    </section>
+
+
+    <section class="card">
+
+      <h2>Financing Request</h2>
+
+      <p class="card-intro">
+        Select the amount you would like to request.
+      </p>
+
+
+      <div class="summary">
+
+        <div class="summary-row">
+          <span>Financing range</span>
+          <span>$20,000 – $50,000</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Annual interest</span>
+          <span>10%</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Term</span>
+          <span>2 years</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Collateral</span>
+          <span>No collateral</span>
+        </div>
+
+      </div>
+
+
+      <form id="applicationForm">
+
+        <div class="field">
+
+          <label for="amount">
+            Requested financing amount (USD)
+          </label>
+
+          <select id="amount" required>
+
+            <option value="">
+              Select amount
+            </option>
+
+            <option value="20000">
+              $20,000
+            </option>
+
+            <option value="25000">
+              $25,000
+            </option>
+
+            <option value="30000">
+              $30,000
+            </option>
+
+            <option value="35000">
+              $35,000
+            </option>
+
+            <option value="40000">
+              $40,000
+            </option>
+
+            <option value="45000">
+              $45,000
+            </option>
+
+            <option value="50000">
+              $50,000
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="row">
+
+          <div class="field">
+
+            <label for="businessName">
+              Business name
+            </label>
+
+            <input
+              type="text"
+              id="businessName"
+              placeholder="Enter business name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="businessType">
+              Business type
+            </label>
+
+            <select id="businessType" required>
+
+              <option value="">
+                Select business type
+              </option>
+
+              <option value="Sole Proprietorship">
+                Sole Proprietorship
+              </option>
+
+              <option value="Partnership">
+                Partnership
+              </option>
+
+              <option value="Limited Company">
+                Limited Company
+              </option>
+
+              <option value="Corporation">
+                Corporation
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="row">
+
+          <div class="field">
+
+            <label for="years">
+              Years in operation
+            </label>
+
+            <select id="years" required>
+
+              <option value="">
+                Select
+              </option>
+
+              <option value="Less than 1 year">
+                Less than 1 year
+              </option>
+
+              <option value="1-2 years">
+                1–2 years
+              </option>
+
+              <option value="3-5 years">
+                3–5 years
+              </option>
+
+              <option value="6-10 years">
+                6–10 years
+              </option>
+
+              <option value="More than 10 years">
+                More than 10 years
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="revenue">
+              Estimated annual revenue
+            </label>
+
+            <select id="revenue" required>
+
+              <option value="">
+                Select range
+              </option>
+
+              <option value="Under $50,000">
+                Under $50,000
+              </option>
+
+              <option value="$50,000 - $100,000">
+                $50,000 – $100,000
+              </option>
+
+              <option value="$100,000 - $250,000">
+                $100,000 – $250,000
+              </option>
+
+              <option value="$250,000 - $500,000">
+                $250,000 – $500,000
+              </option>
+
+              <option value="Over $500,000">
+                Over $500,000
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="purpose">
+            Purpose of financing
+          </label>
+
+          <textarea
+            id="purpose"
+            placeholder="Tell us how the financing will be used..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="notice">
+
+          Your application will be reviewed based on the information
+          provided and any required verification. Submission of an
+          application does not guarantee financing approval.
+
+        </div>
+
+
+        <div class="checkbox">
+
+          <input
+            type="checkbox"
+            id="confirm"
+            required
+          >
+
+          <label for="confirm">
+            I confirm that the information provided is accurate and
+            complete to the best of my knowledge.
+          </label>
+
+        </div>
+
+
+        <button
+          type="submit"
+          id="submitButton"
+        >
+          Continue Application
+        </button>
+
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    © 2026 GlobalBridgeFunding. All rights reserved.
+
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://siykgexfdsmkiqwyxker.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    const form =
+      document.getElementById("applicationForm");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const message =
+      document.getElementById("message");
+
+
+    async function checkUser() {
+
+      const {
+        data: {
+          user
+        }
+      } = await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href =
+          "login.html";
+
+      }
+
+    }
+
+
+    form.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        const {
+          data: {
+            user
+          }
+        } = await supabaseClient.auth.getUser();
+
+
+        if (!user) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+          "Processing...";
+
+
+        /*
+         * The next stage will connect this form
+         * to the Supabase financing application
+         * database.
+         */
+
+        setTimeout(function() {
+
+          message.className =
+            "message error";
+
+          message.textContent =
+            "Your application form is ready. The secure application submission system will be connected next.";
+
+          submitButton.disabled = false;
+
+          submitButton.textContent =
+            "Continue Application";
+
+        }, 700);
+
+      }
+    );
+
+
+    checkUser();
+
+  </script>
+
+</body>
+</html>
