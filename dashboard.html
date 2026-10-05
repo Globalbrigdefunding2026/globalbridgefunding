@@ -17,7 +17,6 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f5f8fc;
       color: #172033;
-      min-height: 100vh;
     }
 
     header {
@@ -40,11 +39,12 @@
 
     .logout {
       background: transparent;
-      border: 1px solid rgba(255,255,255,.5);
       color: white;
-      padding: 9px 16px;
+      border: 1px solid rgba(255,255,255,.4);
+      padding: 9px 14px;
       border-radius: 7px;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .container {
@@ -54,33 +54,33 @@
     }
 
     .welcome {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     .welcome h1 {
       color: #071a35;
       font-size: 30px;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
     }
 
     .welcome p {
       color: #667085;
+      line-height: 1.6;
     }
 
     .status {
-      background: #eef8fc;
-      border-left: 4px solid #36c2ff;
-      padding: 15px;
-      margin-bottom: 25px;
-      border-radius: 6px;
-      color: #536477;
+      display: inline-block;
+      margin-top: 12px;
+      background: #ecfdf3;
+      color: #067647;
+      border: 1px solid #a7f3d0;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .status strong {
-      color: #087ea4;
-    }
-
-    .grid {
+    .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
@@ -88,67 +88,80 @@
 
     .card {
       background: white;
-      border-radius: 14px;
       padding: 25px;
-      box-shadow: 0 8px 28px rgba(20, 40, 70, .08);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+      text-decoration: none;
+      color: inherit;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(20,40,70,.12);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      background: #eef8fc;
+      color: #071a35;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      margin-bottom: 15px;
     }
 
     .card h2 {
       color: #071a35;
-      font-size: 19px;
-      margin-bottom: 9px;
+      font-size: 18px;
+      margin-bottom: 7px;
     }
 
     .card p {
       color: #667085;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 18px;
-    }
-
-    .card a {
-      display: inline-block;
-      background: #36c2ff;
-      color: #071a35;
-      text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 7px;
       font-size: 13px;
-      font-weight: 700;
+      line-height: 1.5;
     }
 
     .account {
       margin-top: 25px;
       background: white;
-      padding: 25px;
       border-radius: 14px;
-      box-shadow: 0 8px 28px rgba(20, 40, 70, .08);
+      padding: 25px;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
     }
 
     .account h2 {
       color: #071a35;
       margin-bottom: 18px;
+      font-size: 19px;
     }
 
-    .account-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 13px 0;
-      border-bottom: 1px solid #edf0f4;
-      font-size: 14px;
+    .info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
     }
 
-    .account-row:last-child {
-      border-bottom: none;
+    .info-box {
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 8px;
     }
 
-    .account-row span:first-child {
+    .info-box span {
+      display: block;
       color: #667085;
+      font-size: 12px;
+      margin-bottom: 5px;
     }
 
-    .account-row span:last-child {
-      font-weight: 700;
-      color: #24344d;
+    .info-box strong {
+      color: #071a35;
+      font-size: 14px;
     }
 
     footer {
@@ -159,12 +172,12 @@
     }
 
     @media (max-width: 800px) {
-      .grid {
+      .cards {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 600px) {
       header {
         padding: 16px 20px;
       }
@@ -178,15 +191,15 @@
       }
 
       .welcome h1 {
-        font-size: 25px;
+        font-size: 26px;
       }
 
-      .grid {
+      .cards {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        padding: 21px;
+      .info {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -194,313 +207,332 @@
 
 <body>
 
-  <header>
+<header>
 
-    <div class="logo">
-      Global<span>Bridge</span>Funding
-    </div>
+  <div class="logo">
+    Global<span>Bridge</span>Funding
+  </div>
 
-    <button class="logout" id="logoutButton">
-      Sign Out
-    </button>
+  <button class="logout" id="logoutButton">
+    Sign Out
+  </button>
 
-  </header>
+</header>
 
 
-  <main class="container">
+<main class="container">
 
-    <section class="welcome">
+  <section class="welcome">
 
-      <h1 id="welcomeMessage">
-        Welcome
-      </h1>
+    <h1 id="welcomeMessage">
+      Welcome
+    </h1>
 
-      <p>
-        Manage your GlobalBridgeFunding account from your private dashboard.
-      </p>
-
-    </section>
-
+    <p>
+      Manage your GlobalBridgeFunding account from your
+      private dashboard.
+    </p>
 
     <div class="status">
+      Account status: Email verified
+    </div>
 
-      <strong>Account status:</strong>
-      Email verified
+  </section>
+
+
+  <section class="cards">
+
+
+    <a href="financing.html" class="card">
+
+      <div class="icon">
+        $
+      </div>
+
+      <h2>
+        Financing
+      </h2>
+
+      <p>
+        Explore available business financing and
+        submit a financing request.
+      </p>
+
+    </a>
+
+
+    <a href="applications.html" class="card">
+
+      <div class="icon">
+        ✓
+      </div>
+
+      <h2>
+        My Applications
+      </h2>
+
+      <p>
+        View your submitted financing applications
+        and current application status.
+      </p>
+
+    </a>
+
+
+    <a href="#" class="card">
+
+      <div class="icon">
+        K
+      </div>
+
+      <h2>
+        KYC Verification
+      </h2>
+
+      <p>
+        Complete your identity and account
+        verification.
+      </p>
+
+    </a>
+
+
+    <a href="#" class="card">
+
+      <div class="icon">
+        W
+      </div>
+
+      <h2>
+        Wallet
+      </h2>
+
+      <p>
+        Manage your available balance and
+        payment information.
+      </p>
+
+    </a>
+
+
+    <a href="#" class="card">
+
+      <div class="icon">
+        T
+      </div>
+
+      <h2>
+        Transactions
+      </h2>
+
+      <p>
+        Review your account transaction history.
+      </p>
+
+    </a>
+
+
+    <a href="#" class="card">
+
+      <div class="icon">
+        P
+      </div>
+
+      <h2>
+        Profile
+      </h2>
+
+      <p>
+        View and manage your personal account
+        information.
+      </p>
+
+    </a>
+
+
+    <a href="#" class="card">
+
+      <div class="icon">
+        ?
+      </div>
+
+      <h2>
+        Support
+      </h2>
+
+      <p>
+        Contact GlobalBridgeFunding support.
+      </p>
+
+    </a>
+
+
+  </section>
+
+
+  <section class="account">
+
+    <h2>
+      Account Information
+    </h2>
+
+    <div class="info">
+
+      <div class="info-box">
+
+        <span>
+          Name
+        </span>
+
+        <strong id="userName">
+          Loading...
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Email
+        </span>
+
+        <strong id="userEmail">
+          Loading...
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Country
+        </span>
+
+        <strong id="userCountry">
+          Loading...
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Preferred language
+        </span>
+
+        <strong id="userLanguage">
+          Loading...
+        </strong>
+
+      </div>
 
     </div>
 
+  </section>
 
-    <section class="grid">
+</main>
 
 
-      <!-- FINANCING -->
+<footer>
 
-      <div class="card">
+  © 2026 GlobalBridgeFunding. All rights reserved.
 
-        <h2>Financing</h2>
+</footer>
 
-        <p>
-          Review available financing options and begin an application.
-        </p>
 
-        <a href="financing.html">
-          View Financing
-        </a>
+<script type="module">
 
-      </div>
+  import { createClient } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
-      <!-- KYC -->
+  const SUPABASE_URL =
+    "https://siykgexfdsmkiqwyxker.supabase.co";
 
-      <div class="card">
+  const SUPABASE_KEY =
+    "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
 
-        <h2>KYC Verification</h2>
 
-        <p>
-          Submit the information and documents required for account verification.
-        </p>
+  const supabaseClient =
+    createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        <a href="#">
-          Open KYC
-        </a>
 
-      </div>
+  async function loadDashboard() {
 
+    const {
+      data: { user },
+      error
+    } = await supabaseClient.auth.getUser();
 
-      <!-- WALLET -->
 
-      <div class="card">
+    if (error || !user) {
 
-        <h2>Wallet</h2>
-
-        <p>
-          View your account wallet information and supported payment options.
-        </p>
-
-        <a href="#">
-          Open Wallet
-        </a>
-
-      </div>
-
-
-      <!-- TRANSACTIONS -->
-
-      <div class="card">
-
-        <h2>Transactions</h2>
-
-        <p>
-          Review your account transaction history.
-        </p>
-
-        <a href="#">
-          View Transactions
-        </a>
-
-      </div>
-
-
-      <!-- PROFILE -->
-
-      <div class="card">
-
-        <h2>Profile</h2>
-
-        <p>
-          Review and manage your personal account information.
-        </p>
-
-        <a href="#">
-          View Profile
-        </a>
-
-      </div>
-
-
-      <!-- SUPPORT -->
-
-      <div class="card">
-
-        <h2>Support</h2>
-
-        <p>
-          Get assistance with your account or financing application.
-        </p>
-
-        <a href="#">
-          Contact Support
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <section class="account">
-
-      <h2>Account Information</h2>
-
-      <div class="account-row">
-
-        <span>Name</span>
-
-        <span id="accountName">
-          Loading...
-        </span>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <span>Email</span>
-
-        <span id="accountEmail">
-          Loading...
-        </span>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <span>Country</span>
-
-        <span id="accountCountry">
-          Loading...
-        </span>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <span>Preferred language</span>
-
-        <span id="accountLanguage">
-          Loading...
-        </span>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <footer>
-
-    © 2026 GlobalBridgeFunding. All rights reserved.
-
-  </footer>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <script>
-
-    const SUPABASE_URL =
-      "https://siykgexfdsmkiqwyxker.supabase.co";
-
-    const SUPABASE_KEY =
-      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-
-
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
-
-    async function loadDashboard() {
-
-      const {
-        data: {
-          user
-        }
-      } = await supabaseClient.auth.getUser();
-
-
-      if (!user) {
-
-        window.location.href =
-          "login.html";
-
-        return;
-
-      }
-
-
-      const metadata =
-        user.user_metadata || {};
-
-
-      const firstName =
-        metadata.first_name || "";
-
-      const lastName =
-        metadata.last_name || "";
-
-
-      const fullName =
-        `${firstName} ${lastName}`.trim();
-
-
-      document.getElementById(
-        "welcomeMessage"
-      ).textContent =
-        fullName
-          ? `Welcome, ${fullName}`
-          : "Welcome";
-
-
-      document.getElementById(
-        "accountName"
-      ).textContent =
-        fullName || "Not provided";
-
-
-      document.getElementById(
-        "accountEmail"
-      ).textContent =
-        user.email || "Not provided";
-
-
-      document.getElementById(
-        "accountCountry"
-      ).textContent =
-        metadata.country || "Not provided";
-
-
-      document.getElementById(
-        "accountLanguage"
-      ).textContent =
-        metadata.preferred_language || "Not provided";
+      window.location.href = "login.html";
+      return;
 
     }
 
 
-    document.getElementById(
-      "logoutButton"
-    ).addEventListener(
-      "click",
-      async function() {
-
-        await supabaseClient.auth.signOut();
-
-        window.location.href =
-          "login.html";
-
-      }
-    );
+    const metadata =
+      user.user_metadata || {};
 
 
-    loadDashboard();
+    const firstName =
+      metadata.first_name || "";
 
-  </script>
+    const lastName =
+      metadata.last_name || "";
+
+    const fullName =
+      `${firstName} ${lastName}`.trim();
+
+
+    document.getElementById("welcomeMessage")
+      .textContent =
+      fullName
+        ? `Welcome, ${fullName}`
+        : "Welcome";
+
+
+    document.getElementById("userName")
+      .textContent =
+      fullName || "Not provided";
+
+
+    document.getElementById("userEmail")
+      .textContent =
+      user.email || "Not provided";
+
+
+    document.getElementById("userCountry")
+      .textContent =
+      metadata.country || "Not provided";
+
+
+    document.getElementById("userLanguage")
+      .textContent =
+      metadata.preferred_language || "Not provided";
+
+  }
+
+
+  document
+    .getElementById("logoutButton")
+    .addEventListener("click", async function() {
+
+      await supabaseClient.auth.signOut();
+
+      window.location.href = "login.html";
+
+    });
+
+
+  loadDashboard();
+
+</script>
 
 </body>
 </html>
