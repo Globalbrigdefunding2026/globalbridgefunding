@@ -118,6 +118,11 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
     .divider {
       display: flex;
       align-items: center;
@@ -156,6 +161,22 @@
       color: #536477;
     }
 
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 7px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff1f1;
+      color: #a42626;
+      border-left: 4px solid #d64545;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
@@ -178,7 +199,6 @@
 <body>
 
   <header>
-
     <div class="logo">
       Global<span>Bridge</span>Funding
     </div>
@@ -186,8 +206,8 @@
     <a href="index.html" class="back">
       ← Back to Home
     </a>
-
   </header>
+
 
   <main class="container">
 
@@ -203,7 +223,8 @@
         Use the email address associated with your account.
       </div>
 
-      <form>
+
+      <form id="loginForm">
 
         <div class="field">
 
@@ -214,13 +235,13 @@
           <input
             type="email"
             id="email"
-            name="email"
             placeholder="you@example.com"
             autocomplete="email"
             required
           >
 
         </div>
+
 
         <div class="field">
 
@@ -231,7 +252,6 @@
           <input
             type="password"
             id="password"
-            name="password"
             placeholder="Enter your password"
             autocomplete="current-password"
             required
@@ -239,21 +259,27 @@
 
         </div>
 
+
         <div class="forgot">
           <a href="#">
             Forgot your password?
           </a>
         </div>
 
-        <button type="submit">
+
+        <button type="submit" id="loginButton">
           Sign In
         </button>
 
+        <div id="message" class="message"></div>
+
       </form>
+
 
       <div class="divider">
         OR
       </div>
+
 
       <div class="create">
         Don't have an account?
@@ -266,9 +292,121 @@
 
   </main>
 
+
   <footer>
     © 2026 GlobalBridgeFunding. All rights reserved.
   </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://siykgexfdsmkiqwyxker.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginButton =
+      document.getElementById("loginButton");
+
+    const message =
+      document.getElementById("message");
+
+
+    loginForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        const email =
+          document.getElementById("email").value.trim();
+
+        const password =
+          document.getElementById("password").value;
+
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Signing in...";
+
+
+        try {
+
+          const result =
+            await supabaseClient.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+
+
+          if (result.error) {
+
+            message.className = "message error";
+
+            message.textContent =
+              result.error.message;
+
+            loginButton.disabled = false;
+
+            loginButton.textContent = "Sign In";
+
+            return;
+          }
+
+
+          if (result.data && result.data.user) {
+
+            window.location.replace(
+              "dashboard.html"
+            );
+
+            return;
+          }
+
+
+          message.className = "message error";
+
+          message.textContent =
+            "Unable to sign in. Please try again.";
+
+          loginButton.disabled = false;
+
+          loginButton.textContent = "Sign In";
+
+        } catch (error) {
+
+          message.className = "message error";
+
+          message.textContent =
+            "Something went wrong. Please try again.";
+
+          loginButton.disabled = false;
+
+          loginButton.textContent = "Sign In";
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
