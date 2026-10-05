@@ -366,6 +366,44 @@
   <footer>
     © 2026 GlobalBridgeFunding. All rights reserved.
   </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+const SUPABASE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const registerForm = document.querySelector("form");
+
+registerForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(registerForm);
+
+  const email = formData.get("email");
+  const password = formData.get("password");
+
+  if (!email || !password) {
+    alert("Please enter your email and password.");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Account created successfully. Please check your email to confirm your account.");
+});
+</script>
 </body>
 </html>
