@@ -117,11 +117,6 @@
       margin-top: 3px;
     }
 
-    .terms a {
-      color: #087ea4;
-      text-decoration: none;
-    }
-
     button {
       width: 100%;
       border: none;
@@ -132,6 +127,11 @@
       font-size: 16px;
       font-weight: 800;
       cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .signin {
@@ -208,7 +208,7 @@
         You will receive important application updates by email.
       </div>
 
-      <form>
+      <form id="registerForm">
 
         <div class="row">
 
@@ -238,7 +238,6 @@
 
         <div class="field">
           <label for="email">Email address</label>
-
           <input
             type="email"
             id="email"
@@ -252,9 +251,7 @@
           <label for="country">Country</label>
 
           <select id="country" name="country" required>
-
             <option value="">Select your country</option>
-
             <option>Portugal</option>
             <option>Vietnam</option>
             <option>Iran</option>
@@ -263,12 +260,10 @@
             <option>Finland</option>
             <option>Singapore</option>
             <option>Ecuador</option>
-
           </select>
         </div>
 
         <div class="field">
-
           <label for="phone">Phone number</label>
 
           <input
@@ -278,17 +273,13 @@
             placeholder="Phone number"
             required
           >
-
         </div>
 
         <div class="field">
-
           <label for="language">Preferred language</label>
 
           <select id="language" name="language" required>
-
             <option value="">Select language</option>
-
             <option>English</option>
             <option>Português</option>
             <option>Tiếng Việt</option>
@@ -297,13 +288,10 @@
             <option>Français</option>
             <option>Suomi</option>
             <option>Español</option>
-
           </select>
-
         </div>
 
         <div class="field">
-
           <label for="password">Password</label>
 
           <input
@@ -314,11 +302,9 @@
             minlength="8"
             required
           >
-
         </div>
 
         <div class="field">
-
           <label for="confirmPassword">Confirm password</label>
 
           <input
@@ -329,7 +315,6 @@
             minlength="8"
             required
           >
-
         </div>
 
         <div class="terms">
@@ -348,7 +333,7 @@
 
         </div>
 
-        <button type="submit">
+        <button type="submit" id="registerButton">
           Create Account
         </button>
 
@@ -356,7 +341,7 @@
 
       <div class="signin">
         Already have an account?
-        <a href="#">Sign in</a>
+        <a href="login.html">Sign in</a>
       </div>
 
     </div>
@@ -366,42 +351,153 @@
   <footer>
     © 2026 GlobalBridgeFunding. All rights reserved.
   </footer>
-<script>
-const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
-const SUPABASE_KEY = const SUPABASE_KEY = "sb_publishable_...your actual key...";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
 
-const registerForm = document.querySelector("form");
+  <!-- Supabase library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-registerForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
+  <!-- Registration system -->
+  <script>
 
-  const formData = new FormData(registerForm);
+    const SUPABASE_URL =
+      "https://siykgexfdsmkiqwyxker.supabase.co";
 
-  const email = formData.get("email");
-  const password = formData.get("password");
+    const SUPABASE_KEY =
+      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
 
-  if (!email || !password) {
-    alert("Please enter your email and password.");
-    return;
-  }
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-  const { data, error } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-  });
+    const registerForm =
+      document.getElementById("registerForm");
 
-  if (error) {
-    alert(error.message);
-    return;
-  }
+    const registerButton =
+      document.getElementById("registerButton");
 
-  alert("Account created successfully. Please check your email to confirm your account.");
-});
+
+    registerForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const firstName =
+        document.getElementById("firstName").value.trim();
+
+      const lastName =
+        document.getElementById("lastName").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const country =
+        document.getElementById("country").value;
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      const language =
+        document.getElementById("language").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+      if (password !== confirmPassword) {
+
+        alert("Passwords do not match.");
+
+        return;
+      }
+
+
+      registerButton.disabled = true;
+
+      registerButton.textContent = "Creating account...";
+
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+              data: {
+
+                first_name: firstName,
+
+                last_name: lastName,
+
+                country: country,
+
+                phone: phone,
+
+                preferred_language: language
+
+              }
+
+            }
+
+          });
+
+
+        if (error) {
+
+          alert(
+            "Registration failed: " + error.message
+          );
+
+          registerButton.disabled = false;
+
+          registerButton.textContent = "Create Account";
+
+          return;
+        }
+
+
+        if (data.user) {
+
+          alert(
+            "Account created successfully!\n\n" +
+            "Please check your email and confirm your account before signing in."
+          );
+
+          registerForm.reset();
+
+        } else {
+
+          alert(
+            "Registration submitted successfully. Please check your email."
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "Something went wrong. Please try again."
+        );
+
+      }
+
+
+      registerButton.disabled = false;
+
+      registerButton.textContent = "Create Account";
+
+    });
+
+  </script>
 
 </body>
 </html>
