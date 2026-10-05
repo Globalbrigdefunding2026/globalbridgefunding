@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Applications | GlobalBridgeFunding</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f8fc;
+      color: #172033;
+    }
+
+    header {
+      background: #071a35;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #36c2ff;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,.4);
+      padding: 9px 14px;
+      border-radius: 7px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #071a35;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      color: #667085;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .application-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .reference {
+      font-size: 12px;
+      color: #667085;
+    }
+
+    .reference strong {
+      display: block;
+      color: #071a35;
+      font-size: 14px;
+      margin-top: 4px;
+      word-break: break-all;
+    }
+
+    .status {
+      padding: 8px 13px;
+      border-radius: 20px;
+      background: #fff7ed;
+      color: #c2410c;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .detail {
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 8px;
+    }
+
+    .detail span {
+      display: block;
+      color: #667085;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .detail strong {
+      color: #071a35;
+      font-size: 15px;
+    }
+
+    .empty {
+      background: white;
+      border-radius: 15px;
+      padding: 40px 25px;
+      text-align: center;
+      color: #667085;
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+    }
+
+    .empty h2 {
+      color: #071a35;
+      margin-bottom: 10px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 35px;
+      color: #667085;
+    }
+
+    .error {
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 16px 20px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .container {
+        margin-top: 25px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .application-card {
+        padding: 20px;
+      }
+
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    Global<span>Bridge</span>Funding
+  </div>
+
+  <a href="dashboard.html" class="back">
+    ← Dashboard
+  </a>
+
+</header>
+
+
+<main class="container">
+
+  <h1>My Applications</h1>
+
+  <p class="intro">
+    View your financing applications and their current status.
+  </p>
+
+  <div id="errorMessage" class="error"></div>
+
+  <div id="applications">
+
+    <div class="loading">
+      Loading your applications...
+    </div>
+
+  </div>
+
+</main>
+
+
+<script type="module">
+
+  import { createClient } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+  const SUPABASE_URL =
+    "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+
+  const supabaseClient =
+    createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
+  const applicationsContainer =
+    document.getElementById("applications");
+
+  const errorMessage =
+    document.getElementById("errorMessage");
+
+
+  async function loadApplications() {
+
+    try {
+
+      const {
+        data: { user },
+        error: userError
+      } = await supabaseClient.auth.getUser();
+
+
+      if (userError || !user) {
+
+        window.location.href = "login.html";
+        return;
+
+      }
+
+
+      const { data, error } =
+        await supabaseClient
+          .from("financing_applications")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("created_at", {
+            ascending: false
+          });
+
+
+      if (error) {
+
+        console.error(error);
+
+        throw new Error(
+          "Unable to load your applications."
+        );
+
+      }
+
+
+      if (!data || data.length === 0) {
+
+        applicationsContainer.innerHTML = `
+          <div class="empty">
+
+            <h2>No Applications Yet</h2>
+
+            <p>
+              You have not submitted a financing application yet.
+            </p>
+
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      applicationsContainer.innerHTML =
+        data.map(application => {
+
+          const amount =
+            Number(application.requested_amount)
+              .toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              });
+
+
+          const date =
+            new Date(application.created_at)
+              .toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              });
+
+
+          const status =
+            application.status || "pending";
+
+
+          return `
+
+            <div class="application-card">
+
+              <div class="top">
+
+                <div class="reference">
+
+                  Application Reference
+
+                  <strong>
+                    ${application.id}
+                  </strong>
+
+                </div>
+
+                <div class="status">
+
+                  ${status.charAt(0).toUpperCase() +
+                    status.slice(1)}
+
+                </div>
+
+              </div>
+
+
+              <div class="details">
+
+                <div class="detail">
+
+                  <span>
+                    Requested financing
+                  </span>
+
+                  <strong>
+                    $${amount}
+                  </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <span>
+                    Business name
+                  </span>
+
+                  <strong>
+                    ${application.business_name}
+                  </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <span>
+                    Business type
+                  </span>
+
+                  <strong>
+                    ${application.business_type}
+                  </strong>
+
+                </div>
+
+
+                <div class="detail">
+
+                  <span>
+                    Submitted
+                  </span>
+
+                  <strong>
+                    ${date}
+                  </strong>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      applicationsContainer.innerHTML = "";
+
+      errorMessage.textContent =
+        error.message ||
+        "Something went wrong.";
+
+      errorMessage.style.display = "block";
+
+    }
+
+  }
+
+
+  loadApplications();
+
+</script>
+
+</body>
+</html>
