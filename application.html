@@ -170,6 +170,7 @@
       align-items: flex-start;
       gap: 10px;
       margin-top: 15px;
+      margin-bottom: 20px;
     }
 
     .checkbox input {
@@ -196,24 +197,29 @@
     }
 
     button:disabled {
-      opacity: .7;
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
     .message {
       display: none;
-      margin-top: 18px;
-      padding: 13px;
-      border-radius: 7px;
-      font-size: 13px;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
       line-height: 1.5;
     }
 
-    .message.error {
-      display: block;
-      background: #fff1f1;
-      color: #a42626;
-      border-left: 4px solid #d64545;
+    .success {
+      background: #ecfdf3;
+      border: 1px solid #a7f3d0;
+      color: #067647;
+    }
+
+    .error {
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+      color: #b42318;
     }
 
     footer {
@@ -224,17 +230,12 @@
     }
 
     @media (max-width: 600px) {
-
       header {
         padding: 16px 20px;
       }
 
       .logo {
         font-size: 18px;
-      }
-
-      .back {
-        font-size: 12px;
       }
 
       .container {
@@ -265,8 +266,8 @@
       Global<span>Bridge</span>Funding
     </div>
 
-    <a href="dashboard.html" class="back">
-      ← Dashboard
+    <a href="financing.html" class="back">
+      ← Financing
     </a>
 
   </header>
@@ -320,6 +321,11 @@
       </div>
 
 
+      <div id="successMessage" class="message success"></div>
+
+      <div id="errorMessage" class="message error"></div>
+
+
       <form id="applicationForm">
 
         <div class="field">
@@ -334,33 +340,13 @@
               Select amount
             </option>
 
-            <option value="20000">
-              $20,000
-            </option>
-
-            <option value="25000">
-              $25,000
-            </option>
-
-            <option value="30000">
-              $30,000
-            </option>
-
-            <option value="35000">
-              $35,000
-            </option>
-
-            <option value="40000">
-              $40,000
-            </option>
-
-            <option value="45000">
-              $45,000
-            </option>
-
-            <option value="50000">
-              $50,000
-            </option>
+            <option value="20000">$20,000</option>
+            <option value="25000">$25,000</option>
+            <option value="30000">$30,000</option>
+            <option value="35000">$35,000</option>
+            <option value="40000">$40,000</option>
+            <option value="45000">$45,000</option>
+            <option value="50000">$50,000</option>
 
           </select>
 
@@ -434,26 +420,11 @@
 
             <select id="years" required>
 
-              <option value="">
-                Select
-              </option>
-
-              <option value="Less than 1 year">
-                Less than 1 year
-              </option>
-
-              <option value="1-2 years">
-                1–2 years
-              </option>
-
-              <option value="3-5 years">
-                3–5 years
-              </option>
-
-              <option value="6-10 years">
-                6–10 years
-              </option>
-
+              <option value="">Select</option>
+              <option value="Less than 1 year">Less than 1 year</option>
+              <option value="1-2 years">1–2 years</option>
+              <option value="3-5 years">3–5 years</option>
+              <option value="6-10 years">6–10 years</option>
               <option value="More than 10 years">
                 More than 10 years
               </option>
@@ -471,26 +442,17 @@
 
             <select id="revenue" required>
 
-              <option value="">
-                Select range
-              </option>
-
-              <option value="Under $50,000">
-                Under $50,000
-              </option>
-
+              <option value="">Select range</option>
+              <option value="Under $50,000">Under $50,000</option>
               <option value="$50,000 - $100,000">
                 $50,000 – $100,000
               </option>
-
               <option value="$100,000 - $250,000">
                 $100,000 – $250,000
               </option>
-
               <option value="$250,000 - $500,000">
                 $250,000 – $500,000
               </option>
-
               <option value="Over $500,000">
                 Over $500,000
               </option>
@@ -542,18 +504,9 @@
         </div>
 
 
-        <button
-          type="submit"
-          id="submitButton"
-        >
+        <button type="submit" id="submitButton">
           Continue Application
         </button>
-
-
-        <div
-          id="message"
-          class="message"
-        ></div>
 
       </form>
 
@@ -563,15 +516,15 @@
 
 
   <footer>
-
     © 2026 GlobalBridgeFunding. All rights reserved.
-
   </footer>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module">
 
-  <script>
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
 
     const SUPABASE_URL =
       "https://siykgexfdsmkiqwyxker.supabase.co";
@@ -581,10 +534,7 @@
 
 
     const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+      createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
     const form =
@@ -593,89 +543,125 @@
     const submitButton =
       document.getElementById("submitButton");
 
-    const message =
-      document.getElementById("message");
+    const successMessage =
+      document.getElementById("successMessage");
+
+    const errorMessage =
+      document.getElementById("errorMessage");
 
 
-    async function checkUser() {
+    form.addEventListener("submit", async function(event) {
 
-      const {
-        data: {
-          user
-        }
-      } = await supabaseClient.auth.getUser();
+      event.preventDefault();
 
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
 
-      if (!user) {
-
-        window.location.href =
-          "login.html";
-
-      }
-
-    }
+      submitButton.disabled = true;
+      submitButton.textContent = "Submitting...";
 
 
-    form.addEventListener(
-      "submit",
-      async function(event) {
-
-        event.preventDefault();
-
-
-        message.className = "message";
-        message.textContent = "";
-
+      try {
 
         const {
-          data: {
-            user
-          }
+          data: { user },
+          error: userError
         } = await supabaseClient.auth.getUser();
 
 
-        if (!user) {
+        if (userError || !user) {
 
-          window.location.href =
-            "login.html";
-
-          return;
+          throw new Error(
+            "Please sign in to your GlobalBridgeFunding account before submitting an application."
+          );
 
         }
 
 
-        submitButton.disabled = true;
+        const applicationData = {
 
-        submitButton.textContent =
-          "Processing...";
+          user_id: user.id,
+
+          requested_amount:
+            Number(document.getElementById("amount").value),
+
+          business_name:
+            document.getElementById("businessName").value.trim(),
+
+          business_type:
+            document.getElementById("businessType").value,
+
+          years_in_operation:
+            document.getElementById("years").value,
+
+          annual_revenue:
+            document.getElementById("revenue").value,
+
+          financing_purpose:
+            document.getElementById("purpose").value.trim()
+
+        };
 
 
-        /*
-         * The next stage will connect this form
-         * to the Supabase financing application
-         * database.
-         */
+        const { data, error } =
+          await supabaseClient
+            .from("financing_applications")
+            .insert([applicationData])
+            .select()
+            .single();
 
-        setTimeout(function() {
 
-          message.className =
-            "message error";
+        if (error) {
 
-          message.textContent =
-            "Your application form is ready. The secure application submission system will be connected next.";
+          console.error(error);
 
-          submitButton.disabled = false;
+          throw new Error(
+            error.message ||
+            "Unable to submit your application."
+          );
 
-          submitButton.textContent =
-            "Continue Application";
+        }
 
-        }, 700);
+
+        successMessage.innerHTML =
+          "<strong>Application submitted successfully.</strong><br>" +
+          "Your application reference is <strong>" +
+          data.id +
+          "</strong>. Your application is now under review.";
+
+        successMessage.style.display = "block";
+
+
+        form.reset();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        errorMessage.textContent =
+          error.message ||
+          "Something went wrong while submitting your application.";
+
+        errorMessage.style.display = "block";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
 
       }
-    );
 
 
-    checkUser();
+      submitButton.disabled = false;
+      submitButton.textContent = "Continue Application";
+
+    });
 
   </script>
 
