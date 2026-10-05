@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard | GlobalBridgeFunding</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f8fc;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #071a35;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #36c2ff;
+    }
+
+    .logout {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.5);
+      color: white;
+      padding: 9px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      color: #071a35;
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #667085;
+    }
+
+    .status {
+      background: #eef8fc;
+      border-left: 4px solid #36c2ff;
+      padding: 15px;
+      margin-bottom: 25px;
+      border-radius: 6px;
+      color: #536477;
+    }
+
+    .status strong {
+      color: #087ea4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 8px 28px rgba(20, 40, 70, .08);
+    }
+
+    .card h2 {
+      color: #071a35;
+      font-size: 19px;
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .card a {
+      display: inline-block;
+      background: #36c2ff;
+      color: #071a35;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .account {
+      margin-top: 25px;
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(20, 40, 70, .08);
+    }
+
+    .account h2 {
+      color: #071a35;
+      margin-bottom: 18px;
+    }
+
+    .account-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #edf0f4;
+      font-size: 14px;
+    }
+
+    .account-row:last-child {
+      border-bottom: none;
+    }
+
+    .account-row span:first-child {
+      color: #667085;
+    }
+
+    .account-row span:last-child {
+      font-weight: 700;
+      color: #24344d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #7b8797;
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      header {
+        padding: 16px 20px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .container {
+        margin-top: 25px;
+      }
+
+      .welcome h1 {
+        font-size: 25px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Global<span>Bridge</span>Funding
+    </div>
+
+    <button class="logout" id="logoutButton">
+      Sign Out
+    </button>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="welcome">
+
+      <h1 id="welcomeMessage">
+        Welcome
+      </h1>
+
+      <p>
+        Manage your GlobalBridgeFunding account from your private dashboard.
+      </p>
+
+    </section>
+
+
+    <div class="status">
+
+      <strong>Account status:</strong>
+      Email verified
+
+    </div>
+
+
+    <section class="grid">
+
+      <div class="card">
+
+        <h2>Financing</h2>
+
+        <p>
+          Review available financing options and begin an application.
+        </p>
+
+        <a href="#">
+          View Financing
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>KYC Verification</h2>
+
+        <p>
+          Submit the information and documents required for account verification.
+        </p>
+
+        <a href="#">
+          Open KYC
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>Wallet</h2>
+
+        <p>
+          View your account wallet information and supported payment options.
+        </p>
+
+        <a href="#">
+          Open Wallet
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>Transactions</h2>
+
+        <p>
+          Review your account transaction history.
+        </p>
+
+        <a href="#">
+          View Transactions
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>Profile</h2>
+
+        <p>
+          Review and manage your personal account information.
+        </p>
+
+        <a href="#">
+          View Profile
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>Support</h2>
+
+        <p>
+          Get assistance with your account or financing application.
+        </p>
+
+        <a href="#">
+          Contact Support
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <section class="account">
+
+      <h2>Account Information</h2>
+
+      <div class="account-row">
+        <span>Name</span>
+        <span id="accountName">Loading...</span>
+      </div>
+
+      <div class="account-row">
+        <span>Email</span>
+        <span id="accountEmail">Loading...</span>
+      </div>
+
+      <div class="account-row">
+        <span>Country</span>
+        <span id="accountCountry">Loading...</span>
+      </div>
+
+      <div class="account-row">
+        <span>Preferred language</span>
+        <span id="accountLanguage">Loading...</span>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    © 2026 GlobalBridgeFunding. All rights reserved.
+  </footer>
+
+
+  <!-- Supabase library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://siykgexfdsmkiqwyxker.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    async function loadDashboard() {
+
+      const {
+        data: {
+          user
+        }
+      } = await supabaseClient.auth.getUser();
+
+
+      /*
+       * If there is no logged-in user,
+       * send them back to the login page.
+       */
+
+      if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+      }
+
+
+      const metadata = user.user_metadata || {};
+
+
+      const firstName =
+        metadata.first_name || "";
+
+      const lastName =
+        metadata.last_name || "";
+
+      const fullName =
+        `${firstName} ${lastName}`.trim();
+
+
+      document.getElementById(
+        "welcomeMessage"
+      ).textContent =
+        fullName
+          ? `Welcome, ${fullName}`
+          : "Welcome";
+
+
+      document.getElementById(
+        "accountName"
+      ).textContent =
+        fullName || "Not provided";
+
+
+      document.getElementById(
+        "accountEmail"
+      ).textContent =
+        user.email || "Not provided";
+
+
+      document.getElementById(
+        "accountCountry"
+      ).textContent =
+        metadata.country || "Not provided";
+
+
+      document.getElementById(
+        "accountLanguage"
+      ).textContent =
+        metadata.preferred_language || "Not provided";
+
+    }
+
+
+    document.getElementById(
+      "logoutButton"
+    ).addEventListener(
+      "click",
+      async function() {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href = "login.html";
+
+      }
+    );
+
+
+    loadDashboard();
+
+  </script>
+
+</body>
+</html>
