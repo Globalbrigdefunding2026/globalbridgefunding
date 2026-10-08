@@ -15,202 +15,258 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f5f8fc;
+      background: #f5f7fb;
       color: #172033;
+      min-height: 100vh;
     }
 
     header {
-      background: #071a35;
-      color: white;
-      padding: 18px 6%;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 16px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
       font-size: 21px;
       font-weight: 800;
+      color: #123c73;
+      white-space: nowrap;
     }
 
-    .logo span {
-      color: #36c2ff;
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .logout {
-      background: transparent;
-      color: white;
-      border: 1px solid rgba(255,255,255,.4);
-      padding: 9px 14px;
-      border-radius: 7px;
-      cursor: pointer;
+    .language-select {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 9px 30px 9px 10px;
+      background: #ffffff;
+      color: #172033;
       font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .language-select:focus {
+      border-color: #123c73;
+    }
+
+    .logout-btn {
+      border: none;
+      background: #123c73;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.9;
     }
 
     .container {
-      max-width: 1100px;
-      margin: 35px auto;
-      padding: 0 20px;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 30px 20px 50px;
     }
 
     .welcome {
-      margin-bottom: 30px;
+      background: linear-gradient(135deg, #123c73, #0c5da8);
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(18, 60, 115, 0.15);
     }
 
     .welcome h1 {
-      color: #071a35;
       font-size: 30px;
       margin-bottom: 8px;
     }
 
     .welcome p {
-      color: #667085;
-      line-height: 1.6;
+      font-size: 15px;
+      opacity: 0.9;
     }
 
-    .status {
-      display: inline-block;
-      margin-top: 12px;
-      background: #ecfdf3;
-      color: #067647;
-      border: 1px solid #a7f3d0;
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 700;
+    .section-title {
+      font-size: 21px;
+      margin-bottom: 15px;
+      color: #172033;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
     }
 
     .card {
-      background: white;
-      padding: 25px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
       border-radius: 14px;
-      box-shadow: 0 8px 28px rgba(20,40,70,.08);
-      text-decoration: none;
-      color: inherit;
-      transition: transform .2s ease, box-shadow .2s ease;
+      padding: 22px;
+      min-height: 145px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(20,40,70,.12);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
     }
 
-    .icon {
-      width: 46px;
-      height: 46px;
-      background: #eef8fc;
-      color: #071a35;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-      margin-bottom: 15px;
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
     }
 
-    .card h2 {
-      color: #071a35;
-      font-size: 18px;
-      margin-bottom: 7px;
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #172033;
     }
 
     .card p {
-      color: #667085;
       font-size: 13px;
+      color: #6b7280;
       line-height: 1.5;
+      margin-bottom: 15px;
     }
 
-    .admin-card {
-      display: none;
-      border: 1px solid #36c2ff;
+    .card a {
+      display: inline-block;
+      text-decoration: none;
+      color: #123c73;
+      font-size: 14px;
+      font-weight: 700;
     }
 
-    .admin-card .icon {
-      background: #071a35;
-      color: #36c2ff;
-    }
-
-    .account {
-      margin-top: 25px;
-      background: white;
+    .account-box {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 25px;
-      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+      margin-bottom: 30px;
     }
 
-    .account h2 {
-      color: #071a35;
-      margin-bottom: 18px;
-      font-size: 19px;
-    }
-
-    .info {
+    .account-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+      gap: 18px;
     }
 
-    .info-box {
+    .account-item {
       background: #f8fafc;
-      padding: 14px;
-      border-radius: 8px;
+      padding: 15px;
+      border-radius: 10px;
     }
 
-    .info-box span {
-      display: block;
-      color: #667085;
+    .account-label {
       font-size: 12px;
-      margin-bottom: 5px;
+      color: #6b7280;
+      margin-bottom: 6px;
     }
 
-    .info-box strong {
-      color: #071a35;
-      font-size: 14px;
+    .account-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #172033;
+      word-break: break-word;
+    }
+
+    #adminCard {
+      display: none;
     }
 
     footer {
       text-align: center;
-      padding: 35px 20px;
-      color: #7b8797;
-      font-size: 12px;
+      color: #6b7280;
+      font-size: 13px;
+      padding: 25px 15px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .cards {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 600px) {
       header {
-        padding: 16px 20px;
+        padding: 13px 14px;
       }
 
       .logo {
-        font-size: 18px;
+        font-size: 17px;
+      }
+
+      .header-right {
+        gap: 6px;
+      }
+
+      .language-select {
+        max-width: 115px;
+        font-size: 12px;
+        padding: 8px 5px;
+      }
+
+      .logout-btn {
+        padding: 8px 10px;
+        font-size: 12px;
       }
 
       .container {
-        margin-top: 25px;
+        padding: 20px 14px 40px;
+      }
+
+      .welcome {
+        padding: 24px 20px;
+        border-radius: 14px;
       }
 
       .welcome h1 {
-        font-size: 26px;
+        font-size: 24px;
       }
 
       .cards {
         grid-template-columns: 1fr;
       }
 
-      .info {
+      .account-grid {
         grid-template-columns: 1fr;
       }
+    }
+
+    html[dir="rtl"] {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] body {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .header-right {
+      flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .language-select {
+      padding: 9px 10px 9px 30px;
     }
   </style>
 </head>
@@ -218,249 +274,191 @@
 <body>
 
 <header>
-
   <div class="logo">
-    Global<span>Bridge</span>Funding
+    GlobalBridgeFunding
   </div>
 
-  <button class="logout" id="logoutButton">
-    Sign Out
-  </button>
+  <div class="header-right">
 
+    <select id="languageSelector" class="language-select" aria-label="Language">
+      <option value="English">English</option>
+      <option value="Português">Português</option>
+      <option value="Tiếng Việt">Tiếng Việt</option>
+      <option value="فارسی">فارسی</option>
+      <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+      <option value="Français">Français</option>
+      <option value="Suomi">Suomi</option>
+      <option value="Español">Español</option>
+    </select>
+
+    <button id="logoutBtn" class="logout-btn">
+      Sign Out
+    </button>
+
+  </div>
 </header>
 
 
 <main class="container">
 
   <section class="welcome">
-
-    <h1 id="welcomeMessage">
-      Welcome
-    </h1>
-
-    <p>
-      Manage your GlobalBridgeFunding account from your
-      private dashboard.
+    <h1 id="welcomeTitle">Welcome</h1>
+    <p id="welcomeText">
+      Manage your GlobalBridgeFunding account and financing applications.
     </p>
+  </section>
 
-    <div class="status">
-      Account status: Email verified
+
+  <h2 class="section-title" id="servicesTitle">
+    Your Services
+  </h2>
+
+
+  <section class="cards">
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💰</div>
+        <h3 id="financingTitle">Financing</h3>
+        <p id="financingText">
+          Explore available financing options and apply for funding.
+        </p>
+      </div>
+      <a href="financing.html" id="financingLink">View Financing →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📄</div>
+        <h3 id="applicationsTitle">My Applications</h3>
+        <p id="applicationsText">
+          View and track your financing applications.
+        </p>
+      </div>
+      <a href="applications.html" id="applicationsLink">View Applications →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">🛡️</div>
+        <h3 id="kycTitle">KYC Verification</h3>
+        <p id="kycText">
+          Complete your identity verification information.
+        </p>
+      </div>
+      <a href="#" id="kycLink">Complete Verification →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💳</div>
+        <h3 id="walletTitle">Wallet</h3>
+        <p id="walletText">
+          Manage your account wallet and payment information.
+        </p>
+      </div>
+      <a href="#" id="walletLink">Open Wallet →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">📊</div>
+        <h3 id="transactionsTitle">Transactions</h3>
+        <p id="transactionsText">
+          Review your account transaction history.
+        </p>
+      </div>
+      <a href="#" id="transactionsLink">View Transactions →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">👤</div>
+        <h3 id="profileTitle">Profile</h3>
+        <p id="profileText">
+          Review your personal account information.
+        </p>
+      </div>
+      <a href="#" id="profileLink">View Profile →</a>
+    </div>
+
+
+    <div class="card">
+      <div>
+        <div class="card-icon">💬</div>
+        <h3 id="supportTitle">Support</h3>
+        <p id="supportText">
+          Get help with your account or application.
+        </p>
+      </div>
+      <a href="#" id="supportLink">Contact Support →</a>
+    </div>
+
+
+    <div class="card" id="adminCard">
+      <div>
+        <div class="card-icon">⚙️</div>
+        <h3 id="adminTitle">Admin Portal</h3>
+        <p id="adminText">
+          Manage applications and administrative functions.
+        </p>
+      </div>
+      <a href="admin-applications.html" id="adminLink">Open Admin Portal →</a>
     </div>
 
   </section>
 
 
-  <section class="cards">
+  <section class="account-box">
 
-
-    <a href="financing.html" class="card">
-
-      <div class="icon">
-        $
-      </div>
-
-      <h2>
-        Financing
-      </h2>
-
-      <p>
-        Explore available business financing and
-        submit a financing request.
-      </p>
-
-    </a>
-
-
-    <a href="applications.html" class="card">
-
-      <div class="icon">
-        ✓
-      </div>
-
-      <h2>
-        My Applications
-      </h2>
-
-      <p>
-        View your submitted financing applications
-        and current application status.
-      </p>
-
-    </a>
-
-
-    <a href="#" class="card">
-
-      <div class="icon">
-        K
-      </div>
-
-      <h2>
-        KYC Verification
-      </h2>
-
-      <p>
-        Complete your identity and account
-        verification.
-      </p>
-
-    </a>
-
-
-    <a href="#" class="card">
-
-      <div class="icon">
-        W
-      </div>
-
-      <h2>
-        Wallet
-      </h2>
-
-      <p>
-        Manage your available balance and
-        payment information.
-      </p>
-
-    </a>
-
-
-    <a href="#" class="card">
-
-      <div class="icon">
-        T
-      </div>
-
-      <h2>
-        Transactions
-      </h2>
-
-      <p>
-        Review your account transaction history.
-      </p>
-
-    </a>
-
-
-    <a href="#" class="card">
-
-      <div class="icon">
-        P
-      </div>
-
-      <h2>
-        Profile
-      </h2>
-
-      <p>
-        View and manage your personal account
-        information.
-      </p>
-
-    </a>
-
-
-    <a href="#" class="card">
-
-      <div class="icon">
-        ?
-      </div>
-
-      <h2>
-        Support
-      </h2>
-
-      <p>
-        Contact GlobalBridgeFunding support.
-      </p>
-
-    </a>
-
-
-    <!-- ADMIN PORTAL -->
-
-    <a
-      href="admin-applications.html"
-      class="card admin-card"
-      id="adminPortal"
-    >
-
-      <div class="icon">
-        A
-      </div>
-
-      <h2>
-        Admin Portal
-      </h2>
-
-      <p>
-        Review and manage customer financing
-        applications.
-      </p>
-
-    </a>
-
-
-  </section>
-
-
-  <section class="account">
-
-    <h2>
+    <h2 class="section-title" id="accountTitle">
       Account Information
     </h2>
 
-    <div class="info">
+    <div class="account-grid">
 
-      <div class="info-box">
-
-        <span>
+      <div class="account-item">
+        <div class="account-label" id="nameLabel">
           Name
-        </span>
-
-        <strong id="userName">
+        </div>
+        <div class="account-value" id="nameValue">
           Loading...
-        </strong>
-
+        </div>
       </div>
 
 
-      <div class="info-box">
-
-        <span>
+      <div class="account-item">
+        <div class="account-label" id="emailLabel">
           Email
-        </span>
-
-        <strong id="userEmail">
+        </div>
+        <div class="account-value" id="emailValue">
           Loading...
-        </strong>
-
+        </div>
       </div>
 
 
-      <div class="info-box">
-
-        <span>
+      <div class="account-item">
+        <div class="account-label" id="countryLabel">
           Country
-        </span>
-
-        <strong id="userCountry">
+        </div>
+        <div class="account-value" id="countryValue">
           Loading...
-        </strong>
-
+        </div>
       </div>
 
 
-      <div class="info-box">
-
-        <span>
-          Preferred language
-        </span>
-
-        <strong id="userLanguage">
+      <div class="account-item">
+        <div class="account-label" id="languageLabel">
+          Preferred Language
+        </div>
+        <div class="account-value" id="languageValue">
           Loading...
-        </strong>
-
+        </div>
       </div>
 
     </div>
@@ -471,17 +469,21 @@
 
 
 <footer>
-
-  © 2026 GlobalBridgeFunding. All rights reserved.
-
+  <span id="footerText">
+    © 2026 GlobalBridgeFunding. All rights reserved.
+  </span>
 </footer>
 
 
 <script type="module">
 
-  import { createClient } from
-    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+  import { createClient }
+    from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
+
+  /* =========================================================
+     SUPABASE
+  ========================================================= */
 
   const SUPABASE_URL =
     "https://siykgexfdsmkiqwyxker.supabase.co";
@@ -489,105 +491,836 @@
   const SUPABASE_KEY =
     "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
 
-
   const supabaseClient =
     createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
-  async function loadDashboard() {
+  /* =========================================================
+     TRANSLATIONS
+  ========================================================= */
 
-    const {
-      data: { user },
-      error
-    } = await supabaseClient.auth.getUser();
+  const translations = {
+
+    "English": {
+
+      welcome: "Welcome",
+      welcomeText: "Manage your GlobalBridgeFunding account and financing applications.",
+      services: "Your Services",
+
+      financing: "Financing",
+      financingText: "Explore available financing options and apply for funding.",
+      financingLink: "View Financing →",
+
+      applications: "My Applications",
+      applicationsText: "View and track your financing applications.",
+      applicationsLink: "View Applications →",
+
+      kyc: "KYC Verification",
+      kycText: "Complete your identity verification information.",
+      kycLink: "Complete Verification →",
+
+      wallet: "Wallet",
+      walletText: "Manage your account wallet and payment information.",
+      walletLink: "Open Wallet →",
+
+      transactions: "Transactions",
+      transactionsText: "Review your account transaction history.",
+      transactionsLink: "View Transactions →",
+
+      profile: "Profile",
+      profileText: "Review your personal account information.",
+      profileLink: "View Profile →",
+
+      support: "Support",
+      supportText: "Get help with your account or application.",
+      supportLink: "Contact Support →",
+
+      admin: "Admin Portal",
+      adminText: "Manage applications and administrative functions.",
+      adminLink: "Open Admin Portal →",
+
+      account: "Account Information",
+      name: "Name",
+      email: "Email",
+      country: "Country",
+      language: "Preferred Language",
+
+      signOut: "Sign Out",
+
+      footer: "© 2026 GlobalBridgeFunding. All rights reserved."
+
+    },
 
 
-    if (error || !user) {
+    "Português": {
 
-      window.location.href = "login.html";
-      return;
+      welcome: "Bem-vindo",
+      welcomeText: "Gerencie a sua conta GlobalBridgeFunding e os seus pedidos de financiamento.",
+      services: "Os Seus Serviços",
+
+      financing: "Financiamento",
+      financingText: "Explore as opções de financiamento disponíveis e solicite financiamento.",
+      financingLink: "Ver Financiamento →",
+
+      applications: "Os Meus Pedidos",
+      applicationsText: "Veja e acompanhe os seus pedidos de financiamento.",
+      applicationsLink: "Ver Pedidos →",
+
+      kyc: "Verificação KYC",
+      kycText: "Complete as informações de verificação da sua identidade.",
+      kycLink: "Completar Verificação →",
+
+      wallet: "Carteira",
+      walletText: "Gerencie a sua carteira e as informações de pagamento.",
+      walletLink: "Abrir Carteira →",
+
+      transactions: "Transações",
+      transactionsText: "Consulte o histórico de transações da sua conta.",
+      transactionsLink: "Ver Transações →",
+
+      profile: "Perfil",
+      profileText: "Consulte as informações pessoais da sua conta.",
+      profileLink: "Ver Perfil →",
+
+      support: "Suporte",
+      supportText: "Obtenha ajuda com a sua conta ou pedido.",
+      supportLink: "Contactar Suporte →",
+
+      admin: "Portal de Administração",
+      adminText: "Gerencie pedidos e funções administrativas.",
+      adminLink: "Abrir Portal →",
+
+      account: "Informações da Conta",
+      name: "Nome",
+      email: "E-mail",
+      country: "País",
+      language: "Idioma Preferido",
+
+      signOut: "Sair",
+
+      footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados."
+
+    },
+
+
+    "Tiếng Việt": {
+
+      welcome: "Chào mừng",
+      welcomeText: "Quản lý tài khoản GlobalBridgeFunding và các đơn đăng ký tài chính của bạn.",
+      services: "Dịch Vụ Của Bạn",
+
+      financing: "Tài Chính",
+      financingText: "Khám phá các lựa chọn tài chính và đăng ký khoản tài trợ.",
+      financingLink: "Xem Tài Chính →",
+
+      applications: "Đơn Của Tôi",
+      applicationsText: "Xem và theo dõi các đơn đăng ký tài chính của bạn.",
+      applicationsLink: "Xem Đơn →",
+
+      kyc: "Xác Minh KYC",
+      kycText: "Hoàn thành thông tin xác minh danh tính của bạn.",
+      kycLink: "Hoàn Thành Xác Minh →",
+
+      wallet: "Ví",
+      walletText: "Quản lý ví tài khoản và thông tin thanh toán.",
+      walletLink: "Mở Ví →",
+
+      transactions: "Giao Dịch",
+      transactionsText: "Xem lịch sử giao dịch tài khoản của bạn.",
+      transactionsLink: "Xem Giao Dịch →",
+
+      profile: "Hồ Sơ",
+      profileText: "Xem thông tin cá nhân của tài khoản.",
+      profileLink: "Xem Hồ Sơ →",
+
+      support: "Hỗ Trợ",
+      supportText: "Nhận trợ giúp về tài khoản hoặc đơn đăng ký.",
+      supportLink: "Liên Hệ Hỗ Trợ →",
+
+      admin: "Cổng Quản Trị",
+      adminText: "Quản lý đơn đăng ký và các chức năng quản trị.",
+      adminLink: "Mở Cổng Quản Trị →",
+
+      account: "Thông Tin Tài Khoản",
+      name: "Tên",
+      email: "Email",
+      country: "Quốc Gia",
+      language: "Ngôn Ngữ Ưa Thích",
+
+      signOut: "Đăng Xuất",
+
+      footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền."
+
+    },
+
+
+    "فارسی": {
+
+      welcome: "خوش آمدید",
+      welcomeText: "حساب GlobalBridgeFunding و درخواست‌های تأمین مالی خود را مدیریت کنید.",
+      services: "خدمات شما",
+
+      financing: "تأمین مالی",
+      financingText: "گزینه‌های تأمین مالی موجود را مشاهده و برای دریافت منابع مالی درخواست دهید.",
+      financingLink: "مشاهده تأمین مالی ←",
+
+      applications: "درخواست‌های من",
+      applicationsText: "درخواست‌های تأمین مالی خود را مشاهده و پیگیری کنید.",
+      applicationsLink: "مشاهده درخواست‌ها ←",
+
+      kyc: "تأیید هویت KYC",
+      kycText: "اطلاعات لازم برای تأیید هویت خود را تکمیل کنید.",
+      kycLink: "تکمیل تأیید هویت ←",
+
+      wallet: "کیف پول",
+      walletText: "کیف پول و اطلاعات پرداخت حساب خود را مدیریت کنید.",
+      walletLink: "باز کردن کیف پول ←",
+
+      transactions: "تراکنش‌ها",
+      transactionsText: "تاریخچه تراکنش‌های حساب خود را بررسی کنید.",
+      transactionsLink: "مشاهده تراکنش‌ها ←",
+
+      profile: "پروفایل",
+      profileText: "اطلاعات شخصی حساب خود را مشاهده کنید.",
+      profileLink: "مشاهده پروفایل ←",
+
+      support: "پشتیبانی",
+      supportText: "برای حساب یا درخواست خود کمک دریافت کنید.",
+      supportLink: "تماس با پشتیبانی ←",
+
+      admin: "پنل مدیریت",
+      adminText: "درخواست‌ها و بخش‌های مدیریتی را مدیریت کنید.",
+      adminLink: "باز کردن پنل مدیریت ←",
+
+      account: "اطلاعات حساب",
+      name: "نام",
+      email: "ایمیل",
+      country: "کشور",
+      language: "زبان ترجیحی",
+
+      signOut: "خروج",
+
+      footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است."
+
+    },
+
+
+    "Bahasa Indonesia": {
+
+      welcome: "Selamat Datang",
+      welcomeText: "Kelola akun GlobalBridgeFunding dan pengajuan pembiayaan Anda.",
+      services: "Layanan Anda",
+
+      financing: "Pembiayaan",
+      financingText: "Jelajahi pilihan pembiayaan yang tersedia dan ajukan pendanaan.",
+      financingLink: "Lihat Pembiayaan →",
+
+      applications: "Pengajuan Saya",
+      applicationsText: "Lihat dan lacak pengajuan pembiayaan Anda.",
+      applicationsLink: "Lihat Pengajuan →",
+
+      kyc: "Verifikasi KYC",
+      kycText: "Lengkapi informasi verifikasi identitas Anda.",
+      kycLink: "Selesaikan Verifikasi →",
+
+      wallet: "Dompet",
+      walletText: "Kelola dompet akun dan informasi pembayaran Anda.",
+      walletLink: "Buka Dompet →",
+
+      transactions: "Transaksi",
+      transactionsText: "Tinjau riwayat transaksi akun Anda.",
+      transactionsLink: "Lihat Transaksi →",
+
+      profile: "Profil",
+      profileText: "Tinjau informasi pribadi akun Anda.",
+      profileLink: "Lihat Profil →",
+
+      support: "Dukungan",
+      supportText: "Dapatkan bantuan terkait akun atau pengajuan Anda.",
+      supportLink: "Hubungi Dukungan →",
+
+      admin: "Portal Admin",
+      adminText: "Kelola pengajuan dan fungsi administratif.",
+      adminLink: "Buka Portal Admin →",
+
+      account: "Informasi Akun",
+      name: "Nama",
+      email: "Email",
+      country: "Negara",
+      language: "Bahasa Pilihan",
+
+      signOut: "Keluar",
+
+      footer: "© 2026 GlobalBridgeFunding. Hak cipta dilindungi."
+
+    },
+
+
+    "Français": {
+
+      welcome: "Bienvenue",
+      welcomeText: "Gérez votre compte GlobalBridgeFunding et vos demandes de financement.",
+      services: "Vos Services",
+
+      financing: "Financement",
+      financingText: "Découvrez les options de financement disponibles et demandez un financement.",
+      financingLink: "Voir le Financement →",
+
+      applications: "Mes Demandes",
+      applicationsText: "Consultez et suivez vos demandes de financement.",
+      applicationsLink: "Voir les Demandes →",
+
+      kyc: "Vérification KYC",
+      kycText: "Complétez les informations nécessaires à la vérification de votre identité.",
+      kycLink: "Terminer la Vérification →",
+
+      wallet: "Portefeuille",
+      walletText: "Gérez votre portefeuille et vos informations de paiement.",
+      walletLink: "Ouvrir le Portefeuille →",
+
+      transactions: "Transactions",
+      transactionsText: "Consultez l'historique des transactions de votre compte.",
+      transactionsLink: "Voir les Transactions →",
+
+      profile: "Profil",
+      profileText: "Consultez les informations personnelles de votre compte.",
+      profileLink: "Voir le Profil →",
+
+      support: "Assistance",
+      supportText: "Obtenez de l'aide concernant votre compte ou votre demande.",
+      supportLink: "Contacter l'Assistance →",
+
+      admin: "Portail Administrateur",
+      adminText: "Gérez les demandes et les fonctions administratives.",
+      adminLink: "Ouvrir le Portail →",
+
+      account: "Informations du Compte",
+      name: "Nom",
+      email: "E-mail",
+      country: "Pays",
+      language: "Langue Préférée",
+
+      signOut: "Déconnexion",
+
+      footer: "© 2026 GlobalBridgeFunding. Tous droits réservés."
+
+    },
+
+
+    "Suomi": {
+
+      welcome: "Tervetuloa",
+      welcomeText: "Hallitse GlobalBridgeFunding-tiliäsi ja rahoitushakemuksiasi.",
+      services: "Palvelusi",
+
+      financing: "Rahoitus",
+      financingText: "Tutustu saatavilla oleviin rahoitusvaihtoehtoihin ja hae rahoitusta.",
+      financingLink: "Näytä Rahoitus →",
+
+      applications: "Hakemukseni",
+      applicationsText: "Katso ja seuraa rahoitushakemuksiasi.",
+      applicationsLink: "Näytä Hakemukset →",
+
+      kyc: "KYC-vahvistus",
+      kycText: "Täytä henkilöllisyytesi vahvistamiseen tarvittavat tiedot.",
+      kycLink: "Suorita Vahvistus →",
+
+      wallet: "Lompakko",
+      walletText: "Hallitse tilisi lompakkoa ja maksutietoja.",
+      walletLink: "Avaa Lompakko →",
+
+      transactions: "Tapahtumat",
+      transactionsText: "Tarkastele tilisi tapahtumahistoriaa.",
+      transactionsLink: "Näytä Tapahtumat →",
+
+      profile: "Profiili",
+      profileText: "Tarkastele tilisi henkilötietoja.",
+      profileLink: "Näytä Profiili →",
+
+      support: "Tuki",
+      supportText: "Saat apua tiliisi tai hakemukseesi liittyvissä asioissa.",
+      supportLink: "Ota Yhteyttä Tukeen →",
+
+      admin: "Ylläpitoportaali",
+      adminText: "Hallitse hakemuksia ja ylläpitotoimintoja.",
+      adminLink: "Avaa Ylläpitoportaali →",
+
+      account: "Tilin Tiedot",
+      name: "Nimi",
+      email: "Sähköposti",
+      country: "Maa",
+      language: "Ensisijainen Kieli",
+
+      signOut: "Kirjaudu Ulos",
+
+      footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään."
+
+    },
+
+
+    "Español": {
+
+      welcome: "Bienvenido",
+      welcomeText: "Administra tu cuenta de GlobalBridgeFunding y tus solicitudes de financiación.",
+      services: "Tus Servicios",
+
+      financing: "Financiación",
+      financingText: "Explora las opciones de financiación disponibles y solicita financiación.",
+      financingLink: "Ver Financiación →",
+
+      applications: "Mis Solicitudes",
+      applicationsText: "Consulta y realiza seguimiento de tus solicitudes de financiación.",
+      applicationsLink: "Ver Solicitudes →",
+
+      kyc: "Verificación KYC",
+      kycText: "Completa la información para verificar tu identidad.",
+      kycLink: "Completar Verificación →",
+
+      wallet: "Billetera",
+      walletText: "Administra la billetera de tu cuenta y la información de pago.",
+      walletLink: "Abrir Billetera →",
+
+      transactions: "Transacciones",
+      transactionsText: "Consulta el historial de transacciones de tu cuenta.",
+      transactionsLink: "Ver Transacciones →",
+
+      profile: "Perfil",
+      profileText: "Consulta la información personal de tu cuenta.",
+      profileLink: "Ver Perfil →",
+
+      support: "Soporte",
+      supportText: "Obtén ayuda con tu cuenta o solicitud.",
+      supportLink: "Contactar Soporte →",
+
+      admin: "Portal de Administración",
+      adminText: "Gestiona solicitudes y funciones administrativas.",
+      adminLink: "Abrir Portal de Administración →",
+
+      account: "Información de la Cuenta",
+      name: "Nombre",
+      email: "Correo Electrónico",
+      country: "País",
+      language: "Idioma Preferido",
+
+      signOut: "Cerrar Sesión",
+
+      footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados."
 
     }
 
-
-    const metadata =
-      user.user_metadata || {};
+  };
 
 
-    const firstName =
-      metadata.first_name || "";
+  /* =========================================================
+     ELEMENTS
+  ========================================================= */
 
-    const lastName =
-      metadata.last_name || "";
+  const languageSelector =
+    document.getElementById("languageSelector");
 
-    const fullName =
-      `${firstName} ${lastName}`.trim();
-
-
-    document.getElementById("welcomeMessage")
-      .textContent =
-      fullName
-        ? `Welcome, ${fullName}`
-        : "Welcome";
+  const logoutBtn =
+    document.getElementById("logoutBtn");
 
 
-    document.getElementById("userName")
-      .textContent =
-      fullName || "Not provided";
+  /* =========================================================
+     USER DATA
+  ========================================================= */
+
+  let currentUser = null;
+
+  let userName = "";
+
+  let currentLanguage = "English";
 
 
-    document.getElementById("userEmail")
-      .textContent =
-      user.email || "Not provided";
+  /* =========================================================
+     APPLY LANGUAGE
+  ========================================================= */
+
+  function applyLanguage(language) {
+
+    if (!translations[language]) {
+      language = "English";
+    }
+
+    currentLanguage = language;
+
+    const t = translations[language];
+
+    document.documentElement.lang =
+      language === "Português" ? "pt" :
+      language === "Tiếng Việt" ? "vi" :
+      language === "فارسی" ? "fa" :
+      language === "Bahasa Indonesia" ? "id" :
+      language === "Français" ? "fr" :
+      language === "Suomi" ? "fi" :
+      language === "Español" ? "es" :
+      "en";
+
+    document.documentElement.dir =
+      language === "فارسی" ? "rtl" : "ltr";
 
 
-    document.getElementById("userCountry")
-      .textContent =
-      metadata.country || "Not provided";
+    languageSelector.value = language;
 
 
-    document.getElementById("userLanguage")
-      .textContent =
-      metadata.preferred_language || "Not provided";
+    document.getElementById("welcomeTitle").textContent =
+      userName
+        ? `${t.welcome}, ${userName}`
+        : t.welcome;
+
+    document.getElementById("welcomeText").textContent =
+      t.welcomeText;
+
+    document.getElementById("servicesTitle").textContent =
+      t.services;
 
 
-    /*
-      CHECK ADMIN ACCESS
+    document.getElementById("financingTitle").textContent =
+      t.financing;
 
-      The Admin Portal appears only when the
-      logged-in user exists in admin_users.
-    */
+    document.getElementById("financingText").textContent =
+      t.financingText;
 
-    const {
-      data: adminRecord,
-      error: adminError
-    } = await supabaseClient
-      .from("admin_users")
-      .select("user_id")
-      .eq("user_id", user.id)
-      .maybeSingle();
+    document.getElementById("financingLink").textContent =
+      t.financingLink;
 
 
-    if (!adminError && adminRecord) {
+    document.getElementById("applicationsTitle").textContent =
+      t.applications;
 
-      document.getElementById("adminPortal")
-        .style.display = "block";
+    document.getElementById("applicationsText").textContent =
+      t.applicationsText;
+
+    document.getElementById("applicationsLink").textContent =
+      t.applicationsLink;
+
+
+    document.getElementById("kycTitle").textContent =
+      t.kyc;
+
+    document.getElementById("kycText").textContent =
+      t.kycText;
+
+    document.getElementById("kycLink").textContent =
+      t.kycLink;
+
+
+    document.getElementById("walletTitle").textContent =
+      t.wallet;
+
+    document.getElementById("walletText").textContent =
+      t.walletText;
+
+    document.getElementById("walletLink").textContent =
+      t.walletLink;
+
+
+    document.getElementById("transactionsTitle").textContent =
+      t.transactions;
+
+    document.getElementById("transactionsText").textContent =
+      t.transactionsText;
+
+    document.getElementById("transactionsLink").textContent =
+      t.transactionsLink;
+
+
+    document.getElementById("profileTitle").textContent =
+      t.profile;
+
+    document.getElementById("profileText").textContent =
+      t.profileText;
+
+    document.getElementById("profileLink").textContent =
+      t.profileLink;
+
+
+    document.getElementById("supportTitle").textContent =
+      t.support;
+
+    document.getElementById("supportText").textContent =
+      t.supportText;
+
+    document.getElementById("supportLink").textContent =
+      t.supportLink;
+
+
+    document.getElementById("adminTitle").textContent =
+      t.admin;
+
+    document.getElementById("adminText").textContent =
+      t.adminText;
+
+    document.getElementById("adminLink").textContent =
+      t.adminLink;
+
+
+    document.getElementById("accountTitle").textContent =
+      t.account;
+
+    document.getElementById("nameLabel").textContent =
+      t.name;
+
+    document.getElementById("emailLabel").textContent =
+      t.email;
+
+    document.getElementById("countryLabel").textContent =
+      t.country;
+
+    document.getElementById("languageLabel").textContent =
+      t.language;
+
+
+    logoutBtn.textContent =
+      t.signOut;
+
+    document.getElementById("footerText").textContent =
+      t.footer;
+
+
+    document.getElementById("languageValue").textContent =
+      language;
+  }
+
+
+  /* =========================================================
+     SAVE LANGUAGE
+  ========================================================= */
+
+  async function saveLanguage(language) {
+
+    localStorage.setItem(
+      "globalbridge_language",
+      language
+    );
+
+    applyLanguage(language);
+
+    if (!currentUser) {
+      return;
+    }
+
+    try {
+
+      const { error } =
+        await supabaseClient.auth.updateUser({
+          data: {
+            preferred_language: language
+          }
+        });
+
+      if (error) {
+        console.error(
+          "Could not save preferred language:",
+          error
+        );
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Language save error:",
+        error
+      );
+
+    }
+  }
+
+
+  /* =========================================================
+     LANGUAGE SELECTOR
+  ========================================================= */
+
+  languageSelector.addEventListener(
+    "change",
+    async function () {
+
+      const selectedLanguage =
+        this.value;
+
+      await saveLanguage(
+        selectedLanguage
+      );
+
+    }
+  );
+
+
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
+  logoutBtn.addEventListener(
+    "click",
+    async function () {
+
+      logoutBtn.disabled = true;
+
+      const { error } =
+        await supabaseClient.auth.signOut();
+
+      if (error) {
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+        logoutBtn.disabled = false;
+
+        return;
+      }
+
+      window.location.href =
+        "login.html";
+
+    }
+  );
+
+
+  /* =========================================================
+     LOAD USER
+  ========================================================= */
+
+  async function loadDashboard() {
+
+    try {
+
+      const {
+        data: {
+          user
+        },
+        error
+      } =
+        await supabaseClient.auth.getUser();
+
+
+      if (error || !user) {
+
+        window.location.href =
+          "login.html";
+
+        return;
+      }
+
+
+      currentUser = user;
+
+
+      const metadata =
+        user.user_metadata || {};
+
+
+      const firstName =
+        metadata.first_name || "";
+
+      const lastName =
+        metadata.last_name || "";
+
+      const country =
+        metadata.country || "—";
+
+      const savedLanguage =
+        metadata.preferred_language || "";
+
+
+      userName =
+        `${firstName} ${lastName}`
+          .trim();
+
+
+      if (!userName) {
+        userName = "User";
+      }
+
+
+      document.getElementById(
+        "nameValue"
+      ).textContent =
+        userName;
+
+
+      document.getElementById(
+        "emailValue"
+      ).textContent =
+        user.email || "—";
+
+
+      document.getElementById(
+        "countryValue"
+      ).textContent =
+        country;
+
+
+      /*
+        LANGUAGE PRIORITY:
+
+        1. Supabase account preference
+        2. Browser saved preference
+        3. English
+      */
+
+      const browserLanguage =
+        localStorage.getItem(
+          "globalbridge_language"
+        );
+
+
+      let language =
+        savedLanguage &&
+        translations[savedLanguage]
+          ? savedLanguage
+          : browserLanguage &&
+            translations[browserLanguage]
+              ? browserLanguage
+              : "English";
+
+
+      await saveLanguage(language);
+
+
+      /*
+        ADMIN CHECK
+      */
+
+      const {
+        data: adminData,
+        error: adminError
+      } =
+        await supabaseClient
+          .from("admin_users")
+          .select("user_id")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+
+      if (!adminError && adminData) {
+
+        document.getElementById(
+          "adminCard"
+        ).style.display = "flex";
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Dashboard loading error:",
+        error
+      );
 
     }
 
   }
 
 
-  document
-    .getElementById("logoutButton")
-    .addEventListener("click", async function() {
+  /* =========================================================
+     START
+  ========================================================= */
 
-      await supabaseClient.auth.signOut();
-
-      window.location.href = "login.html";
-
-    });
-
+  applyLanguage("English");
 
   loadDashboard();
 
