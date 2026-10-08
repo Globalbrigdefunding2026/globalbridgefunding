@@ -6,6 +6,9 @@
 
   <title>Financing | GlobalBridgeFunding</title>
 
+  <!-- Central GlobalBridgeFunding language system -->
+  <script src="language.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -27,6 +30,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 15px;
     }
 
     .logo {
@@ -38,6 +42,12 @@
       color: #36c2ff;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .back {
       color: white;
       text-decoration: none;
@@ -45,6 +55,16 @@
       padding: 9px 14px;
       border: 1px solid rgba(255,255,255,.35);
       border-radius: 7px;
+    }
+
+    .language-box select {
+      background: white;
+      color: #071a35;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
     }
 
     .container {
@@ -296,8 +316,16 @@
       font-size: 12px;
     }
 
-    @media (max-width: 850px) {
+    html[dir="rtl"] body {
+      direction: rtl;
+    }
 
+    html[dir="rtl"] .result {
+      border-left: none;
+      border-right: 4px solid #36c2ff;
+    }
+
+    @media (max-width: 850px) {
       .terms {
         grid-template-columns: 1fr 1fr;
       }
@@ -308,7 +336,6 @@
     }
 
     @media (max-width: 550px) {
-
       header {
         padding: 16px 20px;
       }
@@ -317,9 +344,18 @@
         font-size: 18px;
       }
 
+      .header-right {
+        gap: 8px;
+      }
+
       .back {
         font-size: 12px;
         padding: 8px 10px;
+      }
+
+      .language-box select {
+        padding: 7px 6px;
+        font-size: 11px;
       }
 
       .container {
@@ -362,9 +398,34 @@
       Global<span>Bridge</span>Funding
     </div>
 
-    <a href="dashboard.html" class="back">
-      ← Dashboard
-    </a>
+    <div class="header-right">
+
+      <div class="language-box">
+        <select
+          id="languageSelector"
+          data-language-selector="true"
+          aria-label="Language"
+        >
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="fa">فارسی</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="fr">Français</option>
+          <option value="fi">Suomi</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+
+      <a
+        href="dashboard.html"
+        class="back"
+        data-key="dashboard"
+      >
+        ← Dashboard
+      </a>
+
+    </div>
 
   </header>
 
@@ -373,9 +434,11 @@
 
     <section class="hero">
 
-      <h1>Business Financing</h1>
+      <h1 data-key="heroTitle">
+        Business Financing
+      </h1>
 
-      <p>
+      <p data-key="heroText">
         Explore financing options designed to support eligible businesses
         with access to working capital and business growth funding.
       </p>
@@ -386,23 +449,35 @@
     <section class="terms">
 
       <div class="term-card">
-        <small>Financing Amount</small>
+        <small data-key="financingAmount">
+          Financing Amount
+        </small>
         <strong>$20,000 – $50,000</strong>
       </div>
 
       <div class="term-card">
-        <small>Annual Interest</small>
+        <small data-key="annualInterest">
+          Annual Interest
+        </small>
         <strong>10%</strong>
       </div>
 
       <div class="term-card">
-        <small>Repayment Term</small>
-        <strong>2 Years</strong>
+        <small data-key="repaymentTerm">
+          Repayment Term
+        </small>
+        <strong data-key="twoYears">
+          2 Years
+        </strong>
       </div>
 
       <div class="term-card">
-        <small>Collateral</small>
-        <strong>No Collateral</strong>
+        <small data-key="collateral">
+          Collateral
+        </small>
+        <strong data-key="noCollateral">
+          No Collateral
+        </strong>
       </div>
 
     </section>
@@ -411,13 +486,16 @@
     <section class="main-grid">
 
 
-      <!-- LEFT SIDE -->
-
       <div class="card">
 
-        <h2>Financing Calculator</h2>
+        <h2 data-key="calculatorTitle">
+          Financing Calculator
+        </h2>
 
-        <p class="card-intro">
+        <p
+          class="card-intro"
+          data-key="calculatorIntro"
+        >
           Adjust the financing amount below to view an estimated
           repayment calculation based on the stated annual rate
           and two-year term.
@@ -426,7 +504,10 @@
 
         <div class="field">
 
-          <label for="amount">
+          <label
+            for="amount"
+            data-key="amountLabel"
+          >
             Financing Amount (USD)
           </label>
 
@@ -459,33 +540,57 @@
         <div class="result">
 
           <div class="result-row">
-            <span>Financing amount</span>
+            <span data-key="resultFinancing">
+              Financing amount
+            </span>
             <span id="resultAmount">$20,000</span>
           </div>
 
           <div class="result-row">
-            <span>Annual interest rate</span>
+            <span data-key="resultRate">
+              Annual interest rate
+            </span>
             <span>10%</span>
           </div>
 
           <div class="result-row">
-            <span>Term</span>
-            <span>24 months</span>
+            <span data-key="resultTerm">
+              Term
+            </span>
+            <span data-key="result24Months">
+              24 months
+            </span>
           </div>
 
           <div class="result-row">
-            <span>Estimated interest</span>
+            <span data-key="resultInterest">
+              Estimated interest
+            </span>
             <span id="interest">$4,000</span>
           </div>
 
           <div class="result-row">
-            <span>Total estimated repayment</span>
-            <span class="total" id="total">$24,000</span>
+            <span data-key="resultTotal">
+              Total estimated repayment
+            </span>
+            <span
+              class="total"
+              id="total"
+            >
+              $24,000
+            </span>
           </div>
 
           <div class="result-row">
-            <span>Estimated monthly repayment</span>
-            <span class="total" id="monthly">$1,000</span>
+            <span data-key="resultMonthly">
+              Estimated monthly repayment
+            </span>
+            <span
+              class="total"
+              id="monthly"
+            >
+              $1,000
+            </span>
           </div>
 
         </div>
@@ -494,6 +599,7 @@
         <a
           href="application.html"
           class="apply-button"
+          data-key="continueApply"
         >
           Continue to Apply
         </a>
@@ -501,13 +607,16 @@
       </div>
 
 
-      <!-- RIGHT SIDE -->
-
       <div class="card">
 
-        <h2>Financing Features</h2>
+        <h2 data-key="featuresTitle">
+          Financing Features
+        </h2>
 
-        <p class="card-intro">
+        <p
+          class="card-intro"
+          data-key="featuresIntro"
+        >
           Applications are reviewed individually and remain subject
           to eligibility, verification and approval requirements.
         </p>
@@ -520,9 +629,11 @@
             <div class="check">✓</div>
 
             <div>
-              <strong>$20,000 to $50,000</strong>
+              <strong data-key="featureAmountTitle">
+                $20,000 to $50,000
+              </strong>
 
-              <p>
+              <p data-key="featureAmountText">
                 Financing amounts within the stated business
                 financing range.
               </p>
@@ -536,9 +647,11 @@
             <div class="check">✓</div>
 
             <div>
-              <strong>10% Annual Interest</strong>
+              <strong data-key="featureInterestTitle">
+                10% Annual Interest
+              </strong>
 
-              <p>
+              <p data-key="featureInterestText">
                 The calculator uses the stated annual interest
                 rate for the estimated repayment calculation.
               </p>
@@ -552,9 +665,11 @@
             <div class="check">✓</div>
 
             <div>
-              <strong>Two-Year Term</strong>
+              <strong data-key="featureTermTitle">
+                Two-Year Term
+              </strong>
 
-              <p>
+              <p data-key="featureTermText">
                 The stated financing term is 24 months.
               </p>
             </div>
@@ -567,9 +682,11 @@
             <div class="check">✓</div>
 
             <div>
-              <strong>No Collateral</strong>
+              <strong data-key="featureCollateralTitle">
+                No Collateral
+              </strong>
 
-              <p>
+              <p data-key="featureCollateralText">
                 The stated financing structure does not require
                 collateral, subject to applicable eligibility
                 and approval requirements.
@@ -584,9 +701,11 @@
             <div class="check">✓</div>
 
             <div>
-              <strong>Application Review</strong>
+              <strong data-key="featureReviewTitle">
+                Application Review
+              </strong>
 
-              <p>
+              <p data-key="featureReviewText">
                 Applications are subject to account verification,
                 information review and approval.
               </p>
@@ -599,12 +718,17 @@
 
         <div class="notice">
 
-          <strong>Important:</strong>
-          Calculator figures are estimates based on simple annual
-          interest and do not constitute a financing approval or
-          binding offer. Final terms, eligibility and repayment
-          obligations are determined during the application and
-          approval process.
+          <strong data-key="important">
+            Important:
+          </strong>
+
+          <span data-key="importantText">
+            Calculator figures are estimates based on simple annual
+            interest and do not constitute a financing approval or
+            binding offer. Final terms, eligibility and repayment
+            obligations are determined during the application and
+            approval process.
+          </span>
 
         </div>
 
@@ -615,14 +739,501 @@
   </main>
 
 
-  <footer>
-
+  <footer data-key="footer">
     © 2026 GlobalBridgeFunding. All rights reserved.
-
   </footer>
 
 
   <script>
+
+    /*
+      ==========================================
+      FINANCING PAGE TRANSLATIONS
+      ==========================================
+    */
+
+    const financingTranslations = {
+
+      en: {
+        dashboard: "← Dashboard",
+        heroTitle: "Business Financing",
+        heroText: "Explore financing options designed to support eligible businesses with access to working capital and business growth funding.",
+        financingAmount: "Financing Amount",
+        annualInterest: "Annual Interest",
+        repaymentTerm: "Repayment Term",
+        twoYears: "2 Years",
+        collateral: "Collateral",
+        noCollateral: "No Collateral",
+        calculatorTitle: "Financing Calculator",
+        calculatorIntro: "Adjust the financing amount below to view an estimated repayment calculation based on the stated annual rate and two-year term.",
+        amountLabel: "Financing Amount (USD)",
+        resultFinancing: "Financing amount",
+        resultRate: "Annual interest rate",
+        resultTerm: "Term",
+        result24Months: "24 months",
+        resultInterest: "Estimated interest",
+        resultTotal: "Total estimated repayment",
+        resultMonthly: "Estimated monthly repayment",
+        continueApply: "Continue to Apply",
+        featuresTitle: "Financing Features",
+        featuresIntro: "Applications are reviewed individually and remain subject to eligibility, verification and approval requirements.",
+        featureAmountTitle: "$20,000 to $50,000",
+        featureAmountText: "Financing amounts within the stated business financing range.",
+        featureInterestTitle: "10% Annual Interest",
+        featureInterestText: "The calculator uses the stated annual interest rate for the estimated repayment calculation.",
+        featureTermTitle: "Two-Year Term",
+        featureTermText: "The stated financing term is 24 months.",
+        featureCollateralTitle: "No Collateral",
+        featureCollateralText: "The stated financing structure does not require collateral, subject to applicable eligibility and approval requirements.",
+        featureReviewTitle: "Application Review",
+        featureReviewText: "Applications are subject to account verification, information review and approval.",
+        important: "Important:",
+        importantText: "Calculator figures are estimates based on simple annual interest and do not constitute a financing approval or binding offer. Final terms, eligibility and repayment obligations are determined during the application and approval process.",
+        footer: "© 2026 GlobalBridgeFunding. All rights reserved."
+      },
+
+      pt: {
+        dashboard: "← Painel",
+        heroTitle: "Financiamento Empresarial",
+        heroText: "Explore opções de financiamento concebidas para apoiar empresas elegíveis com acesso a capital de exploração e financiamento para crescimento empresarial.",
+        financingAmount: "Montante de Financiamento",
+        annualInterest: "Juro Anual",
+        repaymentTerm: "Prazo de Reembolso",
+        twoYears: "2 Anos",
+        collateral: "Garantia",
+        noCollateral: "Sem Garantia",
+        calculatorTitle: "Calculadora de Financiamento",
+        calculatorIntro: "Ajuste o montante de financiamento abaixo para consultar uma estimativa de reembolso com base na taxa anual indicada e num prazo de dois anos.",
+        amountLabel: "Montante de Financiamento (USD)",
+        resultFinancing: "Montante de financiamento",
+        resultRate: "Taxa de juro anual",
+        resultTerm: "Prazo",
+        result24Months: "24 meses",
+        resultInterest: "Juros estimados",
+        resultTotal: "Reembolso total estimado",
+        resultMonthly: "Reembolso mensal estimado",
+        continueApply: "Continuar para Candidatura",
+        featuresTitle: "Características do Financiamento",
+        featuresIntro: "As candidaturas são analisadas individualmente e estão sujeitas a requisitos de elegibilidade, verificação e aprovação.",
+        featureAmountTitle: "$20.000 a $50.000",
+        featureAmountText: "Montantes de financiamento dentro do intervalo de financiamento empresarial indicado.",
+        featureInterestTitle: "10% de Juro Anual",
+        featureInterestText: "A calculadora utiliza a taxa de juro anual indicada para estimar o reembolso.",
+        featureTermTitle: "Prazo de Dois Anos",
+        featureTermText: "O prazo de financiamento indicado é de 24 meses.",
+        featureCollateralTitle: "Sem Garantia",
+        featureCollateralText: "A estrutura de financiamento indicada não exige garantia, sujeita aos requisitos de elegibilidade e aprovação aplicáveis.",
+        featureReviewTitle: "Análise da Candidatura",
+        featureReviewText: "As candidaturas estão sujeitas à verificação da conta, análise das informações e aprovação.",
+        important: "Importante:",
+        importantText: "Os valores da calculadora são estimativas baseadas em juros anuais simples e não constituem uma aprovação de financiamento nem uma oferta vinculativa. Os termos finais, a elegibilidade e as obrigações de reembolso são determinados durante o processo de candidatura e aprovação.",
+        footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados."
+      },
+
+      vi: {
+        dashboard: "← Bảng điều khiển",
+        heroTitle: "Tài chính doanh nghiệp",
+        heroText: "Khám phá các lựa chọn tài chính được thiết kế để hỗ trợ các doanh nghiệp đủ điều kiện tiếp cận vốn lưu động và nguồn vốn tăng trưởng.",
+        financingAmount: "Số tiền tài trợ",
+        annualInterest: "Lãi suất hàng năm",
+        repaymentTerm: "Thời hạn hoàn trả",
+        twoYears: "2 năm",
+        collateral: "Tài sản thế chấp",
+        noCollateral: "Không cần tài sản thế chấp",
+        calculatorTitle: "Công cụ tính tài chính",
+        calculatorIntro: "Điều chỉnh số tiền tài trợ bên dưới để xem khoản hoàn trả ước tính dựa trên lãi suất hàng năm và thời hạn hai năm.",
+        amountLabel: "Số tiền tài trợ (USD)",
+        resultFinancing: "Số tiền tài trợ",
+        resultRate: "Lãi suất hàng năm",
+        resultTerm: "Thời hạn",
+        result24Months: "24 tháng",
+        resultInterest: "Lãi suất ước tính",
+        resultTotal: "Tổng khoản hoàn trả ước tính",
+        resultMonthly: "Khoản hoàn trả hàng tháng ước tính",
+        continueApply: "Tiếp tục đăng ký",
+        featuresTitle: "Đặc điểm tài chính",
+        featuresIntro: "Các đơn đăng ký được xem xét riêng và phải đáp ứng các yêu cầu về điều kiện, xác minh và phê duyệt.",
+        featureAmountTitle: "$20.000 đến $50.000",
+        featureAmountText: "Số tiền tài trợ nằm trong phạm vi tài chính doanh nghiệp được nêu.",
+        featureInterestTitle: "Lãi suất hàng năm 10%",
+        featureInterestText: "Công cụ tính sử dụng lãi suất hàng năm được nêu để ước tính khoản hoàn trả.",
+        featureTermTitle: "Thời hạn hai năm",
+        featureTermText: "Thời hạn tài trợ được nêu là 24 tháng.",
+        featureCollateralTitle: "Không cần tài sản thế chấp",
+        featureCollateralText: "Cấu trúc tài trợ được nêu không yêu cầu tài sản thế chấp, tùy thuộc vào điều kiện và phê duyệt.",
+        featureReviewTitle: "Xem xét đơn đăng ký",
+        featureReviewText: "Đơn đăng ký phải trải qua xác minh tài khoản, xem xét thông tin và phê duyệt.",
+        important: "Quan trọng:",
+        importantText: "Các số liệu của công cụ tính chỉ là ước tính dựa trên lãi suất hàng năm đơn giản và không cấu thành phê duyệt tài chính hoặc đề nghị ràng buộc. Điều khoản cuối cùng, điều kiện và nghĩa vụ hoàn trả được xác định trong quá trình đăng ký và phê duyệt.",
+        footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền."
+      },
+
+      fa: {
+        dashboard: "← داشبورد",
+        heroTitle: "تأمین مالی کسب‌وکار",
+        heroText: "گزینه‌های تأمین مالی مناسب برای کسب‌وکارهای واجد شرایط را بررسی کنید و به سرمایه در گردش و منابع مالی رشد کسب‌وکار دسترسی داشته باشید.",
+        financingAmount: "مبلغ تأمین مالی",
+        annualInterest: "سود سالانه",
+        repaymentTerm: "مدت بازپرداخت",
+        twoYears: "۲ سال",
+        collateral: "وثیقه",
+        noCollateral: "بدون وثیقه",
+        calculatorTitle: "محاسبه‌گر تأمین مالی",
+        calculatorIntro: "مبلغ تأمین مالی را تنظیم کنید تا برآورد بازپرداخت بر اساس نرخ سالانه اعلام‌شده و دوره دو ساله نمایش داده شود.",
+        amountLabel: "مبلغ تأمین مالی (دلار آمریکا)",
+        resultFinancing: "مبلغ تأمین مالی",
+        resultRate: "نرخ سود سالانه",
+        resultTerm: "مدت",
+        result24Months: "۲۴ ماه",
+        resultInterest: "سود برآوردی",
+        resultTotal: "مجموع بازپرداخت برآوردی",
+        resultMonthly: "بازپرداخت ماهانه برآوردی",
+        continueApply: "ادامه درخواست",
+        featuresTitle: "ویژگی‌های تأمین مالی",
+        featuresIntro: "درخواست‌ها به صورت جداگانه بررسی شده و مشمول شرایط احراز صلاحیت، بررسی اطلاعات و تأیید هستند.",
+        featureAmountTitle: "۲۰٬۰۰۰ تا ۵۰٬۰۰۰ دلار",
+        featureAmountText: "مبالغ تأمین مالی در محدوده اعلام‌شده برای تأمین مالی کسب‌وکار.",
+        featureInterestTitle: "۱۰٪ سود سالانه",
+        featureInterestText: "محاسبه‌گر از نرخ سود سالانه اعلام‌شده برای برآورد بازپرداخت استفاده می‌کند.",
+        featureTermTitle: "مدت دو ساله",
+        featureTermText: "مدت تأمین مالی اعلام‌شده ۲۴ ماه است.",
+        featureCollateralTitle: "بدون وثیقه",
+        featureCollateralText: "ساختار تأمین مالی اعلام‌شده به وثیقه نیاز ندارد و مشمول شرایط احراز صلاحیت و تأیید است.",
+        featureReviewTitle: "بررسی درخواست",
+        featureReviewText: "درخواست‌ها مشمول تأیید حساب، بررسی اطلاعات و تأیید نهایی هستند.",
+        important: "مهم:",
+        importantText: "ارقام محاسبه‌گر صرفاً برآوردهایی بر اساس سود سالانه ساده هستند و به منزله تأیید تأمین مالی یا پیشنهاد الزام‌آور نیستند. شرایط نهایی، صلاحیت و تعهدات بازپرداخت در فرآیند درخواست و تأیید تعیین می‌شوند.",
+        footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است."
+      },
+
+      id: {
+        dashboard: "← Dasbor",
+        heroTitle: "Pembiayaan Bisnis",
+        heroText: "Jelajahi opsi pembiayaan yang dirancang untuk mendukung bisnis yang memenuhi syarat dengan akses ke modal kerja dan pendanaan pertumbuhan bisnis.",
+        financingAmount: "Jumlah Pembiayaan",
+        annualInterest: "Bunga Tahunan",
+        repaymentTerm: "Jangka Waktu Pembayaran",
+        twoYears: "2 Tahun",
+        collateral: "Jaminan",
+        noCollateral: "Tanpa Jaminan",
+        calculatorTitle: "Kalkulator Pembiayaan",
+        calculatorIntro: "Sesuaikan jumlah pembiayaan di bawah untuk melihat perkiraan pembayaran berdasarkan tingkat bunga tahunan dan jangka waktu dua tahun.",
+        amountLabel: "Jumlah Pembiayaan (USD)",
+        resultFinancing: "Jumlah pembiayaan",
+        resultRate: "Tingkat bunga tahunan",
+        resultTerm: "Jangka waktu",
+        result24Months: "24 bulan",
+        resultInterest: "Perkiraan bunga",
+        resultTotal: "Total perkiraan pembayaran",
+        resultMonthly: "Perkiraan pembayaran bulanan",
+        continueApply: "Lanjutkan Pengajuan",
+        featuresTitle: "Fitur Pembiayaan",
+        featuresIntro: "Pengajuan ditinjau secara individual dan tetap tunduk pada persyaratan kelayakan, verifikasi, dan persetujuan.",
+        featureAmountTitle: "$20.000 hingga $50.000",
+        featureAmountText: "Jumlah pembiayaan dalam rentang pembiayaan bisnis yang disebutkan.",
+        featureInterestTitle: "Bunga Tahunan 10%",
+        featureInterestText: "Kalkulator menggunakan tingkat bunga tahunan yang disebutkan untuk menghitung perkiraan pembayaran.",
+        featureTermTitle: "Jangka Waktu Dua Tahun",
+        featureTermText: "Jangka waktu pembiayaan yang disebutkan adalah 24 bulan.",
+        featureCollateralTitle: "Tanpa Jaminan",
+        featureCollateralText: "Struktur pembiayaan yang disebutkan tidak memerlukan jaminan, dengan tetap mengikuti persyaratan kelayakan dan persetujuan.",
+        featureReviewTitle: "Peninjauan Pengajuan",
+        featureReviewText: "Pengajuan tunduk pada verifikasi akun, peninjauan informasi, dan persetujuan.",
+        important: "Penting:",
+        importantText: "Angka kalkulator merupakan perkiraan berdasarkan bunga tahunan sederhana dan bukan merupakan persetujuan pembiayaan atau penawaran yang mengikat. Syarat akhir, kelayakan, dan kewajiban pembayaran ditentukan selama proses pengajuan dan persetujuan.",
+        footer: "© 2026 GlobalBridgeFunding. Semua hak dilindungi."
+      },
+
+      fr: {
+        dashboard: "← Tableau de bord",
+        heroTitle: "Financement d'entreprise",
+        heroText: "Découvrez des options de financement conçues pour aider les entreprises éligibles à accéder au fonds de roulement et au financement de leur croissance.",
+        financingAmount: "Montant du financement",
+        annualInterest: "Taux annuel",
+        repaymentTerm: "Durée de remboursement",
+        twoYears: "2 ans",
+        collateral: "Garantie",
+        noCollateral: "Sans garantie",
+        calculatorTitle: "Calculateur de financement",
+        calculatorIntro: "Ajustez le montant du financement ci-dessous pour consulter une estimation du remboursement basée sur le taux annuel indiqué et une durée de deux ans.",
+        amountLabel: "Montant du financement (USD)",
+        resultFinancing: "Montant du financement",
+        resultRate: "Taux d'intérêt annuel",
+        resultTerm: "Durée",
+        result24Months: "24 mois",
+        resultInterest: "Intérêts estimés",
+        resultTotal: "Remboursement total estimé",
+        resultMonthly: "Remboursement mensuel estimé",
+        continueApply: "Continuer la demande",
+        featuresTitle: "Caractéristiques du financement",
+        featuresIntro: "Les demandes sont examinées individuellement et restent soumises aux conditions d'éligibilité, de vérification et d'approbation.",
+        featureAmountTitle: "20 000 $ à 50 000 $",
+        featureAmountText: "Montants de financement dans la fourchette indiquée pour le financement d'entreprise.",
+        featureInterestTitle: "Taux annuel de 10 %",
+        featureInterestText: "Le calculateur utilise le taux annuel indiqué pour estimer le remboursement.",
+        featureTermTitle: "Durée de deux ans",
+        featureTermText: "La durée de financement indiquée est de 24 mois.",
+        featureCollateralTitle: "Sans garantie",
+        featureCollateralText: "La structure de financement indiquée ne nécessite pas de garantie, sous réserve des conditions d'éligibilité et d'approbation applicables.",
+        featureReviewTitle: "Examen de la demande",
+        featureReviewText: "Les demandes sont soumises à la vérification du compte, à l'examen des informations et à l'approbation.",
+        important: "Important :",
+        importantText: "Les chiffres du calculateur sont des estimations basées sur un intérêt annuel simple et ne constituent pas une approbation de financement ni une offre contraignante. Les conditions finales, l'éligibilité et les obligations de remboursement sont déterminées au cours du processus de demande et d'approbation.",
+        footer: "© 2026 GlobalBridgeFunding. Tous droits réservés."
+      },
+
+      fi: {
+        dashboard: "← Kojelauta",
+        heroTitle: "Yritysrahoitus",
+        heroText: "Tutustu rahoitusvaihtoehtoihin, jotka on suunniteltu tukemaan kelpoisia yrityksiä käyttöpääoman ja kasvurahoituksen avulla.",
+        financingAmount: "Rahoituksen määrä",
+        annualInterest: "Vuosikorko",
+        repaymentTerm: "Takaisinmaksuaika",
+        twoYears: "2 vuotta",
+        collateral: "Vakuus",
+        noCollateral: "Ei vakuutta",
+        calculatorTitle: "Rahoituslaskuri",
+        calculatorIntro: "Säädä rahoituksen määrää nähdäksesi arvioidun takaisinmaksun ilmoitetun vuosikoron ja kahden vuoden laina-ajan perusteella.",
+        amountLabel: "Rahoituksen määrä (USD)",
+        resultFinancing: "Rahoituksen määrä",
+        resultRate: "Vuosikorko",
+        resultTerm: "Aika",
+        result24Months: "24 kuukautta",
+        resultInterest: "Arvioitu korko",
+        resultTotal: "Arvioitu kokonais­takaisinmaksu",
+        resultMonthly: "Arvioitu kuukausimaksu",
+        continueApply: "Jatka hakemukseen",
+        featuresTitle: "Rahoituksen ominaisuudet",
+        featuresIntro: "Hakemukset käsitellään yksitellen, ja niihin sovelletaan kelpoisuus-, vahvistus- ja hyväksyntävaatimuksia.",
+        featureAmountTitle: "$20 000–$50 000",
+        featureAmountText: "Rahoitussummat ilmoitetulla yritysrahoituksen alueella.",
+        featureInterestTitle: "10 % vuosikorko",
+        featureInterestText: "Laskuri käyttää ilmoitettua vuosikorkoa arvioidun takaisinmaksun laskemiseen.",
+        featureTermTitle: "Kahden vuoden aika",
+        featureTermText: "Ilmoitettu rahoitusaika on 24 kuukautta.",
+        featureCollateralTitle: "Ei vakuutta",
+        featureCollateralText: "Ilmoitettu rahoitusrakenne ei edellytä vakuutta, mutta siihen sovelletaan kelpoisuus- ja hyväksyntävaatimuksia.",
+        featureReviewTitle: "Hakemuksen käsittely",
+        featureReviewText: "Hakemukset edellyttävät tilin vahvistamista, tietojen tarkistamista ja hyväksyntää.",
+        important: "Tärkeää:",
+        importantText: "Laskurin luvut ovat arvioita, jotka perustuvat yksinkertaiseen vuosikorkoon eivätkä muodosta rahoituksen hyväksyntää tai sitovaa tarjousta. Lopulliset ehdot, kelpoisuus ja takaisinmaksuvelvoitteet määritetään hakemus- ja hyväksyntäprosessin aikana.",
+        footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään."
+      },
+
+      es: {
+        dashboard: "← Panel",
+        heroTitle: "Financiación empresarial",
+        heroText: "Explora opciones de financiación diseñadas para apoyar a empresas elegibles con acceso a capital circulante y financiación para el crecimiento empresarial.",
+        financingAmount: "Importe de financiación",
+        annualInterest: "Interés anual",
+        repaymentTerm: "Plazo de reembolso",
+        twoYears: "2 años",
+        collateral: "Garantía",
+        noCollateral: "Sin garantía",
+        calculatorTitle: "Calculadora de financiación",
+        calculatorIntro: "Ajusta el importe de financiación para consultar un cálculo estimado del reembolso basado en la tasa anual indicada y un plazo de dos años.",
+        amountLabel: "Importe de financiación (USD)",
+        resultFinancing: "Importe de financiación",
+        resultRate: "Tasa de interés anual",
+        resultTerm: "Plazo",
+        result24Months: "24 meses",
+        resultInterest: "Interés estimado",
+        resultTotal: "Reembolso total estimado",
+        resultMonthly: "Reembolso mensual estimado",
+        continueApply: "Continuar con la solicitud",
+        featuresTitle: "Características de financiación",
+        featuresIntro: "Las solicitudes se revisan individualmente y están sujetas a requisitos de elegibilidad, verificación y aprobación.",
+        featureAmountTitle: "20.000 $ a 50.000 $",
+        featureAmountText: "Importes de financiación dentro del rango de financiación empresarial indicado.",
+        featureInterestTitle: "10 % de interés anual",
+        featureInterestText: "La calculadora utiliza la tasa de interés anual indicada para estimar el reembolso.",
+        featureTermTitle: "Plazo de dos años",
+        featureTermText: "El plazo de financiación indicado es de 24 meses.",
+        featureCollateralTitle: "Sin garantía",
+        featureCollateralText: "La estructura de financiación indicada no requiere garantía, sujeta a los requisitos de elegibilidad y aprobación aplicables.",
+        featureReviewTitle: "Revisión de la solicitud",
+        featureReviewText: "Las solicitudes están sujetas a verificación de la cuenta, revisión de la información y aprobación.",
+        important: "Importante:",
+        importantText: "Las cifras de la calculadora son estimaciones basadas en interés anual simple y no constituyen una aprobación de financiación ni una oferta vinculante. Las condiciones finales, la elegibilidad y las obligaciones de reembolso se determinan durante el proceso de solicitud y aprobación.",
+        footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados."
+      }
+
+    };
+
+
+    /*
+      ==========================================
+      APPLY TRANSLATION
+      ==========================================
+    */
+
+    function applyFinancingLanguage(language) {
+
+      if (!financingTranslations[language]) {
+        language = "en";
+      }
+
+      const translations =
+        financingTranslations[language];
+
+
+      /*
+        Keep central language system updated.
+      */
+
+      if (
+        window.GlobalBridgeLanguage &&
+        typeof window.GlobalBridgeLanguage.setLanguage === "function"
+      ) {
+
+        /*
+          Only synchronize if necessary.
+          This keeps the same language across pages.
+        */
+
+        const current =
+          window.GlobalBridgeLanguage.getLanguage();
+
+        if (current !== language) {
+          window.GlobalBridgeLanguage.setLanguage(language);
+        }
+
+      } else {
+
+        localStorage.setItem(
+          "globalbridge_language",
+          language
+        );
+
+        localStorage.setItem(
+          "selectedLanguage",
+          language
+        );
+
+      }
+
+
+      document.documentElement.lang =
+        language;
+
+
+      if (language === "fa") {
+
+        document.documentElement.dir =
+          "rtl";
+
+      } else {
+
+        document.documentElement.dir =
+          "ltr";
+
+      }
+
+
+      document
+        .querySelectorAll("[data-key]")
+        .forEach(element => {
+
+          const key =
+            element.getAttribute("data-key");
+
+          if (
+            translations[key] !== undefined
+          ) {
+
+            element.textContent =
+              translations[key];
+
+          }
+
+        });
+
+
+      const selector =
+        document.getElementById(
+          "languageSelector"
+        );
+
+      if (selector) {
+
+        selector.value =
+          language;
+
+      }
+
+    }
+
+
+    /*
+      ==========================================
+      INITIALIZE LANGUAGE
+      ==========================================
+    */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        let language = "en";
+
+
+        if (
+          window.GlobalBridgeLanguage &&
+          typeof window.GlobalBridgeLanguage.getLanguage === "function"
+        ) {
+
+          language =
+            window.GlobalBridgeLanguage.getLanguage();
+
+        } else {
+
+          language =
+            localStorage.getItem(
+              "globalbridge_language"
+            ) ||
+            localStorage.getItem(
+              "selectedLanguage"
+            ) ||
+            "en";
+
+        }
+
+
+        applyFinancingLanguage(
+          language
+        );
+
+
+        const selector =
+          document.getElementById(
+            "languageSelector"
+          );
+
+
+        if (selector) {
+
+          selector.addEventListener(
+            "change",
+            function() {
+
+              applyFinancingLanguage(
+                this.value
+              );
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      ==========================================
+      CALCULATOR
+      ==========================================
+    */
 
     const amountInput =
       document.getElementById("amount");
@@ -672,23 +1283,21 @@
       }
 
 
-      amountInput.value = amount;
-      amountRange.value = amount;
+      amountInput.value =
+        amount;
+
+      amountRange.value =
+        amount;
 
 
-      /*
-       * Simple annual-interest calculation:
-       *
-       * Interest = Principal × 10% × 2 years
-       *
-       * Total = Principal + Interest
-       *
-       * Monthly = Total ÷ 24 months
-       */
+      const annualRate =
+        0.10;
 
-      const annualRate = 0.10;
-      const years = 2;
-      const months = 24;
+      const years =
+        2;
+
+      const months =
+        24;
 
 
       const estimatedInterest =
@@ -706,14 +1315,11 @@
       resultAmount.textContent =
         formatCurrency(amount);
 
-
       interest.textContent =
         formatCurrency(estimatedInterest);
 
-
       total.textContent =
         formatCurrency(estimatedTotal);
-
 
       monthly.textContent =
         formatCurrency(estimatedMonthly);
