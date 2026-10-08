@@ -6,6 +6,9 @@
 
   <title>Admin Applications | GlobalBridgeFunding</title>
 
+  <!-- GlobalBridgeFunding Central Language System -->
+  <script src="language.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -39,9 +42,25 @@
       font-weight: 700;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     .admin-label {
       font-size: 13px;
       opacity: 0.8;
+    }
+
+    .language-select {
+      border: 1px solid rgba(255,255,255,0.35);
+      background: white;
+      color: #172033;
+      border-radius: 7px;
+      padding: 7px 9px;
+      font-size: 12px;
+      outline: none;
     }
 
     main {
@@ -231,9 +250,40 @@
       color: #667085;
     }
 
+    .empty h3 {
+      margin-bottom: 8px;
+      color: #172033;
+    }
+
+    /* Persian / RTL */
+    html[dir="rtl"] body {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] .header-inner,
+    html[dir="rtl"] .application-header,
+    html[dir="rtl"] .review-row {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] .reference {
+      text-align: right;
+    }
+
     @media (max-width: 700px) {
+
       h1 {
         font-size: 25px;
+      }
+
+      .header-inner {
+        align-items: flex-start;
+      }
+
+      .header-right {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
       }
 
       .details {
@@ -247,6 +297,7 @@
       .application {
         padding: 18px;
       }
+
     }
   </style>
 </head>
@@ -254,24 +305,67 @@
 <body>
 
 <header>
+
   <div class="header-inner">
-    <div class="brand">GlobalBridgeFunding</div>
-    <div class="admin-label">Administrator Portal</div>
+
+    <div class="brand">
+      GlobalBridgeFunding
+    </div>
+
+    <div class="header-right">
+
+      <div class="admin-label" data-key="adminPortal">
+        Administrator Portal
+      </div>
+
+      <select
+        class="language-select"
+        id="languageSelector"
+        data-language-selector="true"
+        aria-label="Language"
+      >
+        <option value="en">English</option>
+        <option value="pt">Português</option>
+        <option value="vi">Tiếng Việt</option>
+        <option value="fa">فارسی</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="fr">Français</option>
+        <option value="fi">Suomi</option>
+        <option value="es">Español</option>
+      </select>
+
+    </div>
+
   </div>
+
 </header>
+
 
 <main>
 
-  <h1>Application Review</h1>
+  <h1 data-key="applicationReview">
+    Application Review
+  </h1>
 
-  <p class="intro">
+  <p class="intro" data-key="reviewIntro">
     Review submitted financing applications and update their current status.
   </p>
 
-  <div id="errorMessage" class="message error"></div>
-  <div id="successMessage" class="message success"></div>
+  <div
+    id="errorMessage"
+    class="message error"
+  ></div>
 
-  <div id="loading" class="loading">
+  <div
+    id="successMessage"
+    class="message success"
+  ></div>
+
+  <div
+    id="loading"
+    class="loading"
+    data-key="checkingAccess"
+  >
     Checking administrator access...
   </div>
 
@@ -279,9 +373,635 @@
 
 </main>
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+  /*
+    ==========================================================
+    GLOBALBRIDGEFUNDING ADMIN APPLICATIONS
+    LANGUAGE SYSTEM
+    ==========================================================
+  */
+
+  const adminTranslations = {
+
+    en: {
+      adminPortal: "Administrator Portal",
+      applicationReview: "Application Review",
+      reviewIntro:
+        "Review submitted financing applications and update their current status.",
+      checkingAccess:
+        "Checking administrator access...",
+      applicationReference:
+        "Application Reference",
+      requestedFinancing:
+        "Requested Financing",
+      businessName:
+        "Business Name",
+      businessType:
+        "Business Type",
+      yearsOperation:
+        "Years in Operation",
+      annualRevenue:
+        "Estimated Annual Revenue",
+      submitted:
+        "Submitted",
+      financingPurpose:
+        "Financing Purpose",
+      reviewApplication:
+        "Review Application",
+      applicationStatus:
+        "Application Status",
+      reviewNote:
+        "Review Note",
+      reviewPlaceholder:
+        "Add an internal review note...",
+      pending:
+        "Pending",
+      underReview:
+        "Under Review",
+      approved:
+        "Approved",
+      rejected:
+        "Rejected",
+      saveReview:
+        "Save Review",
+      saving:
+        "Saving...",
+      noApplications:
+        "No applications found",
+      noApplicationsText:
+        "There are currently no financing applications to review.",
+      unableVerify:
+        "Unable to verify administrator access.",
+      accessDenied:
+        "Access denied. This account is not authorized as an administrator.",
+      unableLoad:
+        "Unable to load applications: ",
+      somethingWrong:
+        "Something went wrong while loading the admin page.",
+      unableUpdate:
+        "Unable to update application: ",
+      approvedSending:
+        "Application approved. Sending approval email...",
+      emailSent:
+        "✓ Approval email sent successfully to the applicant.",
+      approvedEmailSuccess:
+        "Application approved and Persian approval email sent successfully.",
+      alreadyApproved:
+        "Application status is already approved. No duplicate email was sent.",
+      statusUpdated:
+        "Application status updated successfully.",
+      unauthorizedUpdate:
+        "You are not authorized to update applications.",
+      unableCurrentStatus:
+        "Unable to find the current application status.",
+      approvedEmailFailed:
+        "Application was approved, but the approval email could not be sent."
+    },
+
+
+    pt: {
+      adminPortal: "Portal do Administrador",
+      applicationReview: "Revisão de Candidaturas",
+      reviewIntro:
+        "Analise os pedidos de financiamento enviados e atualize o estado atual.",
+      checkingAccess:
+        "A verificar o acesso do administrador...",
+      applicationReference:
+        "Referência da Candidatura",
+      requestedFinancing:
+        "Financiamento Solicitado",
+      businessName:
+        "Nome da Empresa",
+      businessType:
+        "Tipo de Empresa",
+      yearsOperation:
+        "Anos de Atividade",
+      annualRevenue:
+        "Receita Anual Estimada",
+      submitted:
+        "Enviado",
+      financingPurpose:
+        "Objetivo do Financiamento",
+      reviewApplication:
+        "Rever Candidatura",
+      applicationStatus:
+        "Estado da Candidatura",
+      reviewNote:
+        "Nota de Revisão",
+      reviewPlaceholder:
+        "Adicionar uma nota interna de revisão...",
+      pending:
+        "Pendente",
+      underReview:
+        "Em Revisão",
+      approved:
+        "Aprovado",
+      rejected:
+        "Rejeitado",
+      saveReview:
+        "Guardar Revisão",
+      saving:
+        "A Guardar...",
+      noApplications:
+        "Nenhuma candidatura encontrada",
+      noApplicationsText:
+        "Não existem atualmente candidaturas de financiamento para analisar.",
+      unableVerify:
+        "Não foi possível verificar o acesso do administrador.",
+      accessDenied:
+        "Acesso negado. Esta conta não está autorizada como administradora.",
+      unableLoad:
+        "Não foi possível carregar as candidaturas: ",
+      somethingWrong:
+        "Ocorreu um erro ao carregar a página do administrador.",
+      unableUpdate:
+        "Não foi possível atualizar a candidatura: ",
+      approvedSending:
+        "Candidatura aprovada. A enviar o email de aprovação...",
+      emailSent:
+        "✓ Email de aprovação enviado com sucesso ao candidato.",
+      approvedEmailSuccess:
+        "Candidatura aprovada e email de aprovação em persa enviado com sucesso.",
+      alreadyApproved:
+        "A candidatura já está aprovada. Nenhum email duplicado foi enviado.",
+      statusUpdated:
+        "Estado da candidatura atualizado com sucesso.",
+      unauthorizedUpdate:
+        "Não está autorizado a atualizar candidaturas.",
+      unableCurrentStatus:
+        "Não foi possível encontrar o estado atual da candidatura.",
+      approvedEmailFailed:
+        "A candidatura foi aprovada, mas o email de aprovação não pôde ser enviado."
+    },
+
+
+    vi: {
+      adminPortal: "Cổng quản trị viên",
+      applicationReview: "Xét duyệt hồ sơ",
+      reviewIntro:
+        "Xem xét các đơn đăng ký tài chính đã gửi và cập nhật trạng thái hiện tại.",
+      checkingAccess:
+        "Đang kiểm tra quyền truy cập quản trị viên...",
+      applicationReference:
+        "Mã hồ sơ",
+      requestedFinancing:
+        "Khoản tài chính yêu cầu",
+      businessName:
+        "Tên doanh nghiệp",
+      businessType:
+        "Loại hình doanh nghiệp",
+      yearsOperation:
+        "Số năm hoạt động",
+      annualRevenue:
+        "Doanh thu hàng năm ước tính",
+      submitted:
+        "Đã gửi",
+      financingPurpose:
+        "Mục đích tài chính",
+      reviewApplication:
+        "Xét duyệt hồ sơ",
+      applicationStatus:
+        "Trạng thái hồ sơ",
+      reviewNote:
+        "Ghi chú xét duyệt",
+      reviewPlaceholder:
+        "Thêm ghi chú xét duyệt nội bộ...",
+      pending:
+        "Đang chờ",
+      underReview:
+        "Đang xem xét",
+      approved:
+        "Đã phê duyệt",
+      rejected:
+        "Bị từ chối",
+      saveReview:
+        "Lưu xét duyệt",
+      saving:
+        "Đang lưu...",
+      noApplications:
+        "Không tìm thấy hồ sơ",
+      noApplicationsText:
+        "Hiện không có đơn đăng ký tài chính nào để xem xét.",
+      unableVerify:
+        "Không thể xác minh quyền quản trị viên.",
+      accessDenied:
+        "Quyền truy cập bị từ chối. Tài khoản này không được ủy quyền làm quản trị viên.",
+      unableLoad:
+        "Không thể tải hồ sơ: ",
+      somethingWrong:
+        "Đã xảy ra lỗi khi tải trang quản trị viên.",
+      unableUpdate:
+        "Không thể cập nhật hồ sơ: ",
+      approvedSending:
+        "Hồ sơ đã được phê duyệt. Đang gửi email phê duyệt...",
+      emailSent:
+        "✓ Email phê duyệt đã được gửi thành công cho người đăng ký.",
+      approvedEmailSuccess:
+        "Hồ sơ đã được phê duyệt và email phê duyệt bằng tiếng Ba Tư đã được gửi thành công.",
+      alreadyApproved:
+        "Hồ sơ đã được phê duyệt. Không gửi email trùng lặp.",
+      statusUpdated:
+        "Trạng thái hồ sơ đã được cập nhật thành công.",
+      unauthorizedUpdate:
+        "Bạn không được phép cập nhật hồ sơ.",
+      unableCurrentStatus:
+        "Không thể tìm thấy trạng thái hiện tại của hồ sơ.",
+      approvedEmailFailed:
+        "Hồ sơ đã được phê duyệt nhưng không thể gửi email phê duyệt."
+    },
+
+
+    fa: {
+      adminPortal: "پنل مدیریت",
+      applicationReview: "بررسی درخواست",
+      reviewIntro:
+        "درخواست‌های تأمین مالی ارسال‌شده را بررسی کرده و وضعیت آن‌ها را به‌روزرسانی کنید.",
+      checkingAccess:
+        "در حال بررسی دسترسی مدیر...",
+      applicationReference:
+        "شماره درخواست",
+      requestedFinancing:
+        "مبلغ تأمین مالی درخواستی",
+      businessName:
+        "نام کسب‌وکار",
+      businessType:
+        "نوع کسب‌وکار",
+      yearsOperation:
+        "سال‌های فعالیت",
+      annualRevenue:
+        "درآمد سالانه تخمینی",
+      submitted:
+        "ارسال شده",
+      financingPurpose:
+        "هدف تأمین مالی",
+      reviewApplication:
+        "بررسی درخواست",
+      applicationStatus:
+        "وضعیت درخواست",
+      reviewNote:
+        "یادداشت بررسی",
+      reviewPlaceholder:
+        "یادداشت داخلی بررسی را وارد کنید...",
+      pending:
+        "در انتظار",
+      underReview:
+        "در حال بررسی",
+      approved:
+        "تأیید شده",
+      rejected:
+        "رد شده",
+      saveReview:
+        "ذخیره بررسی",
+      saving:
+        "در حال ذخیره...",
+      noApplications:
+        "درخواستی یافت نشد",
+      noApplicationsText:
+        "در حال حاضر هیچ درخواست تأمین مالی برای بررسی وجود ندارد.",
+      unableVerify:
+        "امکان تأیید دسترسی مدیر وجود ندارد.",
+      accessDenied:
+        "دسترسی رد شد. این حساب به عنوان مدیر مجاز نیست.",
+      unableLoad:
+        "امکان بارگذاری درخواست‌ها وجود ندارد: ",
+      somethingWrong:
+        "هنگام بارگذاری صفحه مدیریت مشکلی رخ داد.",
+      unableUpdate:
+        "امکان به‌روزرسانی درخواست وجود ندارد: ",
+      approvedSending:
+        "درخواست تأیید شد. در حال ارسال ایمیل تأیید...",
+      emailSent:
+        "✓ ایمیل تأیید با موفقیت برای متقاضی ارسال شد.",
+      approvedEmailSuccess:
+        "درخواست تأیید شد و ایمیل تأیید فارسی با موفقیت ارسال شد.",
+      alreadyApproved:
+        "وضعیت درخواست قبلاً تأیید شده است. ایمیل تکراری ارسال نشد.",
+      statusUpdated:
+        "وضعیت درخواست با موفقیت به‌روزرسانی شد.",
+      unauthorizedUpdate:
+        "شما اجازه به‌روزرسانی درخواست‌ها را ندارید.",
+      unableCurrentStatus:
+        "امکان یافتن وضعیت فعلی درخواست وجود ندارد.",
+      approvedEmailFailed:
+        "درخواست تأیید شد، اما ایمیل تأیید ارسال نشد."
+    },
+
+
+    id: {
+      adminPortal: "Portal Administrator",
+      applicationReview: "Peninjauan Pengajuan",
+      reviewIntro:
+        "Tinjau pengajuan pembiayaan yang dikirim dan perbarui statusnya.",
+      checkingAccess:
+        "Memeriksa akses administrator...",
+      applicationReference:
+        "Referensi Pengajuan",
+      requestedFinancing:
+        "Pembiayaan yang Diminta",
+      businessName:
+        "Nama Bisnis",
+      businessType:
+        "Jenis Bisnis",
+      yearsOperation:
+        "Tahun Beroperasi",
+      annualRevenue:
+        "Perkiraan Pendapatan Tahunan",
+      submitted:
+        "Dikirim",
+      financingPurpose:
+        "Tujuan Pembiayaan",
+      reviewApplication:
+        "Tinjau Pengajuan",
+      applicationStatus:
+        "Status Pengajuan",
+      reviewNote:
+        "Catatan Peninjauan",
+      reviewPlaceholder:
+        "Tambahkan catatan peninjauan internal...",
+      pending:
+        "Menunggu",
+      underReview:
+        "Sedang Ditinjau",
+      approved:
+        "Disetujui",
+      rejected:
+        "Ditolak",
+      saveReview:
+        "Simpan Peninjauan",
+      saving:
+        "Menyimpan...",
+      noApplications:
+        "Tidak ada pengajuan ditemukan",
+      noApplicationsText:
+        "Saat ini tidak ada pengajuan pembiayaan untuk ditinjau.",
+      unableVerify:
+        "Tidak dapat memverifikasi akses administrator.",
+      accessDenied:
+        "Akses ditolak. Akun ini tidak diizinkan sebagai administrator.",
+      unableLoad:
+        "Tidak dapat memuat pengajuan: ",
+      somethingWrong:
+        "Terjadi kesalahan saat memuat halaman administrator.",
+      unableUpdate:
+        "Tidak dapat memperbarui pengajuan: ",
+      approvedSending:
+        "Pengajuan disetujui. Mengirim email persetujuan...",
+      emailSent:
+        "✓ Email persetujuan berhasil dikirim kepada pemohon.",
+      approvedEmailSuccess:
+        "Pengajuan disetujui dan email persetujuan dalam bahasa Persia berhasil dikirim.",
+      alreadyApproved:
+        "Pengajuan sudah disetujui. Tidak ada email duplikat yang dikirim.",
+      statusUpdated:
+        "Status pengajuan berhasil diperbarui.",
+      unauthorizedUpdate:
+        "Anda tidak memiliki izin untuk memperbarui pengajuan.",
+      unableCurrentStatus:
+        "Tidak dapat menemukan status pengajuan saat ini.",
+      approvedEmailFailed:
+        "Pengajuan disetujui, tetapi email persetujuan tidak dapat dikirim."
+    },
+
+
+    fr: {
+      adminPortal: "Portail administrateur",
+      applicationReview: "Révision des demandes",
+      reviewIntro:
+        "Examinez les demandes de financement soumises et mettez à jour leur statut.",
+      checkingAccess:
+        "Vérification de l’accès administrateur...",
+      applicationReference:
+        "Référence de la demande",
+      requestedFinancing:
+        "Financement demandé",
+      businessName:
+        "Nom de l’entreprise",
+      businessType:
+        "Type d’entreprise",
+      yearsOperation:
+        "Années d’activité",
+      annualRevenue:
+        "Chiffre d’affaires annuel estimé",
+      submitted:
+        "Soumis",
+      financingPurpose:
+        "Objet du financement",
+      reviewApplication:
+        "Examiner la demande",
+      applicationStatus:
+        "Statut de la demande",
+      reviewNote:
+        "Note de révision",
+      reviewPlaceholder:
+        "Ajouter une note interne de révision...",
+      pending:
+        "En attente",
+      underReview:
+        "En cours d’examen",
+      approved:
+        "Approuvé",
+      rejected:
+        "Rejeté",
+      saveReview:
+        "Enregistrer la révision",
+      saving:
+        "Enregistrement...",
+      noApplications:
+        "Aucune demande trouvée",
+      noApplicationsText:
+        "Aucune demande de financement n’est actuellement disponible.",
+      unableVerify:
+        "Impossible de vérifier l’accès administrateur.",
+      accessDenied:
+        "Accès refusé. Ce compte n’est pas autorisé comme administrateur.",
+      unableLoad:
+        "Impossible de charger les demandes : ",
+      somethingWrong:
+        "Une erreur s’est produite lors du chargement de la page administrateur.",
+      unableUpdate:
+        "Impossible de mettre à jour la demande : ",
+      approvedSending:
+        "Demande approuvée. Envoi de l’email d’approbation...",
+      emailSent:
+        "✓ Email d’approbation envoyé avec succès au demandeur.",
+      approvedEmailSuccess:
+        "Demande approuvée et email d’approbation en persan envoyé avec succès.",
+      alreadyApproved:
+        "La demande est déjà approuvée. Aucun email en double n’a été envoyé.",
+      statusUpdated:
+        "Le statut de la demande a été mis à jour avec succès.",
+      unauthorizedUpdate:
+        "Vous n’êtes pas autorisé à mettre à jour les demandes.",
+      unableCurrentStatus:
+        "Impossible de trouver le statut actuel de la demande.",
+      approvedEmailFailed:
+        "La demande a été approuvée, mais l’email d’approbation n’a pas pu être envoyé."
+    },
+
+
+    fi: {
+      adminPortal: "Ylläpitäjän portaali",
+      applicationReview: "Hakemusten tarkistus",
+      reviewIntro:
+        "Tarkista lähetetyt rahoitushakemukset ja päivitä niiden nykyinen tila.",
+      checkingAccess:
+        "Tarkistetaan ylläpitäjän käyttöoikeuksia...",
+      applicationReference:
+        "Hakemuksen viite",
+      requestedFinancing:
+        "Haettu rahoitus",
+      businessName:
+        "Yrityksen nimi",
+      businessType:
+        "Yrityksen tyyppi",
+      yearsOperation:
+        "Toimintavuodet",
+      annualRevenue:
+        "Arvioitu vuosiliikevaihto",
+      submitted:
+        "Lähetetty",
+      financingPurpose:
+        "Rahoituksen tarkoitus",
+      reviewApplication:
+        "Tarkista hakemus",
+      applicationStatus:
+        "Hakemuksen tila",
+      reviewNote:
+        "Tarkistusmerkintä",
+      reviewPlaceholder:
+        "Lisää sisäinen tarkistusmerkintä...",
+      pending:
+        "Odottaa",
+      underReview:
+        "Tarkistettavana",
+      approved:
+        "Hyväksytty",
+      rejected:
+        "Hylätty",
+      saveReview:
+        "Tallenna tarkistus",
+      saving:
+        "Tallennetaan...",
+      noApplications:
+        "Hakemuksia ei löytynyt",
+      noApplicationsText:
+        "Tarkistettavia rahoitushakemuksia ei tällä hetkellä ole.",
+      unableVerify:
+        "Ylläpitäjän käyttöoikeutta ei voitu vahvistaa.",
+      accessDenied:
+        "Pääsy estetty. Tällä tilillä ei ole ylläpitäjän oikeuksia.",
+      unableLoad:
+        "Hakemuksia ei voitu ladata: ",
+      somethingWrong:
+        "Ylläpitäjäsivun lataamisessa tapahtui virhe.",
+      unableUpdate:
+        "Hakemusta ei voitu päivittää: ",
+      approvedSending:
+        "Hakemus hyväksytty. Lähetetään hyväksymissähköpostia...",
+      emailSent:
+        "✓ Hyväksymissähköposti lähetettiin onnistuneesti hakijalle.",
+      approvedEmailSuccess:
+        "Hakemus hyväksyttiin ja persiankielinen hyväksymissähköposti lähetettiin onnistuneesti.",
+      alreadyApproved:
+        "Hakemus on jo hyväksytty. Uutta sähköpostia ei lähetetty.",
+      statusUpdated:
+        "Hakemuksen tila päivitettiin onnistuneesti.",
+      unauthorizedUpdate:
+        "Sinulla ei ole oikeutta päivittää hakemuksia.",
+      unableCurrentStatus:
+        "Hakemuksen nykyistä tilaa ei voitu löytää.",
+      approvedEmailFailed:
+        "Hakemus hyväksyttiin, mutta hyväksymissähköpostia ei voitu lähettää."
+    },
+
+
+    es: {
+      adminPortal: "Portal de administrador",
+      applicationReview: "Revisión de solicitudes",
+      reviewIntro:
+        "Revise las solicitudes de financiación enviadas y actualice su estado.",
+      checkingAccess:
+        "Comprobando el acceso del administrador...",
+      applicationReference:
+        "Referencia de la solicitud",
+      requestedFinancing:
+        "Financiación solicitada",
+      businessName:
+        "Nombre de la empresa",
+      businessType:
+        "Tipo de empresa",
+      yearsOperation:
+        "Años de actividad",
+      annualRevenue:
+        "Ingresos anuales estimados",
+      submitted:
+        "Enviada",
+      financingPurpose:
+        "Finalidad de la financiación",
+      reviewApplication:
+        "Revisar solicitud",
+      applicationStatus:
+        "Estado de la solicitud",
+      reviewNote:
+        "Nota de revisión",
+      reviewPlaceholder:
+        "Añadir una nota interna de revisión...",
+      pending:
+        "Pendiente",
+      underReview:
+        "En revisión",
+      approved:
+        "Aprobada",
+      rejected:
+        "Rechazada",
+      saveReview:
+        "Guardar revisión",
+      saving:
+        "Guardando...",
+      noApplications:
+        "No se encontraron solicitudes",
+      noApplicationsText:
+        "Actualmente no hay solicitudes de financiación para revisar.",
+      unableVerify:
+        "No se pudo verificar el acceso del administrador.",
+      accessDenied:
+        "Acceso denegado. Esta cuenta no está autorizada como administrador.",
+      unableLoad:
+        "No se pudieron cargar las solicitudes: ",
+      somethingWrong:
+        "Se produjo un error al cargar la página de administración.",
+      unableUpdate:
+        "No se pudo actualizar la solicitud: ",
+      approvedSending:
+        "Solicitud aprobada. Enviando correo de aprobación...",
+      emailSent:
+        "✓ Correo de aprobación enviado correctamente al solicitante.",
+      approvedEmailSuccess:
+        "Solicitud aprobada y correo de aprobación en persa enviado correctamente.",
+      alreadyApproved:
+        "La solicitud ya está aprobada. No se envió ningún correo duplicado.",
+      statusUpdated:
+        "El estado de la solicitud se actualizó correctamente.",
+      unauthorizedUpdate:
+        "No está autorizado para actualizar solicitudes.",
+      unableCurrentStatus:
+        "No se pudo encontrar el estado actual de la solicitud.",
+      approvedEmailFailed:
+        "La solicitud fue aprobada, pero no se pudo enviar el correo de aprobación."
+    }
+
+  };
+
+
+  /*
+    ==========================================================
+    SUPABASE
+    ==========================================================
+  */
 
   const SUPABASE_URL =
     "https://siykgexfdsmkiqwyxker.supabase.co";
@@ -296,6 +1016,12 @@
     );
 
 
+  /*
+    ==========================================================
+    ELEMENTS
+    ==========================================================
+  */
+
   const loading =
     document.getElementById("loading");
 
@@ -308,60 +1034,262 @@
   const successMessage =
     document.getElementById("successMessage");
 
+  const languageSelector =
+    document.getElementById("languageSelector");
+
+
+  /*
+    ==========================================================
+    LANGUAGE
+    ==========================================================
+  */
+
+  function getSavedLanguage() {
+
+    if (
+      window.GlobalBridgeLanguage &&
+      typeof window.GlobalBridgeLanguage.getLanguage ===
+        "function"
+    ) {
+
+      return window.GlobalBridgeLanguage.getLanguage();
+
+    }
+
+    const saved =
+      localStorage.getItem("globalbridge_language");
+
+    if (
+      saved &&
+      adminTranslations[saved]
+    ) {
+      return saved;
+    }
+
+    return "en";
+  }
+
+
+  function applyAdminLanguage(language) {
+
+    if (!adminTranslations[language]) {
+      language = "en";
+    }
+
+    /*
+      IMPORTANT:
+      We only READ the saved language when
+      the page loads.
+
+      We do NOT call setLanguage() here.
+      This prevents the admin page from
+      accidentally changing the user's
+      previously selected language.
+    */
+
+    document.documentElement.lang =
+      language;
+
+    if (language === "fa") {
+
+      document.documentElement.dir =
+        "rtl";
+
+      document.body.classList.add(
+        "rtl-language"
+      );
+
+    } else {
+
+      document.documentElement.dir =
+        "ltr";
+
+      document.body.classList.remove(
+        "rtl-language"
+      );
+
+    }
+
+
+    document
+      .querySelectorAll("[data-key]")
+      .forEach(element => {
+
+        const key =
+          element.getAttribute("data-key");
+
+        if (
+          adminTranslations[language][key]
+        ) {
+
+          element.textContent =
+            adminTranslations[language][key];
+
+        }
+
+      });
+
+
+    if (languageSelector) {
+
+      languageSelector.value =
+        language;
+
+    }
+
+
+    /*
+      If applications are already loaded,
+      redraw them in the selected language.
+    */
+
+    if (
+      window.adminApplicationsData
+    ) {
+
+      renderApplications(
+        window.adminApplicationsData
+      );
+
+    }
+
+  }
+
+
+  if (languageSelector) {
+
+    languageSelector.addEventListener(
+      "change",
+      function () {
+
+        const selectedLanguage =
+          this.value;
+
+        /*
+          The user deliberately changed
+          the language, so NOW we save it.
+        */
+
+        if (
+          window.GlobalBridgeLanguage &&
+          typeof window.GlobalBridgeLanguage.setLanguage ===
+            "function"
+        ) {
+
+          window.GlobalBridgeLanguage.setLanguage(
+            selectedLanguage
+          );
+
+        } else {
+
+          localStorage.setItem(
+            "globalbridge_language",
+            selectedLanguage
+          );
+
+          localStorage.setItem(
+            "selectedLanguage",
+            selectedLanguage
+          );
+
+        }
+
+        applyAdminLanguage(
+          selectedLanguage
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+    ==========================================================
+    MESSAGES
+    ==========================================================
+  */
 
   function showError(message) {
 
-    errorMessage.textContent = message;
+    errorMessage.textContent =
+      message;
 
-    errorMessage.style.display = "block";
+    errorMessage.style.display =
+      "block";
 
-    successMessage.style.display = "none";
+    successMessage.style.display =
+      "none";
+
   }
 
 
   function showSuccess(message) {
 
-    successMessage.textContent = message;
+    successMessage.textContent =
+      message;
 
-    successMessage.style.display = "block";
+    successMessage.style.display =
+      "block";
 
-    errorMessage.style.display = "none";
+    errorMessage.style.display =
+      "none";
 
     setTimeout(() => {
 
-      successMessage.style.display = "none";
+      successMessage.style.display =
+        "none";
 
     }, 5000);
+
   }
 
 
+  /*
+    ==========================================================
+    FORMATTERS
+    ==========================================================
+  */
+
   function formatMoney(amount) {
 
-    return new Intl.NumberFormat("en-US", {
-
-      style: "currency",
-
-      currency: "USD"
-
-    }).format(amount);
+    return new Intl.NumberFormat(
+      "en-US",
+      {
+        style: "currency",
+        currency: "USD"
+      }
+    ).format(amount);
 
   }
 
 
   function formatDate(date) {
 
+    const language =
+      getSavedLanguage();
+
+    const localeMap = {
+
+      en: "en-US",
+      pt: "pt-PT",
+      vi: "vi-VN",
+      fa: "fa-IR",
+      id: "id-ID",
+      fr: "fr-FR",
+      fi: "fi-FI",
+      es: "es-ES"
+
+    };
+
     return new Date(date).toLocaleDateString(
 
-      "en-US",
+      localeMap[language] || "en-US",
 
       {
-
         year: "numeric",
-
         month: "long",
-
         day: "numeric"
-
       }
 
     );
@@ -375,7 +1303,9 @@
       value === null ||
       value === undefined
     ) {
+
       return "";
+
     }
 
     return String(value)
@@ -393,6 +1323,400 @@
   }
 
 
+  function translateStatus(status) {
+
+    const language =
+      getSavedLanguage();
+
+    const translations =
+      adminTranslations[language] ||
+      adminTranslations.en;
+
+    return translations[status] ||
+      status;
+
+  }
+
+
+  /*
+    ==========================================================
+    RENDER APPLICATIONS
+    ==========================================================
+  */
+
+  function renderApplications(
+    applications
+  ) {
+
+    const language =
+      getSavedLanguage();
+
+    const translations =
+      adminTranslations[language] ||
+      adminTranslations.en;
+
+
+    if (
+      !applications ||
+      applications.length === 0
+    ) {
+
+      applicationsContainer.innerHTML = `
+
+        <div class="empty">
+
+          <h3>
+            ${escapeHtml(
+              translations.noApplications
+            )}
+          </h3>
+
+          <p>
+            ${escapeHtml(
+              translations.noApplicationsText
+            )}
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    applicationsContainer.innerHTML =
+
+      applications.map(application => {
+
+        return `
+
+          <div class="application">
+
+            <div class="application-header">
+
+              <div class="reference">
+
+                <strong>
+                  ${escapeHtml(
+                    translations.applicationReference
+                  )}
+                </strong>
+
+                <br>
+
+                ${escapeHtml(
+                  application.id
+                )}
+
+              </div>
+
+              <div class="status">
+
+                ${escapeHtml(
+                  translateStatus(
+                    application.status
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div class="details">
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.requestedFinancing
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${formatMoney(
+                    application.requested_amount
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.businessName
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${escapeHtml(
+                    application.business_name
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.businessType
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${escapeHtml(
+                    application.business_type
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.yearsOperation
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${escapeHtml(
+                    application.years_in_operation
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.annualRevenue
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${escapeHtml(
+                    application.annual_revenue
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div class="detail">
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.submitted
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${formatDate(
+                    application.created_at
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="detail"
+                style="grid-column: 1 / -1;"
+              >
+
+                <div class="detail-label">
+                  ${escapeHtml(
+                    translations.financingPurpose
+                  )}
+                </div>
+
+                <div class="detail-value">
+
+                  ${escapeHtml(
+                    application.financing_purpose
+                  )}
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="review-section">
+
+              <h3>
+                ${escapeHtml(
+                  translations.reviewApplication
+                )}
+              </h3>
+
+
+              <div class="review-row">
+
+
+                <div>
+
+                  <label
+                    for="status-${application.id}"
+                  >
+                    ${escapeHtml(
+                      translations.applicationStatus
+                    )}
+                  </label>
+
+
+                  <select
+                    id="status-${application.id}"
+                  >
+
+                    <option
+                      value="pending"
+                      ${
+                        application.status === "pending"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      ${escapeHtml(
+                        translations.pending
+                      )}
+                    </option>
+
+
+                    <option
+                      value="under_review"
+                      ${
+                        application.status === "under_review"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      ${escapeHtml(
+                        translations.underReview
+                      )}
+                    </option>
+
+
+                    <option
+                      value="approved"
+                      ${
+                        application.status === "approved"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      ${escapeHtml(
+                        translations.approved
+                      )}
+                    </option>
+
+
+                    <option
+                      value="rejected"
+                      ${
+                        application.status === "rejected"
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      ${escapeHtml(
+                        translations.rejected
+                      )}
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div>
+
+                  <label
+                    for="note-${application.id}"
+                  >
+                    ${escapeHtml(
+                      translations.reviewNote
+                    )}
+                  </label>
+
+
+                  <textarea
+                    id="note-${application.id}"
+                    placeholder="${escapeHtml(
+                      translations.reviewPlaceholder
+                    )}"
+                  ></textarea>
+
+                </div>
+
+
+              </div>
+
+
+              <button
+
+                onclick="
+                  updateApplication('${application.id}')
+                "
+
+                id="button-${application.id}"
+              >
+
+                ${escapeHtml(
+                  translations.saveReview
+                )}
+
+              </button>
+
+
+              <div
+                id="email-status-${application.id}"
+                class="email-status"
+              ></div>
+
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  /*
+    ==========================================================
+    LOAD ADMIN APPLICATIONS
+    ==========================================================
+  */
+
   async function loadAdminApplications() {
 
     try {
@@ -409,9 +1733,13 @@
         await supabaseClient.auth.getUser();
 
 
-      if (userError || !user) {
+      if (
+        userError ||
+        !user
+      ) {
 
-        window.location.href = "login.html";
+        window.location.href =
+          "login.html";
 
         return;
 
@@ -443,10 +1771,13 @@
       if (adminError) {
 
         showError(
-          "Unable to verify administrator access."
+          adminTranslations[
+            getSavedLanguage()
+          ].unableVerify
         );
 
-        loading.style.display = "none";
+        loading.style.display =
+          "none";
 
         return;
 
@@ -456,10 +1787,13 @@
       if (!adminRecord) {
 
         showError(
-          "Access denied. This account is not authorized as an administrator."
+          adminTranslations[
+            getSavedLanguage()
+          ].accessDenied
         );
 
-        loading.style.display = "none";
+        loading.style.display =
+          "none";
 
         return;
 
@@ -491,335 +1825,50 @@
       if (applicationsError) {
 
         showError(
-          "Unable to load applications: " +
+          adminTranslations[
+            getSavedLanguage()
+          ].unableLoad +
           applicationsError.message
         );
 
-        loading.style.display = "none";
+        loading.style.display =
+          "none";
 
         return;
 
       }
 
 
-      loading.style.display = "none";
+      loading.style.display =
+        "none";
 
 
-      if (
-        !applications ||
-        applications.length === 0
-      ) {
+      /*
+        Store applications globally so
+        changing language can redraw them
+        without querying Supabase again.
+      */
 
-        applicationsContainer.innerHTML = `
+      window.adminApplicationsData =
+        applications || [];
 
-          <div class="empty">
 
-            <h3>No applications found</h3>
-
-            <p>
-              There are currently no financing applications to review.
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      applicationsContainer.innerHTML =
-
-        applications.map(application => {
-
-          return `
-
-            <div class="application">
-
-              <div class="application-header">
-
-                <div class="reference">
-
-                  <strong>
-                    Application Reference
-                  </strong>
-
-                  <br>
-
-                  ${escapeHtml(application.id)}
-
-                </div>
-
-                <div class="status">
-
-                  ${escapeHtml(application.status)}
-
-                </div>
-
-              </div>
-
-
-              <div class="details">
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Requested Financing
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${formatMoney(
-                      application.requested_amount
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Business Name
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${escapeHtml(
-                      application.business_name
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Business Type
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${escapeHtml(
-                      application.business_type
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Years in Operation
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${escapeHtml(
-                      application.years_in_operation
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Estimated Annual Revenue
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${escapeHtml(
-                      application.annual_revenue
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    Submitted
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${formatDate(
-                      application.created_at
-                    )}
-
-                  </div>
-
-                </div>
-
-
-                <div
-                  class="detail"
-                  style="grid-column: 1 / -1;"
-                >
-
-                  <div class="detail-label">
-                    Financing Purpose
-                  </div>
-
-                  <div class="detail-value">
-
-                    ${escapeHtml(
-                      application.financing_purpose
-                    )}
-
-                  </div>
-
-                </div>
-
-
-              </div>
-
-
-              <div class="review-section">
-
-                <h3>
-                  Review Application
-                </h3>
-
-
-                <div class="review-row">
-
-
-                  <div>
-
-                    <label
-                      for="status-${application.id}"
-                    >
-                      Application Status
-                    </label>
-
-
-                    <select
-                      id="status-${application.id}"
-                    >
-
-                      <option
-                        value="pending"
-                        ${
-                          application.status === "pending"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Pending
-                      </option>
-
-
-                      <option
-                        value="under_review"
-                        ${
-                          application.status === "under_review"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Under Review
-                      </option>
-
-
-                      <option
-                        value="approved"
-                        ${
-                          application.status === "approved"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Approved
-                      </option>
-
-
-                      <option
-                        value="rejected"
-                        ${
-                          application.status === "rejected"
-                            ? "selected"
-                            : ""
-                        }
-                      >
-                        Rejected
-                      </option>
-
-                    </select>
-
-                  </div>
-
-
-                  <div>
-
-                    <label
-                      for="note-${application.id}"
-                    >
-                      Review Note
-                    </label>
-
-
-                    <textarea
-                      id="note-${application.id}"
-                      placeholder="Add an internal review note..."
-                    ></textarea>
-
-                  </div>
-
-
-                </div>
-
-
-                <button
-
-                  onclick="
-                    updateApplication('${application.id}')
-                  "
-
-                  id="button-${application.id}"
-                >
-
-                  Save Review
-
-                </button>
-
-
-                <div
-                  id="email-status-${application.id}"
-                  class="email-status"
-                ></div>
-
-
-              </div>
-
-            </div>
-
-          `;
-
-        }).join("");
+      renderApplications(
+        window.adminApplicationsData
+      );
 
     }
 
 
     catch (error) {
 
-      loading.style.display = "none";
+      loading.style.display =
+        "none";
 
       showError(
-        "Something went wrong while loading the admin page."
+        adminTranslations[
+          getSavedLanguage()
+        ].somethingWrong
       );
 
       console.error(error);
@@ -829,7 +1878,15 @@
   }
 
 
-  async function updateApplication(applicationId) {
+  /*
+    ==========================================================
+    UPDATE APPLICATION
+    ==========================================================
+  */
+
+  async function updateApplication(
+    applicationId
+  ) {
 
 
     const statusElement =
@@ -864,11 +1921,31 @@
       noteElement.value.trim();
 
 
-    button.disabled = true;
+    /*
+      The note is intentionally retained
+      in the interface for future internal
+      review-note functionality.
 
-    button.textContent = "Saving...";
+      Existing database behavior is preserved.
+    */
 
-    emailStatus.textContent = "";
+    void note;
+
+
+    const translations =
+      adminTranslations[
+        getSavedLanguage()
+      ] || adminTranslations.en;
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      translations.saving;
+
+    emailStatus.textContent =
+      "";
 
 
     try {
@@ -890,9 +1967,13 @@
         await supabaseClient.auth.getUser();
 
 
-      if (userError || !user) {
+      if (
+        userError ||
+        !user
+      ) {
 
-        window.location.href = "login.html";
+        window.location.href =
+          "login.html";
 
         return;
 
@@ -927,7 +2008,7 @@
       ) {
 
         throw new Error(
-          "You are not authorized to update applications."
+          translations.unauthorizedUpdate
         );
 
       }
@@ -937,9 +2018,8 @@
         Get the application's current status
         BEFORE changing it.
 
-        This allows us to send the approval email
-        only when the application changes from
-        another status to approved.
+        This existing security/workflow logic
+        is preserved.
       */
 
       const {
@@ -966,14 +2046,15 @@
       ) {
 
         throw new Error(
-          "Unable to find the current application status."
+          translations.unableCurrentStatus
         );
 
       }
 
 
       const wasAlreadyApproved =
-        currentApplication.status === "approved";
+        currentApplication.status ===
+        "approved";
 
 
       /*
@@ -1007,7 +2088,10 @@
 
       /*
         If the application has just become
-        approved, send the Persian approval email.
+        approved, send the existing Persian
+        approval email through hyper-worker.
+
+        DO NOT CHANGE THIS FUNCTION.
       */
 
       if (
@@ -1017,7 +2101,7 @@
 
 
         emailStatus.textContent =
-          "Application approved. Sending approval email...";
+          translations.approvedSending;
 
 
         const {
@@ -1037,7 +2121,8 @@
 
                 action: "approval_email",
 
-                application_id: applicationId
+                application_id:
+                  applicationId
 
               }
 
@@ -1054,7 +2139,7 @@
           );
 
           throw new Error(
-            "Application was approved, but the approval email could not be sent."
+            translations.approvedEmailFailed
           );
 
         }
@@ -1073,10 +2158,11 @@
 
 
         emailStatus.textContent =
-          "✓ Approval email sent successfully to the applicant.";
+          translations.emailSent;
+
 
         showSuccess(
-          "Application approved and Persian approval email sent successfully."
+          translations.approvedEmailSuccess
         );
 
 
@@ -1087,7 +2173,7 @@
 
 
         showSuccess(
-          "Application status is already approved. No duplicate email was sent."
+          translations.alreadyApproved
         );
 
 
@@ -1095,15 +2181,17 @@
 
 
         showSuccess(
-          "Application status updated successfully."
+          translations.statusUpdated
         );
 
       }
 
 
-      button.disabled = false;
+      button.disabled =
+        false;
 
-      button.textContent = "Save Review";
+      button.textContent =
+        translations.saveReview;
 
 
       /*
@@ -1126,19 +2214,47 @@
 
 
       showError(
-        "Unable to update application: " +
+        translations.unableUpdate +
         error.message
       );
 
 
-      button.disabled = false;
+      button.disabled =
+        false;
 
-      button.textContent = "Save Review";
+      button.textContent =
+        translations.saveReview;
 
     }
 
   }
 
+
+  /*
+    ==========================================================
+    INITIAL LANGUAGE
+    ==========================================================
+
+    IMPORTANT:
+    We READ the existing language.
+
+    We do NOT overwrite it.
+    ==========================================================
+  */
+
+  const initialLanguage =
+    getSavedLanguage();
+
+  applyAdminLanguage(
+    initialLanguage
+  );
+
+
+  /*
+    ==========================================================
+    START PAGE
+    ==========================================================
+  */
 
   loadAdminApplications();
 
