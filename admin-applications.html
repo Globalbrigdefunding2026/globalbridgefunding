@@ -205,6 +205,7 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
+      margin-top: 5px;
     }
 
     button:hover {
@@ -214,6 +215,12 @@
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+    }
+
+    .email-status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #667085;
     }
 
     .empty {
@@ -275,7 +282,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_URL =
+    "https://siykgexfdsmkiqwyxker.supabase.co";
 
   const SUPABASE_KEY =
     "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
@@ -286,7 +295,10 @@
       SUPABASE_KEY
     );
 
-  const loading = document.getElementById("loading");
+
+  const loading =
+    document.getElementById("loading");
+
   const applicationsContainer =
     document.getElementById("applications");
 
@@ -298,54 +310,86 @@
 
 
   function showError(message) {
+
     errorMessage.textContent = message;
+
     errorMessage.style.display = "block";
+
     successMessage.style.display = "none";
   }
 
 
   function showSuccess(message) {
+
     successMessage.textContent = message;
+
     successMessage.style.display = "block";
+
     errorMessage.style.display = "none";
 
     setTimeout(() => {
+
       successMessage.style.display = "none";
-    }, 4000);
+
+    }, 5000);
   }
 
 
   function formatMoney(amount) {
+
     return new Intl.NumberFormat("en-US", {
+
       style: "currency",
+
       currency: "USD"
+
     }).format(amount);
+
   }
 
 
   function formatDate(date) {
+
     return new Date(date).toLocaleDateString(
+
       "en-US",
+
       {
+
         year: "numeric",
+
         month: "long",
+
         day: "numeric"
+
       }
+
     );
+
   }
 
 
   function escapeHtml(value) {
-    if (value === null || value === undefined) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
       return "";
     }
 
     return String(value)
+
       .replace(/&/g, "&amp;")
+
       .replace(/</g, "&lt;")
+
       .replace(/>/g, "&gt;")
+
       .replace(/"/g, "&quot;")
+
       .replace(/'/g, "&#039;");
+
   }
 
 
@@ -354,51 +398,71 @@
     try {
 
       const {
+
         data: {
           user
         },
+
         error: userError
-      } = await supabaseClient.auth.getUser();
+
+      } =
+        await supabaseClient.auth.getUser();
 
 
       if (userError || !user) {
+
         window.location.href = "login.html";
+
         return;
+
       }
 
 
       /*
-        Confirm that the logged-in account
-        exists in the admin_users table.
+        Confirm administrator access.
       */
 
       const {
+
         data: adminRecord,
+
         error: adminError
-      } = await supabaseClient
-        .from("admin_users")
-        .select("user_id")
-        .eq("user_id", user.id)
-        .maybeSingle();
+
+      } =
+        await supabaseClient
+
+          .from("admin_users")
+
+          .select("user_id")
+
+          .eq("user_id", user.id)
+
+          .maybeSingle();
 
 
       if (adminError) {
+
         showError(
           "Unable to verify administrator access."
         );
 
         loading.style.display = "none";
+
         return;
+
       }
 
 
       if (!adminRecord) {
+
         showError(
           "Access denied. This account is not authorized as an administrator."
         );
 
         loading.style.display = "none";
+
         return;
+
       }
 
 
@@ -407,58 +471,90 @@
       */
 
       const {
+
         data: applications,
+
         error: applicationsError
-      } = await supabaseClient
-        .from("financing_applications")
-        .select("*")
-        .order("created_at", {
-          ascending: false
-        });
+
+      } =
+        await supabaseClient
+
+          .from("financing_applications")
+
+          .select("*")
+
+          .order("created_at", {
+            ascending: false
+          });
 
 
       if (applicationsError) {
+
         showError(
           "Unable to load applications: " +
           applicationsError.message
         );
 
         loading.style.display = "none";
+
         return;
+
       }
 
 
       loading.style.display = "none";
 
 
-      if (!applications || applications.length === 0) {
+      if (
+        !applications ||
+        applications.length === 0
+      ) {
 
         applicationsContainer.innerHTML = `
+
           <div class="empty">
+
             <h3>No applications found</h3>
-            <p>There are currently no financing applications to review.</p>
+
+            <p>
+              There are currently no financing applications to review.
+            </p>
+
           </div>
+
         `;
 
         return;
+
       }
 
 
       applicationsContainer.innerHTML =
+
         applications.map(application => {
 
           return `
+
             <div class="application">
 
               <div class="application-header">
 
                 <div class="reference">
-                  <strong>Application Reference</strong><br>
+
+                  <strong>
+                    Application Reference
+                  </strong>
+
+                  <br>
+
                   ${escapeHtml(application.id)}
+
                 </div>
 
                 <div class="status">
+
                   ${escapeHtml(application.status)}
+
                 </div>
 
               </div>
@@ -466,116 +562,199 @@
 
               <div class="details">
 
+
                 <div class="detail">
+
                   <div class="detail-label">
                     Requested Financing
                   </div>
 
                   <div class="detail-value">
-                    ${formatMoney(application.requested_amount)}
+
+                    ${formatMoney(
+                      application.requested_amount
+                    )}
+
                   </div>
+
                 </div>
 
 
                 <div class="detail">
+
                   <div class="detail-label">
                     Business Name
                   </div>
 
                   <div class="detail-value">
-                    ${escapeHtml(application.business_name)}
+
+                    ${escapeHtml(
+                      application.business_name
+                    )}
+
                   </div>
+
                 </div>
 
 
                 <div class="detail">
+
                   <div class="detail-label">
                     Business Type
                   </div>
 
                   <div class="detail-value">
-                    ${escapeHtml(application.business_type)}
+
+                    ${escapeHtml(
+                      application.business_type
+                    )}
+
                   </div>
+
                 </div>
 
 
                 <div class="detail">
+
                   <div class="detail-label">
                     Years in Operation
                   </div>
 
                   <div class="detail-value">
-                    ${escapeHtml(application.years_in_operation)}
+
+                    ${escapeHtml(
+                      application.years_in_operation
+                    )}
+
                   </div>
+
                 </div>
 
 
                 <div class="detail">
+
                   <div class="detail-label">
                     Estimated Annual Revenue
                   </div>
 
                   <div class="detail-value">
-                    ${escapeHtml(application.annual_revenue)}
+
+                    ${escapeHtml(
+                      application.annual_revenue
+                    )}
+
                   </div>
+
                 </div>
 
 
                 <div class="detail">
+
                   <div class="detail-label">
                     Submitted
                   </div>
 
                   <div class="detail-value">
-                    ${formatDate(application.created_at)}
+
+                    ${formatDate(
+                      application.created_at
+                    )}
+
                   </div>
+
                 </div>
 
 
-                <div class="detail" style="grid-column: 1 / -1;">
+                <div
+                  class="detail"
+                  style="grid-column: 1 / -1;"
+                >
+
                   <div class="detail-label">
                     Financing Purpose
                   </div>
 
                   <div class="detail-value">
-                    ${escapeHtml(application.financing_purpose)}
+
+                    ${escapeHtml(
+                      application.financing_purpose
+                    )}
+
                   </div>
+
                 </div>
+
 
               </div>
 
 
               <div class="review-section">
 
-                <h3>Review Application</h3>
+                <h3>
+                  Review Application
+                </h3>
+
 
                 <div class="review-row">
 
+
                   <div>
 
-                    <label for="status-${application.id}">
+                    <label
+                      for="status-${application.id}"
+                    >
                       Application Status
                     </label>
 
-                    <select id="status-${application.id}">
 
-                      <option value="pending"
-                        ${application.status === "pending" ? "selected" : ""}>
+                    <select
+                      id="status-${application.id}"
+                    >
+
+                      <option
+                        value="pending"
+                        ${
+                          application.status === "pending"
+                            ? "selected"
+                            : ""
+                        }
+                      >
                         Pending
                       </option>
 
-                      <option value="under_review"
-                        ${application.status === "under_review" ? "selected" : ""}>
+
+                      <option
+                        value="under_review"
+                        ${
+                          application.status === "under_review"
+                            ? "selected"
+                            : ""
+                        }
+                      >
                         Under Review
                       </option>
 
-                      <option value="approved"
-                        ${application.status === "approved" ? "selected" : ""}>
+
+                      <option
+                        value="approved"
+                        ${
+                          application.status === "approved"
+                            ? "selected"
+                            : ""
+                        }
+                      >
                         Approved
                       </option>
 
-                      <option value="rejected"
-                        ${application.status === "rejected" ? "selected" : ""}>
+
+                      <option
+                        value="rejected"
+                        ${
+                          application.status === "rejected"
+                            ? "selected"
+                            : ""
+                        }
+                      >
                         Rejected
                       </option>
 
@@ -586,9 +765,12 @@
 
                   <div>
 
-                    <label for="note-${application.id}">
+                    <label
+                      for="note-${application.id}"
+                    >
                       Review Note
                     </label>
+
 
                     <textarea
                       id="note-${application.id}"
@@ -597,24 +779,42 @@
 
                   </div>
 
+
                 </div>
 
 
                 <button
-                  onclick="updateApplication('${application.id}')"
+
+                  onclick="
+                    updateApplication('${application.id}')
+                  "
+
                   id="button-${application.id}"
                 >
+
                   Save Review
+
                 </button>
+
+
+                <div
+                  id="email-status-${application.id}"
+                  class="email-status"
+                ></div>
+
 
               </div>
 
             </div>
+
           `;
 
         }).join("");
 
-    } catch (error) {
+    }
+
+
+    catch (error) {
 
       loading.style.display = "none";
 
@@ -623,21 +823,26 @@
       );
 
       console.error(error);
+
     }
+
   }
 
 
   async function updateApplication(applicationId) {
+
 
     const statusElement =
       document.getElementById(
         "status-" + applicationId
       );
 
+
     const noteElement =
       document.getElementById(
         "note-" + applicationId
       );
+
 
     const button =
       document.getElementById(
@@ -645,117 +850,298 @@
       );
 
 
+    const emailStatus =
+      document.getElementById(
+        "email-status-" + applicationId
+      );
+
+
     const status =
       statusElement.value;
+
 
     const note =
       noteElement.value.trim();
 
 
     button.disabled = true;
+
     button.textContent = "Saving...";
+
+    emailStatus.textContent = "";
 
 
     try {
 
+
+      /*
+        Confirm the current logged-in user.
+      */
+
       const {
+
         data: {
           user
-        }
-      } = await supabaseClient.auth.getUser();
+        },
+
+        error: userError
+
+      } =
+        await supabaseClient.auth.getUser();
 
 
-      if (!user) {
+      if (userError || !user) {
+
         window.location.href = "login.html";
+
         return;
+
       }
 
 
       /*
-        Verify administrator permission again
-        before changing the application.
+        Verify administrator permission.
       */
 
       const {
+
         data: adminRecord,
+
         error: adminError
-      } = await supabaseClient
-        .from("admin_users")
-        .select("user_id")
-        .eq("user_id", user.id)
-        .maybeSingle();
+
+      } =
+        await supabaseClient
+
+          .from("admin_users")
+
+          .select("user_id")
+
+          .eq("user_id", user.id)
+
+          .maybeSingle();
 
 
-      if (adminError || !adminRecord) {
+      if (
+        adminError ||
+        !adminRecord
+      ) {
 
-        showError(
+        throw new Error(
           "You are not authorized to update applications."
         );
 
-        button.disabled = false;
-        button.textContent = "Save Review";
-
-        return;
       }
+
+
+      /*
+        Get the application's current status
+        BEFORE changing it.
+
+        This allows us to send the approval email
+        only when the application changes from
+        another status to approved.
+      */
+
+      const {
+
+        data: currentApplication,
+
+        error: currentApplicationError
+
+      } =
+        await supabaseClient
+
+          .from("financing_applications")
+
+          .select("status")
+
+          .eq("id", applicationId)
+
+          .single();
+
+
+      if (
+        currentApplicationError ||
+        !currentApplication
+      ) {
+
+        throw new Error(
+          "Unable to find the current application status."
+        );
+
+      }
+
+
+      const wasAlreadyApproved =
+        currentApplication.status === "approved";
 
 
       /*
         Update application status.
-
-        Review notes are only included if the
-        database contains a review_note column.
       */
 
       const {
-        error
-      } = await supabaseClient
-        .from("financing_applications")
-        .update({
-          status: status
-        })
-        .eq("id", applicationId);
+
+        error: updateError
+
+      } =
+        await supabaseClient
+
+          .from("financing_applications")
+
+          .update({
+
+            status: status
+
+          })
+
+          .eq("id", applicationId);
 
 
-      if (error) {
-        throw error;
+      if (updateError) {
+
+        throw updateError;
+
       }
 
 
-      showSuccess(
-        "Application status updated successfully."
-      );
+      /*
+        If the application has just become
+        approved, send the Persian approval email.
+      */
+
+      if (
+        status === "approved" &&
+        !wasAlreadyApproved
+      ) {
+
+
+        emailStatus.textContent =
+          "Application approved. Sending approval email...";
+
+
+        const {
+
+          data: emailData,
+
+          error: emailError
+
+        } =
+          await supabaseClient.functions.invoke(
+
+            "hyper-worker",
+
+            {
+
+              body: {
+
+                action: "approval_email",
+
+                application_id: applicationId
+
+              }
+
+            }
+
+          );
+
+
+        if (emailError) {
+
+          console.error(
+            "Approval email error:",
+            emailError
+          );
+
+          throw new Error(
+            "Application was approved, but the approval email could not be sent."
+          );
+
+        }
+
+
+        if (
+          emailData &&
+          emailData.error
+        ) {
+
+          throw new Error(
+            emailData.error
+          );
+
+        }
+
+
+        emailStatus.textContent =
+          "✓ Approval email sent successfully to the applicant.";
+
+        showSuccess(
+          "Application approved and Persian approval email sent successfully."
+        );
+
+
+      } else if (
+        status === "approved" &&
+        wasAlreadyApproved
+      ) {
+
+
+        showSuccess(
+          "Application status is already approved. No duplicate email was sent."
+        );
+
+
+      } else {
+
+
+        showSuccess(
+          "Application status updated successfully."
+        );
+
+      }
 
 
       button.disabled = false;
+
       button.textContent = "Save Review";
 
 
       /*
-        Refresh the application list so the
-        new status is displayed.
+        Refresh the application list.
       */
 
       setTimeout(() => {
+
         loadAdminApplications();
-      }, 500);
+
+      }, 800);
 
 
-    } catch (error) {
+    }
+
+
+    catch (error) {
 
       console.error(error);
+
 
       showError(
         "Unable to update application: " +
         error.message
       );
 
+
       button.disabled = false;
+
       button.textContent = "Save Review";
+
     }
+
   }
 
 
   loadAdminApplications();
+
 </script>
 
 </body>
