@@ -126,6 +126,16 @@
       line-height: 1.5;
     }
 
+    .admin-card {
+      display: none;
+      border: 1px solid #36c2ff;
+    }
+
+    .admin-card .icon {
+      background: #071a35;
+      color: #36c2ff;
+    }
+
     .account {
       margin-top: 25px;
       background: white;
@@ -367,6 +377,30 @@
     </a>
 
 
+    <!-- ADMIN PORTAL -->
+
+    <a
+      href="admin-applications.html"
+      class="card admin-card"
+      id="adminPortal"
+    >
+
+      <div class="icon">
+        A
+      </div>
+
+      <h2>
+        Admin Portal
+      </h2>
+
+      <p>
+        Review and manage customer financing
+        applications.
+      </p>
+
+    </a>
+
+
   </section>
 
 
@@ -515,6 +549,31 @@
     document.getElementById("userLanguage")
       .textContent =
       metadata.preferred_language || "Not provided";
+
+
+    /*
+      CHECK ADMIN ACCESS
+
+      The Admin Portal appears only when the
+      logged-in user exists in admin_users.
+    */
+
+    const {
+      data: adminRecord,
+      error: adminError
+    } = await supabaseClient
+      .from("admin_users")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+
+    if (!adminError && adminRecord) {
+
+      document.getElementById("adminPortal")
+        .style.display = "block";
+
+    }
 
   }
 
