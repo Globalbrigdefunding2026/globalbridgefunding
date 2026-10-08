@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Create Account | GlobalBridgeFunding</title>
 
-  <!-- Central GlobalBridgeFunding language system -->
+  <!-- CENTRAL LANGUAGE SYSTEM -->
   <script src="language.js"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -36,6 +38,7 @@
       color: white;
       font-size: 21px;
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .logo span {
@@ -45,13 +48,18 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 14px;
     }
 
     .back {
       color: white;
       text-decoration: none;
       font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .back:hover {
+      text-decoration: underline;
     }
 
     .language-selector {
@@ -90,6 +98,16 @@
       line-height: 1.6;
     }
 
+    .notice {
+      background: #eef8fc;
+      border-left: 4px solid #36c2ff;
+      padding: 12px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #536477;
+      line-height: 1.5;
+    }
+
     .row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -117,6 +135,7 @@
       font-size: 15px;
       outline: none;
       background: white;
+      color: #172033;
     }
 
     input:focus,
@@ -160,7 +179,7 @@
     }
 
     button:disabled {
-      opacity: 0.6;
+      opacity: .6;
       cursor: not-allowed;
     }
 
@@ -177,22 +196,14 @@
       text-decoration: none;
     }
 
-    .notice {
-      background: #eef8fc;
-      border-left: 4px solid #36c2ff;
-      padding: 12px;
-      margin-bottom: 22px;
-      font-size: 13px;
-      color: #536477;
-      line-height: 1.5;
-    }
-
     footer {
       text-align: center;
       padding: 25px;
       color: #7b8797;
       font-size: 12px;
     }
+
+    /* RTL SUPPORT */
 
     html[dir="rtl"] body {
       text-align: right;
@@ -206,6 +217,8 @@
     html[dir="rtl"] .terms {
       text-align: right;
     }
+
+    /* MOBILE */
 
     @media (max-width: 600px) {
 
@@ -224,6 +237,7 @@
       .language-selector {
         max-width: 105px;
       }
+
     }
 
     @media (max-width: 500px) {
@@ -242,10 +256,16 @@
       }
 
     }
+
   </style>
+
 </head>
 
+
 <body>
+
+
+  <!-- HEADER -->
 
   <header>
 
@@ -261,6 +281,7 @@
         data-language-selector="true"
         aria-label="Language"
       >
+
         <option value="en">English</option>
         <option value="pt">Português</option>
         <option value="vi">Tiếng Việt</option>
@@ -269,9 +290,15 @@
         <option value="fr">Français</option>
         <option value="fi">Suomi</option>
         <option value="es">Español</option>
+
       </select>
 
-      <a href="index.html" class="back" data-key="backHome">
+
+      <a
+        href="index.html"
+        class="back"
+        data-key="backHome"
+      >
         ← Back to Home
       </a>
 
@@ -280,29 +307,45 @@
   </header>
 
 
+  <!-- MAIN -->
+
   <main class="container">
 
     <div class="card">
+
 
       <h1 data-key="title">
         Create your account
       </h1>
 
-      <p class="intro" data-key="intro">
+
+      <p
+        class="intro"
+        data-key="intro"
+      >
         Create an account to begin your financing application and manage
         your information securely.
       </p>
 
 
-      <div class="notice" data-key="notice">
+      <div
+        class="notice"
+        data-key="notice"
+      >
         Registration is currently designed for email-based communication.
         You will receive important application updates by email.
       </div>
 
 
+      <!-- REGISTRATION FORM -->
+
       <form id="registerForm">
 
+
+        <!-- FIRST + LAST NAME -->
+
         <div class="row">
+
 
           <div class="field">
 
@@ -345,8 +388,11 @@
 
           </div>
 
+
         </div>
 
+
+        <!-- EMAIL -->
 
         <div class="field">
 
@@ -369,6 +415,8 @@
         </div>
 
 
+        <!-- COUNTRY -->
+
         <div class="field">
 
           <label
@@ -383,23 +431,52 @@
             name="country"
             required
           >
-            <option value="" data-key="countryPlaceholder">
+
+            <option
+              value=""
+              data-key="countryPlaceholder"
+            >
               Select your country
             </option>
 
-            <option value="Portugal">Portugal</option>
-            <option value="Vietnam">Vietnam</option>
-            <option value="Iran">Iran</option>
-            <option value="Indonesia">Indonesia</option>
-            <option value="France">France</option>
-            <option value="Finland">Finland</option>
-            <option value="Singapore">Singapore</option>
-            <option value="Ecuador">Ecuador</option>
+            <option value="Portugal">
+              Portugal
+            </option>
+
+            <option value="Vietnam">
+              Vietnam
+            </option>
+
+            <option value="Iran">
+              Iran
+            </option>
+
+            <option value="Indonesia">
+              Indonesia
+            </option>
+
+            <option value="France">
+              France
+            </option>
+
+            <option value="Finland">
+              Finland
+            </option>
+
+            <option value="Singapore">
+              Singapore
+            </option>
+
+            <option value="Ecuador">
+              Ecuador
+            </option>
 
           </select>
 
         </div>
 
+
+        <!-- PHONE -->
 
         <div class="field">
 
@@ -421,6 +498,8 @@
 
         </div>
 
+
+        <!-- PREFERRED LANGUAGE -->
 
         <div class="field">
 
@@ -481,6 +560,8 @@
         </div>
 
 
+        <!-- PASSWORD -->
+
         <div class="field">
 
           <label
@@ -502,6 +583,8 @@
 
         </div>
 
+
+        <!-- CONFIRM PASSWORD -->
 
         <div class="field">
 
@@ -525,6 +608,8 @@
         </div>
 
 
+        <!-- TERMS -->
+
         <div class="terms">
 
           <input
@@ -545,6 +630,8 @@
         </div>
 
 
+        <!-- BUTTON -->
+
         <button
           type="submit"
           id="registerButton"
@@ -553,8 +640,11 @@
           Create Account
         </button>
 
+
       </form>
 
+
+      <!-- SIGN IN -->
 
       <div class="signin">
 
@@ -571,21 +661,26 @@
 
       </div>
 
+
     </div>
 
   </main>
 
+
+  <!-- FOOTER -->
 
   <footer data-key="footer">
     © 2026 GlobalBridgeFunding. All rights reserved.
   </footer>
 
 
-  <!-- Supabase library -->
+  <!-- SUPABASE -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-  <!-- Registration + Language System -->
+  <!-- REGISTRATION SYSTEM -->
+
   <script>
 
     const SUPABASE_URL =
@@ -593,6 +688,7 @@
 
     const SUPABASE_KEY =
       "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
 
     const supabaseClient =
       supabase.createClient(
@@ -602,301 +698,825 @@
 
 
     const registerForm =
-      document.getElementById("registerForm");
+      document.getElementById(
+        "registerForm"
+      );
+
 
     const registerButton =
-      document.getElementById("registerButton");
+      document.getElementById(
+        "registerButton"
+      );
+
 
     const languageSelector =
-      document.getElementById("languageSelector");
+      document.getElementById(
+        "languageSelector"
+      );
 
 
     /*
-      Registration page translations.
+      TRANSLATIONS
     */
 
     const registerTranslations = {
 
+
       en: {
-        backHome: "← Back to Home",
-        title: "Create your account",
-        intro: "Create an account to begin your financing application and manage your information securely.",
-        notice: "Registration is currently designed for email-based communication. You will receive important application updates by email.",
-        firstNameLabel: "First name",
-        firstNamePlaceholder: "First name",
-        lastNameLabel: "Last name",
-        lastNamePlaceholder: "Last name",
-        emailLabel: "Email address",
-        emailPlaceholder: "you@example.com",
-        countryLabel: "Country",
-        countryPlaceholder: "Select your country",
-        phoneLabel: "Phone number",
-        phonePlaceholder: "Phone number",
-        preferredLanguageLabel: "Preferred language",
-        languagePlaceholder: "Select language",
-        passwordLabel: "Password",
-        passwordPlaceholder: "Create a password",
-        confirmPasswordLabel: "Confirm password",
-        confirmPasswordPlaceholder: "Confirm your password",
-        terms: "I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.",
-        createAccount: "Create Account",
-        creatingAccount: "Creating account...",
-        alreadyAccount: "Already have an account?",
-        signIn: "Sign in",
-        footer: "© 2026 GlobalBridgeFunding. All rights reserved.",
-        passwordMismatch: "Passwords do not match.",
-        registrationFailed: "Registration failed: ",
-        success: "Account created successfully!\n\nPlease check your email and confirm your account before signing in.",
-        submitted: "Registration submitted successfully. Please check your email.",
-        error: "Something went wrong. Please try again."
+
+        backHome:
+          "← Back to Home",
+
+        title:
+          "Create your account",
+
+        intro:
+          "Create an account to begin your financing application and manage your information securely.",
+
+        notice:
+          "Registration is currently designed for email-based communication. You will receive important application updates by email.",
+
+        firstNameLabel:
+          "First name",
+
+        firstNamePlaceholder:
+          "First name",
+
+        lastNameLabel:
+          "Last name",
+
+        lastNamePlaceholder:
+          "Last name",
+
+        emailLabel:
+          "Email address",
+
+        emailPlaceholder:
+          "you@example.com",
+
+        countryLabel:
+          "Country",
+
+        countryPlaceholder:
+          "Select your country",
+
+        phoneLabel:
+          "Phone number",
+
+        phonePlaceholder:
+          "Phone number",
+
+        preferredLanguageLabel:
+          "Preferred language",
+
+        languagePlaceholder:
+          "Select language",
+
+        passwordLabel:
+          "Password",
+
+        passwordPlaceholder:
+          "Create a password",
+
+        confirmPasswordLabel:
+          "Confirm password",
+
+        confirmPasswordPlaceholder:
+          "Confirm your password",
+
+        terms:
+          "I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.",
+
+        createAccount:
+          "Create Account",
+
+        creatingAccount:
+          "Creating account...",
+
+        alreadyAccount:
+          "Already have an account?",
+
+        signIn:
+          "Sign in",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. All rights reserved.",
+
+        passwordMismatch:
+          "Passwords do not match.",
+
+        registrationFailed:
+          "Registration failed: ",
+
+        success:
+          "Account created successfully!\n\nPlease check your email and confirm your account before signing in.",
+
+        submitted:
+          "Registration submitted successfully. Please check your email.",
+
+        error:
+          "Something went wrong. Please try again."
+
       },
+
 
       pt: {
-        backHome: "← Voltar à página inicial",
-        title: "Crie a sua conta",
-        intro: "Crie uma conta para iniciar o seu pedido de financiamento e gerir as suas informações com segurança.",
-        notice: "O registo foi concebido para comunicação por email. Receberá atualizações importantes sobre o seu pedido por email.",
-        firstNameLabel: "Nome",
-        firstNamePlaceholder: "Nome",
-        lastNameLabel: "Apelido",
-        lastNamePlaceholder: "Apelido",
-        emailLabel: "Endereço de email",
-        emailPlaceholder: "voce@exemplo.com",
-        countryLabel: "País",
-        countryPlaceholder: "Selecione o seu país",
-        phoneLabel: "Número de telefone",
-        phonePlaceholder: "Número de telefone",
-        preferredLanguageLabel: "Idioma preferido",
-        languagePlaceholder: "Selecione o idioma",
-        passwordLabel: "Palavra-passe",
-        passwordPlaceholder: "Crie uma palavra-passe",
-        confirmPasswordLabel: "Confirmar palavra-passe",
-        confirmPasswordPlaceholder: "Confirme a sua palavra-passe",
-        terms: "Concordo com os termos aplicáveis e reconheço que as informações submetidas podem ser analisadas como parte do processo de candidatura.",
-        createAccount: "Criar conta",
-        creatingAccount: "A criar conta...",
-        alreadyAccount: "Já tem uma conta?",
-        signIn: "Iniciar sessão",
-        footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
-        passwordMismatch: "As palavras-passe não coincidem.",
-        registrationFailed: "Falha no registo: ",
-        success: "Conta criada com sucesso!\n\nVerifique o seu email e confirme a sua conta antes de iniciar sessão.",
-        submitted: "Registo enviado com sucesso. Verifique o seu email.",
-        error: "Ocorreu um erro. Tente novamente."
+
+        backHome:
+          "← Voltar à página inicial",
+
+        title:
+          "Crie a sua conta",
+
+        intro:
+          "Crie uma conta para iniciar o seu pedido de financiamento e gerir as suas informações com segurança.",
+
+        notice:
+          "O registo foi concebido para comunicação por email. Receberá atualizações importantes sobre o seu pedido por email.",
+
+        firstNameLabel:
+          "Nome",
+
+        firstNamePlaceholder:
+          "Nome",
+
+        lastNameLabel:
+          "Apelido",
+
+        lastNamePlaceholder:
+          "Apelido",
+
+        emailLabel:
+          "Endereço de email",
+
+        emailPlaceholder:
+          "voce@exemplo.com",
+
+        countryLabel:
+          "País",
+
+        countryPlaceholder:
+          "Selecione o seu país",
+
+        phoneLabel:
+          "Número de telefone",
+
+        phonePlaceholder:
+          "Número de telefone",
+
+        preferredLanguageLabel:
+          "Idioma preferido",
+
+        languagePlaceholder:
+          "Selecione o idioma",
+
+        passwordLabel:
+          "Palavra-passe",
+
+        passwordPlaceholder:
+          "Crie uma palavra-passe",
+
+        confirmPasswordLabel:
+          "Confirmar palavra-passe",
+
+        confirmPasswordPlaceholder:
+          "Confirme a sua palavra-passe",
+
+        terms:
+          "Concordo com os termos aplicáveis e reconheço que as informações submetidas podem ser analisadas como parte do processo de candidatura.",
+
+        createAccount:
+          "Criar conta",
+
+        creatingAccount:
+          "A criar conta...",
+
+        alreadyAccount:
+          "Já tem uma conta?",
+
+        signIn:
+          "Iniciar sessão",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
+
+        passwordMismatch:
+          "As palavras-passe não coincidem.",
+
+        registrationFailed:
+          "Falha no registo: ",
+
+        success:
+          "Conta criada com sucesso!\n\nVerifique o seu email e confirme a sua conta antes de iniciar sessão.",
+
+        submitted:
+          "Registo enviado com sucesso. Verifique o seu email.",
+
+        error:
+          "Ocorreu um erro. Tente novamente."
+
       },
+
 
       vi: {
-        backHome: "← Quay lại Trang chủ",
-        title: "Tạo tài khoản",
-        intro: "Tạo tài khoản để bắt đầu đơn đăng ký tài chính và quản lý thông tin của bạn một cách an toàn.",
-        notice: "Đăng ký hiện được thiết kế để liên lạc qua email. Bạn sẽ nhận được các cập nhật quan trọng về đơn đăng ký qua email.",
-        firstNameLabel: "Tên",
-        firstNamePlaceholder: "Tên",
-        lastNameLabel: "Họ",
-        lastNamePlaceholder: "Họ",
-        emailLabel: "Địa chỉ email",
-        emailPlaceholder: "ban@example.com",
-        countryLabel: "Quốc gia",
-        countryPlaceholder: "Chọn quốc gia của bạn",
-        phoneLabel: "Số điện thoại",
-        phonePlaceholder: "Số điện thoại",
-        preferredLanguageLabel: "Ngôn ngữ ưa thích",
-        languagePlaceholder: "Chọn ngôn ngữ",
-        passwordLabel: "Mật khẩu",
-        passwordPlaceholder: "Tạo mật khẩu",
-        confirmPasswordLabel: "Xác nhận mật khẩu",
-        confirmPasswordPlaceholder: "Xác nhận mật khẩu",
-        terms: "Tôi đồng ý với các điều khoản áp dụng và hiểu rằng thông tin đã gửi có thể được xem xét trong quá trình đăng ký.",
-        createAccount: "Tạo tài khoản",
-        creatingAccount: "Đang tạo tài khoản...",
-        alreadyAccount: "Đã có tài khoản?",
-        signIn: "Đăng nhập",
-        footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
-        passwordMismatch: "Mật khẩu không khớp.",
-        registrationFailed: "Đăng ký thất bại: ",
-        success: "Tạo tài khoản thành công!\n\nVui lòng kiểm tra email và xác nhận tài khoản trước khi đăng nhập.",
-        submitted: "Đã gửi đăng ký thành công. Vui lòng kiểm tra email.",
-        error: "Đã xảy ra lỗi. Vui lòng thử lại."
+
+        backHome:
+          "← Quay lại Trang chủ",
+
+        title:
+          "Tạo tài khoản",
+
+        intro:
+          "Tạo tài khoản để bắt đầu đơn đăng ký tài chính và quản lý thông tin của bạn một cách an toàn.",
+
+        notice:
+          "Đăng ký hiện được thiết kế để liên lạc qua email. Bạn sẽ nhận được các cập nhật quan trọng về đơn đăng ký qua email.",
+
+        firstNameLabel:
+          "Tên",
+
+        firstNamePlaceholder:
+          "Tên",
+
+        lastNameLabel:
+          "Họ",
+
+        lastNamePlaceholder:
+          "Họ",
+
+        emailLabel:
+          "Địa chỉ email",
+
+        emailPlaceholder:
+          "ban@example.com",
+
+        countryLabel:
+          "Quốc gia",
+
+        countryPlaceholder:
+          "Chọn quốc gia của bạn",
+
+        phoneLabel:
+          "Số điện thoại",
+
+        phonePlaceholder:
+          "Số điện thoại",
+
+        preferredLanguageLabel:
+          "Ngôn ngữ ưa thích",
+
+        languagePlaceholder:
+          "Chọn ngôn ngữ",
+
+        passwordLabel:
+          "Mật khẩu",
+
+        passwordPlaceholder:
+          "Tạo mật khẩu",
+
+        confirmPasswordLabel:
+          "Xác nhận mật khẩu",
+
+        confirmPasswordPlaceholder:
+          "Xác nhận mật khẩu",
+
+        terms:
+          "Tôi đồng ý với các điều khoản áp dụng và hiểu rằng thông tin đã gửi có thể được xem xét trong quá trình đăng ký.",
+
+        createAccount:
+          "Tạo tài khoản",
+
+        creatingAccount:
+          "Đang tạo tài khoản...",
+
+        alreadyAccount:
+          "Đã có tài khoản?",
+
+        signIn:
+          "Đăng nhập",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
+
+        passwordMismatch:
+          "Mật khẩu không khớp.",
+
+        registrationFailed:
+          "Đăng ký thất bại: ",
+
+        success:
+          "Tạo tài khoản thành công!\n\nVui lòng kiểm tra email và xác nhận tài khoản trước khi đăng nhập.",
+
+        submitted:
+          "Đã gửi đăng ký thành công. Vui lòng kiểm tra email.",
+
+        error:
+          "Đã xảy ra lỗi. Vui lòng thử lại."
+
       },
+
 
       fa: {
-        backHome: "← بازگشت به صفحه اصلی",
-        title: "ایجاد حساب کاربری",
-        intro: "برای شروع درخواست تأمین مالی و مدیریت امن اطلاعات خود، یک حساب ایجاد کنید.",
-        notice: "ثبت‌نام در حال حاضر برای ارتباط از طریق ایمیل طراحی شده است. به‌روزرسانی‌های مهم درخواست خود را از طریق ایمیل دریافت خواهید کرد.",
-        firstNameLabel: "نام",
-        firstNamePlaceholder: "نام",
-        lastNameLabel: "نام خانوادگی",
-        lastNamePlaceholder: "نام خانوادگی",
-        emailLabel: "آدرس ایمیل",
-        emailPlaceholder: "you@example.com",
-        countryLabel: "کشور",
-        countryPlaceholder: "کشور خود را انتخاب کنید",
-        phoneLabel: "شماره تلفن",
-        phonePlaceholder: "شماره تلفن",
-        preferredLanguageLabel: "زبان ترجیحی",
-        languagePlaceholder: "زبان را انتخاب کنید",
-        passwordLabel: "رمز عبور",
-        passwordPlaceholder: "رمز عبور ایجاد کنید",
-        confirmPasswordLabel: "تأیید رمز عبور",
-        confirmPasswordPlaceholder: "رمز عبور خود را تأیید کنید",
-        terms: "با شرایط قابل اجرا موافقم و می‌پذیرم که اطلاعات ارسال‌شده ممکن است به عنوان بخشی از فرآیند درخواست بررسی شود.",
-        createAccount: "ایجاد حساب",
-        creatingAccount: "در حال ایجاد حساب...",
-        alreadyAccount: "قبلاً حساب دارید؟",
-        signIn: "ورود",
-        footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
-        passwordMismatch: "رمزهای عبور مطابقت ندارند.",
-        registrationFailed: "ثبت‌نام ناموفق بود: ",
-        success: "حساب با موفقیت ایجاد شد!\n\nلطفاً ایمیل خود را بررسی کرده و قبل از ورود، حساب خود را تأیید کنید.",
-        submitted: "ثبت‌نام با موفقیت ارسال شد. لطفاً ایمیل خود را بررسی کنید.",
-        error: "مشکلی پیش آمد. لطفاً دوباره تلاش کنید."
+
+        backHome:
+          "← بازگشت به صفحه اصلی",
+
+        title:
+          "ایجاد حساب کاربری",
+
+        intro:
+          "برای شروع درخواست تأمین مالی و مدیریت امن اطلاعات خود، یک حساب ایجاد کنید.",
+
+        notice:
+          "ثبت‌نام در حال حاضر برای ارتباط از طریق ایمیل طراحی شده است. به‌روزرسانی‌های مهم درخواست خود را از طریق ایمیل دریافت خواهید کرد.",
+
+        firstNameLabel:
+          "نام",
+
+        firstNamePlaceholder:
+          "نام",
+
+        lastNameLabel:
+          "نام خانوادگی",
+
+        lastNamePlaceholder:
+          "نام خانوادگی",
+
+        emailLabel:
+          "آدرس ایمیل",
+
+        emailPlaceholder:
+          "you@example.com",
+
+        countryLabel:
+          "کشور",
+
+        countryPlaceholder:
+          "کشور خود را انتخاب کنید",
+
+        phoneLabel:
+          "شماره تلفن",
+
+        phonePlaceholder:
+          "شماره تلفن",
+
+        preferredLanguageLabel:
+          "زبان ترجیحی",
+
+        languagePlaceholder:
+          "زبان را انتخاب کنید",
+
+        passwordLabel:
+          "رمز عبور",
+
+        passwordPlaceholder:
+          "رمز عبور ایجاد کنید",
+
+        confirmPasswordLabel:
+          "تأیید رمز عبور",
+
+        confirmPasswordPlaceholder:
+          "رمز عبور خود را تأیید کنید",
+
+        terms:
+          "با شرایط قابل اجرا موافقم و می‌پذیرم که اطلاعات ارسال‌شده ممکن است به عنوان بخشی از فرآیند درخواست بررسی شود.",
+
+        createAccount:
+          "ایجاد حساب",
+
+        creatingAccount:
+          "در حال ایجاد حساب...",
+
+        alreadyAccount:
+          "قبلاً حساب دارید؟",
+
+        signIn:
+          "ورود",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
+
+        passwordMismatch:
+          "رمزهای عبور مطابقت ندارند.",
+
+        registrationFailed:
+          "ثبت‌نام ناموفق بود: ",
+
+        success:
+          "حساب با موفقیت ایجاد شد!\n\nلطفاً ایمیل خود را بررسی کرده و قبل از ورود، حساب خود را تأیید کنید.",
+
+        submitted:
+          "ثبت‌نام با موفقیت ارسال شد. لطفاً ایمیل خود را بررسی کنید.",
+
+        error:
+          "مشکلی پیش آمد. لطفاً دوباره تلاش کنید."
+
       },
+
 
       id: {
-        backHome: "← Kembali ke Beranda",
-        title: "Buat akun Anda",
-        intro: "Buat akun untuk memulai pengajuan pembiayaan dan mengelola informasi Anda dengan aman.",
-        notice: "Pendaftaran saat ini dirancang untuk komunikasi melalui email. Anda akan menerima pembaruan penting mengenai pengajuan melalui email.",
-        firstNameLabel: "Nama depan",
-        firstNamePlaceholder: "Nama depan",
-        lastNameLabel: "Nama belakang",
-        lastNamePlaceholder: "Nama belakang",
-        emailLabel: "Alamat email",
-        emailPlaceholder: "anda@example.com",
-        countryLabel: "Negara",
-        countryPlaceholder: "Pilih negara Anda",
-        phoneLabel: "Nomor telepon",
-        phonePlaceholder: "Nomor telepon",
-        preferredLanguageLabel: "Bahasa pilihan",
-        languagePlaceholder: "Pilih bahasa",
-        passwordLabel: "Kata sandi",
-        passwordPlaceholder: "Buat kata sandi",
-        confirmPasswordLabel: "Konfirmasi kata sandi",
-        confirmPasswordPlaceholder: "Konfirmasi kata sandi Anda",
-        terms: "Saya menyetujui ketentuan yang berlaku dan memahami bahwa informasi yang dikirim dapat ditinjau sebagai bagian dari proses pengajuan.",
-        createAccount: "Buat Akun",
-        creatingAccount: "Membuat akun...",
-        alreadyAccount: "Sudah memiliki akun?",
-        signIn: "Masuk",
-        footer: "© 2026 GlobalBridgeFunding. Hak cipta dilindungi.",
-        passwordMismatch: "Kata sandi tidak cocok.",
-        registrationFailed: "Pendaftaran gagal: ",
-        success: "Akun berhasil dibuat!\n\nSilakan periksa email Anda dan konfirmasi akun sebelum masuk.",
-        submitted: "Pendaftaran berhasil dikirim. Silakan periksa email Anda.",
-        error: "Terjadi kesalahan. Silakan coba lagi."
+
+        backHome:
+          "← Kembali ke Beranda",
+
+        title:
+          "Buat akun Anda",
+
+        intro:
+          "Buat akun untuk memulai pengajuan pembiayaan dan mengelola informasi Anda dengan aman.",
+
+        notice:
+          "Pendaftaran saat ini dirancang untuk komunikasi melalui email. Anda akan menerima pembaruan penting mengenai pengajuan melalui email.",
+
+        firstNameLabel:
+          "Nama depan",
+
+        firstNamePlaceholder:
+          "Nama depan",
+
+        lastNameLabel:
+          "Nama belakang",
+
+        lastNamePlaceholder:
+          "Nama belakang",
+
+        emailLabel:
+          "Alamat email",
+
+        emailPlaceholder:
+          "anda@example.com",
+
+        countryLabel:
+          "Negara",
+
+        countryPlaceholder:
+          "Pilih negara Anda",
+
+        phoneLabel:
+          "Nomor telepon",
+
+        phonePlaceholder:
+          "Nomor telepon",
+
+        preferredLanguageLabel:
+          "Bahasa pilihan",
+
+        languagePlaceholder:
+          "Pilih bahasa",
+
+        passwordLabel:
+          "Kata sandi",
+
+        passwordPlaceholder:
+          "Buat kata sandi",
+
+        confirmPasswordLabel:
+          "Konfirmasi kata sandi",
+
+        confirmPasswordPlaceholder:
+          "Konfirmasi kata sandi Anda",
+
+        terms:
+          "Saya menyetujui ketentuan yang berlaku dan memahami bahwa informasi yang dikirim dapat ditinjau sebagai bagian dari proses pengajuan.",
+
+        createAccount:
+          "Buat Akun",
+
+        creatingAccount:
+          "Membuat akun...",
+
+        alreadyAccount:
+          "Sudah memiliki akun?",
+
+        signIn:
+          "Masuk",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Hak cipta dilindungi.",
+
+        passwordMismatch:
+          "Kata sandi tidak cocok.",
+
+        registrationFailed:
+          "Pendaftaran gagal: ",
+
+        success:
+          "Akun berhasil dibuat!\n\nSilakan periksa email Anda dan konfirmasi akun sebelum masuk.",
+
+        submitted:
+          "Pendaftaran berhasil dikirim. Silakan periksa email Anda.",
+
+        error:
+          "Terjadi kesalahan. Silakan coba lagi."
+
       },
+
 
       fr: {
-        backHome: "← Retour à l'accueil",
-        title: "Créer votre compte",
-        intro: "Créez un compte pour commencer votre demande de financement et gérer vos informations en toute sécurité.",
-        notice: "L'inscription est actuellement conçue pour une communication par email. Vous recevrez les mises à jour importantes de votre demande par email.",
-        firstNameLabel: "Prénom",
-        firstNamePlaceholder: "Prénom",
-        lastNameLabel: "Nom",
-        lastNamePlaceholder: "Nom",
-        emailLabel: "Adresse email",
-        emailPlaceholder: "vous@exemple.com",
-        countryLabel: "Pays",
-        countryPlaceholder: "Sélectionnez votre pays",
-        phoneLabel: "Numéro de téléphone",
-        phonePlaceholder: "Numéro de téléphone",
-        preferredLanguageLabel: "Langue préférée",
-        languagePlaceholder: "Sélectionnez la langue",
-        passwordLabel: "Mot de passe",
-        passwordPlaceholder: "Créez un mot de passe",
-        confirmPasswordLabel: "Confirmer le mot de passe",
-        confirmPasswordPlaceholder: "Confirmez votre mot de passe",
-        terms: "J'accepte les conditions applicables et reconnais que les informations soumises peuvent être examinées dans le cadre du processus de demande.",
-        createAccount: "Créer le compte",
-        creatingAccount: "Création du compte...",
-        alreadyAccount: "Vous avez déjà un compte ?",
-        signIn: "Se connecter",
-        footer: "© 2026 GlobalBridgeFunding. Tous droits réservés.",
-        passwordMismatch: "Les mots de passe ne correspondent pas.",
-        registrationFailed: "Échec de l'inscription : ",
-        success: "Compte créé avec succès !\n\nVeuillez vérifier votre email et confirmer votre compte avant de vous connecter.",
-        submitted: "Inscription envoyée avec succès. Veuillez vérifier votre email.",
-        error: "Une erreur s'est produite. Veuillez réessayer."
+
+        backHome:
+          "← Retour à l'accueil",
+
+        title:
+          "Créer votre compte",
+
+        intro:
+          "Créez un compte pour commencer votre demande de financement et gérer vos informations en toute sécurité.",
+
+        notice:
+          "L'inscription est actuellement conçue pour une communication par email. Vous recevrez les mises à jour importantes de votre demande par email.",
+
+        firstNameLabel:
+          "Prénom",
+
+        firstNamePlaceholder:
+          "Prénom",
+
+        lastNameLabel:
+          "Nom",
+
+        lastNamePlaceholder:
+          "Nom",
+
+        emailLabel:
+          "Adresse email",
+
+        emailPlaceholder:
+          "vous@exemple.com",
+
+        countryLabel:
+          "Pays",
+
+        countryPlaceholder:
+          "Sélectionnez votre pays",
+
+        phoneLabel:
+          "Numéro de téléphone",
+
+        phonePlaceholder:
+          "Numéro de téléphone",
+
+        preferredLanguageLabel:
+          "Langue préférée",
+
+        languagePlaceholder:
+          "Sélectionnez la langue",
+
+        passwordLabel:
+          "Mot de passe",
+
+        passwordPlaceholder:
+          "Créez un mot de passe",
+
+        confirmPasswordLabel:
+          "Confirmer le mot de passe",
+
+        confirmPasswordPlaceholder:
+          "Confirmez votre mot de passe",
+
+        terms:
+          "J'accepte les conditions applicables et reconnais que les informations soumises peuvent être examinées dans le cadre du processus de demande.",
+
+        createAccount:
+          "Créer le compte",
+
+        creatingAccount:
+          "Création du compte...",
+
+        alreadyAccount:
+          "Vous avez déjà un compte ?",
+
+        signIn:
+          "Se connecter",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Tous droits réservés.",
+
+        passwordMismatch:
+          "Les mots de passe ne correspondent pas.",
+
+        registrationFailed:
+          "Échec de l'inscription : ",
+
+        success:
+          "Compte créé avec succès !\n\nVeuillez vérifier votre email et confirmer votre compte avant de vous connecter.",
+
+        submitted:
+          "Inscription envoyée avec succès. Veuillez vérifier votre email.",
+
+        error:
+          "Une erreur s'est produite. Veuillez réessayer."
+
       },
+
 
       fi: {
-        backHome: "← Takaisin etusivulle",
-        title: "Luo tilisi",
-        intro: "Luo tili aloittaaksesi rahoitushakemuksesi ja hallitaksesi tietojasi turvallisesti.",
-        notice: "Rekisteröinti on tällä hetkellä suunniteltu sähköpostiviestintää varten. Saat tärkeät hakemustasi koskevat päivitykset sähköpostitse.",
-        firstNameLabel: "Etunimi",
-        firstNamePlaceholder: "Etunimi",
-        lastNameLabel: "Sukunimi",
-        lastNamePlaceholder: "Sukunimi",
-        emailLabel: "Sähköpostiosoite",
-        emailPlaceholder: "sinä@example.com",
-        countryLabel: "Maa",
-        countryPlaceholder: "Valitse maasi",
-        phoneLabel: "Puhelinnumero",
-        phonePlaceholder: "Puhelinnumero",
-        preferredLanguageLabel: "Ensisijainen kieli",
-        languagePlaceholder: "Valitse kieli",
-        passwordLabel: "Salasana",
-        passwordPlaceholder: "Luo salasana",
-        confirmPasswordLabel: "Vahvista salasana",
-        confirmPasswordPlaceholder: "Vahvista salasanasi",
-        terms: "Hyväksyn sovellettavat ehdot ja ymmärrän, että toimitetut tiedot voidaan tarkistaa osana hakemusprosessia.",
-        createAccount: "Luo tili",
-        creatingAccount: "Tiliä luodaan...",
-        alreadyAccount: "Onko sinulla jo tili?",
-        signIn: "Kirjaudu sisään",
-        footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
-        passwordMismatch: "Salasanat eivät täsmää.",
-        registrationFailed: "Rekisteröinti epäonnistui: ",
-        success: "Tili luotiin onnistuneesti!\n\nTarkista sähköpostisi ja vahvista tilisi ennen kirjautumista.",
-        submitted: "Rekisteröinti lähetettiin onnistuneesti. Tarkista sähköpostisi.",
-        error: "Jokin meni pieleen. Yritä uudelleen."
+
+        backHome:
+          "← Takaisin etusivulle",
+
+        title:
+          "Luo tilisi",
+
+        intro:
+          "Luo tili aloittaaksesi rahoitushakemuksesi ja hallitaksesi tietojasi turvallisesti.",
+
+        notice:
+          "Rekisteröinti on tällä hetkellä suunniteltu sähköpostiviestintää varten. Saat tärkeät hakemustasi koskevat päivitykset sähköpostitse.",
+
+        firstNameLabel:
+          "Etunimi",
+
+        firstNamePlaceholder:
+          "Etunimi",
+
+        lastNameLabel:
+          "Sukunimi",
+
+        lastNamePlaceholder:
+          "Sukunimi",
+
+        emailLabel:
+          "Sähköpostiosoite",
+
+        emailPlaceholder:
+          "sinä@example.com",
+
+        countryLabel:
+          "Maa",
+
+        countryPlaceholder:
+          "Valitse maasi",
+
+        phoneLabel:
+          "Puhelinnumero",
+
+        phonePlaceholder:
+          "Puhelinnumero",
+
+        preferredLanguageLabel:
+          "Ensisijainen kieli",
+
+        languagePlaceholder:
+          "Valitse kieli",
+
+        passwordLabel:
+          "Salasana",
+
+        passwordPlaceholder:
+          "Luo salasana",
+
+        confirmPasswordLabel:
+          "Vahvista salasana",
+
+        confirmPasswordPlaceholder:
+          "Vahvista salasanasi",
+
+        terms:
+          "Hyväksyn sovellettavat ehdot ja ymmärrän, että toimitetut tiedot voidaan tarkistaa osana hakemusprosessia.",
+
+        createAccount:
+          "Luo tili",
+
+        creatingAccount:
+          "Tiliä luodaan...",
+
+        alreadyAccount:
+          "Onko sinulla jo tili?",
+
+        signIn:
+          "Kirjaudu sisään",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
+
+        passwordMismatch:
+          "Salasanat eivät täsmää.",
+
+        registrationFailed:
+          "Rekisteröinti epäonnistui: ",
+
+        success:
+          "Tili luotiin onnistuneesti!\n\nTarkista sähköpostisi ja vahvista tilisi ennen kirjautumista.",
+
+        submitted:
+          "Rekisteröinti lähetettiin onnistuneesti. Tarkista sähköpostisi.",
+
+        error:
+          "Jokin meni pieleen. Yritä uudelleen."
+
       },
 
+
       es: {
-        backHome: "← Volver al inicio",
-        title: "Crea tu cuenta",
-        intro: "Crea una cuenta para comenzar tu solicitud de financiación y gestionar tu información de forma segura.",
-        notice: "El registro está diseñado actualmente para la comunicación por correo electrónico. Recibirás actualizaciones importantes de tu solicitud por correo electrónico.",
-        firstNameLabel: "Nombre",
-        firstNamePlaceholder: "Nombre",
-        lastNameLabel: "Apellido",
-        lastNamePlaceholder: "Apellido",
-        emailLabel: "Dirección de correo electrónico",
-        emailPlaceholder: "tu@ejemplo.com",
-        countryLabel: "País",
-        countryPlaceholder: "Selecciona tu país",
-        phoneLabel: "Número de teléfono",
-        phonePlaceholder: "Número de teléfono",
-        preferredLanguageLabel: "Idioma preferido",
-        languagePlaceholder: "Selecciona el idioma",
-        passwordLabel: "Contraseña",
-        passwordPlaceholder: "Crea una contraseña",
-        confirmPasswordLabel: "Confirmar contraseña",
-        confirmPasswordPlaceholder: "Confirma tu contraseña",
-        terms: "Acepto los términos aplicables y reconozco que la información enviada puede ser revisada como parte del proceso de solicitud.",
-        createAccount: "Crear cuenta",
-        creatingAccount: "Creando cuenta...",
-        alreadyAccount: "¿Ya tienes una cuenta?",
-        signIn: "Iniciar sesión",
-        footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
-        passwordMismatch: "Las contraseñas no coinciden.",
-        registrationFailed: "Error en el registro: ",
-        success: "¡Cuenta creada correctamente!\n\nRevisa tu correo electrónico y confirma tu cuenta antes de iniciar sesión.",
-        submitted: "Registro enviado correctamente. Revisa tu correo electrónico.",
-        error: "Algo salió mal. Inténtalo de nuevo."
+
+        backHome:
+          "← Volver al inicio",
+
+        title:
+          "Crea tu cuenta",
+
+        intro:
+          "Crea una cuenta para comenzar tu solicitud de financiación y gestionar tu información de forma segura.",
+
+        notice:
+          "El registro está diseñado actualmente para la comunicación por correo electrónico. Recibirás actualizaciones importantes de tu solicitud por correo electrónico.",
+
+        firstNameLabel:
+          "Nombre",
+
+        firstNamePlaceholder:
+          "Nombre",
+
+        lastNameLabel:
+          "Apellido",
+
+        lastNamePlaceholder:
+          "Apellido",
+
+        emailLabel:
+          "Dirección de correo electrónico",
+
+        emailPlaceholder:
+          "tu@ejemplo.com",
+
+        countryLabel:
+          "País",
+
+        countryPlaceholder:
+          "Selecciona tu país",
+
+        phoneLabel:
+          "Número de teléfono",
+
+        phonePlaceholder:
+          "Número de teléfono",
+
+        preferredLanguageLabel:
+          "Idioma preferido",
+
+        languagePlaceholder:
+          "Selecciona el idioma",
+
+        passwordLabel:
+          "Contraseña",
+
+        passwordPlaceholder:
+          "Crea una contraseña",
+
+        confirmPasswordLabel:
+          "Confirmar contraseña",
+
+        confirmPasswordPlaceholder:
+          "Confirma tu contraseña",
+
+        terms:
+          "Acepto los términos aplicables y reconozco que la información enviada puede ser revisada como parte del proceso de solicitud.",
+
+        createAccount:
+          "Crear cuenta",
+
+        creatingAccount:
+          "Creando cuenta...",
+
+        alreadyAccount:
+          "¿Ya tienes una cuenta?",
+
+        signIn:
+          "Iniciar sesión",
+
+        footer:
+          "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
+
+        passwordMismatch:
+          "Las contraseñas no coinciden.",
+
+        registrationFailed:
+          "Error en el registro: ",
+
+        success:
+          "¡Cuenta creada correctamente!\n\nRevisa tu correo electrónico y confirma tu cuenta antes de iniciar sesión.",
+
+        submitted:
+          "Registro enviado correctamente. Revisa tu correo electrónico.",
+
+        error:
+          "Algo salió mal. Inténtalo de nuevo."
+
       }
 
     };
 
 
     /*
-      Get the currently selected website language.
+      GET SAVED WEBSITE LANGUAGE
+
+      IMPORTANT:
+      This function only READS the saved
+      language. It does not change it.
     */
 
-    function getCurrentLanguage() {
+    function getSavedLanguage() {
 
       if (
         window.GlobalBridgeLanguage &&
@@ -907,61 +1527,65 @@
 
       }
 
-      const saved =
-        localStorage.getItem("globalbridge_language");
 
-      return saved || "en";
+      const saved =
+        localStorage.getItem(
+          "globalbridge_language"
+        );
+
+
+      if (
+        saved &&
+        registerTranslations[saved]
+      ) {
+
+        return saved;
+
+      }
+
+
+      return "en";
 
     }
 
 
     /*
-      Translate the registration page.
+      APPLY LANGUAGE TO REGISTRATION PAGE
     */
 
-    function applyRegisterLanguage(language) {
+    function applyRegisterLanguage(
+      language
+    ) {
 
-      if (!registerTranslations[language]) {
+      if (
+        !registerTranslations[language]
+      ) {
+
         language = "en";
+
       }
+
 
       const translations =
         registerTranslations[language];
 
 
       /*
-        Save the language through the central system.
+        Set document language.
       */
-
-      if (
-        window.GlobalBridgeLanguage &&
-        typeof window.GlobalBridgeLanguage.setLanguage === "function"
-      ) {
-
-        window.GlobalBridgeLanguage.setLanguage(language);
-
-      } else {
-
-        localStorage.setItem(
-          "globalbridge_language",
-          language
-        );
-
-        localStorage.setItem(
-          "selectedLanguage",
-          language
-        );
-
-      }
-
 
       document.documentElement.lang =
         language;
 
 
+      /*
+        Persian = RTL.
+      */
+
       if (language === "fa") {
 
-        document.documentElement.dir = "rtl";
+        document.documentElement.dir =
+          "rtl";
 
         document.body.classList.add(
           "rtl-language"
@@ -969,7 +1593,8 @@
 
       } else {
 
-        document.documentElement.dir = "ltr";
+        document.documentElement.dir =
+          "ltr";
 
         document.body.classList.remove(
           "rtl-language"
@@ -979,26 +1604,33 @@
 
 
       /*
-        Translate normal text.
+        Translate all normal text.
       */
 
       document
-        .querySelectorAll("[data-key]")
-        .forEach(element => {
+        .querySelectorAll(
+          "[data-key]"
+        )
+        .forEach(
+          function(element) {
 
-          const key =
-            element.getAttribute("data-key");
+            const key =
+              element.getAttribute(
+                "data-key"
+              );
 
-          if (
-            translations[key] !== undefined
-          ) {
 
-            element.textContent =
-              translations[key];
+            if (
+              translations[key] !== undefined
+            ) {
+
+              element.textContent =
+                translations[key];
+
+            }
 
           }
-
-        });
+        );
 
 
       /*
@@ -1006,28 +1638,34 @@
       */
 
       document
-        .querySelectorAll("[data-placeholder]")
-        .forEach(element => {
+        .querySelectorAll(
+          "[data-placeholder]"
+        )
+        .forEach(
+          function(element) {
 
-          const key =
-            element.getAttribute(
-              "data-placeholder"
-            );
+            const key =
+              element.getAttribute(
+                "data-placeholder"
+              );
 
-          if (
-            translations[key] !== undefined
-          ) {
 
-            element.placeholder =
-              translations[key];
+            if (
+              translations[key] !== undefined
+            ) {
+
+              element.placeholder =
+                translations[key];
+
+            }
 
           }
-
-        });
+        );
 
 
       /*
-        Keep the top language selector synchronized.
+        Keep the top selector
+        synchronized.
       */
 
       if (languageSelector) {
@@ -1041,15 +1679,46 @@
 
 
     /*
-      Change language.
+      TOP LANGUAGE SELECTOR
+
+      The language is saved ONLY when
+      the visitor deliberately changes it.
     */
 
     languageSelector.addEventListener(
       "change",
-      function () {
+      function() {
+
+        const selectedLanguage =
+          this.value;
+
+
+        if (
+          window.GlobalBridgeLanguage &&
+          typeof window.GlobalBridgeLanguage.setLanguage === "function"
+        ) {
+
+          window.GlobalBridgeLanguage.setLanguage(
+            selectedLanguage
+          );
+
+        } else {
+
+          localStorage.setItem(
+            "globalbridge_language",
+            selectedLanguage
+          );
+
+          localStorage.setItem(
+            "selectedLanguage",
+            selectedLanguage
+          );
+
+        }
+
 
         applyRegisterLanguage(
-          this.value
+          selectedLanguage
         );
 
       }
@@ -1057,27 +1726,43 @@
 
 
     /*
-      Apply saved website language when
-      registration page opens.
+      INITIALIZE REGISTRATION PAGE
+
+      Read the language that was already
+      selected somewhere else on the website.
     */
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      function () {
+    function initializeRegisterLanguage() {
 
-        const savedLanguage =
-          getCurrentLanguage();
+      const savedLanguage =
+        getSavedLanguage();
 
-        applyRegisterLanguage(
-          savedLanguage
-        );
 
-      }
-    );
+      applyRegisterLanguage(
+        savedLanguage
+      );
+
+    }
+
+
+    if (
+      document.readyState === "loading"
+    ) {
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        initializeRegisterLanguage
+      );
+
+    } else {
+
+      initializeRegisterLanguage();
+
+    }
 
 
     /*
-      Registration system.
+      REGISTRATION FORM
     */
 
     registerForm.addEventListener(
@@ -1089,58 +1774,74 @@
 
         const firstName =
           document
-            .getElementById("firstName")
+            .getElementById(
+              "firstName"
+            )
             .value
             .trim();
 
 
         const lastName =
           document
-            .getElementById("lastName")
+            .getElementById(
+              "lastName"
+            )
             .value
             .trim();
 
 
         const email =
           document
-            .getElementById("email")
+            .getElementById(
+              "email"
+            )
             .value
             .trim();
 
 
         const country =
           document
-            .getElementById("country")
+            .getElementById(
+              "country"
+            )
             .value;
 
 
         const phone =
           document
-            .getElementById("phone")
+            .getElementById(
+              "phone"
+            )
             .value
             .trim();
 
 
         const language =
           document
-            .getElementById("language")
+            .getElementById(
+              "language"
+            )
             .value;
 
 
         const password =
           document
-            .getElementById("password")
+            .getElementById(
+              "password"
+            )
             .value;
 
 
         const confirmPassword =
           document
-            .getElementById("confirmPassword")
+            .getElementById(
+              "confirmPassword"
+            )
             .value;
 
 
         const currentLanguage =
-          getCurrentLanguage();
+          getSavedLanguage();
 
 
         const translations =
@@ -1149,6 +1850,10 @@
           ] ||
           registerTranslations.en;
 
+
+        /*
+          CHECK PASSWORDS
+        */
 
         if (
           password !== confirmPassword
@@ -1163,6 +1868,10 @@
         }
 
 
+        /*
+          DISABLE BUTTON
+        */
+
         registerButton.disabled =
           true;
 
@@ -1173,12 +1882,22 @@
 
         try {
 
+
+          /*
+            SUPABASE REGISTRATION
+
+            Existing registration logic
+            remains unchanged.
+          */
+
           const { data, error } =
             await supabaseClient.auth.signUp({
 
-              email: email,
+              email:
+                email,
 
-              password: password,
+              password:
+                password,
 
               options: {
 
@@ -1206,6 +1925,10 @@
             });
 
 
+          /*
+            REGISTRATION ERROR
+          */
+
           if (error) {
 
             alert(
@@ -1227,6 +1950,10 @@
           }
 
 
+          /*
+            SUCCESS
+          */
+
           if (data.user) {
 
             alert(
@@ -1238,13 +1965,14 @@
 
 
             /*
-              Restore the website language
+              Keep the website language
               after resetting the form.
             */
 
             applyRegisterLanguage(
               currentLanguage
             );
+
 
           } else {
 
@@ -1267,6 +1995,10 @@
         }
 
 
+        /*
+          RESTORE BUTTON
+        */
+
         registerButton.disabled =
           false;
 
@@ -1278,6 +2010,7 @@
     );
 
   </script>
+
 
 </body>
 </html>
