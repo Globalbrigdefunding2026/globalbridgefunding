@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="GlobalBridgeFunding — international business financing platform.">
 <title>GlobalBridgeFunding — Business Financing</title>
+
 <link rel="stylesheet" href="styles.css">
+
+<!-- CENTRAL WEBSITE LANGUAGE SYSTEM -->
+<script src="language.js"></script>
 </head>
 
 <body>
@@ -29,6 +33,7 @@
     <select
       class="lang"
       id="languageSelector"
+      data-language-selector="true"
       aria-label="Language"
       onchange="changeLanguage(this.value)"
     >
@@ -498,7 +503,7 @@
 <script>
 
 /* =====================================================
-   GLOBALBRIDGEFUNDING LANGUAGE SYSTEM
+   GLOBALBRIDGEFUNDING HOMEPAGE LANGUAGE SYSTEM
    ===================================================== */
 
 const translations = {
@@ -1070,56 +1075,108 @@ function changeLanguage(language) {
 
   const t = translations[language];
 
-  /* Save language */
-  localStorage.setItem("selectedLanguage", language);
+  /*
+    SAVE TO THE CENTRAL WEBSITE LANGUAGE KEY
+  */
+  localStorage.setItem(
+    "globalbridge_language",
+    language
+  );
 
-  /* HTML language */
-  document.documentElement.lang = language;
+  /*
+    KEEP OLD HOMEPAGE KEY FOR COMPATIBILITY
+  */
+  localStorage.setItem(
+    "selectedLanguage",
+    language
+  );
 
-  /* Persian direction */
+  /*
+    HTML LANGUAGE
+  */
+  document.documentElement.lang =
+    language;
+
+  /*
+    PERSIAN RIGHT-TO-LEFT
+  */
   if (language === "fa") {
-    document.documentElement.dir = "rtl";
+
+    document.documentElement.dir =
+      "rtl";
+
+    document.body.classList.add(
+      "rtl-language"
+    );
+
   } else {
-    document.documentElement.dir = "ltr";
+
+    document.documentElement.dir =
+      "ltr";
+
+    document.body.classList.remove(
+      "rtl-language"
+    );
+
   }
 
-  /* Change normal text */
+  /*
+    CHANGE NORMAL TEXT
+  */
   const normalElements =
     document.querySelectorAll("[data-key]");
 
   normalElements.forEach(function(element) {
 
-    const key = element.getAttribute("data-key");
+    const key =
+      element.getAttribute("data-key");
 
     if (t[key] !== undefined) {
-      element.textContent = t[key];
+
+      element.textContent =
+        t[key];
+
     }
 
   });
 
-  /* Change HTML text */
+  /*
+    CHANGE HTML TEXT
+  */
   const htmlElements =
     document.querySelectorAll("[data-html]");
 
   htmlElements.forEach(function(element) {
 
-    const key = element.getAttribute("data-html");
+    const key =
+      element.getAttribute("data-html");
 
     if (t[key] !== undefined) {
-      element.innerHTML = t[key];
+
+      element.innerHTML =
+        t[key];
+
     }
 
   });
 
-  /* Update selector */
-  const selector =
-    document.getElementById("languageSelector");
+  /*
+    UPDATE ALL LANGUAGE SELECTORS
+  */
+  document
+    .querySelectorAll(
+      "#languageSelector, [data-language-selector]"
+    )
+    .forEach(function(selector) {
 
-  if (selector) {
-    selector.value = language;
-  }
+      selector.value =
+        language;
 
-  /* Update calculator term language */
+    });
+
+  /*
+    UPDATE CALCULATOR
+  */
   updateCalculator();
 
 }
@@ -1146,7 +1203,13 @@ function updateCalculator() {
   const payment =
     document.getElementById("payment");
 
-  if (!amount || !term) {
+  if (
+    !amount ||
+    !term ||
+    !amountOut ||
+    !termOut ||
+    !payment
+  ) {
     return;
   }
 
@@ -1180,33 +1243,58 @@ function updateCalculator() {
     "$" +
     amountValue.toLocaleString();
 
+  /*
+    ALWAYS READ THE CENTRAL LANGUAGE KEY FIRST
+  */
   const language =
-    localStorage.getItem("selectedLanguage") || "en";
+    localStorage.getItem(
+      "globalbridge_language"
+    ) ||
+    localStorage.getItem(
+      "selectedLanguage"
+    ) ||
+    "en";
 
   if (language === "pt") {
+
     termOut.textContent =
       months + " meses";
+
   } else if (language === "vi") {
+
     termOut.textContent =
       months + " tháng";
+
   } else if (language === "fa") {
+
     termOut.textContent =
       months + " ماه";
+
   } else if (language === "id") {
+
     termOut.textContent =
       months + " bulan";
+
   } else if (language === "fr") {
+
     termOut.textContent =
       months + " mois";
+
   } else if (language === "fi") {
+
     termOut.textContent =
       months + " kuukautta";
+
   } else if (language === "es") {
+
     termOut.textContent =
       months + " meses";
+
   } else {
+
     termOut.textContent =
       months + " months";
+
   }
 
   payment.textContent =
@@ -1226,38 +1314,80 @@ function updateCalculator() {
    SLIDER EVENTS
    ===================================================== */
 
-document
-  .getElementById("amount")
-  .addEventListener(
+const amountSlider =
+  document.getElementById("amount");
+
+const termSlider =
+  document.getElementById("term");
+
+if (amountSlider) {
+
+  amountSlider.addEventListener(
     "input",
     updateCalculator
   );
 
-document
-  .getElementById("term")
-  .addEventListener(
+}
+
+if (termSlider) {
+
+  termSlider.addEventListener(
     "input",
     updateCalculator
   );
+
+}
 
 
 /* =====================================================
    LOAD SAVED LANGUAGE
    ===================================================== */
 
+/*
+  CENTRAL KEY FIRST
+  OLD KEY SECOND
+  ENGLISH AS DEFAULT
+*/
+
 const savedLanguage =
-  localStorage.getItem("selectedLanguage");
+  localStorage.getItem(
+    "globalbridge_language"
+  ) ||
+  localStorage.getItem(
+    "selectedLanguage"
+  ) ||
+  "en";
+
 
 if (
-  savedLanguage &&
   translations[savedLanguage]
 ) {
 
-  changeLanguage(savedLanguage);
+  changeLanguage(
+    savedLanguage
+  );
 
 } else {
 
-  changeLanguage("en");
+  changeLanguage(
+    "en"
+  );
+
+}
+
+
+/*
+  Keep the central language system
+  synchronized with this homepage.
+*/
+
+if (
+  window.GlobalBridgeLanguage
+) {
+
+  window.GlobalBridgeLanguage.applyLanguage(
+    savedLanguage
+  );
 
 }
 
