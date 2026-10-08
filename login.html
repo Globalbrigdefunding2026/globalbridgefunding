@@ -6,6 +6,9 @@
 
   <title>Sign In | GlobalBridgeFunding</title>
 
+  <!-- Central GlobalBridgeFunding language system -->
+  <script src="language.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -26,6 +29,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 15px;
     }
 
     .logo {
@@ -38,10 +42,26 @@
       color: #36c2ff;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     .back {
       color: white;
       text-decoration: none;
       font-size: 14px;
+    }
+
+    .language-box select {
+      background: white;
+      color: #071a35;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 13px;
+      cursor: pointer;
     }
 
     .container {
@@ -67,6 +87,7 @@
       color: #667085;
       font-size: 15px;
       margin-bottom: 28px;
+      line-height: 1.5;
     }
 
     .field {
@@ -159,6 +180,7 @@
       margin-bottom: 23px;
       font-size: 13px;
       color: #536477;
+      line-height: 1.5;
     }
 
     .message {
@@ -184,7 +206,51 @@
       font-size: 12px;
     }
 
+    /* Persian / RTL */
+    html[dir="rtl"] body {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] .forgot {
+      text-align: left;
+    }
+
+    html[dir="rtl"] .notice {
+      border-left: none;
+      border-right: 4px solid #36c2ff;
+    }
+
+    html[dir="rtl"] .message.error {
+      border-left: none;
+      border-right: 4px solid #d64545;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        padding: 15px 5%;
+      }
+
+      .header-right {
+        gap: 9px;
+      }
+
+      .back {
+        font-size: 12px;
+      }
+
+      .language-box select {
+        padding: 7px 6px;
+        font-size: 11px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+    }
+
     @media (max-width: 500px) {
+
       .card {
         padding: 27px 21px;
       }
@@ -199,13 +265,40 @@
 <body>
 
   <header>
+
     <div class="logo">
       Global<span>Bridge</span>Funding
     </div>
 
-    <a href="index.html" class="back">
-      ← Back to Home
-    </a>
+    <div class="header-right">
+
+      <div class="language-box">
+        <select
+          id="languageSelector"
+          data-language-selector="true"
+          aria-label="Language"
+        >
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="fa">فارسی</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="fr">Français</option>
+          <option value="fi">Suomi</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+
+      <a
+        href="index.html"
+        class="back"
+        data-key="backHome"
+      >
+        ← Back to Home
+      </a>
+
+    </div>
+
   </header>
 
 
@@ -213,13 +306,21 @@
 
     <div class="card">
 
-      <h1>Welcome back</h1>
+      <h1 data-key="title">
+        Welcome back
+      </h1>
 
-      <p class="intro">
+      <p
+        class="intro"
+        data-key="intro"
+      >
         Sign in to access your GlobalBridgeFunding account.
       </p>
 
-      <div class="notice">
+      <div
+        class="notice"
+        data-key="notice"
+      >
         Use the email address associated with your account.
       </div>
 
@@ -228,7 +329,10 @@
 
         <div class="field">
 
-          <label for="email">
+          <label
+            for="email"
+            data-key="emailLabel"
+          >
             Email address
           </label>
 
@@ -236,6 +340,7 @@
             type="email"
             id="email"
             placeholder="you@example.com"
+            data-placeholder="emailPlaceholder"
             autocomplete="email"
             required
           >
@@ -245,7 +350,10 @@
 
         <div class="field">
 
-          <label for="password">
+          <label
+            for="password"
+            data-key="passwordLabel"
+          >
             Password
           </label>
 
@@ -253,6 +361,7 @@
             type="password"
             id="password"
             placeholder="Enter your password"
+            data-placeholder="passwordPlaceholder"
             autocomplete="current-password"
             required
           >
@@ -261,31 +370,51 @@
 
 
         <div class="forgot">
-          <a href="#">
+
+          <a
+            href="#"
+            data-key="forgot"
+          >
             Forgot your password?
           </a>
+
         </div>
 
 
-        <button type="submit" id="loginButton">
+        <button
+          type="submit"
+          id="loginButton"
+          data-key="signIn"
+        >
           Sign In
         </button>
 
-        <div id="message" class="message"></div>
+        <div
+          id="message"
+          class="message"
+        ></div>
 
       </form>
 
 
       <div class="divider">
-        OR
+        <span data-key="or">OR</span>
       </div>
 
 
       <div class="create">
-        Don't have an account?
-        <a href="register.html">
+
+        <span data-key="noAccount">
+          Don't have an account?
+        </span>
+
+        <a
+          href="register.html"
+          data-key="createAccount"
+        >
           Create an account
         </a>
+
       </div>
 
     </div>
@@ -293,14 +422,409 @@
   </main>
 
 
-  <footer>
+  <footer data-key="footer">
     © 2026 GlobalBridgeFunding. All rights reserved.
   </footer>
 
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
   <script>
+
+    /*
+      ==========================================
+      GLOBALBRIDGEFUNDING LOGIN LANGUAGE SYSTEM
+      ==========================================
+    */
+
+    const loginTranslations = {
+
+      en: {
+        backHome: "← Back to Home",
+        title: "Welcome back",
+        intro: "Sign in to access your GlobalBridgeFunding account.",
+        notice: "Use the email address associated with your account.",
+        emailLabel: "Email address",
+        emailPlaceholder: "you@example.com",
+        passwordLabel: "Password",
+        passwordPlaceholder: "Enter your password",
+        forgot: "Forgot your password?",
+        signIn: "Sign In",
+        signingIn: "Signing in...",
+        or: "OR",
+        noAccount: "Don't have an account?",
+        createAccount: "Create an account",
+        footer: "© 2026 GlobalBridgeFunding. All rights reserved.",
+        loginError: "Unable to sign in. Please try again.",
+        generalError: "Something went wrong. Please try again."
+      },
+
+      pt: {
+        backHome: "← Voltar à página inicial",
+        title: "Bem-vindo de volta",
+        intro: "Inicie sessão para aceder à sua conta GlobalBridgeFunding.",
+        notice: "Utilize o endereço de email associado à sua conta.",
+        emailLabel: "Endereço de email",
+        emailPlaceholder: "voce@exemplo.com",
+        passwordLabel: "Palavra-passe",
+        passwordPlaceholder: "Introduza a sua palavra-passe",
+        forgot: "Esqueceu-se da palavra-passe?",
+        signIn: "Iniciar sessão",
+        signingIn: "A iniciar sessão...",
+        or: "OU",
+        noAccount: "Ainda não tem uma conta?",
+        createAccount: "Criar uma conta",
+        footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
+        loginError: "Não foi possível iniciar sessão. Tente novamente.",
+        generalError: "Ocorreu um erro. Tente novamente."
+      },
+
+      vi: {
+        backHome: "← Về trang chủ",
+        title: "Chào mừng bạn trở lại",
+        intro: "Đăng nhập để truy cập tài khoản GlobalBridgeFunding của bạn.",
+        notice: "Sử dụng địa chỉ email liên kết với tài khoản của bạn.",
+        emailLabel: "Địa chỉ email",
+        emailPlaceholder: "ban@example.com",
+        passwordLabel: "Mật khẩu",
+        passwordPlaceholder: "Nhập mật khẩu của bạn",
+        forgot: "Quên mật khẩu?",
+        signIn: "Đăng nhập",
+        signingIn: "Đang đăng nhập...",
+        or: "HOẶC",
+        noAccount: "Bạn chưa có tài khoản?",
+        createAccount: "Tạo tài khoản",
+        footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
+        loginError: "Không thể đăng nhập. Vui lòng thử lại.",
+        generalError: "Đã xảy ra lỗi. Vui lòng thử lại."
+      },
+
+      fa: {
+        backHome: "← بازگشت به صفحه اصلی",
+        title: "خوش آمدید",
+        intro: "برای دسترسی به حساب GlobalBridgeFunding خود وارد شوید.",
+        notice: "از آدرس ایمیل مرتبط با حساب خود استفاده کنید.",
+        emailLabel: "آدرس ایمیل",
+        emailPlaceholder: "you@example.com",
+        passwordLabel: "رمز عبور",
+        passwordPlaceholder: "رمز عبور خود را وارد کنید",
+        forgot: "رمز عبور خود را فراموش کرده‌اید؟",
+        signIn: "ورود",
+        signingIn: "در حال ورود...",
+        or: "یا",
+        noAccount: "حساب کاربری ندارید؟",
+        createAccount: "ایجاد حساب",
+        footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
+        loginError: "ورود انجام نشد. لطفاً دوباره تلاش کنید.",
+        generalError: "خطایی رخ داد. لطفاً دوباره تلاش کنید."
+      },
+
+      id: {
+        backHome: "← Kembali ke Beranda",
+        title: "Selamat datang kembali",
+        intro: "Masuk untuk mengakses akun GlobalBridgeFunding Anda.",
+        notice: "Gunakan alamat email yang terkait dengan akun Anda.",
+        emailLabel: "Alamat email",
+        emailPlaceholder: "anda@example.com",
+        passwordLabel: "Kata sandi",
+        passwordPlaceholder: "Masukkan kata sandi Anda",
+        forgot: "Lupa kata sandi?",
+        signIn: "Masuk",
+        signingIn: "Sedang masuk...",
+        or: "ATAU",
+        noAccount: "Belum memiliki akun?",
+        createAccount: "Buat akun",
+        footer: "© 2026 GlobalBridgeFunding. Semua hak dilindungi.",
+        loginError: "Tidak dapat masuk. Silakan coba lagi.",
+        generalError: "Terjadi kesalahan. Silakan coba lagi."
+      },
+
+      fr: {
+        backHome: "← Retour à l'accueil",
+        title: "Bon retour",
+        intro: "Connectez-vous pour accéder à votre compte GlobalBridgeFunding.",
+        notice: "Utilisez l'adresse e-mail associée à votre compte.",
+        emailLabel: "Adresse e-mail",
+        emailPlaceholder: "vous@exemple.com",
+        passwordLabel: "Mot de passe",
+        passwordPlaceholder: "Entrez votre mot de passe",
+        forgot: "Mot de passe oublié ?",
+        signIn: "Se connecter",
+        signingIn: "Connexion...",
+        or: "OU",
+        noAccount: "Vous n'avez pas de compte ?",
+        createAccount: "Créer un compte",
+        footer: "© 2026 GlobalBridgeFunding. Tous droits réservés.",
+        loginError: "Impossible de se connecter. Veuillez réessayer.",
+        generalError: "Une erreur s'est produite. Veuillez réessayer."
+      },
+
+      fi: {
+        backHome: "← Takaisin etusivulle",
+        title: "Tervetuloa takaisin",
+        intro: "Kirjaudu sisään päästäksesi GlobalBridgeFunding-tilillesi.",
+        notice: "Käytä tiliisi liitettyä sähköpostiosoitetta.",
+        emailLabel: "Sähköpostiosoite",
+        emailPlaceholder: "sinä@example.com",
+        passwordLabel: "Salasana",
+        passwordPlaceholder: "Anna salasanasi",
+        forgot: "Unohditko salasanasi?",
+        signIn: "Kirjaudu sisään",
+        signingIn: "Kirjaudutaan...",
+        or: "TAI",
+        noAccount: "Eikö sinulla ole tiliä?",
+        createAccount: "Luo tili",
+        footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
+        loginError: "Kirjautuminen ei onnistunut. Yritä uudelleen.",
+        generalError: "Jotain meni pieleen. Yritä uudelleen."
+      },
+
+      es: {
+        backHome: "← Volver al inicio",
+        title: "Bienvenido de nuevo",
+        intro: "Inicia sesión para acceder a tu cuenta de GlobalBridgeFunding.",
+        notice: "Utiliza la dirección de correo electrónico asociada a tu cuenta.",
+        emailLabel: "Dirección de correo electrónico",
+        emailPlaceholder: "tu@ejemplo.com",
+        passwordLabel: "Contraseña",
+        passwordPlaceholder: "Introduce tu contraseña",
+        forgot: "¿Olvidaste tu contraseña?",
+        signIn: "Iniciar sesión",
+        signingIn: "Iniciando sesión...",
+        or: "O",
+        noAccount: "¿No tienes una cuenta?",
+        createAccount: "Crear una cuenta",
+        footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
+        loginError: "No se pudo iniciar sesión. Inténtalo de nuevo.",
+        generalError: "Algo salió mal. Inténtalo de nuevo."
+      }
+
+    };
+
+
+    /*
+      ==========================================
+      GET SAVED LANGUAGE
+      ==========================================
+    */
+
+    function getSavedLanguage() {
+
+      if (
+        window.GlobalBridgeLanguage &&
+        typeof window.GlobalBridgeLanguage.getLanguage === "function"
+      ) {
+
+        return window.GlobalBridgeLanguage.getLanguage();
+
+      }
+
+      const saved =
+        localStorage.getItem("globalbridge_language");
+
+      if (saved) {
+        return saved;
+      }
+
+      const oldSaved =
+        localStorage.getItem("selectedLanguage");
+
+      if (oldSaved) {
+        return oldSaved;
+      }
+
+      return "en";
+    }
+
+
+    /*
+      ==========================================
+      APPLY LOGIN TRANSLATION
+      ==========================================
+    */
+
+    function applyLoginLanguage(language) {
+
+      if (!loginTranslations[language]) {
+        language = "en";
+      }
+
+
+      /*
+        Save centrally.
+      */
+
+      if (
+        window.GlobalBridgeLanguage &&
+        typeof window.GlobalBridgeLanguage.setLanguage === "function"
+      ) {
+
+        window.GlobalBridgeLanguage.setLanguage(language);
+
+      } else {
+
+        localStorage.setItem(
+          "globalbridge_language",
+          language
+        );
+
+        localStorage.setItem(
+          "selectedLanguage",
+          language
+        );
+
+      }
+
+
+      document.documentElement.lang =
+        language;
+
+
+      if (language === "fa") {
+
+        document.documentElement.dir =
+          "rtl";
+
+        document.body.classList.add(
+          "rtl-language"
+        );
+
+      } else {
+
+        document.documentElement.dir =
+          "ltr";
+
+        document.body.classList.remove(
+          "rtl-language"
+        );
+
+      }
+
+
+      const translations =
+        loginTranslations[language];
+
+
+      /*
+        Translate normal text.
+      */
+
+      document
+        .querySelectorAll("[data-key]")
+        .forEach(element => {
+
+          const key =
+            element.getAttribute("data-key");
+
+          if (
+            translations[key] !== undefined
+          ) {
+
+            element.textContent =
+              translations[key];
+
+          }
+
+        });
+
+
+      /*
+        Translate placeholders.
+      */
+
+      document
+        .querySelectorAll("[data-placeholder]")
+        .forEach(element => {
+
+          const key =
+            element.getAttribute(
+              "data-placeholder"
+            );
+
+          if (
+            translations[key] !== undefined
+          ) {
+
+            element.placeholder =
+              translations[key];
+
+          }
+
+        });
+
+
+      /*
+        Keep the selector synchronized.
+      */
+
+      const selector =
+        document.getElementById(
+          "languageSelector"
+        );
+
+      if (selector) {
+        selector.value = language;
+      }
+
+    }
+
+
+    /*
+      ==========================================
+      LANGUAGE SELECTOR
+      ==========================================
+    */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        const selector =
+          document.getElementById(
+            "languageSelector"
+          );
+
+
+        const savedLanguage =
+          getSavedLanguage();
+
+
+        /*
+          Apply the language that was already
+          selected on the previous page.
+        */
+
+        applyLoginLanguage(
+          savedLanguage
+        );
+
+
+        if (selector) {
+
+          selector.addEventListener(
+            "change",
+            function() {
+
+              applyLoginLanguage(
+                this.value
+              );
+
+            }
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      ==========================================
+      SUPABASE
+      ==========================================
+    */
 
     const SUPABASE_URL =
       "https://siykgexfdsmkiqwyxker.supabase.co";
@@ -314,6 +838,12 @@
         SUPABASE_KEY
       );
 
+
+    /*
+      ==========================================
+      LOGIN
+      ==========================================
+    */
 
     const loginForm =
       document.getElementById("loginForm");
@@ -332,74 +862,148 @@
         event.preventDefault();
 
 
-        message.className = "message";
-        message.textContent = "";
+        message.className =
+          "message";
+
+        message.textContent =
+          "";
 
 
         const email =
-          document.getElementById("email").value.trim();
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
 
         const password =
-          document.getElementById("password").value;
+          document
+            .getElementById("password")
+            .value;
 
 
-        loginButton.disabled = true;
-        loginButton.textContent = "Signing in...";
+        loginButton.disabled =
+          true;
+
+
+        const currentLanguage =
+          getSavedLanguage();
+
+
+        if (
+          loginTranslations[currentLanguage]
+        ) {
+
+          loginButton.textContent =
+            loginTranslations[
+              currentLanguage
+            ].signingIn;
+
+        } else {
+
+          loginButton.textContent =
+            "Signing in...";
+
+        }
 
 
         try {
 
           const result =
             await supabaseClient.auth.signInWithPassword({
+
               email: email,
+
               password: password
+
             });
 
 
           if (result.error) {
 
-            message.className = "message error";
+            message.className =
+              "message error";
 
             message.textContent =
               result.error.message;
 
-            loginButton.disabled = false;
+            loginButton.disabled =
+              false;
 
-            loginButton.textContent = "Sign In";
+            loginButton.textContent =
+              loginTranslations[
+                getSavedLanguage()
+              ]?.signIn || "Sign In";
 
             return;
+
           }
 
 
-          if (result.data && result.data.user) {
+          if (
+            result.data &&
+            result.data.user
+          ) {
+
+            /*
+              IMPORTANT:
+              Do NOT reset or change the
+              selected language during login.
+
+              The saved language remains in
+              localStorage and will be read by
+              dashboard.html.
+            */
 
             window.location.replace(
               "dashboard.html"
             );
 
             return;
+
           }
 
 
-          message.className = "message error";
+          message.className =
+            "message error";
 
           message.textContent =
+            loginTranslations[
+              getSavedLanguage()
+            ]?.loginError ||
             "Unable to sign in. Please try again.";
 
-          loginButton.disabled = false;
 
-          loginButton.textContent = "Sign In";
+          loginButton.disabled =
+            false;
+
+          loginButton.textContent =
+            loginTranslations[
+              getSavedLanguage()
+            ]?.signIn ||
+            "Sign In";
+
 
         } catch (error) {
 
-          message.className = "message error";
+          message.className =
+            "message error";
 
           message.textContent =
+            loginTranslations[
+              getSavedLanguage()
+            ]?.generalError ||
             "Something went wrong. Please try again.";
 
-          loginButton.disabled = false;
 
-          loginButton.textContent = "Sign In";
+          loginButton.disabled =
+            false;
+
+          loginButton.textContent =
+            loginTranslations[
+              getSavedLanguage()
+            ]?.signIn ||
+            "Sign In";
 
         }
 
