@@ -2,67 +2,223 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Financing Application | GlobalBridgeFunding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#091326">
+<title>Financing Applications | GlobalBridgeFunding</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;background:#f5f8fc;color:#172033}
-header{background:#071a35;color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{font-size:21px;font-weight:800;white-space:nowrap}
-.logo span{color:#36c2ff}
-.header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-#languageSelector{display:block;max-width:100%;width:165px;padding:10px;border:1px solid #cbd5e1;border-radius:7px;background:white;color:#172033;font-size:14px}
-.back{color:white;text-decoration:none;font-size:14px;border:1px solid rgba(255,255,255,.4);padding:10px 12px;border-radius:7px;white-space:nowrap}
-.container{max-width:850px;margin:35px auto;padding:0 20px}
-.intro{margin-bottom:25px}
-.intro h1{color:#071a35;font-size:30px;margin-bottom:8px}
-.intro p{color:#667085;line-height:1.6}
-.card{background:white;padding:30px;border-radius:15px;box-shadow:0 8px 28px rgba(20,40,70,.08);margin-bottom:20px}
-.card h2{color:#071a35;font-size:20px;margin-bottom:7px}
-.card-intro{color:#667085;font-size:14px;line-height:1.6;margin-bottom:23px}
-.field{margin-bottom:20px}
-label{display:block;font-size:14px;font-weight:700;color:#24344d;margin-bottom:8px}
-input,select,textarea{width:100%;padding:13px;border:1px solid #d6dee9;border-radius:8px;font-size:15px;font-family:inherit;outline:none;background:white;color:#172033}
-textarea{min-height:120px;resize:vertical}
-input:focus,select:focus,textarea:focus{border-color:#36c2ff}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:17px}
-.summary{background:#eef8fc;border-left:4px solid #36c2ff;padding:17px;border-radius:7px;margin-bottom:25px}
-.summary-row{display:flex;justify-content:space-between;gap:15px;padding:8px 0;font-size:14px}
-.summary-row span:first-child{color:#667085}
-.summary-row span:last-child{color:#071a35;font-weight:700;text-align:end}
-.notice{background:#f8fafc;border:1px solid #e4e9ef;padding:15px;border-radius:8px;color:#667085;font-size:13px;line-height:1.6;margin-bottom:20px}
-.checkbox{display:flex;align-items:flex-start;gap:10px;margin-top:15px;margin-bottom:20px}
-.checkbox input{width:auto;min-width:16px;margin-top:3px}
-.checkbox label{font-weight:400;line-height:1.5;margin:0}
-button{width:100%;padding:15px;border:none;border-radius:8px;background:#36c2ff;color:#071a35;font-size:16px;font-weight:800;cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
-.message{display:none;padding:15px;border-radius:8px;margin-bottom:20px;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
-.success{background:#ecfdf3;border:1px solid #a7f3d0;color:#067647}
-.error{background:#fef3f2;border:1px solid #fecdca;color:#b42318}
-footer{text-align:center;padding:35px 20px;color:#7b8797;font-size:12px}
-html[dir="rtl"] body{text-align:right}
-html[dir="rtl"] header,html[dir="rtl"] .header-actions{direction:rtl}
-html[dir="rtl"] .summary{border-left:0;border-right:4px solid #36c2ff}
-html[dir="rtl"] .summary-row{flex-direction:row-reverse}
-html[dir="rtl"] .checkbox{flex-direction:row}
-@media(max-width:600px){
- header{padding:15px 18px}
- .logo{font-size:18px}
- .header-actions{width:100%;display:flex}
- #languageSelector{flex:1;width:100%;min-width:0}
- .container{margin-top:25px}
- .intro h1{font-size:26px}
- .card{padding:22px 19px}
- .row{grid-template-columns:1fr;gap:0}
- .summary-row{font-size:13px}
+:root {
+  --navy: #091326;
+  --navy2: #13294b;
+  --gold: #d9b56d;
+  --bg: #f4f6fa;
+  --white: #fff;
+  --text: #19253a;
+  --muted: #718096;
+  --border: #e5eaf2;
+  --green: #137547;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+button, select { font: inherit; }
+.header {
+  background: var(--navy);
+  color: white;
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.brand { font-size: 19px; font-weight: 800; letter-spacing: -.5px; }
+.brand span { color: var(--gold); }
+.header-right { display: flex; align-items: center; gap: 18px; }
+.language {
+  background: #14233d;
+  color: white;
+  border: 1px solid #344561;
+  border-radius: 9px;
+  padding: 10px;
+  max-width: 180px;
+}
+.back { color: var(--gold); font-size: 14px; font-weight: 700; }
+.container { width: min(1120px, 92%); margin: 32px auto 50px; }
+.hero {
+  background: linear-gradient(120deg, #091326 0%, #142e54 70%, #1e3c65 100%);
+  color: white;
+  border-radius: 22px;
+  padding: 35px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(217,181,109,.35);
+  border-radius: 50%;
+  right: -65px;
+  top: -90px;
+  box-shadow: 0 0 0 28px rgba(217,181,109,.05),
+              0 0 0 58px rgba(217,181,109,.04);
+}
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+h1 { font-size: clamp(28px, 4vw, 39px); line-height: 1.2; margin-bottom: 13px; }
+.hero p { color: #d5deed; line-height: 1.8; max-width: 650px; font-size: 15px; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 15px;
+}
+.stat-label { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.stat-value { font-size: 25px; font-weight: 800; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+.section-head h2 { font-size: 22px; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  background: var(--gold);
+  color: #18243a;
+  padding: 12px 17px;
+  min-height: 44px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn-light { background: white; border: 1px solid var(--border); }
+.btn:disabled { opacity: .6; }
+.notice {
+  display: none;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.notice.show { display: block; }
+.notice.error { background: #fff0ef; color: #a51e16; border: 1px solid #ffd4d0; }
+.notice.info { background: #eaf2ff; color: #204d88; border: 1px solid #cbdfff; }
+.notice.success { background: #e9f8ef; color: #137547; border: 1px solid #c5ead3; }
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.application {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 23px;
+  min-width: 0;
+  box-shadow: 0 8px 28px rgba(14,31,59,.035);
+}
+.app-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.business { font-size: 18px; font-weight: 800; overflow-wrap: anywhere; }
+.reference { font-size: 11px; color: var(--muted); margin-top: 7px; overflow-wrap: anywhere; }
+.status {
+  display: inline-block;
+  border-radius: 30px;
+  background: #edf1f6;
+  color: #475467;
+  padding: 7px 10px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status.approved { background: #e8f7ee; color: #137547; }
+.status.rejected, .status.declined { background: #fff0ef; color: #a51e16; }
+.status.pending, .status.under_review, .status.processing {
+  background: #fff4dc; color: #8b5b00;
+}
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+.label { color: var(--muted); font-size: 12px; margin-bottom: 7px; }
+.value { font-size: 15px; font-weight: 750; overflow-wrap: anywhere; }
+.app-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 22px;
+  padding-top: 15px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.empty {
+  background: white;
+  border: 1px dashed #cbd4e2;
+  border-radius: 18px;
+  padding: 42px 20px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+.empty-icon { font-size: 36px; margin-bottom: 14px; }
+.empty h3 { font-size: 21px; margin-bottom: 10px; }
+.empty p { color: var(--muted); line-height: 1.7; margin: 0 auto 20px; max-width: 480px; }
+.loading { text-align: center; color: var(--muted); padding: 40px 15px; grid-column: 1 / -1; }
+.footer { text-align: center; padding: 25px 15px 35px; color: var(--muted); font-size: 12px; }
+[dir="rtl"] body { text-align: right; }
+[dir="rtl"] .hero:after { right: auto; left: -65px; }
+@media(max-width:720px) {
+  .header { padding: 16px 4%; }
+  .header-right { width: 100%; justify-content: space-between; }
+  .container { margin-top: 22px; }
+  .hero { padding: 25px 21px; }
+  .stats { gap: 9px; }
+  .stat { padding: 14px 11px; }
+  .stat-value { font-size: 20px; }
+  .stat-label { line-height: 1.5; }
+  .list { grid-template-columns: 1fr; }
+  .application { padding: 19px; }
+}
+@media(max-width:390px) {
+  .stats { grid-template-columns: 1fr; }
+  .app-top { flex-direction: column; }
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">Global<span>Bridge</span>Funding</div>
-  <div class="header-actions">
-    <select id="languageSelector" aria-label="Select language">
+<header class="header">
+  <a class="brand" href="dashboard.html">GlobalBridge<span>Funding</span></a>
+  <div class="header-right">
+    <select class="language" id="languageSelector" aria-label="Language">
       <option value="en">English</option>
       <option value="pt">Português</option>
       <option value="vi">Tiếng Việt</option>
@@ -72,220 +228,374 @@ html[dir="rtl"] .checkbox{flex-direction:row}
       <option value="fi">Suomi</option>
       <option value="es">Español</option>
     </select>
-    <a href="financing.html" class="back" id="backLink">← Financing</a>
+    <a class="back" href="dashboard.html" data-i18n="dashboard">← Dashboard</a>
   </div>
 </header>
 <main class="container">
-  <section class="intro">
-    <h1 data-i18n="heading">Financing Application</h1>
-    <p data-i18n="intro">Complete the information below to continue your financing application.</p>
+  <section class="hero">
+    <div class="eyebrow" data-i18n="eyebrow">CLIENT FINANCING CENTRE</div>
+    <h1 data-i18n="title">Your Financing Applications</h1>
+    <p data-i18n="intro">A clear overview of your financing requests, their submission dates and their current review status.</p>
   </section>
-  <section class="card">
-    <h2 data-i18n="request">Financing Request</h2>
-    <p class="card-intro" data-i18n="requestIntro">Select the amount you would like to request.</p>
-    <div class="summary">
-      <div class="summary-row"><span data-i18n="range">Financing range</span><span>$20,000 – $50,000</span></div>
-      <div class="summary-row"><span data-i18n="interest">Annual interest</span><span>10%</span></div>
-      <div class="summary-row"><span data-i18n="term">Term</span><span data-i18n="twoYears">2 years</span></div>
-      <div class="summary-row"><span data-i18n="collateral">Collateral</span><span data-i18n="none">No collateral</span></div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label" data-i18n="total">Total applications</div>
+      <div class="stat-value" id="totalCount">—</div>
     </div>
-    <div id="successMessage" class="message success" role="status" aria-live="polite"></div>
-    <div id="errorMessage" class="message error" role="alert" aria-live="assertive"></div>
-    <form id="applicationForm">
-      <div class="field">
-        <label for="amount" data-i18n="amountLabel">Requested financing amount (USD)</label>
-        <select id="amount" required>
-          <option value="" data-i18n="selectAmount">Select amount</option>
-          <option value="20000">$20,000</option>
-          <option value="25000">$25,000</option>
-          <option value="30000">$30,000</option>
-          <option value="35000">$35,000</option>
-          <option value="40000">$40,000</option>
-          <option value="45000">$45,000</option>
-          <option value="50000">$50,000</option>
-        </select>
-      </div>
-      <div class="row">
-        <div class="field">
-          <label for="businessName" data-i18n="businessName">Business name</label>
-          <input type="text" id="businessName" data-i18n-placeholder="businessPlaceholder" placeholder="Enter business name" required>
-        </div>
-        <div class="field">
-          <label for="businessType" data-i18n="businessType">Business type</label>
-          <select id="businessType" required>
-            <option value="" data-i18n="selectBusinessType">Select business type</option>
-            <option value="Sole Proprietorship" data-i18n="sole">Sole Proprietorship</option>
-            <option value="Partnership" data-i18n="partnership">Partnership</option>
-            <option value="Limited Company" data-i18n="limited">Limited Company</option>
-            <option value="Corporation" data-i18n="corporation">Corporation</option>
-            <option value="Other" data-i18n="other">Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <label for="years" data-i18n="yearsLabel">Years in operation</label>
-          <select id="years" required>
-            <option value="" data-i18n="select">Select</option>
-            <option value="Less than 1 year" data-i18n="less1">Less than 1 year</option>
-            <option value="1-2 years" data-i18n="years12">1–2 years</option>
-            <option value="3-5 years" data-i18n="years35">3–5 years</option>
-            <option value="6-10 years" data-i18n="years610">6–10 years</option>
-            <option value="More than 10 years" data-i18n="over10">More than 10 years</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="revenue" data-i18n="revenueLabel">Estimated annual revenue</label>
-          <select id="revenue" required>
-            <option value="" data-i18n="selectRange">Select range</option>
-            <option value="Under $50,000" data-i18n="rev1">Under $50,000</option>
-            <option value="$50,000 - $100,000" data-i18n="rev2">$50,000 – $100,000</option>
-            <option value="$100,000 - $250,000" data-i18n="rev3">$100,000 – $250,000</option>
-            <option value="$250,000 - $500,000" data-i18n="rev4">$250,000 – $500,000</option>
-            <option value="Over $500,000" data-i18n="rev5">Over $500,000</option>
-          </select>
-        </div>
-      </div>
-      <div class="field">
-        <label for="purpose" data-i18n="purposeLabel">Purpose of financing</label>
-        <textarea id="purpose" data-i18n-placeholder="purposePlaceholder" placeholder="Tell us how the financing will be used..." required></textarea>
-      </div>
-      <div class="notice" data-i18n="notice">
-        Your application will be reviewed based on the information provided and any required verification. Submission of an application does not guarantee financing approval.
-      </div>
-      <div class="checkbox">
-        <input type="checkbox" id="confirm" required>
-        <label for="confirm" data-i18n="confirmText">I confirm that the information provided is accurate and complete to the best of my knowledge.</label>
-      </div>
-      <button type="submit" id="submitButton" data-i18n="submit">Continue Application</button>
-    </form>
+    <div class="stat">
+      <div class="stat-label" data-i18n="pendingCount">Under review / pending</div>
+      <div class="stat-value" id="pendingCount">—</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label" data-i18n="approvedCount">Approved applications</div>
+      <div class="stat-value" id="approvedCount">—</div>
+    </div>
+  </div>
+  <div id="notice" class="notice" role="status" aria-live="polite"></div>
+  <div class="section-head">
+    <h2 data-i18n="history">Application history</h2>
+    <div class="actions">
+      <button class="btn btn-light" id="refreshButton" type="button" data-i18n="refresh">Refresh</button>
+      <a class="btn" href="application.html" data-i18n="newApp">+ New application</a>
+    </div>
+  </div>
+  <section id="applicationList" class="list" aria-live="polite">
+    <div class="loading" data-i18n="loading">Loading your applications…</div>
   </section>
 </main>
-<footer data-i18n="footer">© 2026 GlobalBridgeFunding. All rights reserved.</footer>
+<footer class="footer" data-i18n="copyright">
+  © 2026 GlobalBridgeFunding. All rights reserved.
+</footer>
 <script type="module">
-import { createClient } from
-  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
 const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
-const translations = {
-en:{
-back:"← Financing",heading:"Financing Application",intro:"Complete the information below to continue your financing application.",request:"Financing Request",requestIntro:"Select the amount you would like to request.",range:"Financing range",interest:"Annual interest",term:"Term",twoYears:"2 years",collateral:"Collateral",none:"No collateral",amountLabel:"Requested financing amount (USD)",selectAmount:"Select amount",businessName:"Business name",businessPlaceholder:"Enter business name",businessType:"Business type",selectBusinessType:"Select business type",sole:"Sole Proprietorship",partnership:"Partnership",limited:"Limited Company",corporation:"Corporation",other:"Other",yearsLabel:"Years in operation",select:"Select",less1:"Less than 1 year",years12:"1–2 years",years35:"3–5 years",years610:"6–10 years",over10:"More than 10 years",revenueLabel:"Estimated annual revenue",selectRange:"Select range",rev1:"Under $50,000",rev2:"$50,000 – $100,000",rev3:"$100,000 – $250,000",rev4:"$250,000 – $500,000",rev5:"Over $500,000",purposeLabel:"Purpose of financing",purposePlaceholder:"Tell us how the financing will be used...",notice:"Your application will be reviewed based on the information provided and any required verification. Submission of an application does not guarantee financing approval.",confirmText:"I confirm that the information provided is accurate and complete to the best of my knowledge.",submit:"Continue Application",submitting:"Submitting...",success:"Application submitted successfully.",reference:"Your application reference is:",review:"Your application is now under review.",signIn:"Please sign in before submitting an application.",failed:"Unable to submit your application.",unexpected:"Something went wrong while submitting your application.",footer:"© 2026 GlobalBridgeFunding. All rights reserved."
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const words = {
+en: {
+dashboard:"← Dashboard", eyebrow:"CLIENT FINANCING CENTRE",
+title:"Your Financing Applications",
+intro:"A clear overview of your financing requests, their submission dates and their current review status.",
+total:"Total applications", pendingCount:"Under review / pending",
+approvedCount:"Approved applications", history:"Application history",
+refresh:"Refresh", newApp:"+ New application", loading:"Loading your applications…",
+copyright:"© 2026 GlobalBridgeFunding. All rights reserved.",
+business:"Business", reference:"Reference", amount:"Requested amount",
+type:"Business type", status:"Status", date:"Submission date",
+emptyTitle:"No applications yet", emptyText:"You have not submitted a financing application. Start your application whenever you are ready.",
+start:"Start application", login:"Please sign in to view your applications.",
+error:"We could not load your applications. Please refresh and try again.",
+pending:"Pending", approved:"Approved", rejected:"Rejected", declined:"Declined",
+under_review:"Under review", processing:"Processing", unknown:"Not available",
+noBusiness:"Business application", noType:"Not provided", noDate:"Not available",
+updated:"Your applications have been refreshed."
 },
-pt:{
-back:"← Financiamento",heading:"Pedido de Financiamento",intro:"Preencha as informações abaixo para continuar o seu pedido de financiamento.",request:"Pedido de Financiamento",requestIntro:"Selecione o montante que pretende solicitar.",range:"Intervalo de financiamento",interest:"Juros anuais",term:"Prazo",twoYears:"2 anos",collateral:"Garantia",none:"Sem garantias",amountLabel:"Montante solicitado (USD)",selectAmount:"Selecione o montante",businessName:"Nome da empresa",businessPlaceholder:"Introduza o nome da empresa",businessType:"Tipo de negócio",selectBusinessType:"Selecione o tipo de negócio",sole:"Empresário em nome individual",partnership:"Sociedade de pessoas",limited:"Sociedade por quotas",corporation:"Sociedade anónima",other:"Outro",yearsLabel:"Anos de atividade",select:"Selecione",less1:"Menos de 1 ano",years12:"1–2 anos",years35:"3–5 anos",years610:"6–10 anos",over10:"Mais de 10 anos",revenueLabel:"Receita anual estimada",selectRange:"Selecione o intervalo",rev1:"Menos de $50.000",rev2:"$50.000 – $100.000",rev3:"$100.000 – $250.000",rev4:"$250.000 – $500.000",rev5:"Mais de $500.000",purposeLabel:"Finalidade do financiamento",purposePlaceholder:"Explique como o financiamento será utilizado...",notice:"O pedido será analisado com base nas informações fornecidas e nas verificações necessárias. O envio não garante aprovação.",confirmText:"Confirmo que as informações fornecidas são corretas e completas, tanto quanto sei.",submit:"Continuar pedido",submitting:"A enviar...",success:"Pedido enviado com sucesso.",reference:"A referência do seu pedido é:",review:"O seu pedido está em análise.",signIn:"Inicie sessão antes de enviar o pedido.",failed:"Não foi possível enviar o pedido.",unexpected:"Ocorreu um erro ao enviar o pedido.",footer:"© 2026 GlobalBridgeFunding. Todos os direitos reservados."
+pt: {
+dashboard:"← Painel", eyebrow:"CENTRO DE FINANCIAMENTO",
+title:"As suas candidaturas de financiamento",
+intro:"Consulte os seus pedidos de financiamento, as datas de envio e o estado atual da análise.",
+total:"Total de candidaturas", pendingCount:"Pendentes / em análise",
+approvedCount:"Candidaturas aprovadas", history:"Histórico de candidaturas",
+refresh:"Atualizar", newApp:"+ Nova candidatura", loading:"A carregar candidaturas…",
+copyright:"© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
+business:"Empresa", reference:"Referência", amount:"Montante solicitado",
+type:"Tipo de empresa", status:"Estado", date:"Data de envio",
+emptyTitle:"Ainda não existem candidaturas", emptyText:"Ainda não enviou um pedido de financiamento.",
+start:"Iniciar candidatura", login:"Inicie sessão para consultar as suas candidaturas.",
+error:"Não foi possível carregar as candidaturas. Atualize e tente novamente.",
+pending:"Pendente", approved:"Aprovada", rejected:"Rejeitada", declined:"Recusada",
+under_review:"Em análise", processing:"Em processamento", unknown:"Indisponível",
+noBusiness:"Pedido empresarial", noType:"Não indicado", noDate:"Indisponível",
+updated:"Candidaturas atualizadas."
 },
-vi:{
-back:"← Tài trợ",heading:"Đơn đăng ký tài trợ",intro:"Hoàn thành thông tin bên dưới để tiếp tục đơn đăng ký tài trợ.",request:"Yêu cầu tài trợ",requestIntro:"Chọn số tiền bạn muốn yêu cầu.",range:"Khoản tài trợ",interest:"Lãi suất hằng năm",term:"Thời hạn",twoYears:"2 năm",collateral:"Tài sản bảo đảm",none:"Không cần tài sản bảo đảm",amountLabel:"Số tiền yêu cầu (USD)",selectAmount:"Chọn số tiền",businessName:"Tên doanh nghiệp",businessPlaceholder:"Nhập tên doanh nghiệp",businessType:"Loại hình kinh doanh",selectBusinessType:"Chọn loại hình",sole:"Doanh nghiệp tư nhân",partnership:"Công ty hợp danh",limited:"Công ty trách nhiệm hữu hạn",corporation:"Công ty cổ phần",other:"Khác",yearsLabel:"Số năm hoạt động",select:"Chọn",less1:"Dưới 1 năm",years12:"1–2 năm",years35:"3–5 năm",years610:"6–10 năm",over10:"Trên 10 năm",revenueLabel:"Doanh thu hằng năm ước tính",selectRange:"Chọn khoảng",rev1:"Dưới $50.000",rev2:"$50.000 – $100.000",rev3:"$100.000 – $250.000",rev4:"$250.000 – $500.000",rev5:"Trên $500.000",purposeLabel:"Mục đích tài trợ",purposePlaceholder:"Cho biết bạn sẽ sử dụng khoản tài trợ như thế nào...",notice:"Đơn đăng ký sẽ được xem xét dựa trên thông tin cung cấp và các bước xác minh cần thiết. Gửi đơn không đảm bảo được phê duyệt.",confirmText:"Tôi xác nhận rằng thông tin cung cấp là chính xác và đầy đủ theo hiểu biết của tôi.",submit:"Tiếp tục đăng ký",submitting:"Đang gửi...",success:"Đã gửi đơn thành công.",reference:"Mã tham chiếu đơn đăng ký:",review:"Đơn đăng ký của bạn đang được xem xét.",signIn:"Vui lòng đăng nhập trước khi gửi đơn.",failed:"Không thể gửi đơn đăng ký.",unexpected:"Đã xảy ra lỗi khi gửi đơn. Vui lòng thử lại.",footer:"© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền."
+vi: {
+dashboard:"← Bảng điều khiển", eyebrow:"TRUNG TÂM TÀI TRỢ",
+title:"Đơn đăng ký tài trợ của bạn",
+intro:"Theo dõi các yêu cầu tài trợ, ngày gửi và trạng thái xét duyệt hiện tại.",
+total:"Tổng số đơn", pendingCount:"Đang chờ / xem xét",
+approvedCount:"Đơn đã duyệt", history:"Lịch sử đơn đăng ký",
+refresh:"Làm mới", newApp:"+ Đơn đăng ký mới", loading:"Đang tải đơn…",
+copyright:"© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
+business:"Doanh nghiệp", reference:"Mã tham chiếu", amount:"Số tiền yêu cầu",
+type:"Loại hình doanh nghiệp", status:"Trạng thái", date:"Ngày gửi",
+emptyTitle:"Chưa có đơn đăng ký", emptyText:"Bạn chưa gửi đơn xin tài trợ.",
+start:"Bắt đầu đăng ký", login:"Vui lòng đăng nhập để xem đơn.",
+error:"Không thể tải đơn. Vui lòng thử lại.",
+pending:"Đang chờ", approved:"Đã duyệt", rejected:"Bị từ chối", declined:"Bị từ chối",
+under_review:"Đang xem xét", processing:"Đang xử lý", unknown:"Không có thông tin",
+noBusiness:"Đơn doanh nghiệp", noType:"Chưa cung cấp", noDate:"Không có ngày",
+updated:"Đã cập nhật danh sách đơn."
 },
-fa:{
-back:"تأمین مالی ←",heading:"درخواست تأمین مالی",intro:"برای ادامه درخواست تأمین مالی، اطلاعات زیر را تکمیل کنید.",request:"درخواست تأمین مالی",requestIntro:"مبلغ مورد نظر خود را انتخاب کنید.",range:"محدوده تأمین مالی",interest:"سود سالانه",term:"مدت",twoYears:"۲ سال",collateral:"وثیقه",none:"بدون وثیقه",amountLabel:"مبلغ درخواستی (دلار آمریکا)",selectAmount:"مبلغ را انتخاب کنید",businessName:"نام کسب‌وکار",businessPlaceholder:"نام کسب‌وکار را وارد کنید",businessType:"نوع کسب‌وکار",selectBusinessType:"نوع کسب‌وکار را انتخاب کنید",sole:"مالکیت انفرادی",partnership:"مشارکت",limited:"شرکت با مسئولیت محدود",corporation:"شرکت سهامی",other:"سایر",yearsLabel:"سابقه فعالیت",select:"انتخاب کنید",less1:"کمتر از ۱ سال",years12:"۱ تا ۲ سال",years35:"۳ تا ۵ سال",years610:"۶ تا ۱۰ سال",over10:"بیش از ۱۰ سال",revenueLabel:"درآمد سالانه تخمینی",selectRange:"محدوده را انتخاب کنید",rev1:"کمتر از ۵۰٬۰۰۰ دلار",rev2:"۵۰٬۰۰۰ تا ۱۰۰٬۰۰۰ دلار",rev3:"۱۰۰٬۰۰۰ تا ۲۵۰٬۰۰۰ دلار",rev4:"۲۵۰٬۰۰۰ تا ۵۰۰٬۰۰۰ دلار",rev5:"بیش از ۵۰۰٬۰۰۰ دلار",purposeLabel:"هدف تأمین مالی",purposePlaceholder:"توضیح دهید که از تأمین مالی چگونه استفاده می‌کنید...",notice:"درخواست بر اساس اطلاعات ارائه‌شده و بررسی‌های لازم ارزیابی می‌شود. ارسال درخواست تضمین‌کننده تأیید تأمین مالی نیست.",confirmText:"تأیید می‌کنم که اطلاعات ارائه‌شده تا حد دانش من دقیق و کامل است.",submit:"ادامه درخواست",submitting:"در حال ارسال...",success:"درخواست با موفقیت ارسال شد.",reference:"شماره پیگیری درخواست:",review:"درخواست شما در حال بررسی است.",signIn:"لطفاً پیش از ارسال درخواست وارد حساب خود شوید.",failed:"ارسال درخواست امکان‌پذیر نیست.",unexpected:"هنگام ارسال درخواست خطایی رخ داد. دوباره تلاش کنید.",footer:"© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است."
+fa: {
+dashboard:"← داشبورد", eyebrow:"مرکز تأمین مالی",
+title:"درخواست‌های تأمین مالی شما",
+intro:"درخواست‌های تأمین مالی، تاریخ ارسال و وضعیت بررسی آن‌ها را مشاهده کنید.",
+total:"مجموع درخواست‌ها", pendingCount:"در انتظار / در حال بررسی",
+approvedCount:"درخواست‌های تأییدشده", history:"تاریخچه درخواست‌ها",
+refresh:"به‌روزرسانی", newApp:"+ درخواست جدید", loading:"در حال بارگذاری…",
+copyright:"© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
+business:"کسب‌وکار", reference:"شماره پیگیری", amount:"مبلغ درخواستی",
+type:"نوع کسب‌وکار", status:"وضعیت", date:"تاریخ ارسال",
+emptyTitle:"هنوز درخواستی وجود ندارد", emptyText:"هنوز درخواست تأمین مالی ارسال نکرده‌اید.",
+start:"شروع درخواست", login:"برای مشاهده درخواست‌ها وارد شوید.",
+error:"بارگذاری درخواست‌ها ناموفق بود. دوباره تلاش کنید.",
+pending:"در انتظار", approved:"تأیید شده", rejected:"رد شده", declined:"رد شده",
+under_review:"در حال بررسی", processing:"در حال پردازش", unknown:"نامشخص",
+noBusiness:"درخواست کسب‌وکار", noType:"ارائه نشده", noDate:"نامشخص",
+updated:"درخواست‌ها به‌روزرسانی شدند."
 },
-id:{
-back:"← Pembiayaan",heading:"Pengajuan Pembiayaan",intro:"Lengkapi informasi berikut untuk melanjutkan pengajuan pembiayaan Anda.",request:"Permohonan Pembiayaan",requestIntro:"Pilih jumlah yang ingin Anda ajukan.",range:"Rentang pembiayaan",interest:"Bunga tahunan",term:"Jangka waktu",twoYears:"2 tahun",collateral:"Jaminan",none:"Tanpa jaminan",amountLabel:"Jumlah pembiayaan yang diminta (USD)",selectAmount:"Pilih jumlah",businessName:"Nama bisnis",businessPlaceholder:"Masukkan nama bisnis",businessType:"Jenis bisnis",selectBusinessType:"Pilih jenis bisnis",sole:"Usaha perseorangan",partnership:"Kemitraan",limited:"Perseroan terbatas",corporation:"Korporasi",other:"Lainnya",yearsLabel:"Lama beroperasi",select:"Pilih",less1:"Kurang dari 1 tahun",years12:"1–2 tahun",years35:"3–5 tahun",years610:"6–10 tahun",over10:"Lebih dari 10 tahun",revenueLabel:"Perkiraan pendapatan tahunan",selectRange:"Pilih rentang",rev1:"Di bawah $50.000",rev2:"$50.000 – $100.000",rev3:"$100.000 – $250.000",rev4:"$250.000 – $500.000",rev5:"Di atas $500.000",purposeLabel:"Tujuan pembiayaan",purposePlaceholder:"Jelaskan bagaimana dana akan digunakan...",notice:"Pengajuan akan ditinjau berdasarkan informasi yang diberikan dan verifikasi yang diperlukan. Pengajuan tidak menjamin persetujuan pembiayaan.",confirmText:"Saya menyatakan bahwa informasi yang diberikan akurat dan lengkap sejauh pengetahuan saya.",submit:"Lanjutkan Pengajuan",submitting:"Mengirim...",success:"Pengajuan berhasil dikirim.",reference:"Referensi pengajuan Anda:",review:"Pengajuan Anda sedang ditinjau.",signIn:"Silakan masuk sebelum mengirim pengajuan.",failed:"Pengajuan tidak dapat dikirim.",unexpected:"Terjadi kesalahan saat mengirim pengajuan. Silakan coba lagi.",footer:"© 2026 GlobalBridgeFunding. Hak cipta dilindungi."
+id: {
+dashboard:"← Dasbor", eyebrow:"PUSAT PEMBIAYAAN",
+title:"Pengajuan Pembiayaan Anda",
+intro:"Lihat permohonan pembiayaan, tanggal pengajuan, dan status peninjauan saat ini.",
+total:"Total pengajuan", pendingCount:"Menunggu / ditinjau",
+approvedCount:"Pengajuan disetujui", history:"Riwayat pengajuan",
+refresh:"Muat ulang", newApp:"+ Pengajuan baru", loading:"Memuat pengajuan…",
+copyright:"© 2026 GlobalBridgeFunding. Hak cipta dilindungi.",
+business:"Bisnis", reference:"Referensi", amount:"Jumlah yang diminta",
+type:"Jenis bisnis", status:"Status", date:"Tanggal pengajuan",
+emptyTitle:"Belum ada pengajuan", emptyText:"Anda belum mengirim pengajuan pembiayaan.",
+start:"Mulai pengajuan", login:"Silakan masuk untuk melihat pengajuan.",
+error:"Pengajuan tidak dapat dimuat. Silakan coba lagi.",
+pending:"Menunggu", approved:"Disetujui", rejected:"Ditolak", declined:"Ditolak",
+under_review:"Sedang ditinjau", processing:"Diproses", unknown:"Tidak tersedia",
+noBusiness:"Pengajuan bisnis", noType:"Belum diberikan", noDate:"Tidak tersedia",
+updated:"Pengajuan telah diperbarui."
 },
-fr:{
-back:"← Financement",heading:"Demande de financement",intro:"Remplissez les informations ci-dessous pour poursuivre votre demande de financement.",request:"Demande de financement",requestIntro:"Sélectionnez le montant que vous souhaitez demander.",range:"Montant du financement",interest:"Intérêt annuel",term:"Durée",twoYears:"2 ans",collateral:"Garantie",none:"Sans garantie",amountLabel:"Montant demandé (USD)",selectAmount:"Sélectionnez un montant",businessName:"Nom de l’entreprise",businessPlaceholder:"Saisissez le nom de l’entreprise",businessType:"Type d’entreprise",selectBusinessType:"Sélectionnez le type d’entreprise",sole:"Entreprise individuelle",partnership:"Société en partenariat",limited:"Société à responsabilité limitée",corporation:"Société par actions",other:"Autre",yearsLabel:"Années d’activité",select:"Sélectionner",less1:"Moins d’un an",years12:"1–2 ans",years35:"3–5 ans",years610:"6–10 ans",over10:"Plus de 10 ans",revenueLabel:"Chiffre d’affaires annuel estimé",selectRange:"Sélectionnez une fourchette",rev1:"Moins de 50 000 $",rev2:"50 000 $ – 100 000 $",rev3:"100 000 $ – 250 000 $",rev4:"250 000 $ – 500 000 $",rev5:"Plus de 500 000 $",purposeLabel:"Objet du financement",purposePlaceholder:"Expliquez comment le financement sera utilisé...",notice:"Votre demande sera examinée sur la base des informations fournies et des vérifications nécessaires. Le dépôt ne garantit pas l’approbation du financement.",confirmText:"Je confirme que les informations fournies sont exactes et complètes à ma connaissance.",submit:"Continuer la demande",submitting:"Envoi en cours...",success:"Demande envoyée avec succès.",reference:"Référence de votre demande :",review:"Votre demande est en cours d’examen.",signIn:"Veuillez vous connecter avant d’envoyer une demande.",failed:"Impossible d’envoyer votre demande.",unexpected:"Une erreur s’est produite lors de l’envoi. Veuillez réessayer.",footer:"© 2026 GlobalBridgeFunding. Tous droits réservés."
+fr: {
+dashboard:"← Tableau de bord", eyebrow:"CENTRE DE FINANCEMENT",
+title:"Vos demandes de financement",
+intro:"Consultez vos demandes de financement, leurs dates d’envoi et leur statut actuel.",
+total:"Nombre de demandes", pendingCount:"En attente / en examen",
+approvedCount:"Demandes approuvées", history:"Historique des demandes",
+refresh:"Actualiser", newApp:"+ Nouvelle demande", loading:"Chargement des demandes…",
+copyright:"© 2026 GlobalBridgeFunding. Tous droits réservés.",
+business:"Entreprise", reference:"Référence", amount:"Montant demandé",
+type:"Type d’entreprise", status:"Statut", date:"Date d’envoi",
+emptyTitle:"Aucune demande pour le moment", emptyText:"Vous n’avez pas encore soumis de demande de financement.",
+start:"Commencer une demande", login:"Connectez-vous pour consulter vos demandes.",
+error:"Impossible de charger vos demandes. Veuillez réessayer.",
+pending:"En attente", approved:"Approuvée", rejected:"Rejetée", declined:"Refusée",
+under_review:"En cours d’examen", processing:"En traitement", unknown:"Indisponible",
+noBusiness:"Demande d’entreprise", noType:"Non renseigné", noDate:"Indisponible",
+updated:"Demandes actualisées."
 },
-fi:{
-back:"← Rahoitus",heading:"Rahoitushakemus",intro:"Täytä alla olevat tiedot jatkaaksesi rahoitushakemustasi.",request:"Rahoituspyyntö",requestIntro:"Valitse haettava summa.",range:"Rahoituksen määrä",interest:"Vuosikorko",term:"Laina-aika",twoYears:"2 vuotta",collateral:"Vakuus",none:"Ei vakuutta",amountLabel:"Haettava rahoitussumma (USD)",selectAmount:"Valitse summa",businessName:"Yrityksen nimi",businessPlaceholder:"Kirjoita yrityksen nimi",businessType:"Yrityksen tyyppi",selectBusinessType:"Valitse yrityksen tyyppi",sole:"Yksityinen elinkeinonharjoittaja",partnership:"Avoin yhtiö",limited:"Osakeyhtiö",corporation:"Osakeyhtiö / konserni",other:"Muu",yearsLabel:"Toimintavuodet",select:"Valitse",less1:"Alle 1 vuosi",years12:"1–2 vuotta",years35:"3–5 vuotta",years610:"6–10 vuotta",over10:"Yli 10 vuotta",revenueLabel:"Arvioitu vuotuinen liikevaihto",selectRange:"Valitse vaihteluväli",rev1:"Alle 50 000 $",rev2:"50 000 $ – 100 000 $",rev3:"100 000 $ – 250 000 $",rev4:"250 000 $ – 500 000 $",rev5:"Yli 500 000 $",purposeLabel:"Rahoituksen käyttötarkoitus",purposePlaceholder:"Kerro, miten rahoitusta käytetään...",notice:"Hakemus arvioidaan annettujen tietojen ja tarvittavien tarkistusten perusteella. Hakemuksen lähettäminen ei takaa rahoituksen hyväksymistä.",confirmText:"Vahvistan, että antamani tiedot ovat parhaan tietämykseni mukaan oikeita ja täydellisiä.",submit:"Jatka hakemusta",submitting:"Lähetetään...",success:"Hakemus lähetettiin onnistuneesti.",reference:"Hakemuksesi viitenumero:",review:"Hakemustasi käsitellään.",signIn:"Kirjaudu sisään ennen hakemuksen lähettämistä.",failed:"Hakemusta ei voitu lähettää.",unexpected:"Hakemuksen lähettämisessä tapahtui virhe. Yritä uudelleen.",footer:"© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään."
+fi: {
+dashboard:"← Kojelauta", eyebrow:"RAHOITUSKESKUS",
+title:"Rahoitushakemuksesi",
+intro:"Tarkastele rahoitushakemuksiasi, lähetyspäiviä ja tämänhetkistä käsittelytilaa.",
+total:"Hakemuksia yhteensä", pendingCount:"Odottaa / tarkistettavana",
+approvedCount:"Hyväksytyt hakemukset", history:"Hakemushistoria",
+refresh:"Päivitä", newApp:"+ Uusi hakemus", loading:"Ladataan hakemuksia…",
+copyright:"© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
+business:"Yritys", reference:"Viite", amount:"Haettu summa",
+type:"Yritystyyppi", status:"Tila", date:"Lähetyspäivä",
+emptyTitle:"Ei vielä hakemuksia", emptyText:"Et ole vielä lähettänyt rahoitushakemusta.",
+start:"Aloita hakemus", login:"Kirjaudu sisään nähdäksesi hakemuksesi.",
+error:"Hakemuksia ei voitu ladata. Yritä uudelleen.",
+pending:"Odottaa", approved:"Hyväksytty", rejected:"Hylätty", declined:"Hylätty",
+under_review:"Tarkistettavana", processing:"Käsittelyssä", unknown:"Ei saatavilla",
+noBusiness:"Yrityshakemus", noType:"Ei ilmoitettu", noDate:"Ei saatavilla",
+updated:"Hakemukset päivitetty."
 },
-es:{
-back:"← Financiación",heading:"Solicitud de financiación",intro:"Complete la información siguiente para continuar con su solicitud de financiación.",request:"Solicitud de financiación",requestIntro:"Seleccione el importe que desea solicitar.",range:"Rango de financiación",interest:"Interés anual",term:"Plazo",twoYears:"2 años",collateral:"Garantía",none:"Sin garantía",amountLabel:"Importe solicitado (USD)",selectAmount:"Seleccione un importe",businessName:"Nombre de la empresa",businessPlaceholder:"Introduzca el nombre de la empresa",businessType:"Tipo de empresa",selectBusinessType:"Seleccione el tipo de empresa",sole:"Empresa unipersonal",partnership:"Sociedad colectiva",limited:"Sociedad limitada",corporation:"Corporación",other:"Otro",yearsLabel:"Años de actividad",select:"Seleccione",less1:"Menos de 1 año",years12:"1–2 años",years35:"3–5 años",years610:"6–10 años",over10:"Más de 10 años",revenueLabel:"Ingresos anuales estimados",selectRange:"Seleccione un rango",rev1:"Menos de $50.000",rev2:"$50.000 – $100.000",rev3:"$100.000 – $250.000",rev4:"$250.000 – $500.000",rev5:"Más de $500.000",purposeLabel:"Finalidad de la financiación",purposePlaceholder:"Explique cómo utilizará la financiación...",notice:"La solicitud se revisará según la información proporcionada y las verificaciones necesarias. Enviar una solicitud no garantiza la aprobación de la financiación.",confirmText:"Confirmo que la información proporcionada es correcta y completa según mi leal saber y entender.",submit:"Continuar solicitud",submitting:"Enviando...",success:"Solicitud enviada correctamente.",reference:"La referencia de su solicitud es:",review:"Su solicitud está siendo revisada.",signIn:"Inicie sesión antes de enviar una solicitud.",failed:"No se pudo enviar su solicitud.",unexpected:"Se produjo un error al enviar la solicitud. Inténtelo de nuevo.",footer:"© 2026 GlobalBridgeFunding. Todos los derechos reservados."
+es: {
+dashboard:"← Panel", eyebrow:"CENTRO DE FINANCIACIÓN",
+title:"Tus solicitudes de financiación",
+intro:"Consulta tus solicitudes de financiación, las fechas de envío y su estado actual.",
+total:"Total de solicitudes", pendingCount:"Pendientes / en revisión",
+approvedCount:"Solicitudes aprobadas", history:"Historial de solicitudes",
+refresh:"Actualizar", newApp:"+ Nueva solicitud", loading:"Cargando solicitudes…",
+copyright:"© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
+business:"Empresa", reference:"Referencia", amount:"Importe solicitado",
+type:"Tipo de empresa", status:"Estado", date:"Fecha de envío",
+emptyTitle:"Todavía no hay solicitudes", emptyText:"Aún no has enviado una solicitud de financiación.",
+start:"Iniciar solicitud", login:"Inicia sesión para ver tus solicitudes.",
+error:"No se pudieron cargar las solicitudes. Inténtalo de nuevo.",
+pending:"Pendiente", approved:"Aprobada", rejected:"Rechazada", declined:"Rechazada",
+under_review:"En revisión", processing:"En proceso", unknown:"No disponible",
+noBusiness:"Solicitud empresarial", noType:"No indicado", noDate:"No disponible",
+updated:"Solicitudes actualizadas."
 }
 };
-const languageSelector = document.getElementById("languageSelector");
-const form = document.getElementById("applicationForm");
-const submitButton = document.getElementById("submitButton");
-const successMessage = document.getElementById("successMessage");
-const errorMessage = document.getElementById("errorMessage");
-let currentLanguage = "en";
+const selector = document.getElementById("languageSelector");
+const list = document.getElementById("applicationList");
+const notice = document.getElementById("notice");
+const refreshButton = document.getElementById("refreshButton");
+let language = "en";
 let busy = false;
-function t(key) {
-  return translations[currentLanguage]?.[key] ?? translations.en[key] ?? key;
+let cachedRows = [];
+function normalise(value) {
+  if (!value) return "en";
+  const v = String(value).trim().toLowerCase();
+  if (words[v]) return v;
+  const names = {
+    "english":"en", "português":"pt", "portuguese":"pt",
+    "tiếng việt":"vi", "فارسی":"fa", "persian":"fa",
+    "bahasa indonesia":"id", "français":"fr", "french":"fr",
+    "suomi":"fi", "español":"es", "spanish":"es"
+  };
+  return names[v] || "en";
 }
-function applyLanguage(language) {
-  currentLanguage = translations[language] ? language : "en";
-  document.documentElement.lang = currentLanguage;
-  document.documentElement.dir = currentLanguage === "fa" ? "rtl" : "ltr";
-  document.querySelectorAll("[data-i18n]").forEach(node => {
-    const key = node.dataset.i18n;
-    if (t(key)) node.textContent = t(key);
+function tr(key) {
+  return words[language]?.[key] || words.en[key] || key;
+}
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;",
+    '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+function showNotice(message, type = "info") {
+  notice.textContent = message;
+  notice.className = "notice show " + type;
+}
+function applyLanguage(value) {
+  language = normalise(value);
+  localStorage.setItem("globalbridge_language", language);
+  localStorage.setItem("selectedLanguage", language);
+  localStorage.setItem("gbf_application_language", language);
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+  selector.value = language;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = tr(el.dataset.i18n);
   });
-  document.querySelectorAll("[data-i18n-placeholder]").forEach(node => {
-    node.placeholder = t(node.dataset.i18nPlaceholder);
-  });
+  render(cachedRows);
+}
+function money(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "—";
   try {
-    localStorage.setItem("gbf_application_language", currentLanguage);
-  } catch (_) {}
-  if (busy) {
-    submitButton.textContent = t("submitting");
+    return new Intl.NumberFormat("en-US", {
+      style: "currency", currency: "USD", maximumFractionDigits: 2
+    }).format(n);
+  } catch {
+    return "$" + n.toLocaleString("en-US");
   }
 }
-languageSelector.addEventListener("change", event => {
-  applyLanguage(event.target.value);
-});
-try {
-  const savedLanguage = localStorage.getItem("gbf_application_language");
-  if (savedLanguage && translations[savedLanguage]) {
-    languageSelector.value = savedLanguage;
-    currentLanguage = savedLanguage;
+function dateFormat(value) {
+  if (!value) return tr("noDate");
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return tr("noDate");
+  return new Intl.DateTimeFormat(language, {
+    year: "numeric", month: "short", day: "numeric"
+  }).format(date);
+}
+function statusKey(value) {
+  const s = String(value || "unknown").toLowerCase()
+    .trim().replace(/[ -]+/g, "_");
+  return ["pending","approved","rejected","declined","under_review","processing"].includes(s)
+    ? s : "unknown";
+}
+function render(rows) {
+  document.getElementById("totalCount").textContent = rows.length;
+  document.getElementById("pendingCount").textContent =
+    rows.filter(r => ["pending","under_review","processing"].includes(statusKey(r.status))).length;
+  document.getElementById("approvedCount").textContent =
+    rows.filter(r => statusKey(r.status) === "approved").length;
+  if (!rows.length) {
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📄</div>
+        <h3>${escapeHtml(tr("emptyTitle"))}</h3>
+        <p>${escapeHtml(tr("emptyText"))}</p>
+        <a class="btn" href="application.html">${escapeHtml(tr("start"))}</a>
+      </div>`;
+    return;
   }
-} catch (_) {}
-applyLanguage(currentLanguage);
-form.addEventListener("submit", async event => {
-  event.preventDefault();
-  successMessage.style.display = "none";
-  errorMessage.style.display = "none";
+  list.innerHTML = rows.map(row => {
+    const key = statusKey(row.status);
+    const status = tr(key);
+    const business = row.business_name || tr("noBusiness");
+    const type = row.business_type || tr("noType");
+    const id = row.id || "—";
+    return `
+      <article class="application">
+        <div class="app-top">
+          <div>
+            <div class="business">${escapeHtml(business)}</div>
+            <div class="reference">${escapeHtml(tr("reference"))}: ${escapeHtml(id)}</div>
+          </div>
+          <span class="status ${escapeHtml(key)}">${escapeHtml(status)}</span>
+        </div>
+        <div class="details">
+          <div><div class="label">${escapeHtml(tr("amount"))}</div>
+            <div class="value">${escapeHtml(money(row.requested_amount))}</div></div>
+          <div><div class="label">${escapeHtml(tr("type"))}</div>
+            <div class="value">${escapeHtml(type)}</div></div>
+          <div><div class="label">${escapeHtml(tr("date"))}</div>
+            <div class="value">${escapeHtml(dateFormat(row.created_at))}</div></div>
+          <div><div class="label">${escapeHtml(tr("status"))}</div>
+            <div class="value">${escapeHtml(status)}</div></div>
+        </div>
+        <div class="app-footer">${escapeHtml(tr("reference"))}: ${escapeHtml(id)}</div>
+      </article>`;
+  }).join("");
+}
+async function loadApplications(showSuccess = false) {
   if (busy) return;
   busy = true;
-  submitButton.disabled = true;
-  submitButton.textContent = t("submitting");
+  refreshButton.disabled = true;
+  notice.className = "notice";
+  list.innerHTML = `<div class="loading">${escapeHtml(tr("loading"))}</div>`;
   try {
-    const { data: { user }, error: userError } =
-      await supabaseClient.auth.getUser();
-    if (userError) throw userError;
-    if (!user) throw new Error(t("signIn"));
-    const applicationData = {
-      user_id: user.id,
-      requested_amount: Number(document.getElementById("amount").value),
-      business_name: document.getElementById("businessName").value.trim(),
-      business_type: document.getElementById("businessType").value,
-      years_in_operation: document.getElementById("years").value,
-      annual_revenue: document.getElementById("revenue").value,
-      financing_purpose: document.getElementById("purpose").value.trim()
-    };
-    const { data, error } = await supabaseClient
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError) throw sessionError;
+    let session = sessionData.session;
+    if (!session) {
+      const { data, error } = await supabase.auth.getUser();
+      if (error || !data.user) {
+        cachedRows = [];
+        render([]);
+        showNotice(tr("login"), "error");
+        setTimeout(() => location.assign("login.html"), 1800);
+        return;
+      }
+    }
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    if (userError || !userData.user) {
+      cachedRows = [];
+      render([]);
+      showNotice(tr("login"), "error");
+      setTimeout(() => location.assign("login.html"), 1800);
+      return;
+    }
+    const { data, error } = await supabase
       .from("financing_applications")
-      .insert([applicationData])
-      .select()
-      .single();
+      .select("id,user_id,requested_amount,business_name,business_type,created_at,status")
+      .eq("user_id", userData.user.id)
+      .order("created_at", { ascending: false });
     if (error) throw error;
-    successMessage.replaceChildren();
-    const strong = document.createElement("strong");
-    strong.textContent = t("success");
-    successMessage.appendChild(strong);
-    successMessage.appendChild(document.createElement("br"));
-    successMessage.appendChild(document.createTextNode(t("reference") + " "));
-    const reference = document.createElement("strong");
-    reference.textContent = String(data.id);
-    successMessage.appendChild(reference);
-    successMessage.appendChild(document.createElement("br"));
-    successMessage.appendChild(document.createTextNode(t("review")));
-    successMessage.style.display = "block";
-    form.reset();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    cachedRows = Array.isArray(data) ? data : [];
+    render(cachedRows);
+    if (showSuccess) showNotice(tr("updated"), "success");
   } catch (error) {
-    console.error("Application submission failed:", error);
-    errorMessage.textContent = error.message || t("unexpected");
-    errorMessage.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    console.error("Unable to load financing applications:", error);
+    cachedRows = [];
+    render([]);
+    showNotice(tr("error"), "error");
   } finally {
     busy = false;
-    submitButton.disabled = false;
-    submitButton.textContent = t("submit");
+    refreshButton.disabled = false;
+  }
+}
+selector.addEventListener("change", async event => {
+  applyLanguage(event.target.value);
+  const { data } = await supabase.auth.getUser();
+  if (data?.user) {
+    const { error } = await supabase.auth.updateUser({
+      data: { preferred_language: language }
+    });
+    if (error) console.warn("Language preference could not be saved to account:", error.message);
   }
 });
+refreshButton.addEventListener("click", () => loadApplications(true));
+const savedLanguage =
+  localStorage.getItem("globalbridge_language") ||
+  localStorage.getItem("selectedLanguage") ||
+  localStorage.getItem("gbf_application_language");
+applyLanguage(savedLanguage || "en");
+await loadApplications();
 </script>
 </body>
 </html>
