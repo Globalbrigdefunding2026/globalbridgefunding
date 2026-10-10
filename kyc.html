@@ -8,7 +8,7 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="#071a35">
 
@@ -24,19 +24,13 @@
 
       --green: #16834a;
 
-      --green-bg: #e8f8ee;
-
       --text: #17253b;
 
       --muted: #64748b;
 
       --border: #e1e8f0;
 
-      --surface: #ffffff;
-
       --page: #f3f7fc;
-
-      --red: #b42318;
 
     }
 
@@ -50,9 +44,9 @@
 
         Roboto, Arial, sans-serif;
 
-      background: var(--page);
-
       color: var(--text);
+
+      background: var(--page);
 
       min-height: 100vh;
 
@@ -70,7 +64,7 @@
 
     .header-inner {
 
-      max-width: 900px;
+      max-width: 760px;
 
       margin: auto;
 
@@ -86,35 +80,13 @@
 
     .brand {
 
+      font-size: 17px;
+
       font-weight: 800;
-
-      font-size: 18px;
-
-      letter-spacing: -.4px;
 
     }
 
     .brand span { color: var(--blue); }
-
-    select, input, textarea {
-
-      width: 100%;
-
-      border: 1px solid var(--border);
-
-      border-radius: 10px;
-
-      padding: 13px 12px;
-
-      background: white;
-
-      color: var(--text);
-
-      font: inherit;
-
-      font-size: 15px;
-
-    }
 
     #language {
 
@@ -124,75 +96,75 @@
 
       padding: 9px;
 
+      border: 1px solid #ccd6e3;
+
+      border-radius: 9px;
+
+      background: white;
+
       font-size: 13px;
 
     }
 
     main {
 
-      width: min(100% - 28px, 720px);
+      width: min(100% - 28px, 680px);
 
-      margin: 28px auto 50px;
+      margin: 30px auto 45px;
 
     }
-
-    .intro { margin-bottom: 20px; }
 
     h1 {
 
       color: var(--navy);
 
-      font-size: clamp(26px, 6vw, 34px);
+      font-size: 30px;
 
       margin: 0 0 9px;
 
-      letter-spacing: -.7px;
-
     }
 
-    h2 { margin: 0 0 10px; color: var(--navy); }
+    h2 { color: var(--navy); }
 
     p {
 
       color: var(--muted);
 
-      line-height: 1.6;
-
-      margin-top: 0;
+      line-height: 1.65;
 
     }
 
     .card {
 
-      background: var(--surface);
+      background: white;
 
       border: 1px solid var(--border);
 
       border-radius: 18px;
 
-      padding: 22px;
+      padding: 23px;
 
-      box-shadow: 0 8px 28px rgba(7, 26, 53, .05);
+      box-shadow: 0 8px 26px rgba(7, 26, 53, .05);
 
     }
 
     .notice {
 
+      padding: 13px;
+
+      margin-bottom: 20px;
+
       background: #eef7ff;
 
       border: 1px solid #cdeaff;
-
-      color: #174a70;
-
-      padding: 13px 14px;
 
       border-radius: 11px;
 
       font-size: 14px;
 
-      line-height: 1.5;
+      line-height: 1.55;
 
-      margin-bottom: 20px;
+      color: #174a70;
 
     }
 
@@ -210,21 +182,51 @@
 
     }
 
-    .help {
+    input, select, textarea {
 
-      font-size: 12px;
+      display: block;
 
-      color: var(--muted);
+      width: 100%;
 
-      margin-top: 6px;
+      padding: 13px 12px;
 
-      line-height: 1.5;
+      border: 1px solid #d5deea;
+
+      border-radius: 10px;
+
+      background: white;
+
+      color: var(--text);
+
+      font: inherit;
+
+      font-size: 15px;
 
     }
 
-    textarea { min-height: 95px; resize: vertical; }
+    input[readonly] { background: #f4f7fb; }
 
-    .check-row {
+    textarea {
+
+      min-height: 90px;
+
+      resize: vertical;
+
+    }
+
+    .help {
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.5;
+
+      margin-top: 6px;
+
+    }
+
+    .consent {
 
       display: flex;
 
@@ -236,11 +238,13 @@
 
       font-size: 14px;
 
+      font-weight: 400;
+
       line-height: 1.5;
 
     }
 
-    .check-row input {
+    .consent input {
 
       width: 19px;
 
@@ -254,19 +258,19 @@
 
     button, .button {
 
-      display: inline-flex;
+      display: flex;
 
       align-items: center;
 
       justify-content: center;
 
-      gap: 9px;
-
       width: 100%;
 
-      min-height: 49px;
+      min-height: 50px;
 
-      border: 0;
+      padding: 14px 18px;
+
+      border: none;
 
       border-radius: 11px;
 
@@ -274,13 +278,13 @@
 
       color: var(--navy);
 
-      font-weight: 800;
-
       font-size: 15px;
 
-      text-decoration: none;
+      font-weight: 800;
 
-      padding: 13px 18px;
+      text-align: center;
+
+      text-decoration: none;
 
       cursor: pointer;
 
@@ -294,35 +298,35 @@
 
     }
 
-    .secondary {
+    .dashboard-button {
+
+      margin-top: 12px;
 
       background: var(--navy);
 
       color: white;
 
-      margin-top: 12px;
-
     }
 
-    .error {
+    #errorMessage {
 
       display: none;
 
-      color: var(--red);
+      padding: 13px;
 
-      background: #fff1f0;
+      margin-bottom: 17px;
 
-      border: 1px solid #ffd0cc;
+      border: 1px solid #f4b8b3;
 
       border-radius: 10px;
 
-      padding: 12px;
+      background: #fff1f0;
+
+      color: #b42318;
 
       font-size: 13px;
 
       line-height: 1.5;
-
-      margin-bottom: 16px;
 
       overflow-wrap: anywhere;
 
@@ -334,23 +338,19 @@
 
       font-size: 12px;
 
-      margin: 16px 0 0;
+      margin-bottom: 0;
 
     }
 
-    /* Success screen */
+    /* Successful submission screen */
 
-    #successPanel { text-align: center; }
+    #successScreen { text-align: center; }
 
-    .success-icon {
+    .check-circle {
 
-      width: 94px;
+      width: 100px;
 
-      height: 94px;
-
-      border-radius: 50%;
-
-      background: var(--green-bg);
+      height: 100px;
 
       display: flex;
 
@@ -358,29 +358,37 @@
 
       justify-content: center;
 
-      margin: 6px auto 22px;
+      margin: 7px auto 23px;
+
+      border-radius: 50%;
+
+      background: #e4f7eb;
+
+      border: 2px solid #b5e8c8;
 
     }
 
-    .success-icon svg {
+    .check-circle svg {
 
-      width: 57px;
+      width: 61px;
 
-      height: 57px;
-
-      display: block;
+      height: 61px;
 
     }
 
-    #successPanel h2 {
+    #successScreen h2 {
 
       font-size: 27px;
 
-      margin-bottom: 10px;
+      line-height: 1.25;
+
+      margin: 0 0 10px;
 
     }
 
-    .status-pill {
+    .success-subtitle { margin-bottom: 17px; }
+
+    .status {
 
       display: inline-flex;
 
@@ -388,29 +396,29 @@
 
       gap: 8px;
 
-      background: #fff4d8;
+      margin: 5px 0 17px;
 
-      color: #865b00;
-
-      border: 1px solid #f1d58c;
+      padding: 10px 15px;
 
       border-radius: 30px;
 
-      padding: 9px 14px;
+      border: 1px solid #f1d58c;
+
+      background: #fff4d8;
+
+      color: #865b00;
 
       font-size: 13px;
 
       font-weight: 800;
 
-      margin: 5px 0 18px;
-
     }
 
     .status-dot {
 
-      width: 8px;
+      width: 9px;
 
-      height: 8px;
+      height: 9px;
 
       background: #d49a19;
 
@@ -418,35 +426,37 @@
 
     }
 
-    .success-details {
+    .next-steps {
 
       text-align: left;
 
-      background: #f7fafc;
+      margin: 17px 0 23px;
+
+      padding: 16px;
 
       border: 1px solid var(--border);
 
+      background: #f7fafc;
+
       border-radius: 12px;
-
-      padding: 15px;
-
-      margin: 20px 0;
-
-      line-height: 1.6;
 
       font-size: 14px;
 
+      line-height: 1.65;
+
     }
 
+    .next-steps p { margin-bottom: 0; }
+
     footer {
+
+      padding: 0 15px 25px;
 
       text-align: center;
 
       color: var(--muted);
 
       font-size: 12px;
-
-      padding: 0 16px 28px;
 
     }
 
@@ -456,9 +466,9 @@
 
       .card { padding: 18px; }
 
-      .brand { font-size: 16px; }
+      h1 { font-size: 27px; }
 
-      #language { max-width: 130px; }
+      .brand { font-size: 15px; }
 
     }
 
@@ -500,31 +510,29 @@
 
   <main>
 
-    <section id="formSection">
+    <!-- FORM: hidden after successful database submission -->
 
-      <div class="intro">
+    <section id="formScreen">
 
-        <h1 data-i18n="title">KYC Verification</h1>
+      <h1 data-t="title">KYC Verification</h1>
 
-        <p data-i18n="intro">Provide your details for identity and business verification.</p>
-
-      </div>
+      <p data-t="intro">Provide your details for identity and business verification.</p>
 
       <div class="card">
 
-        <div class="notice" data-i18n="notice">
+        <div class="notice" data-t="notice">
 
-          Your information will be reviewed manually. Submitting this form does not mean your verification or financing has been approved.
+          Your information will be reviewed manually. Submission does not mean approval.
 
         </div>
 
-        <div id="errorMessage" class="error" role="alert"></div>
+        <div id="errorMessage" role="alert"></div>
 
         <form id="kycForm">
 
           <div class="field">
 
-            <label for="email" data-i18n="emailLabel">Account email</label>
+            <label for="email" data-t="emailLabel">Account email</label>
 
             <input id="email" type="email" readonly>
 
@@ -532,35 +540,35 @@
 
           <div class="field">
 
-            <label for="full_name" data-i18n="fullName">Full legal name *</label>
+            <label for="full_name" data-t="fullName">Full legal name *</label>
 
-            <input id="full_name" name="full_name" autocomplete="name" required maxlength="150">
-
-          </div>
-
-          <div class="field">
-
-            <label for="country_of_residence" data-i18n="residence">Country of residence *</label>
-
-            <input id="country_of_residence" name="country_of_residence" required maxlength="100">
+            <input id="full_name" required maxlength="150" autocomplete="name">
 
           </div>
 
           <div class="field">
 
-            <label for="document_type" data-i18n="documentType">Identity document type *</label>
+            <label for="country_of_residence" data-t="residence">Country of residence *</label>
 
-            <select id="document_type" name="document_type" required>
+            <input id="country_of_residence" required maxlength="100">
 
-              <option value="" data-i18n="choose">Select an option</option>
+          </div>
 
-              <option value="Passport" data-i18n="passport">Passport</option>
+          <div class="field">
 
-              <option value="National ID" data-i18n="nationalId">National ID</option>
+            <label for="document_type" data-t="documentType">Identity document type *</label>
 
-              <option value="Driving Licence" data-i18n="drivingLicence">Driving licence</option>
+            <select id="document_type" required>
 
-              <option value="Other" data-i18n="other">Other</option>
+              <option value="" data-t="choose">Select an option</option>
+
+              <option value="Passport" data-t="passport">Passport</option>
+
+              <option value="National ID" data-t="nationalId">National ID</option>
+
+              <option value="Driving Licence" data-t="drivingLicence">Driving licence</option>
+
+              <option value="Other" data-t="other">Other</option>
 
             </select>
 
@@ -568,67 +576,75 @@
 
           <div class="field">
 
-            <label for="document_number" data-i18n="documentNumber">Document number *</label>
+            <label for="document_number" data-t="documentNumber">Document number *</label>
 
-            <input id="document_number" name="document_number" required maxlength="100" autocomplete="off">
+            <input id="document_number" required maxlength="100" autocomplete="off">
 
-            <div class="help" data-i18n="documentHelp">Enter the number shown on your identity document. Do not enter your password or bank PIN.</div>
+            <div class="help" data-t="documentHelp">
 
-          </div>
+              Enter the number on your identity document. Never enter your password or bank PIN.
 
-          <div class="field">
-
-            <label for="business_name" data-i18n="businessName">Business name</label>
-
-            <input id="business_name" name="business_name" maxlength="200">
+            </div>
 
           </div>
 
           <div class="field">
 
-            <label for="business_country" data-i18n="businessCountry">Business registration country</label>
+            <label for="business_name" data-t="businessName">Business name</label>
 
-            <input id="business_country" name="business_country" maxlength="100">
-
-          </div>
-
-          <div class="field">
-
-            <label for="business_type" data-i18n="businessType">Business type</label>
-
-            <input id="business_type" name="business_type" maxlength="150">
+            <input id="business_name" maxlength="200">
 
           </div>
 
           <div class="field">
 
-            <label for="additional_information" data-i18n="additional">Additional information</label>
+            <label for="business_country" data-t="businessCountry">Business registration country</label>
 
-            <textarea id="additional_information" name="additional_information" maxlength="2000"></textarea>
+            <input id="business_country" maxlength="100">
 
           </div>
 
-          <label class="check-row" for="consent">
+          <div class="field">
+
+            <label for="business_type" data-t="businessType">Business type</label>
+
+            <input id="business_type" maxlength="150">
+
+          </div>
+
+          <div class="field">
+
+            <label for="additional_information" data-t="additional">Additional information</label>
+
+            <textarea id="additional_information" maxlength="2000"></textarea>
+
+          </div>
+
+          <label class="consent" for="consent">
 
             <input id="consent" type="checkbox" required>
 
-            <span data-i18n="consent">I confirm that the information provided is accurate and understand that my details will be reviewed manually. *</span>
+            <span data-t="consent">
+
+              I confirm that my information is accurate and understand it will be reviewed manually. *
+
+            </span>
 
           </label>
 
           <button id="submitButton" type="submit">
 
-            <span data-i18n="submit">Submit for manual review</span>
+            <span data-t="submit">Submit for manual review</span>
 
           </button>
 
-          <a class="button secondary" href="dashboard.html" data-i18n="backDashboard">
+          <a href="dashboard.html" class="button dashboard-button" data-t="back">
 
             Back to Dashboard
 
           </a>
 
-          <p class="small-note" data-i18n="secureNote">
+          <p class="small-note" data-t="secureNote">
 
             Your submission is linked to your signed-in account.
 
@@ -640,53 +656,55 @@
 
     </section>
 
-    <!-- This panel appears only after Supabase confirms the insert succeeded. -->
+    <!-- SUCCESS: displayed only after Supabase confirms the insert -->
 
-    <section id="successPanel" class="card" hidden aria-live="polite">
+    <section id="successScreen" class="card" hidden aria-live="polite">
 
-      <div class="success-icon" aria-hidden="true">
+      <div class="check-circle" aria-hidden="true">
 
         <svg viewBox="0 0 64 64" fill="none">
 
-          <circle cx="32" cy="32" r="29" stroke="#16834a" stroke-width="4"/>
+          <circle cx="32" cy="32" r="28" stroke="#16834a" stroke-width="4"/>
 
-          <path d="M17 33L27 43L48 21" stroke="#16834a"
+          <path d="M17 33L27 43L48 21"
 
-            stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            stroke="#16834a" stroke-width="5"
+
+            stroke-linecap="round" stroke-linejoin="round"/>
 
         </svg>
 
       </div>
 
-      <h2 data-i18n="successTitle">KYC Submitted Successfully</h2>
+      <h2 data-t="successTitle">KYC Submitted Successfully!</h2>
 
-      <p data-i18n="successMessage">
+      <p class="success-subtitle" data-t="successMessage">
 
-        Your identity verification details have been received and saved.
+        Your KYC details have been received and saved successfully.
 
       </p>
 
-      <div class="status-pill">
+      <div class="status">
 
         <span class="status-dot"></span>
 
-        <span data-i18n="pendingStatus">Pending Verification</span>
+        <span data-t="pending">PENDING VERIFICATION</span>
 
       </div>
 
-      <div class="success-details">
+      <div class="next-steps">
 
-        <strong data-i18n="nextTitle">What happens next?</strong>
+        <strong data-t="nextTitle">What happens next?</strong>
 
-        <p data-i18n="nextMessage" style="margin:8px 0 0">
+        <p data-t="nextMessage">
 
-          An administrator will review your details. This submission is not an approval of your identity or financing application.
+          Your details are waiting for manual review. This is not an approval of your identity or financing application.
 
         </p>
 
       </div>
 
-      <a href="dashboard.html" class="button" data-i18n="backDashboard">
+      <a href="dashboard.html" class="button" data-t="back">
 
         Back to Dashboard
 
@@ -696,7 +714,7 @@
 
   </main>
 
-  <footer data-i18n="footer">
+  <footer data-t="footer">
 
     GlobalBridgeFunding · Secure account verification
 
@@ -714,409 +732,419 @@
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const translations = {
+    const words = {
 
       en: {
 
-        title:"KYC Verification", intro:"Provide your details for identity and business verification.",
+        title:"KYC Verification",intro:"Provide your details for identity and business verification.",
 
-        notice:"Your information will be reviewed manually. Submitting this form does not mean your verification or financing has been approved.",
+        notice:"Your information will be reviewed manually. Submission does not mean approval.",
 
-        emailLabel:"Account email", fullName:"Full legal name *", residence:"Country of residence *",
+        emailLabel:"Account email",fullName:"Full legal name *",residence:"Country of residence *",
 
-        documentType:"Identity document type *", choose:"Select an option", passport:"Passport",
+        documentType:"Identity document type *",choose:"Select an option",passport:"Passport",
 
-        nationalId:"National ID", drivingLicence:"Driving licence", other:"Other",
+        nationalId:"National ID",drivingLicence:"Driving licence",other:"Other",
 
-        documentNumber:"Document number *", documentHelp:"Enter the number shown on your identity document. Do not enter your password or bank PIN.",
+        documentNumber:"Document number *",documentHelp:"Enter the number on your identity document. Never enter your password or bank PIN.",
 
-        businessName:"Business name", businessCountry:"Business registration country", businessType:"Business type",
+        businessName:"Business name",businessCountry:"Business registration country",businessType:"Business type",
 
-        additional:"Additional information", consent:"I confirm that the information provided is accurate and understand that my details will be reviewed manually. *",
+        additional:"Additional information",consent:"I confirm that my information is accurate and understand it will be reviewed manually. *",
 
-        submit:"Submit for manual review", submitting:"Submitting securely…", backDashboard:"Back to Dashboard",
+        submit:"Submit for manual review",sending:"Submitting securely…",back:"Back to Dashboard",
 
         secureNote:"Your submission is linked to your signed-in account.",
 
-        successTitle:"KYC Submitted Successfully", successMessage:"Your identity verification details have been received and saved.",
+        successTitle:"KYC Submitted Successfully!",successMessage:"Your KYC details have been received and saved successfully.",
 
-        pendingStatus:"Pending Verification", nextTitle:"What happens next?",
+        pending:"PENDING VERIFICATION",nextTitle:"What happens next?",
 
-        nextMessage:"An administrator will review your details. This submission is not an approval of your identity or financing application.",
+        nextMessage:"Your details are waiting for manual review. This is not an approval of your identity or financing application.",
 
         footer:"GlobalBridgeFunding · Secure account verification",
 
-        login:"Please sign in to submit your KYC details.", saveError:"We could not save your submission. Please try again.",
+        login:"Please sign in to submit your KYC details.",
 
-        loadError:"We could not verify your login. Please sign in again."
+        failed:"Your details could not be saved. Please try again.",
+
+        sessionFailed:"Your session could not be verified. Please sign in again."
 
       },
 
       pt: {
 
-        title:"Verificação KYC", intro:"Forneça os seus dados para verificação de identidade e da empresa.",
+        title:"Verificação KYC",intro:"Forneça os seus dados para verificação de identidade e da empresa.",
 
-        notice:"As suas informações serão analisadas manualmente. O envio não significa que a verificação ou o financiamento foram aprovados.",
+        notice:"As informações serão analisadas manualmente. O envio não significa aprovação.",
 
-        emailLabel:"E-mail da conta", fullName:"Nome legal completo *", residence:"País de residência *",
+        emailLabel:"E-mail da conta",fullName:"Nome legal completo *",residence:"País de residência *",
 
-        documentType:"Tipo de documento de identidade *", choose:"Selecione uma opção", passport:"Passaporte",
+        documentType:"Tipo de documento de identidade *",choose:"Selecione uma opção",passport:"Passaporte",
 
-        nationalId:"Documento de identidade nacional", drivingLicence:"Carta de condução", other:"Outro",
+        nationalId:"Documento de identidade nacional",drivingLicence:"Carta de condução",other:"Outro",
 
-        documentNumber:"Número do documento *", documentHelp:"Introduza o número do documento. Não introduza a sua palavra-passe ou PIN bancário.",
+        documentNumber:"Número do documento *",documentHelp:"Introduza o número do documento. Nunca introduza a sua palavra-passe ou PIN bancário.",
 
-        businessName:"Nome da empresa", businessCountry:"País de registo da empresa", businessType:"Tipo de empresa",
+        businessName:"Nome da empresa",businessCountry:"País de registo da empresa",businessType:"Tipo de empresa",
 
-        additional:"Informações adicionais", consent:"Confirmo que as informações são corretas e compreendo que serão analisadas manualmente. *",
+        additional:"Informações adicionais",consent:"Confirmo que as informações são corretas e compreendo que serão analisadas manualmente. *",
 
-        submit:"Enviar para análise manual", submitting:"A enviar com segurança…", backDashboard:"Voltar ao painel",
+        submit:"Enviar para análise manual",sending:"A enviar com segurança…",back:"Voltar ao painel",
 
         secureNote:"O envio está associado à sua conta autenticada.",
 
-        successTitle:"KYC enviado com sucesso", successMessage:"Os seus dados de verificação foram recebidos e guardados.",
+        successTitle:"KYC enviado com sucesso!",successMessage:"Os seus dados foram recebidos e guardados.",
 
-        pendingStatus:"Verificação pendente", nextTitle:"O que acontece a seguir?",
+        pending:"VERIFICAÇÃO PENDENTE",nextTitle:"O que acontece a seguir?",
 
-        nextMessage:"Um administrador irá analisar os seus dados. Este envio não representa aprovação da identidade nem do financiamento.",
+        nextMessage:"Os seus dados aguardam análise manual. Isto não significa aprovação da identidade ou do financiamento.",
 
         footer:"GlobalBridgeFunding · Verificação segura da conta",
 
-        login:"Inicie sessão para enviar os seus dados KYC.", saveError:"Não foi possível guardar o envio. Tente novamente.",
+        login:"Inicie sessão para enviar os seus dados KYC.",failed:"Não foi possível guardar os dados. Tente novamente.",
 
-        loadError:"Não foi possível verificar a sessão. Inicie sessão novamente."
+        sessionFailed:"Não foi possível verificar a sessão. Inicie sessão novamente."
 
       },
 
       vi: {
 
-        title:"Xác minh KYC", intro:"Cung cấp thông tin để xác minh danh tính và doanh nghiệp.",
+        title:"Xác minh KYC",intro:"Cung cấp thông tin để xác minh danh tính và doanh nghiệp.",
 
-        notice:"Thông tin của bạn sẽ được xem xét thủ công. Gửi biểu mẫu không có nghĩa là bạn đã được xác minh hoặc duyệt tài trợ.",
+        notice:"Thông tin sẽ được xem xét thủ công. Gửi biểu mẫu không có nghĩa là được phê duyệt.",
 
-        emailLabel:"Email tài khoản", fullName:"Họ tên pháp lý đầy đủ *", residence:"Quốc gia cư trú *",
+        emailLabel:"Email tài khoản",fullName:"Họ tên pháp lý đầy đủ *",residence:"Quốc gia cư trú *",
 
-        documentType:"Loại giấy tờ tùy thân *", choose:"Chọn một tùy chọn", passport:"Hộ chiếu",
+        documentType:"Loại giấy tờ tùy thân *",choose:"Chọn một tùy chọn",passport:"Hộ chiếu",
 
-        nationalId:"Căn cước quốc gia", drivingLicence:"Bằng lái xe", other:"Khác",
+        nationalId:"Căn cước quốc gia",drivingLicence:"Bằng lái xe",other:"Khác",
 
-        documentNumber:"Số giấy tờ *", documentHelp:"Nhập số trên giấy tờ tùy thân. Không nhập mật khẩu hoặc mã PIN ngân hàng.",
+        documentNumber:"Số giấy tờ *",documentHelp:"Nhập số trên giấy tờ tùy thân. Không nhập mật khẩu hoặc mã PIN ngân hàng.",
 
-        businessName:"Tên doanh nghiệp", businessCountry:"Quốc gia đăng ký doanh nghiệp", businessType:"Loại hình doanh nghiệp",
+        businessName:"Tên doanh nghiệp",businessCountry:"Quốc gia đăng ký doanh nghiệp",businessType:"Loại hình doanh nghiệp",
 
-        additional:"Thông tin bổ sung", consent:"Tôi xác nhận thông tin là chính xác và hiểu rằng thông tin sẽ được xem xét thủ công. *",
+        additional:"Thông tin bổ sung",consent:"Tôi xác nhận thông tin chính xác và hiểu rằng thông tin sẽ được xem xét thủ công. *",
 
-        submit:"Gửi để xem xét thủ công", submitting:"Đang gửi an toàn…", backDashboard:"Quay lại bảng điều khiển",
+        submit:"Gửi để xem xét",sending:"Đang gửi an toàn…",back:"Quay lại bảng điều khiển",
 
-        secureNote:"Thông tin gửi được liên kết với tài khoản đã đăng nhập.",
+        secureNote:"Thông tin được liên kết với tài khoản đã đăng nhập.",
 
-        successTitle:"Đã gửi KYC thành công", successMessage:"Thông tin xác minh danh tính của bạn đã được nhận và lưu.",
+        successTitle:"Đã gửi KYC thành công!",successMessage:"Thông tin KYC đã được nhận và lưu thành công.",
 
-        pendingStatus:"Đang chờ xác minh", nextTitle:"Điều gì sẽ xảy ra tiếp theo?",
+        pending:"ĐANG CHỜ XÁC MINH",nextTitle:"Điều gì xảy ra tiếp theo?",
 
-        nextMessage:"Quản trị viên sẽ xem xét thông tin của bạn. Việc gửi này không đồng nghĩa với việc danh tính hoặc khoản tài trợ được phê duyệt.",
+        nextMessage:"Thông tin đang chờ xem xét thủ công. Đây không phải là phê duyệt danh tính hoặc tài trợ.",
 
         footer:"GlobalBridgeFunding · Xác minh tài khoản an toàn",
 
-        login:"Vui lòng đăng nhập để gửi thông tin KYC.", saveError:"Không thể lưu thông tin. Vui lòng thử lại.",
+        login:"Vui lòng đăng nhập để gửi thông tin KYC.",failed:"Không thể lưu thông tin. Vui lòng thử lại.",
 
-        loadError:"Không thể xác minh đăng nhập. Vui lòng đăng nhập lại."
+        sessionFailed:"Không thể xác minh đăng nhập. Vui lòng đăng nhập lại."
 
       },
 
       fa: {
 
-        title:"تأیید هویت KYC", intro:"اطلاعات خود را برای تأیید هویت و کسب‌وکار وارد کنید.",
+        title:"تأیید هویت KYC",intro:"اطلاعات خود را برای تأیید هویت و کسب‌وکار وارد کنید.",
 
-        notice:"اطلاعات شما به‌صورت دستی بررسی می‌شود. ارسال فرم به معنی تأیید هویت یا تأمین مالی نیست.",
+        notice:"اطلاعات شما به‌صورت دستی بررسی می‌شود. ارسال فرم به معنی تأیید نیست.",
 
-        emailLabel:"ایمیل حساب", fullName:"نام قانونی کامل *", residence:"کشور محل اقامت *",
+        emailLabel:"ایمیل حساب",fullName:"نام قانونی کامل *",residence:"کشور محل اقامت *",
 
-        documentType:"نوع مدرک هویتی *", choose:"یک گزینه انتخاب کنید", passport:"گذرنامه",
+        documentType:"نوع مدرک هویتی *",choose:"یک گزینه انتخاب کنید",passport:"گذرنامه",
 
-        nationalId:"کارت شناسایی ملی", drivingLicence:"گواهینامه رانندگی", other:"سایر",
+        nationalId:"کارت شناسایی ملی",drivingLicence:"گواهینامه رانندگی",other:"سایر",
 
-        documentNumber:"شماره مدرک *", documentHelp:"شماره درج‌شده روی مدرک هویتی را وارد کنید. رمز عبور یا PIN بانکی را وارد نکنید.",
+        documentNumber:"شماره مدرک *",documentHelp:"شماره مدرک هویتی را وارد کنید. رمز عبور یا PIN بانکی را وارد نکنید.",
 
-        businessName:"نام کسب‌وکار", businessCountry:"کشور ثبت کسب‌وکار", businessType:"نوع کسب‌وکار",
+        businessName:"نام کسب‌وکار",businessCountry:"کشور ثبت کسب‌وکار",businessType:"نوع کسب‌وکار",
 
-        additional:"اطلاعات تکمیلی", consent:"تأیید می‌کنم اطلاعات صحیح است و می‌دانم که به‌صورت دستی بررسی می‌شود. *",
+        additional:"اطلاعات تکمیلی",consent:"تأیید می‌کنم اطلاعات صحیح است و می‌دانم دستی بررسی می‌شود. *",
 
-        submit:"ارسال برای بررسی دستی", submitting:"در حال ارسال امن…", backDashboard:"بازگشت به داشبورد",
+        submit:"ارسال برای بررسی",sending:"در حال ارسال امن…",back:"بازگشت به داشبورد",
 
         secureNote:"درخواست به حساب واردشده شما متصل است.",
 
-        successTitle:"اطلاعات KYC با موفقیت ارسال شد", successMessage:"اطلاعات تأیید هویت شما دریافت و ذخیره شد.",
+        successTitle:"اطلاعات KYC با موفقیت ارسال شد!",successMessage:"اطلاعات شما دریافت و ذخیره شد.",
 
-        pendingStatus:"در انتظار تأیید", nextTitle:"مرحله بعد چیست؟",
+        pending:"در انتظار تأیید",nextTitle:"مرحله بعد چیست؟",
 
-        nextMessage:"مدیر اطلاعات شما را بررسی می‌کند. این ارسال به معنی تأیید هویت یا درخواست تأمین مالی نیست.",
+        nextMessage:"اطلاعات شما در انتظار بررسی دستی است. این به معنی تأیید هویت یا تأمین مالی نیست.",
 
         footer:"GlobalBridgeFunding · تأیید امن حساب",
 
-        login:"برای ارسال اطلاعات KYC ابتدا وارد شوید.", saveError:"ذخیره اطلاعات ناموفق بود. دوباره تلاش کنید.",
+        login:"برای ارسال اطلاعات KYC ابتدا وارد شوید.",failed:"ذخیره اطلاعات ناموفق بود. دوباره تلاش کنید.",
 
-        loadError:"تأیید ورود ممکن نیست. لطفاً دوباره وارد شوید."
+        sessionFailed:"تأیید ورود ممکن نیست. دوباره وارد شوید."
 
       },
 
       id: {
 
-        title:"Verifikasi KYC", intro:"Berikan informasi untuk verifikasi identitas dan bisnis.",
+        title:"Verifikasi KYC",intro:"Berikan informasi untuk verifikasi identitas dan bisnis.",
 
-        notice:"Informasi Anda akan ditinjau secara manual. Mengirim formulir tidak berarti verifikasi atau pembiayaan telah disetujui.",
+        notice:"Informasi Anda akan ditinjau manual. Pengiriman formulir bukan berarti persetujuan.",
 
-        emailLabel:"Email akun", fullName:"Nama lengkap sesuai dokumen *", residence:"Negara tempat tinggal *",
+        emailLabel:"Email akun",fullName:"Nama lengkap sesuai dokumen *",residence:"Negara tempat tinggal *",
 
-        documentType:"Jenis dokumen identitas *", choose:"Pilih opsi", passport:"Paspor",
+        documentType:"Jenis dokumen identitas *",choose:"Pilih opsi",passport:"Paspor",
 
-        nationalId:"Kartu identitas nasional", drivingLicence:"SIM", other:"Lainnya",
+        nationalId:"Kartu identitas nasional",drivingLicence:"SIM",other:"Lainnya",
 
-        documentNumber:"Nomor dokumen *", documentHelp:"Masukkan nomor pada dokumen identitas. Jangan masukkan kata sandi atau PIN bank.",
+        documentNumber:"Nomor dokumen *",documentHelp:"Masukkan nomor dokumen identitas. Jangan masukkan kata sandi atau PIN bank.",
 
-        businessName:"Nama bisnis", businessCountry:"Negara pendaftaran bisnis", businessType:"Jenis bisnis",
+        businessName:"Nama bisnis",businessCountry:"Negara pendaftaran bisnis",businessType:"Jenis bisnis",
 
-        additional:"Informasi tambahan", consent:"Saya memastikan informasi yang diberikan benar dan memahami bahwa data akan ditinjau secara manual. *",
+        additional:"Informasi tambahan",consent:"Saya memastikan informasi benar dan memahami bahwa data ditinjau manual. *",
 
-        submit:"Kirim untuk peninjauan manual", submitting:"Mengirim dengan aman…", backDashboard:"Kembali ke Dasbor",
+        submit:"Kirim untuk ditinjau",sending:"Mengirim dengan aman…",back:"Kembali ke Dasbor",
 
-        secureNote:"Pengiriman ini terhubung ke akun Anda yang sedang masuk.",
+        secureNote:"Pengiriman terhubung ke akun Anda.",
 
-        successTitle:"KYC Berhasil Dikirim", successMessage:"Informasi verifikasi identitas Anda telah diterima dan disimpan.",
+        successTitle:"KYC Berhasil Dikirim!",successMessage:"Informasi KYC Anda telah diterima dan disimpan.",
 
-        pendingStatus:"Menunggu Verifikasi", nextTitle:"Apa selanjutnya?",
+        pending:"MENUNGGU VERIFIKASI",nextTitle:"Apa selanjutnya?",
 
-        nextMessage:"Administrator akan meninjau informasi Anda. Pengiriman ini bukan persetujuan identitas atau pembiayaan.",
+        nextMessage:"Informasi Anda menunggu peninjauan manual. Ini bukan persetujuan identitas atau pembiayaan.",
 
         footer:"GlobalBridgeFunding · Verifikasi akun aman",
 
-        login:"Silakan masuk untuk mengirim informasi KYC.", saveError:"Informasi gagal disimpan. Silakan coba lagi.",
+        login:"Silakan masuk untuk mengirim informasi KYC.",failed:"Informasi gagal disimpan. Silakan coba lagi.",
 
-        loadError:"Login Anda tidak dapat diverifikasi. Silakan masuk kembali."
+        sessionFailed:"Login tidak dapat diverifikasi. Silakan masuk kembali."
 
       },
 
       fr: {
 
-        title:"Vérification KYC", intro:"Fournissez vos informations pour vérifier votre identité et votre entreprise.",
+        title:"Vérification KYC",intro:"Fournissez vos informations pour vérifier votre identité et votre entreprise.",
 
-        notice:"Vos informations seront examinées manuellement. L’envoi du formulaire ne signifie pas que votre identité ou votre financement est approuvé.",
+        notice:"Vos informations seront examinées manuellement. L’envoi ne signifie pas une approbation.",
 
-        emailLabel:"E-mail du compte", fullName:"Nom légal complet *", residence:"Pays de résidence *",
+        emailLabel:"E-mail du compte",fullName:"Nom légal complet *",residence:"Pays de résidence *",
 
-        documentType:"Type de pièce d’identité *", choose:"Sélectionnez une option", passport:"Passeport",
+        documentType:"Type de pièce d’identité *",choose:"Sélectionnez une option",passport:"Passeport",
 
-        nationalId:"Carte nationale d’identité", drivingLicence:"Permis de conduire", other:"Autre",
+        nationalId:"Carte nationale d’identité",drivingLicence:"Permis de conduire",other:"Autre",
 
-        documentNumber:"Numéro du document *", documentHelp:"Saisissez le numéro figurant sur votre pièce d’identité. N’indiquez pas votre mot de passe ni votre code PIN bancaire.",
+        documentNumber:"Numéro du document *",documentHelp:"Saisissez le numéro de votre pièce d’identité. N’indiquez pas votre mot de passe ni votre PIN bancaire.",
 
-        businessName:"Nom de l’entreprise", businessCountry:"Pays d’immatriculation", businessType:"Type d’entreprise",
+        businessName:"Nom de l’entreprise",businessCountry:"Pays d’immatriculation",businessType:"Type d’entreprise",
 
-        additional:"Informations complémentaires", consent:"Je confirme l’exactitude des informations et comprends qu’elles seront examinées manuellement. *",
+        additional:"Informations complémentaires",consent:"Je confirme l’exactitude des informations et comprends qu’elles seront examinées manuellement. *",
 
-        submit:"Envoyer pour examen manuel", submitting:"Envoi sécurisé…", backDashboard:"Retour au tableau de bord",
+        submit:"Envoyer pour examen",sending:"Envoi sécurisé…",back:"Retour au tableau de bord",
 
         secureNote:"Votre demande est liée à votre compte connecté.",
 
-        successTitle:"KYC envoyé avec succès", successMessage:"Vos informations de vérification ont été reçues et enregistrées.",
+        successTitle:"KYC envoyé avec succès !",successMessage:"Vos informations KYC ont été reçues et enregistrées.",
 
-        pendingStatus:"Vérification en attente", nextTitle:"Que se passe-t-il ensuite ?",
+        pending:"VÉRIFICATION EN ATTENTE",nextTitle:"Que se passe-t-il ensuite ?",
 
-        nextMessage:"Un administrateur examinera vos informations. Cet envoi ne constitue pas une approbation de votre identité ou de votre financement.",
+        nextMessage:"Vos informations attendent un examen manuel. Cela ne constitue pas une approbation de votre identité ou financement.",
 
         footer:"GlobalBridgeFunding · Vérification sécurisée du compte",
 
-        login:"Veuillez vous connecter pour envoyer vos informations KYC.", saveError:"Impossible d’enregistrer votre demande. Veuillez réessayer.",
+        login:"Connectez-vous pour envoyer vos informations KYC.",failed:"Impossible d’enregistrer vos informations. Réessayez.",
 
-        loadError:"Impossible de vérifier votre connexion. Veuillez vous reconnecter."
+        sessionFailed:"Connexion non vérifiée. Veuillez vous reconnecter."
 
       },
 
       fi: {
 
-        title:"KYC-tunnistautuminen", intro:"Anna tietosi henkilöllisyyden ja yrityksen tarkistamista varten.",
+        title:"KYC-tunnistautuminen",intro:"Anna tietosi henkilöllisyyden ja yrityksen tarkistamista varten.",
 
-        notice:"Tietosi tarkistetaan manuaalisesti. Lomakkeen lähettäminen ei tarkoita henkilöllisyyden tai rahoituksen hyväksymistä.",
+        notice:"Tietosi tarkistetaan manuaalisesti. Lomakkeen lähettäminen ei tarkoita hyväksyntää.",
 
-        emailLabel:"Tilin sähköposti", fullName:"Koko virallinen nimi *", residence:"Asuinmaa *",
+        emailLabel:"Tilin sähköposti",fullName:"Koko virallinen nimi *",residence:"Asuinmaa *",
 
-        documentType:"Henkilöllisyystodistuksen tyyppi *", choose:"Valitse vaihtoehto", passport:"Passi",
+        documentType:"Henkilöllisyystodistuksen tyyppi *",choose:"Valitse vaihtoehto",passport:"Passi",
 
-        nationalId:"Henkilökortti", drivingLicence:"Ajokortti", other:"Muu",
+        nationalId:"Henkilökortti",drivingLicence:"Ajokortti",other:"Muu",
 
-        documentNumber:"Asiakirjan numero *", documentHelp:"Anna henkilöllisyystodistuksessa näkyvä numero. Älä anna salasanaasi tai pankin PIN-koodia.",
+        documentNumber:"Asiakirjan numero *",documentHelp:"Anna henkilöllisyystodistuksen numero. Älä anna salasanaasi tai pankin PIN-koodia.",
 
-        businessName:"Yrityksen nimi", businessCountry:"Yrityksen rekisteröintimaa", businessType:"Yrityksen tyyppi",
+        businessName:"Yrityksen nimi",businessCountry:"Yrityksen rekisteröintimaa",businessType:"Yrityksen tyyppi",
 
-        additional:"Lisätiedot", consent:"Vahvistan tietojen oikeellisuuden ja ymmärrän, että ne tarkistetaan manuaalisesti. *",
+        additional:"Lisätiedot",consent:"Vahvistan tietojen oikeellisuuden ja ymmärrän, että ne tarkistetaan manuaalisesti. *",
 
-        submit:"Lähetä manuaaliseen tarkistukseen", submitting:"Lähetetään turvallisesti…", backDashboard:"Takaisin hallintapaneeliin",
+        submit:"Lähetä tarkistettavaksi",sending:"Lähetetään turvallisesti…",back:"Takaisin hallintapaneeliin",
 
         secureNote:"Lähetys liitetään kirjautuneeseen tiliisi.",
 
-        successTitle:"KYC lähetetty onnistuneesti", successMessage:"Henkilöllisyyden tarkistustietosi on vastaanotettu ja tallennettu.",
+        successTitle:"KYC lähetetty onnistuneesti!",successMessage:"KYC-tietosi on vastaanotettu ja tallennettu.",
 
-        pendingStatus:"Odottaa tarkistusta", nextTitle:"Mitä tapahtuu seuraavaksi?",
+        pending:"ODOTTAA TARKISTUSTA",nextTitle:"Mitä tapahtuu seuraavaksi?",
 
-        nextMessage:"Ylläpitäjä tarkistaa tietosi. Lähetys ei tarkoita henkilöllisyyden tai rahoituksen hyväksymistä.",
+        nextMessage:"Tietosi odottavat manuaalista tarkistusta. Tämä ei tarkoita henkilöllisyyden tai rahoituksen hyväksymistä.",
 
         footer:"GlobalBridgeFunding · Tilin turvallinen tarkistus",
 
-        login:"Kirjaudu sisään lähettääksesi KYC-tietosi.", saveError:"Tietojen tallennus epäonnistui. Yritä uudelleen.",
+        login:"Kirjaudu sisään lähettääksesi KYC-tietosi.",failed:"Tietojen tallennus epäonnistui. Yritä uudelleen.",
 
-        loadError:"Kirjautumistasi ei voitu vahvistaa. Kirjaudu uudelleen."
+        sessionFailed:"Kirjautumista ei voitu vahvistaa. Kirjaudu uudelleen."
 
       },
 
       es: {
 
-        title:"Verificación KYC", intro:"Proporcione sus datos para verificar su identidad y negocio.",
+        title:"Verificación KYC",intro:"Proporcione sus datos para verificar su identidad y negocio.",
 
-        notice:"Su información será revisada manualmente. Enviar este formulario no significa que su identidad o financiación hayan sido aprobadas.",
+        notice:"Su información será revisada manualmente. El envío no significa aprobación.",
 
-        emailLabel:"Correo electrónico de la cuenta", fullName:"Nombre legal completo *", residence:"País de residencia *",
+        emailLabel:"Correo de la cuenta",fullName:"Nombre legal completo *",residence:"País de residencia *",
 
-        documentType:"Tipo de documento de identidad *", choose:"Seleccione una opción", passport:"Pasaporte",
+        documentType:"Tipo de documento de identidad *",choose:"Seleccione una opción",passport:"Pasaporte",
 
-        nationalId:"Documento nacional de identidad", drivingLicence:"Permiso de conducir", other:"Otro",
+        nationalId:"Documento nacional de identidad",drivingLicence:"Permiso de conducir",other:"Otro",
 
-        documentNumber:"Número del documento *", documentHelp:"Introduzca el número que aparece en su documento de identidad. No introduzca su contraseña ni el PIN bancario.",
+        documentNumber:"Número del documento *",documentHelp:"Introduzca el número de su documento. No introduzca su contraseña ni el PIN bancario.",
 
-        businessName:"Nombre de la empresa", businessCountry:"País de registro de la empresa", businessType:"Tipo de empresa",
+        businessName:"Nombre de la empresa",businessCountry:"País de registro",businessType:"Tipo de empresa",
 
-        additional:"Información adicional", consent:"Confirmo que la información es correcta y entiendo que será revisada manualmente. *",
+        additional:"Información adicional",consent:"Confirmo que la información es correcta y entiendo que se revisará manualmente. *",
 
-        submit:"Enviar para revisión manual", submitting:"Enviando de forma segura…", backDashboard:"Volver al panel",
+        submit:"Enviar para revisión",sending:"Enviando de forma segura…",back:"Volver al panel",
 
-        secureNote:"El envío está vinculado a su cuenta iniciada.",
+        secureNote:"El envío está vinculado a su cuenta.",
 
-        successTitle:"KYC enviado correctamente", successMessage:"Sus datos de verificación de identidad se han recibido y guardado.",
+        successTitle:"¡KYC enviado correctamente!",successMessage:"Sus datos KYC se han recibido y guardado.",
 
-        pendingStatus:"Verificación pendiente", nextTitle:"¿Qué sucede después?",
+        pending:"VERIFICACIÓN PENDIENTE",nextTitle:"¿Qué sucede después?",
 
-        nextMessage:"Un administrador revisará sus datos. Este envío no supone la aprobación de su identidad ni de su financiación.",
+        nextMessage:"Sus datos esperan una revisión manual. Esto no supone la aprobación de su identidad ni de su financiación.",
 
         footer:"GlobalBridgeFunding · Verificación segura de la cuenta",
 
-        login:"Inicie sesión para enviar sus datos KYC.", saveError:"No se pudo guardar el envío. Inténtelo de nuevo.",
+        login:"Inicie sesión para enviar sus datos KYC.",failed:"No se pudieron guardar los datos. Inténtelo de nuevo.",
 
-        loadError:"No se pudo verificar su inicio de sesión. Vuelva a iniciar sesión."
+        sessionFailed:"No se pudo verificar su sesión. Vuelva a iniciar sesión."
 
       }
 
     };
 
+    const formScreen = document.getElementById("formScreen");
+
+    const successScreen = document.getElementById("successScreen");
+
     const form = document.getElementById("kycForm");
 
-    const formSection = document.getElementById("formSection");
-
-    const successPanel = document.getElementById("successPanel");
-
-    const errorMessage = document.getElementById("errorMessage");
+    const errorBox = document.getElementById("errorMessage");
 
     const submitButton = document.getElementById("submitButton");
 
     const languageSelect = document.getElementById("language");
 
-    let currentLanguage = "en";
+    let language = "en";
 
-    function t(key) {
+    let user = null;
 
-      return translations[currentLanguage]?.[key] || translations.en[key] || key;
+    function tr(key) {
+
+      return (words[language] && words[language][key]) ||
+
+        words.en[key] || key;
 
     }
 
-    function applyLanguage(language) {
+    function setLanguage(value) {
 
-      currentLanguage = translations[language] ? language : "en";
+      language = words[value] ? value : "en";
 
-      document.documentElement.lang = currentLanguage;
+      document.documentElement.lang = language;
 
-      document.documentElement.dir = currentLanguage === "fa" ? "rtl" : "ltr";
+      document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
 
-      languageSelect.value = currentLanguage;
+      languageSelect.value = language;
 
-      document.querySelectorAll("[data-i18n]").forEach(element => {
+      document.querySelectorAll("[data-t]").forEach(el => {
 
-        const key = element.dataset.i18n;
+        const key = el.dataset.t;
 
-        if (translations[currentLanguage][key]) {
-
-          element.textContent = translations[currentLanguage][key];
-
-        }
+        if (tr(key)) el.textContent = tr(key);
 
       });
 
-      document.title = t("title") + " | GlobalBridgeFunding";
+      document.title = tr("title") + " | GlobalBridgeFunding";
 
       try {
 
-        localStorage.setItem("globalBridge_language", currentLanguage);
+        localStorage.setItem("globalBridge_language", language);
 
       } catch (_) {}
 
     }
 
+    let savedLanguage = "en";
+
     try {
 
-      const savedLanguage = localStorage.getItem("globalBridge_language") || "en";
+      savedLanguage = localStorage.getItem("globalBridge_language") || "en";
 
-      applyLanguage(savedLanguage);
+    } catch (_) {}
 
-    } catch (_) {
-
-      applyLanguage("en");
-
-    }
+    setLanguage(savedLanguage);
 
     languageSelect.addEventListener("change", () => {
 
-      applyLanguage(languageSelect.value);
+      setLanguage(languageSelect.value);
 
     });
 
     function showError(message) {
 
-      errorMessage.textContent = message;
+      errorBox.textContent = message;
 
-      errorMessage.style.display = "block";
+      errorBox.style.display = "block";
 
     }
 
-    async function checkSession() {
+    async function initialise() {
 
-      const { data, error } = await supabase.auth.getSession();
+      try {
 
-      if (error || !data.session) {
+        const { data, error } = await supabase.auth.getSession();
 
-        showError(t("login"));
+        if (error || !data.session) {
+
+          showError(tr("login"));
+
+          submitButton.disabled = true;
+
+          return;
+
+        }
+
+        user = data.session.user;
+
+        document.getElementById("email").value = user.email || "";
+
+      } catch (err) {
+
+        console.error(err);
+
+        showError(tr("sessionFailed"));
 
         submitButton.disabled = true;
 
-        return null;
-
       }
-
-      document.getElementById("email").value =
-
-        data.session.user.email || "";
-
-      return data.session.user;
 
     }
 
-    const currentUser = await checkSession();
+    await initialise();
 
     form.addEventListener("submit", async event => {
 
       event.preventDefault();
 
-      errorMessage.style.display = "none";
+      errorBox.style.display = "none";
 
-      if (!currentUser) {
+      if (!user) {
 
-        showError(t("login"));
+        showError(tr("login"));
 
         return;
 
@@ -1126,11 +1154,11 @@
 
       submitButton.disabled = true;
 
-      submitButton.querySelector("span").textContent = t("submitting");
+      submitButton.querySelector("span").textContent = tr("sending");
 
       const payload = {
 
-        user_id: currentUser.id,
+        user_id: user.id,
 
         full_name: document.getElementById("full_name").value.trim(),
 
@@ -1162,23 +1190,37 @@
 
         if (error) throw error;
 
-        // Only show success after Supabase confirms the row was saved.
+        /*
 
-        formSection.hidden = true;
+         * IMPORTANT:
 
-        successPanel.hidden = false;
+         * These lines run only after Supabase confirms success.
+
+         * The old form and old submit message are removed from view.
+
+         */
+
+        form.reset();
+
+        formScreen.hidden = true;
+
+        formScreen.style.display = "none";
+
+        successScreen.hidden = false;
+
+        successScreen.style.display = "block";
 
         window.scrollTo({ top: 0, behavior: "smooth" });
 
-      } catch (error) {
+      } catch (err) {
 
-        console.error("KYC submission error:", error);
+        console.error("KYC submission failed:", err);
 
-        showError(t("saveError") + " " + (error.message || ""));
+        showError(tr("failed") + (err.message ? " " + err.message : ""));
 
         submitButton.disabled = false;
 
-        submitButton.querySelector("span").textContent = t("submit");
+        submitButton.querySelector("span").textContent = tr("submit");
 
       }
 
