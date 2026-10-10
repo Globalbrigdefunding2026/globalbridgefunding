@@ -1,447 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>My Applications | GlobalBridgeFunding</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f8fc;
-      color: #172033;
-    }
-
-    header {
-      background: #071a35;
-      color: white;
-      padding: 18px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 21px;
-      font-weight: 800;
-    }
-
-    .logo span {
-      color: #36c2ff;
-    }
-
-    .back {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      border: 1px solid rgba(255,255,255,.4);
-      padding: 9px 14px;
-      border-radius: 7px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 35px auto;
-      padding: 0 20px;
-    }
-
-    h1 {
-      color: #071a35;
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .intro {
-      color: #667085;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-
-    .application-card {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 28px rgba(20,40,70,.08);
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .reference {
-      font-size: 12px;
-      color: #667085;
-    }
-
-    .reference strong {
-      display: block;
-      color: #071a35;
-      font-size: 14px;
-      margin-top: 4px;
-      word-break: break-all;
-    }
-
-    .status {
-      padding: 8px 13px;
-      border-radius: 20px;
-      background: #fff7ed;
-      color: #c2410c;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .detail {
-      background: #f8fafc;
-      padding: 14px;
-      border-radius: 8px;
-    }
-
-    .detail span {
-      display: block;
-      color: #667085;
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
-
-    .detail strong {
-      color: #071a35;
-      font-size: 15px;
-    }
-
-    .empty {
-      background: white;
-      border-radius: 15px;
-      padding: 40px 25px;
-      text-align: center;
-      color: #667085;
-      box-shadow: 0 8px 28px rgba(20,40,70,.08);
-    }
-
-    .empty h2 {
-      color: #071a35;
-      margin-bottom: 10px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 35px;
-      color: #667085;
-    }
-
-    .error {
-      background: #fef3f2;
-      border: 1px solid #fecdca;
-      color: #b42318;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    @media (max-width: 600px) {
-
-      header {
-        padding: 16px 20px;
-      }
-
-      .logo {
-        font-size: 18px;
-      }
-
-      .container {
-        margin-top: 25px;
-      }
-
-      h1 {
-        font-size: 26px;
-      }
-
-      .application-card {
-        padding: 20px;
-      }
-
-      .top {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .details {
-        grid-template-columns: 1fr;
-      }
-
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a35">
+<title>My Applications | GlobalBridgeFunding</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f5f8fc;color:#172033}
+header{background:#071a35;color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:21px;font-weight:800}
+.logo span{color:#36c2ff}
+.header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+#language{padding:10px;border-radius:7px;border:1px solid #64748b;background:white;color:#071a35;font-size:14px;max-width:180px}
+.back,.new-app{color:white;text-decoration:none;font-size:14px;border:1px solid #ffffff66;padding:10px 13px;border-radius:7px;white-space:nowrap}
+.new-app{background:#36c2ff;color:#071a35;border-color:#36c2ff;font-weight:700}
+.container{max-width:900px;margin:32px auto;padding:0 18px}
+h1{color:#071a35;font-size:30px;margin-bottom:8px}
+.intro{color:#667085;line-height:1.6;margin-bottom:24px}
+.application-card{background:white;border-radius:15px;padding:25px;margin-bottom:20px;box-shadow:0 8px 28px #14284614}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.reference{font-size:12px;color:#667085}
+.reference strong{display:block;color:#071a35;font-size:14px;margin-top:4px;word-break:break-all}
+.status{padding:8px 13px;border-radius:20px;background:#fff7ed;color:#c2410c;font-size:13px;font-weight:700;white-space:nowrap}
+.status.approved{background:#eaf8ef;color:#176534}
+.status.declined,.status.rejected{background:#fff1f1;color:#a42626}
+.status.reviewing,.status.pending{background:#fff7ed;color:#c2410c}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.detail{background:#f8fafc;padding:14px;border-radius:8px;min-width:0}
+.detail span{display:block;color:#667085;font-size:12px;margin-bottom:5px}
+.detail strong{color:#071a35;font-size:15px;overflow-wrap:anywhere}
+.empty{background:white;border-radius:15px;padding:40px 25px;text-align:center;color:#667085;box-shadow:0 8px 28px #14284614}
+.empty h2{color:#071a35;margin-bottom:10px}
+.empty p{line-height:1.6;margin-bottom:20px}
+.loading{text-align:center;padding:35px;color:#667085}
+.error{background:#fef3f2;border:1px solid #fecdca;color:#b42318;padding:15px;border-radius:8px;margin-bottom:20px;display:none;line-height:1.6;overflow-wrap:anywhere}
+footer{text-align:center;padding:30px 18px;color:#7b8797;font-size:12px}
+[dir="rtl"] .detail,[dir="rtl"] .reference{text-align:right}
+[dir="rtl"] .status{direction:rtl}
+@media(max-width:600px){
+ header{padding:15px 18px}
+ .logo{font-size:18px}
+ .header-right{width:100%}
+ #language{flex:1;max-width:none}
+ .back,.new-app{font-size:12px;padding:9px}
+ .container{margin-top:24px}
+ h1{font-size:26px}
+ .application-card{padding:20px}
+ .top{align-items:flex-start;flex-direction:column}
+ .details{grid-template-columns:1fr}
+}
+</style>
 </head>
-
 <body>
-
 <header>
-
-  <div class="logo">
-    Global<span>Bridge</span>Funding
+  <div class="logo">Global<span>Bridge</span>Funding</div>
+  <div class="header-right">
+    <select id="language" aria-label="Choose language">
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="vi">Tiếng Việt</option>
+      <option value="fa">فارسی</option>
+      <option value="id">Bahasa Indonesia</option>
+      <option value="fr">Français</option>
+      <option value="fi">Suomi</option>
+      <option value="es">Español</option>
+    </select>
+    <a href="dashboard.html" class="back" data-i18n="dashboard">← Dashboard</a>
+    <a href="application.html" class="new-app" data-i18n="newApplication">+ New Application</a>
   </div>
-
-  <a href="dashboard.html" class="back">
-    ← Dashboard
-  </a>
-
 </header>
-
-
 <main class="container">
-
-  <h1>My Applications</h1>
-
-  <p class="intro">
-    View your financing applications and their current status.
-  </p>
-
-  <div id="errorMessage" class="error"></div>
-
+  <h1 data-i18n="title">My Applications</h1>
+  <p class="intro" data-i18n="intro">View your financing applications and their current status.</p>
+  <div id="errorMessage" class="error" role="alert"></div>
   <div id="applications">
-
-    <div class="loading">
-      Loading your applications...
-    </div>
-
+    <div class="loading" data-i18n="loading">Loading your applications...</div>
   </div>
-
 </main>
-
-
-<script type="module">
-
-  import { createClient } from
-    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-
-  const SUPABASE_URL =
-    "https://siykgexfdsmkiqwyxker.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-
-
-  const supabaseClient =
-    createClient(SUPABASE_URL, SUPABASE_KEY);
-
-
-  const applicationsContainer =
-    document.getElementById("applications");
-
-  const errorMessage =
-    document.getElementById("errorMessage");
-
-
-  async function loadApplications() {
-
-    try {
-
-      const {
-        data: { user },
-        error: userError
-      } = await supabaseClient.auth.getUser();
-
-
-      if (userError || !user) {
-
-        window.location.href = "login.html";
-        return;
-
-      }
-
-
-      const { data, error } =
-        await supabaseClient
-          .from("financing_applications")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("created_at", {
-            ascending: false
-          });
-
-
-      if (error) {
-
-        console.error(error);
-
-        throw new Error(
-          "Unable to load your applications."
-        );
-
-      }
-
-
-      if (!data || data.length === 0) {
-
-        applicationsContainer.innerHTML = `
-          <div class="empty">
-
-            <h2>No Applications Yet</h2>
-
-            <p>
-              You have not submitted a financing application yet.
-            </p>
-
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      applicationsContainer.innerHTML =
-        data.map(application => {
-
-          const amount =
-            Number(application.requested_amount)
-              .toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              });
-
-
-          const date =
-            new Date(application.created_at)
-              .toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-              });
-
-
-          const status =
-            application.status || "pending";
-
-
-          return `
-
-            <div class="application-card">
-
-              <div class="top">
-
-                <div class="reference">
-
-                  Application Reference
-
-                  <strong>
-                    ${application.id}
-                  </strong>
-
-                </div>
-
-                <div class="status">
-
-                  ${status.charAt(0).toUpperCase() +
-                    status.slice(1)}
-
-                </div>
-
-              </div>
-
-
-              <div class="details">
-
-                <div class="detail">
-
-                  <span>
-                    Requested financing
-                  </span>
-
-                  <strong>
-                    $${amount}
-                  </strong>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <span>
-                    Business name
-                  </span>
-
-                  <strong>
-                    ${application.business_name}
-                  </strong>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <span>
-                    Business type
-                  </span>
-
-                  <strong>
-                    ${application.business_type}
-                  </strong>
-
-                </div>
-
-
-                <div class="detail">
-
-                  <span>
-                    Submitted
-                  </span>
-
-                  <strong>
-                    ${date}
-                  </strong>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          `;
-
-        }).join("");
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      applicationsContainer.innerHTML = "";
-
-      errorMessage.textContent =
-        error.message ||
-        "Something went wrong.";
-
-      errorMessage.style.display = "block";
-
-    }
-
+<footer data-i18n="footer">© 2026 GlobalBridgeFunding. All rights reserved.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+"use strict";
+const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const translations = {
+en:{
+dashboard:"← Dashboard",newApplication:"+ New Application",title:"My Applications",
+intro:"View your financing applications and their current status.",
+loading:"Loading your applications...",reference:"Application Reference",
+amount:"Requested financing",businessName:"Business name",businessType:"Business type",
+submitted:"Submitted",emptyTitle:"No Applications Yet",
+emptyText:"You have not submitted a financing application yet.",
+startApplication:"Submit an Application",pending:"Pending",approved:"Approved",
+declined:"Declined",rejected:"Rejected",underReview:"Under Review",
+processing:"Processing",errorLoad:"Unable to load your applications. Please try again.",
+errorGeneral:"Something went wrong. Please refresh the page and try again.",
+footer:"© 2026 GlobalBridgeFunding. All rights reserved."
+},
+pt:{
+dashboard:"← Painel",newApplication:"+ Novo pedido",title:"Os Meus Pedidos",
+intro:"Consulte os seus pedidos de financiamento e o respetivo estado.",
+loading:"A carregar os seus pedidos...",reference:"Referência do pedido",
+amount:"Montante solicitado",businessName:"Nome da empresa",businessType:"Tipo de empresa",
+submitted:"Data de envio",emptyTitle:"Ainda Não Existem Pedidos",
+emptyText:"Ainda não enviou nenhum pedido de financiamento.",
+startApplication:"Enviar um pedido",pending:"Pendente",approved:"Aprovado",
+declined:"Recusado",rejected:"Rejeitado",underReview:"Em análise",
+processing:"Em processamento",errorLoad:"Não foi possível carregar os seus pedidos. Tente novamente.",
+errorGeneral:"Ocorreu um erro. Atualize a página e tente novamente.",
+footer:"© 2026 GlobalBridgeFunding. Todos os direitos reservados."
+},
+vi:{
+dashboard:"← Bảng điều khiển",newApplication:"+ Đơn đăng ký mới",title:"Đơn đăng ký của tôi",
+intro:"Xem các đơn đăng ký tài trợ và trạng thái hiện tại.",
+loading:"Đang tải đơn đăng ký...",reference:"Mã tham chiếu đơn",
+amount:"Số tiền yêu cầu",businessName:"Tên doanh nghiệp",businessType:"Loại hình doanh nghiệp",
+submitted:"Ngày gửi",emptyTitle:"Chưa có đơn đăng ký",
+emptyText:"Bạn chưa gửi đơn đăng ký tài trợ nào.",
+startApplication:"Gửi đơn đăng ký",pending:"Đang chờ",approved:"Đã chấp thuận",
+declined:"Bị từ chối",rejected:"Bị từ chối",underReview:"Đang xét duyệt",
+processing:"Đang xử lý",errorLoad:"Không thể tải đơn đăng ký. Vui lòng thử lại.",
+errorGeneral:"Đã xảy ra lỗi. Vui lòng tải lại trang và thử lại.",
+footer:"© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền."
+},
+fa:{
+dashboard:"← داشبورد",newApplication:"+ درخواست جدید",title:"درخواست‌های من",
+intro:"درخواست‌های تأمین مالی و وضعیت فعلی آن‌ها را مشاهده کنید.",
+loading:"در حال بارگذاری درخواست‌ها...",reference:"شماره مرجع درخواست",
+amount:"مبلغ درخواستی",businessName:"نام کسب‌وکار",businessType:"نوع کسب‌وکار",
+submitted:"تاریخ ارسال",emptyTitle:"هنوز درخواستی ندارید",
+emptyText:"شما هنوز درخواست تأمین مالی ارسال نکرده‌اید.",
+startApplication:"ارسال درخواست",pending:"در انتظار بررسی",approved:"تأیید شده",
+declined:"رد شده",rejected:"رد شده",underReview:"در حال بررسی",
+processing:"در حال پردازش",errorLoad:"بارگذاری درخواست‌ها ممکن نشد. لطفاً دوباره تلاش کنید.",
+errorGeneral:"خطایی رخ داد. صفحه را تازه‌سازی کرده و دوباره تلاش کنید.",
+footer:"© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است."
+},
+id:{
+dashboard:"← Dasbor",newApplication:"+ Permohonan Baru",title:"Permohonan Saya",
+intro:"Lihat permohonan pembiayaan dan status terkininya.",
+loading:"Memuat permohonan Anda...",reference:"Referensi Permohonan",
+amount:"Jumlah pembiayaan yang diminta",businessName:"Nama bisnis",businessType:"Jenis bisnis",
+submitted:"Tanggal pengajuan",emptyTitle:"Belum Ada Permohonan",
+emptyText:"Anda belum mengajukan permohonan pembiayaan.",
+startApplication:"Ajukan Permohonan",pending:"Menunggu",approved:"Disetujui",
+declined:"Ditolak",rejected:"Ditolak",underReview:"Sedang ditinjau",
+processing:"Sedang diproses",errorLoad:"Permohonan tidak dapat dimuat. Silakan coba lagi.",
+errorGeneral:"Terjadi kesalahan. Muat ulang halaman dan coba lagi.",
+footer:"© 2026 GlobalBridgeFunding. Hak cipta dilindungi."
+},
+fr:{
+dashboard:"← Tableau de bord",newApplication:"+ Nouvelle demande",title:"Mes demandes",
+intro:"Consultez vos demandes de financement et leur statut actuel.",
+loading:"Chargement de vos demandes...",reference:"Référence de la demande",
+amount:"Montant demandé",businessName:"Nom de l'entreprise",businessType:"Type d'entreprise",
+submitted:"Date d'envoi",emptyTitle:"Aucune demande pour le moment",
+emptyText:"Vous n'avez pas encore soumis de demande de financement.",
+startApplication:"Soumettre une demande",pending:"En attente",approved:"Approuvée",
+declined:"Refusée",rejected:"Rejetée",underReview:"En cours d'examen",
+processing:"En cours de traitement",errorLoad:"Impossible de charger vos demandes. Veuillez réessayer.",
+errorGeneral:"Une erreur s'est produite. Actualisez la page et réessayez.",
+footer:"© 2026 GlobalBridgeFunding. Tous droits réservés."
+},
+fi:{
+dashboard:"← Hallintapaneeli",newApplication:"+ Uusi hakemus",title:"Omat hakemukset",
+intro:"Katso rahoitushakemuksesi ja niiden tämänhetkinen tila.",
+loading:"Ladataan hakemuksiasi...",reference:"Hakemuksen viite",
+amount:"Haettava rahoitusmäärä",businessName:"Yrityksen nimi",businessType:"Yrityksen tyyppi",
+submitted:"Lähetyspäivä",emptyTitle:"Ei vielä hakemuksia",
+emptyText:"Et ole vielä lähettänyt rahoitushakemusta.",
+startApplication:"Lähetä hakemus",pending:"Odottaa käsittelyä",approved:"Hyväksytty",
+declined:"Hylätty",rejected:"Hylätty",underReview:"Käsiteltävänä",
+processing:"Käsitellään",errorLoad:"Hakemuksiasi ei voitu ladata. Yritä uudelleen.",
+errorGeneral:"Tapahtui virhe. Päivitä sivu ja yritä uudelleen.",
+footer:"© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään."
+},
+es:{
+dashboard:"← Panel",newApplication:"+ Nueva solicitud",title:"Mis solicitudes",
+intro:"Consulte sus solicitudes de financiación y su estado actual.",
+loading:"Cargando sus solicitudes...",reference:"Referencia de la solicitud",
+amount:"Importe solicitado",businessName:"Nombre de la empresa",businessType:"Tipo de empresa",
+submitted:"Fecha de envío",emptyTitle:"Todavía no hay solicitudes",
+emptyText:"Aún no ha enviado ninguna solicitud de financiación.",
+startApplication:"Enviar una solicitud",pending:"Pendiente",approved:"Aprobada",
+declined:"Rechazada",rejected:"Rechazada",underReview:"En revisión",
+processing:"En proceso",errorLoad:"No se pudieron cargar sus solicitudes. Inténtelo de nuevo.",
+errorGeneral:"Se produjo un error. Actualice la página e inténtelo de nuevo.",
+footer:"© 2026 GlobalBridgeFunding. Todos los derechos reservados."
+}
+};
+const languageSelect = document.getElementById("language");
+const applicationsContainer = document.getElementById("applications");
+const errorMessage = document.getElementById("errorMessage");
+let currentLanguage = "en";
+let applicationsData = [];
+function t(key){
+  return (translations[currentLanguage] && translations[currentLanguage][key]) ||
+    translations.en[key] || key;
+}
+function escapeHTML(value){
+  return String(value == null ? "" : value).replace(/[&<>"']/g, function(char){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
+  });
+}
+function getStatusKey(status){
+  const value = String(status || "pending").toLowerCase().trim();
+  if(value === "approved" || value === "approve") return "approved";
+  if(value === "declined" || value === "decline") return "declined";
+  if(value === "rejected" || value === "reject") return "rejected";
+  if(value === "under_review" || value === "under review" || value === "reviewing") return "underReview";
+  if(value === "processing" || value === "in_progress") return "processing";
+  return "pending";
+}
+function formatAmount(value){
+  const number = Number(value);
+  if(!Number.isFinite(number)) return escapeHTML(value);
+  return "$" + number.toLocaleString(currentLanguage === "fa" ? "fa-IR" :
+    currentLanguage === "pt" ? "pt-PT" :
+    currentLanguage === "vi" ? "vi-VN" :
+    currentLanguage === "id" ? "id-ID" :
+    currentLanguage === "fr" ? "fr-FR" :
+    currentLanguage === "fi" ? "fi-FI" :
+    currentLanguage === "es" ? "es-ES" : "en-US", {
+      minimumFractionDigits:2, maximumFractionDigits:2
+    });
+}
+function formatDate(value){
+  if(!value) return "—";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return "—";
+  const locales = {
+    en:"en-US",pt:"pt-PT",vi:"vi-VN",fa:"fa-IR",
+    id:"id-ID",fr:"fr-FR",fi:"fi-FI",es:"es-ES"
+  };
+  return date.toLocaleDateString(locales[currentLanguage] || "en-US", {
+    year:"numeric",month:"long",day:"numeric"
+  });
+}
+function renderApplications(){
+  errorMessage.style.display = "none";
+  if(!applicationsData.length){
+    applicationsContainer.innerHTML = `
+      <div class="empty">
+        <h2>${escapeHTML(t("emptyTitle"))}</h2>
+        <p>${escapeHTML(t("emptyText"))}</p>
+        <a href="application.html" class="new-app">${escapeHTML(t("startApplication"))}</a>
+      </div>`;
+    return;
   }
-
-
-  loadApplications();
-
+  applicationsContainer.innerHTML = applicationsData.map(function(application){
+    const statusKey = getStatusKey(application.status);
+    const statusClass = statusKey === "underReview" ? "reviewing" : statusKey;
+    return `
+      <div class="application-card">
+        <div class="top">
+          <div class="reference">
+            ${escapeHTML(t("reference"))}
+            <strong>${escapeHTML(application.id || "—")}</strong>
+          </div>
+          <div class="status ${escapeHTML(statusClass)}">
+            ${escapeHTML(t(statusKey))}
+          </div>
+        </div>
+        <div class="details">
+          <div class="detail">
+            <span>${escapeHTML(t("amount"))}</span>
+            <strong>${formatAmount(application.requested_amount)}</strong>
+          </div>
+          <div class="detail">
+            <span>${escapeHTML(t("businessName"))}</span>
+            <strong>${escapeHTML(application.business_name || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>${escapeHTML(t("businessType"))}</span>
+            <strong>${escapeHTML(application.business_type || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>${escapeHTML(t("submitted"))}</span>
+            <strong>${escapeHTML(formatDate(application.created_at))}</strong>
+          </div>
+        </div>
+      </div>`;
+  }).join("");
+}
+function applyLanguage(language){
+  currentLanguage = translations[language] ? language : "en";
+  document.documentElement.lang = currentLanguage;
+  document.documentElement.dir = currentLanguage === "fa" ? "rtl" : "ltr";
+  document.title = t("title") + " | GlobalBridgeFunding";
+  document.querySelectorAll("[data-i18n]").forEach(function(element){
+    const key = element.getAttribute("data-i18n");
+    element.textContent = t(key);
+  });
+  languageSelect.value = currentLanguage;
+  renderApplications();
+}
+function saveLanguage(language){
+  try{
+    localStorage.setItem("globalbridge_language", language);
+  }catch(error){}
+}
+try{
+  const savedLanguage = localStorage.getItem("globalbridge_language");
+  if(savedLanguage && translations[savedLanguage]){
+    currentLanguage = savedLanguage;
+  }
+}catch(error){}
+languageSelect.value = currentLanguage;
+languageSelect.addEventListener("change", function(){
+  saveLanguage(this.value);
+  applyLanguage(this.value);
+});
+applyLanguage(currentLanguage);
+async function loadApplications(){
+  applicationsContainer.innerHTML =
+    '<div class="loading">' + escapeHTML(t("loading")) + '</div>';
+  try{
+    const {data: userData, error: userError} =
+      await supabaseClient.auth.getUser();
+    if(userError || !userData.user){
+      window.location.href = "login.html";
+      return;
+    }
+    const {data, error} = await supabaseClient
+      .from("financing_applications")
+      .select("*")
+      .eq("user_id", userData.user.id)
+      .order("created_at", {ascending:false});
+    if(error){
+      console.error("Application loading error:", error);
+      throw new Error(t("errorLoad"));
+    }
+    applicationsData = data || [];
+    renderApplications();
+  }catch(error){
+    console.error(error);
+    applicationsContainer.innerHTML = "";
+    errorMessage.textContent = error.message || t("errorGeneral");
+    errorMessage.style.display = "block";
+  }
+}
+loadApplications();
+})();
 </script>
-
 </body>
 </html>
