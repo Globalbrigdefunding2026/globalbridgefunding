@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#071a35">
+
+  <title>My Wallet | GlobalBridgeFunding</title>
+
+  <style>
+
+    :root{--navy:#071a35;--blue:#36c2ff;--bg:#f3f7fc;--text:#15243b;--muted:#68778d;--line:#e1e8f1;--green:#13834a}
+
+    *{box-sizing:border-box}
+
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+
+    header{background:var(--navy);color:#fff;padding:18px 16px}
+
+    .top{max-width:950px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    .brand{font-weight:800;font-size:17px;letter-spacing:.2px}
+
+    .brand span{color:var(--blue)}
+
+    select,button,input{font:inherit}
+
+    select{padding:10px;border-radius:10px;border:1px solid #d7e0eb;background:#fff;color:#15243b}
+
+    main{max-width:950px;margin:24px auto;padding:0 15px 40px}
+
+    .heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+
+    h1{font-size:27px;margin:0 0 6px;color:var(--navy)}
+
+    h2{font-size:18px;margin:0 0 15px;color:var(--navy)}
+
+    p{line-height:1.5}
+
+    .muted{color:var(--muted);font-size:14px}
+
+    .btn{display:inline-block;border:0;border-radius:10px;padding:12px 15px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center}
+
+    .primary{background:var(--blue);color:var(--navy)}
+
+    .secondary{background:#edf4fb;color:var(--navy);border:1px solid var(--line)}
+
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 5px 20px #071a3508;min-width:0}
+
+    .balance{background:linear-gradient(135deg,#071a35,#123c67);color:white;border-radius:18px;padding:23px;margin-bottom:18px}
+
+    .balance .label{color:#d1e3f5;font-size:14px}
+
+    .amount{font-size:34px;font-weight:800;margin:10px 0}
+
+    .balance small{color:#d1e3f5}
+
+    label{display:block;font-size:14px;font-weight:650;margin:14px 0 7px}
+
+    input{width:100%;padding:12px;border:1px solid #d4deea;border-radius:10px;background:#fff;color:var(--text)}
+
+    input:focus,select:focus{outline:2px solid #36c2ff66;border-color:var(--blue)}
+
+    .field-help{font-size:12px;color:var(--muted);margin-top:6px}
+
+    .address{padding:12px;border-radius:10px;background:#f1f6fb;overflow-wrap:anywhere;font-size:13px;border:1px solid var(--line);margin:10px 0}
+
+    .notice{padding:12px;border-radius:10px;background:#fff8e8;color:#775414;font-size:13px;line-height:1.5;margin-top:12px}
+
+    .message{display:none;padding:12px;border-radius:10px;margin:12px 0;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+
+    .message.show{display:block}
+
+    .message.success{background:#e9f8ef;color:#17683a}
+
+    .message.error{background:#fff0f0;color:#a32929}
+
+    .table-wrap{overflow-x:auto}
+
+    table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px}
+
+    th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+
+    th{color:var(--muted);font-weight:650}
+
+    .status{font-weight:750;text-transform:capitalize}
+
+    .status.completed,.status.approved{color:var(--green)}
+
+    .status.rejected{color:#b42318}
+
+    .status.pending{color:#996515}
+
+    .empty{text-align:center;color:var(--muted);padding:22px}
+
+    .footer{text-align:center;color:var(--muted);font-size:12px;padding:12px}
+
+    button:disabled{opacity:.6;cursor:wait}
+
+    @media(max-width:650px){.cards{grid-template-columns:1fr}main{margin-top:18px}.amount{font-size:29px}.card{padding:17px}h1{font-size:24px}}
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="top">
+
+    <div class="brand">GlobalBridge<span>Funding</span></div>
+
+    <select id="language" aria-label="Language">
+
+      <option value="en">English</option>
+
+      <option value="pt">Português</option>
+
+      <option value="vi">Tiếng Việt</option>
+
+      <option value="fa">فارسی</option>
+
+      <option value="id">Bahasa Indonesia</option>
+
+      <option value="fr">Français</option>
+
+      <option value="fi">Suomi</option>
+
+      <option value="es">Español</option>
+
+    </select>
+
+  </div>
+
+</header>
+
+<main>
+
+  <div class="heading">
+
+    <div>
+
+      <h1 data-i18n="title">My Wallet</h1>
+
+      <div class="muted" data-i18n="subtitle">Manage your USDT wallet and transactions.</div>
+
+    </div>
+
+    <a class="btn secondary" href="dashboard.html" data-i18n="dashboard">Back to Dashboard</a>
+
+  </div>
+
+  <div id="pageMessage" class="message" role="status"></div>
+
+  <section class="balance">
+
+    <div class="label" data-i18n="available">Available balance</div>
+
+    <div class="amount" id="balance">$0.00</div>
+
+    <small data-i18n="balanceNote">USDT • TRC20 • Pending requests are not available funds.</small>
+
+  </section>
+
+  <div class="cards">
+
+    <section class="card">
+
+      <h2 data-i18n="depositTitle">Deposit USDT</h2>
+
+      <p class="muted" data-i18n="depositIntro">Send USDT only using the TRC20 network.</p>
+
+      <label data-i18n="depositAddress">Official deposit address</label>
+
+      <div class="address" id="depositAddress">Loading…</div>
+
+      <button class="btn secondary" id="copyAddress" type="button" data-i18n="copy">Copy address</button>
+
+      <div class="notice" data-i18n="depositWarning">Only send USDT on TRC20. Sending another token or using another network may result in permanent loss. Deposits are not credited until verified.</div>
+
+      <form id="depositForm">
+
+        <label for="depositAmount" data-i18n="amount">Amount (USDT)</label>
+
+        <input id="depositAmount" type="number" min="0.000001" max="1000000000" step="0.000001" required placeholder="e.g. 100">
+
+        <label for="depositHash" data-i18n="txHash">Transaction hash (optional)</label>
+
+        <input id="depositHash" type="text" maxlength="200" placeholder="Blockchain transaction ID">
+
+        <button class="btn primary" type="submit" style="margin-top:15px;width:100%" data-i18n="submitDeposit">Submit deposit for review</button>
+
+      </form>
+
+    </section>
+
+    <section class="card">
+
+      <h2 data-i18n="withdrawTitle">Withdraw USDT</h2>
+
+      <p class="muted" data-i18n="withdrawIntro">Withdrawals are reviewed manually before processing.</p>
+
+      <form id="withdrawForm">
+
+        <label for="withdrawAmount" data-i18n="amount">Amount (USDT)</label>
+
+        <input id="withdrawAmount" type="number" min="0.000001" max="1000000000" step="0.000001" required placeholder="e.g. 50">
+
+        <label for="withdrawAddress" data-i18n="destination">Destination TRC20 wallet address</label>
+
+        <input id="withdrawAddress" type="text" minlength="10" maxlength="200" required placeholder="Enter your USDT TRC20 address">
+
+        <div class="field-help" data-i18n="addressHelp">Check the address carefully. Crypto transfers are generally irreversible.</div>
+
+        <button class="btn primary" type="submit" style="margin-top:15px;width:100%" data-i18n="submitWithdraw">Request withdrawal</button>
+
+      </form>
+
+      <div class="notice" data-i18n="withdrawWarning">Your available balance is checked by the database. Pending withdrawals reserve funds until rejected or processed.</div>
+
+    </section>
+
+  </div>
+
+  <section class="card">
+
+    <h2 data-i18n="history">Transaction history</h2>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead><tr>
+
+          <th data-i18n="date">Date</th>
+
+          <th data-i18n="type">Type</th>
+
+          <th data-i18n="amount">Amount (USDT)</th>
+
+          <th data-i18n="status">Status</th>
+
+          <th data-i18n="reference">Reference</th>
+
+        </tr></thead>
+
+        <tbody id="transactions">
+
+          <tr><td colspan="5" class="empty" data-i18n="loading">Loading transactions…</td></tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <p class="muted" data-i18n="historyNote">Only completed deposits and recorded loan disbursements count toward your balance.</p>
+
+  </section>
+
+  <div class="footer">GlobalBridgeFunding • <span data-i18n="footer">Secure account access</span></div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="language.js"></script>
+
+<script>
+
+(() => {
+
+  "use strict";
+
+  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const translations = {
+
+    en:{title:"My Wallet",subtitle:"Manage your USDT wallet and transactions.",dashboard:"Back to Dashboard",available:"Available balance",balanceNote:"USDT • TRC20 • Pending requests are not available funds.",depositTitle:"Deposit USDT",depositIntro:"Send USDT only using the TRC20 network.",depositAddress:"Official deposit address",copy:"Copy address",depositWarning:"Only send USDT on TRC20. Sending another token or using another network may result in permanent loss. Deposits are not credited until verified.",amount:"Amount (USDT)",txHash:"Transaction hash (optional)",submitDeposit:"Submit deposit for review",withdrawTitle:"Withdraw USDT",withdrawIntro:"Withdrawals are reviewed manually before processing.",destination:"Destination TRC20 wallet address",addressHelp:"Check the address carefully. Crypto transfers are generally irreversible.",submitWithdraw:"Request withdrawal",withdrawWarning:"Your available balance is checked by the database. Pending withdrawals reserve funds until rejected or processed.",history:"Transaction history",date:"Date",type:"Type",status:"Status",reference:"Reference",loading:"Loading transactions…",historyNote:"Only completed deposits and recorded loan disbursements count toward your balance.",footer:"Secure account access",noTransactions:"No transactions yet.",noAddress:"The administrator has not configured a deposit address yet.",signIn:"Please sign in to access your wallet.",loadError:"Could not load wallet information.",copied:"Address copied.",copyFailed:"Could not copy automatically. Press and hold the address to copy it.",requestSuccess:"Your request was submitted for manual review.",requestError:"Could not submit your request.",enterAddress:"Enter a destination wallet address.",deposit:"Deposit",withdrawal:"Withdrawal",loan:"Loan disbursement",pending:"Pending",approved:"Approved",rejected:"Rejected",completed:"Completed",processing:"Submitting…"},
+
+    pt:{title:"Minha carteira",subtitle:"Gira a sua carteira USDT e transações.",dashboard:"Voltar ao painel",available:"Saldo disponível",balanceNote:"USDT • TRC20 • Pedidos pendentes não são fundos disponíveis.",depositTitle:"Depositar USDT",depositIntro:"Envie USDT apenas pela rede TRC20.",depositAddress:"Endereço oficial de depósito",copy:"Copiar endereço",depositWarning:"Envie apenas USDT na rede TRC20. Os depósitos só são creditados após verificação.",amount:"Valor (USDT)",txHash:"Hash da transação (opcional)",submitDeposit:"Enviar depósito para análise",withdrawTitle:"Levantar USDT",withdrawIntro:"Os levantamentos são analisados manualmente.",destination:"Endereço de destino TRC20",addressHelp:"Confirme o endereço. As transferências cripto são geralmente irreversíveis.",submitWithdraw:"Solicitar levantamento",withdrawWarning:"O saldo é verificado pela base de dados. Levantamentos pendentes reservam fundos.",history:"Histórico de transações",date:"Data",type:"Tipo",status:"Estado",reference:"Referência",loading:"A carregar transações…",historyNote:"Apenas depósitos concluídos e desembolsos registados contam para o saldo.",footer:"Acesso seguro à conta",noTransactions:"Ainda não existem transações.",noAddress:"O administrador ainda não configurou o endereço.",signIn:"Inicie sessão para aceder à carteira.",loadError:"Não foi possível carregar a carteira.",copied:"Endereço copiado.",copyFailed:"Não foi possível copiar automaticamente.",requestSuccess:"Pedido enviado para análise manual.",requestError:"Não foi possível enviar o pedido.",enterAddress:"Introduza um endereço de destino.",deposit:"Depósito",withdrawal:"Levantamento",loan:"Desembolso de financiamento",pending:"Pendente",approved:"Aprovado",rejected:"Rejeitado",completed:"Concluído",processing:"A enviar…"},
+
+    vi:{title:"Ví của tôi",subtitle:"Quản lý ví USDT và giao dịch.",dashboard:"Quay lại bảng điều khiển",available:"Số dư khả dụng",balanceNote:"USDT • TRC20 • Yêu cầu đang chờ không phải tiền khả dụng.",depositTitle:"Nạp USDT",depositIntro:"Chỉ gửi USDT qua mạng TRC20.",depositAddress:"Địa chỉ nạp chính thức",copy:"Sao chép địa chỉ",depositWarning:"Chỉ gửi USDT trên TRC20. Tiền nạp chỉ được ghi có sau khi xác minh.",amount:"Số tiền (USDT)",txHash:"Mã giao dịch (không bắt buộc)",submitDeposit:"Gửi yêu cầu nạp",withdrawTitle:"Rút USDT",withdrawIntro:"Yêu cầu rút tiền được xem xét thủ công.",destination:"Địa chỉ ví TRC20 nhận tiền",addressHelp:"Kiểm tra kỹ địa chỉ; giao dịch tiền mã hóa thường không thể hoàn tác.",submitWithdraw:"Yêu cầu rút tiền",withdrawWarning:"Số dư được kiểm tra trong cơ sở dữ liệu. Yêu cầu rút đang chờ sẽ giữ số tiền.",history:"Lịch sử giao dịch",date:"Ngày",type:"Loại",status:"Trạng thái",reference:"Mã tham chiếu",loading:"Đang tải giao dịch…",historyNote:"Chỉ tiền nạp hoàn tất và khoản giải ngân được ghi nhận mới tính vào số dư.",footer:"Truy cập tài khoản an toàn",noTransactions:"Chưa có giao dịch.",noAddress:"Quản trị viên chưa thiết lập địa chỉ nạp.",signIn:"Vui lòng đăng nhập để sử dụng ví.",loadError:"Không thể tải thông tin ví.",copied:"Đã sao chép địa chỉ.",copyFailed:"Không thể tự sao chép.",requestSuccess:"Yêu cầu đã gửi để xem xét.",requestError:"Không thể gửi yêu cầu.",enterAddress:"Nhập địa chỉ ví nhận.",deposit:"Nạp tiền",withdrawal:"Rút tiền",loan:"Giải ngân khoản vay",pending:"Đang chờ",approved:"Đã duyệt",rejected:"Từ chối",completed:"Hoàn tất",processing:"Đang gửi…"},
+
+    fa:{title:"کیف پول من",subtitle:"مدیریت کیف پول و تراکنش‌های USDT",dashboard:"بازگشت به داشبورد",available:"موجودی قابل استفاده",balanceNote:"USDT • TRC20 • درخواست‌های در انتظار، موجودی قابل استفاده نیستند.",depositTitle:"واریز USDT",depositIntro:"فقط از شبکه TRC20 استفاده کنید.",depositAddress:"آدرس رسمی واریز",copy:"کپی آدرس",depositWarning:"فقط USDT روی شبکه TRC20 ارسال کنید. واریز پس از تأیید ثبت می‌شود.",amount:"مبلغ (USDT)",txHash:"هش تراکنش (اختیاری)",submitDeposit:"ارسال واریز برای بررسی",withdrawTitle:"برداشت USDT",withdrawIntro:"برداشت‌ها به‌صورت دستی بررسی می‌شوند.",destination:"آدرس کیف پول مقصد TRC20",addressHelp:"آدرس را با دقت بررسی کنید؛ انتقال رمزارز معمولاً برگشت‌ناپذیر است.",submitWithdraw:"درخواست برداشت",withdrawWarning:"موجودی توسط پایگاه داده بررسی می‌شود. برداشت‌های در انتظار، وجه را رزرو می‌کنند.",history:"تاریخچه تراکنش‌ها",date:"تاریخ",type:"نوع",status:"وضعیت",reference:"شناسه",loading:"در حال بارگذاری…",historyNote:"فقط واریزهای تکمیل‌شده و پرداخت‌های ثبت‌شده وام در موجودی حساب می‌شوند.",footer:"دسترسی امن به حساب",noTransactions:"هنوز تراکنشی وجود ندارد.",noAddress:"مدیر هنوز آدرس واریز را تنظیم نکرده است.",signIn:"برای دسترسی وارد شوید.",loadError:"بارگذاری کیف پول ناموفق بود.",copied:"آدرس کپی شد.",copyFailed:"کپی خودکار ناموفق بود.",requestSuccess:"درخواست برای بررسی دستی ارسال شد.",requestError:"ارسال درخواست ناموفق بود.",enterAddress:"آدرس مقصد را وارد کنید.",deposit:"واریز",withdrawal:"برداشت",loan:"پرداخت وام",pending:"در انتظار",approved:"تأیید شده",rejected:"رد شده",completed:"تکمیل شده",processing:"در حال ارسال…"},
+
+    id:{title:"Dompet Saya",subtitle:"Kelola dompet dan transaksi USDT Anda.",dashboard:"Kembali ke Dasbor",available:"Saldo tersedia",balanceNote:"USDT • TRC20 • Permintaan tertunda bukan saldo tersedia.",depositTitle:"Deposit USDT",depositIntro:"Kirim USDT hanya melalui jaringan TRC20.",depositAddress:"Alamat deposit resmi",copy:"Salin alamat",depositWarning:"Hanya kirim USDT melalui TRC20. Deposit baru dikreditkan setelah diverifikasi.",amount:"Jumlah (USDT)",txHash:"Hash transaksi (opsional)",submitDeposit:"Kirim deposit untuk ditinjau",withdrawTitle:"Tarik USDT",withdrawIntro:"Penarikan ditinjau secara manual.",destination:"Alamat dompet tujuan TRC20",addressHelp:"Periksa alamat dengan teliti; transfer kripto biasanya tidak dapat dibatalkan.",submitWithdraw:"Ajukan penarikan",withdrawWarning:"Saldo diperiksa oleh database. Penarikan tertunda akan mencadangkan dana.",history:"Riwayat transaksi",date:"Tanggal",type:"Jenis",status:"Status",reference:"Referensi",loading:"Memuat transaksi…",historyNote:"Hanya deposit selesai dan pencairan pinjaman tercatat yang dihitung dalam saldo.",footer:"Akses akun aman",noTransactions:"Belum ada transaksi.",noAddress:"Admin belum mengatur alamat deposit.",signIn:"Silakan masuk untuk mengakses dompet.",loadError:"Gagal memuat informasi dompet.",copied:"Alamat disalin.",copyFailed:"Tidak dapat menyalin otomatis.",requestSuccess:"Permintaan dikirim untuk peninjauan manual.",requestError:"Permintaan gagal dikirim.",enterAddress:"Masukkan alamat dompet tujuan.",deposit:"Deposit",withdrawal:"Penarikan",loan:"Pencairan pinjaman",pending:"Menunggu",approved:"Disetujui",rejected:"Ditolak",completed:"Selesai",processing:"Mengirim…"},
+
+    fr:{title:"Mon portefeuille",subtitle:"Gérez votre portefeuille USDT et vos transactions.",dashboard:"Retour au tableau de bord",available:"Solde disponible",balanceNote:"USDT • TRC20 • Les demandes en attente ne sont pas disponibles.",depositTitle:"Déposer des USDT",depositIntro:"Envoyez des USDT uniquement via le réseau TRC20.",depositAddress:"Adresse officielle de dépôt",copy:"Copier l’adresse",depositWarning:"Envoyez uniquement des USDT sur TRC20. Les dépôts ne sont crédités qu’après vérification.",amount:"Montant (USDT)",txHash:"Hash de transaction (facultatif)",submitDeposit:"Soumettre le dépôt",withdrawTitle:"Retirer des USDT",withdrawIntro:"Les retraits sont examinés manuellement.",destination:"Adresse du portefeuille TRC20 destinataire",addressHelp:"Vérifiez l’adresse. Les transferts crypto sont généralement irréversibles.",submitWithdraw:"Demander un retrait",withdrawWarning:"Le solde est vérifié par la base de données. Les retraits en attente réservent les fonds.",history:"Historique des transactions",date:"Date",type:"Type",status:"Statut",reference:"Référence",loading:"Chargement des transactions…",historyNote:"Seuls les dépôts terminés et les décaissements enregistrés comptent dans le solde.",footer:"Accès sécurisé au compte",noTransactions:"Aucune transaction pour le moment.",noAddress:"L’administrateur n’a pas encore configuré d’adresse.",signIn:"Connectez-vous pour accéder au portefeuille.",loadError:"Impossible de charger le portefeuille.",copied:"Adresse copiée.",copyFailed:"Copie automatique impossible.",requestSuccess:"Demande envoyée pour examen manuel.",requestError:"Impossible d’envoyer la demande.",enterAddress:"Saisissez une adresse de destination.",deposit:"Dépôt",withdrawal:"Retrait",loan:"Décaissement de financement",pending:"En attente",approved:"Approuvé",rejected:"Refusé",completed:"Terminé",processing:"Envoi…"},
+
+    fi:{title:"Lompakkoni",subtitle:"Hallinnoi USDT-lompakkoasi ja tapahtumia.",dashboard:"Takaisin hallintapaneeliin",available:"Käytettävissä oleva saldo",balanceNote:"USDT • TRC20 • Odottavat pyynnöt eivät ole käytettävissä olevia varoja.",depositTitle:"Talleta USDT",depositIntro:"Lähetä USDT vain TRC20-verkossa.",depositAddress:"Virallinen talletusosoite",copy:"Kopioi osoite",depositWarning:"Lähetä vain USDT:tä TRC20-verkossa. Talletukset hyvitetään vasta tarkistuksen jälkeen.",amount:"Määrä (USDT)",txHash:"Tapahtumatunniste (valinnainen)",submitDeposit:"Lähetä talletus tarkistettavaksi",withdrawTitle:"Nosta USDT",withdrawIntro:"Nostot tarkistetaan manuaalisesti.",destination:"Vastaanottajan TRC20-lompakko-osoite",addressHelp:"Tarkista osoite huolellisesti; kryptosiirrot ovat yleensä peruuttamattomia.",submitWithdraw:"Pyydä nostoa",withdrawWarning:"Tietokanta tarkistaa saldon. Odottavat nostot varaavat varoja.",history:"Tapahtumahistoria",date:"Päivä",type:"Tyyppi",status:"Tila",reference:"Viite",loading:"Ladataan tapahtumia…",historyNote:"Vain valmiit talletukset ja kirjatut lainan maksut lasketaan saldoon.",footer:"Suojattu tilin käyttö",noTransactions:"Ei vielä tapahtumia.",noAddress:"Ylläpitäjä ei ole vielä määrittänyt talletusosoitetta.",signIn:"Kirjaudu sisään käyttääksesi lompakkoa.",loadError:"Lompakon tietoja ei voitu ladata.",copied:"Osoite kopioitu.",copyFailed:"Automaattinen kopiointi epäonnistui.",requestSuccess:"Pyyntö lähetettiin manuaaliseen tarkistukseen.",requestError:"Pyynnön lähetys epäonnistui.",enterAddress:"Anna vastaanottajan lompakko-osoite.",deposit:"Talletus",withdrawal:"Nosto",loan:"Lainan maksu",pending:"Odottaa",approved:"Hyväksytty",rejected:"Hylätty",completed:"Valmis",processing:"Lähetetään…"},
+
+    es:{title:"Mi cartera",subtitle:"Administra tu cartera USDT y tus transacciones.",dashboard:"Volver al panel",available:"Saldo disponible",balanceNote:"USDT • TRC20 • Las solicitudes pendientes no son fondos disponibles.",depositTitle:"Depositar USDT",depositIntro:"Envía USDT únicamente por la red TRC20.",depositAddress:"Dirección oficial de depósito",copy:"Copiar dirección",depositWarning:"Envía solo USDT por TRC20. Los depósitos se acreditan después de verificarse.",amount:"Importe (USDT)",txHash:"Hash de transacción (opcional)",submitDeposit:"Enviar depósito para revisión",withdrawTitle:"Retirar USDT",withdrawIntro:"Los retiros se revisan manualmente.",destination:"Dirección de destino TRC20",addressHelp:"Comprueba la dirección; las transferencias cripto suelen ser irreversibles.",submitWithdraw:"Solicitar retiro",withdrawWarning:"La base de datos verifica el saldo. Los retiros pendientes reservan fondos.",history:"Historial de transacciones",date:"Fecha",type:"Tipo",status:"Estado",reference:"Referencia",loading:"Cargando transacciones…",historyNote:"Solo los depósitos completados y desembolsos registrados cuentan para el saldo.",footer:"Acceso seguro a la cuenta",noTransactions:"Aún no hay transacciones.",noAddress:"El administrador aún no configuró una dirección.",signIn:"Inicia sesión para acceder a tu cartera.",loadError:"No se pudo cargar la cartera.",copied:"Dirección copiada.",copyFailed:"No se pudo copiar automáticamente.",requestSuccess:"Solicitud enviada para revisión manual.",requestError:"No se pudo enviar la solicitud.",enterAddress:"Introduce una dirección de destino.",deposit:"Depósito",withdrawal:"Retiro",loan:"Desembolso de financiación",pending:"Pendiente",approved:"Aprobado",rejected:"Rechazado",completed:"Completado",processing:"Enviando…"}
+
+  };
+
+  const $ = id => document.getElementById(id);
+
+  let currentUser = null;
+
+  let currentLanguage = "en";
+
+  let depositAddressValue = "";
+
+  function t(key) {
+
+    return (translations[currentLanguage] && translations[currentLanguage][key]) ||
+
+           translations.en[key] || key;
+
+  }
+
+  function showMessage(message, type = "error") {
+
+    const el = $("pageMessage");
+
+    el.textContent = message;
+
+    el.className = "message show " + type;
+
+  }
+
+  function clearMessage() {
+
+    $("pageMessage").className = "message";
+
+    $("pageMessage").textContent = "";
+
+  }
+
+  function applyLanguage(lang) {
+
+    currentLanguage = translations[lang] ? lang : "en";
+
+    document.documentElement.lang = currentLanguage;
+
+    document.documentElement.dir = currentLanguage === "fa" ? "rtl" : "ltr";
+
+    $("language").value = currentLanguage;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+
+      const key = el.getAttribute("data-i18n");
+
+      if (t(key)) el.textContent = t(key);
+
+    });
+
+    if (depositAddressValue) $("depositAddress").textContent = depositAddressValue;
+
+    else $("depositAddress").textContent = t("noAddress");
+
+  }
+
+  function getSavedLanguage() {
+
+    try {
+
+      return localStorage.getItem("globalbridge_language") ||
+
+             localStorage.getItem("globalBridge_language") || "en";
+
+    } catch (_) { return "en"; }
+
+  }
+
+  $("language").addEventListener("change", event => {
+
+    const lang = event.target.value;
+
+    applyLanguage(lang);
+
+    try { localStorage.setItem("globalbridge_language", lang); } catch (_) {}
+
+    // If the shared language file exposes a setter, let it update its own UI too.
+
+    if (typeof window.setLanguage === "function") {
+
+      try { window.setLanguage(lang); } catch (_) {}
+
+    }
+
+  });
+
+  $("copyAddress").addEventListener("click", async () => {
+
+    if (!depositAddressValue) {
+
+      showMessage(t("noAddress"));
+
+      return;
+
+    }
+
+    try {
+
+      await navigator.clipboard.writeText(depositAddressValue);
+
+      showMessage(t("copied"), "success");
+
+    } catch (_) {
+
+      showMessage(t("copyFailed"));
+
+    }
+
+  });
+
+  function escapeHtml(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, c => ({
+
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+
+    }[c]));
+
+  }
+
+  function money(value) {
+
+    const n = Number(value);
+
+    return Number.isFinite(n) ? n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:6}) : "0.00";
+
+  }
+
+  function labelType(type) {
+
+    if (type === "deposit") return t("deposit");
+
+    if (type === "withdrawal") return t("withdrawal");
+
+    if (type === "loan_disbursement") return t("loan");
+
+    return type || "—";
+
+  }
+
+  function labelStatus(status) {
+
+    const known = ["pending","approved","rejected","completed"];
+
+    return known.includes(status) ? t(status) : (status || "—");
+
+  }
+
+  async function loadWallet() {
+
+    const [settingsResult, transactionsResult] = await Promise.all([
+
+      client.from("wallet_settings").select("deposit_address").eq("id", 1).maybeSingle(),
+
+      client.from("wallet_transactions")
+
+        .select("id,transaction_type,amount,status,created_at,transaction_hash")
+
+        .eq("user_id", currentUser.id)
+
+        .order("created_at", {ascending:false})
+
+        .limit(100)
+
+    ]);
+
+    if (settingsResult.error) throw settingsResult.error;
+
+    if (transactionsResult.error) throw transactionsResult.error;
+
+    depositAddressValue = settingsResult.data?.deposit_address?.trim() || "";
+
+    $("depositAddress").textContent = depositAddressValue || t("noAddress");
+
+    const transactions = transactionsResult.data || [];
+
+    let credits = 0;
+
+    let reservedWithdrawals = 0;
+
+    for (const tx of transactions) {
+
+      const amount = Number(tx.amount) || 0;
+
+      if (tx.status === "completed" &&
+
+          ["deposit","loan_disbursement"].includes(tx.transaction_type)) {
+
+        credits += amount;
+
+      }
+
+      if (tx.transaction_type === "withdrawal" &&
+
+          ["pending","approved","completed"].includes(tx.status)) {
+
+        reservedWithdrawals += amount;
+
+      }
+
+    }
+
+    // This page shows USDT transaction units; pending deposits never count as funds.
+
+    $("balance").textContent = money(Math.max(0, credits - reservedWithdrawals)) + " USDT";
+
+    const tbody = $("transactions");
+
+    if (!transactions.length) {
+
+      tbody.innerHTML = '<tr><td colspan="5" class="empty">' + escapeHtml(t("noTransactions")) + '</td></tr>';
+
+      return;
+
+    }
+
+    tbody.innerHTML = transactions.map(tx => {
+
+      const date = tx.created_at ? new Date(tx.created_at).toLocaleString() : "—";
+
+      const hash = tx.transaction_hash ? tx.transaction_hash : tx.id;
+
+      const shortRef = String(hash).length > 22 ? String(hash).slice(0,10) + "…" + String(hash).slice(-8) : String(hash);
+
+      return '<tr>' +
+
+        '<td>' + escapeHtml(date) + '</td>' +
+
+        '<td>' + escapeHtml(labelType(tx.transaction_type)) + '</td>' +
+
+        '<td>' + escapeHtml(money(tx.amount)) + '</td>' +
+
+        '<td><span class="status ' + escapeHtml(tx.status) + '">' + escapeHtml(labelStatus(tx.status)) + '</span></td>' +
+
+        '<td title="' + escapeHtml(hash) + '">' + escapeHtml(shortRef) + '</td>' +
+
+      '</tr>';
+
+    }).join("");
+
+  }
+
+  async function submitRequest(event, type) {
+
+    event.preventDefault();
+
+    clearMessage();
+
+    const amountField = type === "deposit" ? $("depositAmount") : $("withdrawAmount");
+
+    const amount = Number(amountField.value);
+
+    const walletAddress = type === "withdrawal" ? $("withdrawAddress").value.trim() : null;
+
+    const txHash = type === "deposit" ? $("depositHash").value.trim() : null;
+
+    const form = event.currentTarget;
+
+    const button = form.querySelector('button[type="submit"]');
+
+    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000000) {
+
+      showMessage(t("requestError"));
+
+      return;
+
+    }
+
+    if (type === "withdrawal" && !walletAddress) {
+
+      showMessage(t("enterAddress"));
+
+      return;
+
+    }
+
+    button.disabled = true;
+
+    const oldText = button.textContent;
+
+    button.textContent = t("processing");
+
+    try {
+
+      const {data, error} = await client.rpc("submit_wallet_request", {
+
+        p_type: type,
+
+        p_amount: amount,
+
+        p_wallet_address: walletAddress,
+
+        p_transaction_hash: txHash
+
+      });
+
+      if (error) throw error;
+
+      showMessage(t("requestSuccess") + " (" + String(data).slice(0,8) + ")", "success");
+
+      form.reset();
+
+      await loadWallet();
+
+    } catch (error) {
+
+      console.error("Wallet request failed:", error);
+
+      showMessage(error?.message || t("requestError"));
+
+    } finally {
+
+      button.disabled = false;
+
+      button.textContent = oldText;
+
+    }
+
+  }
+
+  $("depositForm").addEventListener("submit", event => submitRequest(event, "deposit"));
+
+  $("withdrawForm").addEventListener("submit", event => submitRequest(event, "withdrawal"));
+
+  async function init() {
+
+    applyLanguage(getSavedLanguage());
+
+    const {data, error} = await client.auth.getUser();
+
+    if (error || !data?.user) {
+
+      showMessage(t("signIn"));
+
+      setTimeout(() => { window.location.href = "login.html"; }, 1200);
+
+      return;
+
+    }
+
+    currentUser = data.user;
+
+    try {
+
+      await loadWallet();
+
+    } catch (error) {
+
+      console.error("Wallet load failed:", error);
+
+      showMessage(t("loadError") + " " + (error?.message || ""), "error");
+
+    }
+
+  }
+
+  init();
+
+})();
+
+</script>
+
+</body>
+
+</html>
