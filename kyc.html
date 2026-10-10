@@ -78,7 +78,15 @@
 
     .brand span { color: var(--blue); }
 
-    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .top-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
 
     select, input, textarea {
 
@@ -100,8 +108,6 @@
 
     .language { width: auto; max-width: 180px; padding: 9px; }
 
-    a { color: inherit; }
-
     .back {
 
       color: var(--blue);
@@ -114,7 +120,15 @@
 
     }
 
-    main { max-width: 850px; margin: 28px auto; padding: 0 16px 40px; }
+    main {
+
+      max-width: 850px;
+
+      margin: 28px auto;
+
+      padding: 0 16px 40px;
+
+    }
 
     .intro {
 
@@ -166,17 +180,43 @@
 
     h2 { margin: 0 0 8px; font-size: 20px; }
 
-    .help { color: var(--muted); font-size: 14px; line-height: 1.6; margin-top: 0; }
+    .help {
 
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin-top: 0;
+
+    }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px;
+
+    }
 
     .field { margin-top: 16px; }
 
-    label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 7px; }
+    label {
+
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      margin-bottom: 7px;
+
+    }
 
     .required { color: #c2410c; }
-
-    .file-note { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
 
     .notice {
 
@@ -196,7 +236,17 @@
 
     }
 
-    .checkrow { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; }
+    .checkrow {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 10px;
+
+      margin-top: 18px;
+
+    }
 
     .checkrow input { width: auto; margin-top: 4px; }
 
@@ -244,6 +294,8 @@
 
       overflow-wrap: anywhere;
 
+      white-space: pre-wrap;
+
     }
 
     .status.show { display: block; }
@@ -254,7 +306,21 @@
 
     .status.info { background: #eff6ff; color: #1e40af; }
 
-    .footer { text-align: center; color: var(--muted); font-size: 12px; padding: 15px; }
+    .footer {
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      padding: 15px;
+
+    }
+
+    [dir="rtl"] .topbar-inner { direction: rtl; }
+
+    [dir="rtl"] .checkrow { direction: rtl; }
 
     @media (max-width: 600px) {
 
@@ -265,6 +331,8 @@
       main { margin-top: 18px; }
 
       .brand { font-size: 16px; }
+
+      .top-actions { flex-wrap: wrap; }
 
     }
 
@@ -318,147 +386,151 @@
 
       <h1 data-i18n="title">KYC Verification</h1>
 
-      <p data-i18n="intro">Submit your details for manual review. Verification is not complete until an authorized reviewer checks your information and updates your status.</p>
+      <p data-i18n="intro">Submit your details for review. Verification is not complete until an authorized reviewer checks your information and updates your status.</p>
 
     </section>
 
     <div id="pageStatus" class="status" role="status" aria-live="polite"></div>
 
-    <section class="card">
+    <form id="kycForm">
 
-      <h2 data-i18n="accountTitle">Account information</h2>
+      <section class="card">
 
-      <p class="help" data-i18n="accountHelp">Your signed-in account is used to associate your request with your profile.</p>
+        <h2 data-i18n="accountTitle">Account information</h2>
 
-      <div class="field">
-
-        <label data-i18n="emailLabel">Account email</label>
-
-        <input id="accountEmail" type="email" readonly>
-
-      </div>
-
-      <div class="field">
-
-        <label for="fullName" data-i18n="fullName">Full legal name <span class="required">*</span></label>
-
-        <input id="fullName" autocomplete="name" maxlength="150" required>
-
-      </div>
-
-      <div class="grid">
+        <p class="help" data-i18n="accountHelp">Your signed-in account is used to associate your request with your profile.</p>
 
         <div class="field">
 
-          <label for="country" data-i18n="country">Country of residence <span class="required">*</span></label>
+          <label for="accountEmail" data-i18n="emailLabel">Account email</label>
 
-          <input id="country" autocomplete="country-name" maxlength="100" required>
+          <input id="accountEmail" type="email" readonly>
 
         </div>
 
         <div class="field">
 
-          <label for="documentType" data-i18n="documentType">Document type <span class="required">*</span></label>
+          <label for="fullName" data-i18n="fullName">Full legal name <span class="required">*</span></label>
 
-          <select id="documentType" required>
-
-            <option value="" data-i18n="choose">Choose an option</option>
-
-            <option value="passport" data-i18n="passport">Passport</option>
-
-            <option value="national_id" data-i18n="nationalId">National identity card</option>
-
-            <option value="driving_licence" data-i18n="driving">Driving licence</option>
-
-          </select>
+          <input id="fullName" autocomplete="name" maxlength="150" required>
 
         </div>
 
-      </div>
+        <div class="grid">
 
-      <div class="field">
+          <div class="field">
 
-        <label for="documentNumber" data-i18n="documentNumber">Document number <span class="required">*</span></label>
+            <label for="country" data-i18n="country">Country of residence <span class="required">*</span></label>
 
-        <input id="documentNumber" maxlength="100" autocomplete="off" required>
+            <input id="country" autocomplete="country-name" maxlength="100" required>
 
-      </div>
+          </div>
 
-      <div class="notice" data-i18n="privacyNotice">
+          <div class="field">
 
-        Do not upload identity documents until the site's private document storage and access permissions have been configured. This form currently collects details only.
+            <label for="documentType" data-i18n="documentType">Document type <span class="required">*</span></label>
 
-      </div>
+            <select id="documentType" required>
 
-    </section>
+              <option value="" data-i18n="choose">Choose an option</option>
 
-    <section class="card">
+              <option value="passport" data-i18n="passport">Passport</option>
 
-      <h2 data-i18n="businessTitle">Business information</h2>
+              <option value="national_id" data-i18n="nationalId">National identity card</option>
 
-      <p class="help" data-i18n="businessHelp">Provide the business details relevant to your financing application.</p>
+              <option value="driving_licence" data-i18n="driving">Driving licence</option>
 
-      <div class="field">
+            </select>
 
-        <label for="businessName" data-i18n="businessName">Registered business name</label>
-
-        <input id="businessName" maxlength="180">
-
-      </div>
-
-      <div class="grid">
-
-        <div class="field">
-
-          <label for="businessCountry" data-i18n="businessCountry">Business registration country</label>
-
-          <input id="businessCountry" maxlength="100">
+          </div>
 
         </div>
 
         <div class="field">
 
-          <label for="businessType" data-i18n="businessType">Business type</label>
+          <label for="documentNumber" data-i18n="documentNumber">Document number <span class="required">*</span></label>
 
-          <select id="businessType">
-
-            <option value="" data-i18n="choose">Choose an option</option>
-
-            <option value="sole_proprietorship" data-i18n="sole">Sole proprietorship</option>
-
-            <option value="partnership" data-i18n="partnership">Partnership</option>
-
-            <option value="limited_company" data-i18n="limited">Limited company</option>
-
-            <option value="other" data-i18n="other">Other</option>
-
-          </select>
+          <input id="documentNumber" maxlength="100" autocomplete="off" required>
 
         </div>
 
-      </div>
+        <div class="notice" data-i18n="privacyNotice">
 
-      <div class="field">
+          Do not upload identity documents until private document storage and access permissions have been configured. This form collects details only.
 
-        <label for="notes" data-i18n="notes">Additional information (optional)</label>
+        </div>
 
-        <textarea id="notes" rows="3" maxlength="1000"></textarea>
+      </section>
 
-      </div>
+      <section class="card">
 
-      <div class="checkrow">
+        <h2 data-i18n="businessTitle">Business information</h2>
 
-        <input type="checkbox" id="consent" required>
+        <p class="help" data-i18n="businessHelp">Provide the business details relevant to your financing application.</p>
 
-        <label for="consent" data-i18n="consent">I confirm that the information I have provided is accurate and understand that submission does not guarantee verification or financing approval. <span class="required">*</span></label>
+        <div class="field">
 
-      </div>
+          <label for="businessName" data-i18n="businessName">Registered business name</label>
 
-      <button id="submitBtn" class="btn" type="button" data-i18n="submit">Submit for manual review</button>
+          <input id="businessName" maxlength="180">
 
-      <p class="help" data-i18n="reviewHelp">Your request will be marked as submitted only if the database accepts it. An authorized reviewer must make the final decision.</p>
+        </div>
 
-    </section>
+        <div class="grid">
+
+          <div class="field">
+
+            <label for="businessCountry" data-i18n="businessCountry">Business registration country</label>
+
+            <input id="businessCountry" maxlength="100">
+
+          </div>
+
+          <div class="field">
+
+            <label for="businessType" data-i18n="businessType">Business type</label>
+
+            <select id="businessType">
+
+              <option value="" data-i18n="choose">Choose an option</option>
+
+              <option value="sole_proprietorship" data-i18n="sole">Sole proprietorship</option>
+
+              <option value="partnership" data-i18n="partnership">Partnership</option>
+
+              <option value="limited_company" data-i18n="limited">Limited company</option>
+
+              <option value="other" data-i18n="other">Other</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="notes" data-i18n="notes">Additional information (optional)</label>
+
+          <textarea id="notes" rows="3" maxlength="1000"></textarea>
+
+        </div>
+
+        <div class="checkrow">
+
+          <input type="checkbox" id="consent" required>
+
+          <label for="consent" data-i18n="consent">I confirm that the information provided is accurate and understand that submission does not guarantee verification or financing approval. <span class="required">*</span></label>
+
+        </div>
+
+        <button id="submitBtn" class="btn" type="submit" data-i18n="submit">Submit Request</button>
+
+        <p class="help" data-i18n="reviewHelp">Your request is submitted only if the database accepts it. An authorized reviewer must make the final decision.</p>
+
+      </section>
+
+    </form>
 
     <div class="footer">© <span id="year"></span> GlobalBridgeFunding</div>
 
@@ -480,7 +552,7 @@
 
         back:"Dashboard", eyebrow:"Account security", title:"KYC Verification",
 
-        intro:"Submit your details for manual review. Verification is not complete until an authorized reviewer checks your information and updates your status.",
+        intro:"Submit your details for review. Verification is not complete until an authorized reviewer checks your information and updates your status.",
 
         accountTitle:"Account information", accountHelp:"Your signed-in account is used to associate your request with your profile.",
 
@@ -492,7 +564,7 @@
 
         documentNumber:"Document number <span class='required'>*</span>",
 
-        privacyNotice:"Do not upload identity documents until the site's private document storage and access permissions have been configured. This form currently collects details only.",
+        privacyNotice:"Do not upload identity documents until private document storage and access permissions have been configured. This form collects details only.",
 
         businessTitle:"Business information", businessHelp:"Provide the business details relevant to your financing application.",
 
@@ -502,19 +574,19 @@
 
         notes:"Additional information (optional)",
 
-        consent:"I confirm that the information I have provided is accurate and understand that submission does not guarantee verification or financing approval. <span class='required'>*</span>",
+        consent:"I confirm that the information provided is accurate and understand that submission does not guarantee verification or financing approval. <span class='required'>*</span>",
 
-        submit:"Submit for manual review", reviewHelp:"Your request will be marked as submitted only if the database accepts it. An authorized reviewer must make the final decision.",
+        submit:"Submit Request", reviewHelp:"Your request is submitted only if the database accepts it. An authorized reviewer must make the final decision.",
 
         login:"Please log in before accessing KYC verification.", loading:"Checking your account…",
 
-        sending:"Submitting your request…", success:"Your KYC details were submitted for manual review. This is not an approval.",
+        sending:"Submitting your request…", success:"Your KYC details were submitted successfully for review. This is not an approval.",
 
         missing:"Please complete all required fields and confirm the declaration.",
 
-        schema:"The KYC database table is not ready or access was denied. No submission was confirmed. Please ask the site administrator to configure the table and its security policies.",
+        generic:"Submission failed. Please try again.",
 
-        generic:"Submission failed. Please try again later or contact support."
+        initError:"We could not verify your login session. Refresh the page and sign in again."
 
       },
 
@@ -522,9 +594,9 @@
 
         back:"Painel", eyebrow:"Segurança da conta", title:"Verificação KYC",
 
-        intro:"Envie os seus dados para análise manual. A verificação só fica concluída depois de um revisor autorizado analisar as informações e atualizar o seu estado.",
+        intro:"Envie os seus dados para análise. A verificação só fica concluída depois de um revisor autorizado analisar as informações e atualizar o seu estado.",
 
-        accountTitle:"Informações da conta", accountHelp:"A sua conta com sessão iniciada será associada ao pedido.",
+        accountTitle:"Informações da conta", accountHelp:"O seu pedido será associado à conta com sessão iniciada.",
 
         emailLabel:"E-mail da conta", fullName:"Nome legal completo <span class='required'>*</span>",
 
@@ -534,7 +606,7 @@
 
         documentNumber:"Número do documento <span class='required'>*</span>",
 
-        privacyNotice:"Não carregue documentos de identidade até que o armazenamento privado e as permissões de acesso estejam configurados. Este formulário recolhe apenas dados.",
+        privacyNotice:"Não carregue documentos de identidade até configurar o armazenamento privado e as permissões de acesso. Este formulário recolhe apenas dados.",
 
         businessTitle:"Informações da empresa", businessHelp:"Indique os dados da empresa relevantes para o pedido de financiamento.",
 
@@ -546,17 +618,17 @@
 
         consent:"Confirmo que as informações fornecidas são corretas e compreendo que o envio não garante verificação nem aprovação de financiamento. <span class='required'>*</span>",
 
-        submit:"Enviar para análise manual", reviewHelp:"O pedido só será considerado enviado se a base de dados o aceitar. A decisão final cabe a um revisor autorizado.",
+        submit:"Enviar pedido", reviewHelp:"O pedido só será enviado se a base de dados o aceitar. A decisão final cabe a um revisor autorizado.",
 
         login:"Inicie sessão para aceder à verificação KYC.", loading:"A verificar a sua conta…",
 
-        sending:"A enviar o pedido…", success:"Os seus dados KYC foram enviados para análise manual. Isto não é uma aprovação.",
+        sending:"A enviar o pedido…", success:"Os seus dados KYC foram enviados para análise. Isto não é uma aprovação.",
 
         missing:"Preencha todos os campos obrigatórios e confirme a declaração.",
 
-        schema:"A tabela KYC não está configurada ou o acesso foi recusado. Nenhum envio foi confirmado. Contacte o administrador do site.",
+        generic:"O envio falhou. Tente novamente.",
 
-        generic:"O envio falhou. Tente novamente mais tarde ou contacte o suporte."
+        initError:"Não foi possível verificar a sessão. Atualize a página e inicie sessão novamente."
 
       },
 
@@ -564,9 +636,9 @@
 
         back:"Bảng điều khiển", eyebrow:"Bảo mật tài khoản", title:"Xác minh KYC",
 
-        intro:"Gửi thông tin để được xem xét thủ công. Việc xác minh chỉ hoàn tất khi người xét duyệt được ủy quyền kiểm tra thông tin và cập nhật trạng thái.",
+        intro:"Gửi thông tin để được xem xét. Việc xác minh chỉ hoàn tất khi người xét duyệt được ủy quyền kiểm tra và cập nhật trạng thái.",
 
-        accountTitle:"Thông tin tài khoản", accountHelp:"Tài khoản đã đăng nhập sẽ được liên kết với yêu cầu của bạn.",
+        accountTitle:"Thông tin tài khoản", accountHelp:"Yêu cầu sẽ được liên kết với tài khoản đã đăng nhập.",
 
         emailLabel:"Email tài khoản", fullName:"Họ tên pháp lý đầy đủ <span class='required'>*</span>",
 
@@ -576,7 +648,7 @@
 
         documentNumber:"Số giấy tờ <span class='required'>*</span>",
 
-        privacyNotice:"Không tải giấy tờ tùy thân lên trước khi cấu hình lưu trữ riêng tư và quyền truy cập. Biểu mẫu này hiện chỉ thu thập thông tin.",
+        privacyNotice:"Không tải giấy tờ tùy thân lên trước khi cấu hình lưu trữ riêng tư và quyền truy cập. Biểu mẫu này chỉ thu thập thông tin.",
 
         businessTitle:"Thông tin doanh nghiệp", businessHelp:"Cung cấp thông tin doanh nghiệp liên quan đến đơn xin tài trợ.",
 
@@ -588,17 +660,17 @@
 
         consent:"Tôi xác nhận thông tin đã cung cấp là chính xác và hiểu rằng việc gửi thông tin không đảm bảo xác minh hoặc phê duyệt tài trợ. <span class='required'>*</span>",
 
-        submit:"Gửi để xem xét thủ công", reviewHelp:"Yêu cầu chỉ được ghi nhận khi cơ sở dữ liệu chấp nhận. Người xét duyệt được ủy quyền sẽ đưa ra quyết định cuối cùng.",
+        submit:"Gửi yêu cầu", reviewHelp:"Yêu cầu chỉ được gửi khi cơ sở dữ liệu chấp nhận. Người xét duyệt được ủy quyền sẽ đưa ra quyết định cuối cùng.",
 
         login:"Vui lòng đăng nhập để truy cập xác minh KYC.", loading:"Đang kiểm tra tài khoản…",
 
-        sending:"Đang gửi yêu cầu…", success:"Thông tin KYC đã được gửi để xem xét thủ công. Đây không phải là phê duyệt.",
+        sending:"Đang gửi yêu cầu…", success:"Thông tin KYC đã được gửi để xem xét. Đây không phải là phê duyệt.",
 
         missing:"Vui lòng điền đủ các trường bắt buộc và xác nhận tuyên bố.",
 
-        schema:"Bảng KYC chưa sẵn sàng hoặc quyền truy cập bị từ chối. Chưa xác nhận gửi thành công. Vui lòng liên hệ quản trị viên.",
+        generic:"Gửi không thành công. Vui lòng thử lại.",
 
-        generic:"Gửi không thành công. Vui lòng thử lại sau hoặc liên hệ hỗ trợ."
+        initError:"Không thể xác minh phiên đăng nhập. Hãy tải lại trang và đăng nhập lại."
 
       },
 
@@ -606,7 +678,7 @@
 
         back:"داشبورد", eyebrow:"امنیت حساب", title:"تأیید هویت KYC",
 
-        intro:"اطلاعات خود را برای بررسی دستی ارسال کنید. تأیید هویت زمانی کامل می‌شود که بررسی‌کننده مجاز اطلاعات را بررسی و وضعیت را به‌روزرسانی کند.",
+        intro:"اطلاعات خود را برای بررسی ارسال کنید. تأیید هویت پس از بررسی اطلاعات و به‌روزرسانی وضعیت توسط بررسی‌کننده مجاز کامل می‌شود.",
 
         accountTitle:"اطلاعات حساب", accountHelp:"درخواست به حساب واردشده شما مرتبط می‌شود.",
 
@@ -618,7 +690,7 @@
 
         documentNumber:"شماره مدرک <span class='required'>*</span>",
 
-        privacyNotice:"تا زمان پیکربندی فضای ذخیره‌سازی خصوصی و مجوزهای دسترسی، مدارک هویتی را بارگذاری نکنید. این فرم فعلاً فقط اطلاعات را جمع‌آوری می‌کند.",
+        privacyNotice:"تا زمان پیکربندی فضای ذخیره‌سازی خصوصی و مجوزهای دسترسی، مدارک هویتی را بارگذاری نکنید. این فرم فقط اطلاعات را جمع‌آوری می‌کند.",
 
         businessTitle:"اطلاعات کسب‌وکار", businessHelp:"اطلاعات کسب‌وکار مرتبط با درخواست تأمین مالی را وارد کنید.",
 
@@ -630,17 +702,17 @@
 
         consent:"تأیید می‌کنم اطلاعات ارائه‌شده صحیح است و می‌دانم ارسال آن تضمین‌کننده تأیید هویت یا تأمین مالی نیست. <span class='required'>*</span>",
 
-        submit:"ارسال برای بررسی دستی", reviewHelp:"درخواست فقط در صورت پذیرش پایگاه داده ثبت‌شده محسوب می‌شود. تصمیم نهایی با بررسی‌کننده مجاز است.",
+        submit:"ارسال درخواست", reviewHelp:"درخواست فقط در صورت پذیرش پایگاه داده ثبت می‌شود. تصمیم نهایی با بررسی‌کننده مجاز است.",
 
         login:"برای دسترسی به تأیید هویت KYC وارد حساب شوید.", loading:"در حال بررسی حساب…",
 
-        sending:"در حال ارسال درخواست…", success:"اطلاعات KYC برای بررسی دستی ارسال شد. این به معنای تأیید نیست.",
+        sending:"در حال ارسال درخواست…", success:"اطلاعات KYC برای بررسی ارسال شد. این به معنای تأیید نیست.",
 
         missing:"لطفاً تمام فیلدهای الزامی را تکمیل و اظهارنامه را تأیید کنید.",
 
-        schema:"جدول KYC آماده نیست یا دسترسی رد شده است. ارسال تأیید نشد. با مدیر سایت تماس بگیرید.",
+        generic:"ارسال ناموفق بود. لطفاً دوباره تلاش کنید.",
 
-        generic:"ارسال ناموفق بود. بعداً دوباره تلاش کنید یا با پشتیبانی تماس بگیرید."
+        initError:"تأیید نشست ورود ممکن نشد. صفحه را تازه‌سازی کرده و دوباره وارد شوید."
 
       },
 
@@ -648,7 +720,7 @@
 
         back:"Dasbor", eyebrow:"Keamanan akun", title:"Verifikasi KYC",
 
-        intro:"Kirim detail Anda untuk pemeriksaan manual. Verifikasi selesai setelah petugas berwenang memeriksa informasi dan memperbarui status.",
+        intro:"Kirim detail Anda untuk ditinjau. Verifikasi selesai setelah petugas berwenang memeriksa informasi dan memperbarui status.",
 
         accountTitle:"Informasi akun", accountHelp:"Permintaan Anda akan dikaitkan dengan akun yang sedang masuk.",
 
@@ -660,7 +732,7 @@
 
         documentNumber:"Nomor dokumen <span class='required'>*</span>",
 
-        privacyNotice:"Jangan unggah dokumen identitas sebelum penyimpanan privat dan izin akses dikonfigurasi. Formulir ini saat ini hanya mengumpulkan informasi.",
+        privacyNotice:"Jangan unggah dokumen identitas sebelum penyimpanan privat dan izin akses dikonfigurasi. Formulir ini hanya mengumpulkan informasi.",
 
         businessTitle:"Informasi bisnis", businessHelp:"Masukkan informasi bisnis yang relevan dengan permohonan pembiayaan.",
 
@@ -672,17 +744,17 @@
 
         consent:"Saya menyatakan informasi yang diberikan benar dan memahami bahwa pengiriman tidak menjamin verifikasi atau persetujuan pembiayaan. <span class='required'>*</span>",
 
-        submit:"Kirim untuk pemeriksaan manual", reviewHelp:"Permintaan hanya dianggap terkirim jika diterima oleh basis data. Keputusan akhir dibuat oleh petugas berwenang.",
+        submit:"Kirim Permintaan", reviewHelp:"Permintaan hanya dianggap terkirim jika diterima oleh basis data. Keputusan akhir dibuat oleh petugas berwenang.",
 
         login:"Silakan masuk untuk mengakses verifikasi KYC.", loading:"Memeriksa akun Anda…",
 
-        sending:"Mengirim permintaan…", success:"Detail KYC telah dikirim untuk pemeriksaan manual. Ini bukan persetujuan.",
+        sending:"Mengirim permintaan…", success:"Detail KYC telah dikirim untuk ditinjau. Ini bukan persetujuan.",
 
         missing:"Lengkapi semua kolom wajib dan konfirmasikan pernyataan.",
 
-        schema:"Tabel KYC belum siap atau akses ditolak. Pengiriman belum dikonfirmasi. Hubungi administrator situs.",
+        generic:"Pengiriman gagal. Silakan coba lagi.",
 
-        generic:"Pengiriman gagal. Coba lagi nanti atau hubungi dukungan."
+        initError:"Sesi masuk tidak dapat diverifikasi. Muat ulang halaman dan masuk kembali."
 
       },
 
@@ -690,7 +762,7 @@
 
         back:"Tableau de bord", eyebrow:"Sécurité du compte", title:"Vérification KYC",
 
-        intro:"Envoyez vos informations pour un examen manuel. La vérification n'est terminée qu'après le contrôle des informations par un examinateur autorisé et la mise à jour du statut.",
+        intro:"Envoyez vos informations pour examen. La vérification est terminée après le contrôle des informations et la mise à jour du statut par un examinateur autorisé.",
 
         accountTitle:"Informations du compte", accountHelp:"Votre demande sera associée au compte connecté.",
 
@@ -704,7 +776,7 @@
 
         privacyNotice:"Ne téléversez pas de documents d'identité avant la configuration du stockage privé et des autorisations d'accès. Ce formulaire collecte uniquement des informations.",
 
-        businessTitle:"Informations sur l'entreprise", businessHelp:"Fournissez les informations de l'entreprise liées à votre demande de financement.",
+        businessTitle:"Informations sur l'entreprise", businessHelp:"Fournissez les informations liées à votre demande de financement.",
 
         businessName:"Nom commercial enregistré", businessCountry:"Pays d'enregistrement", businessType:"Type d'entreprise",
 
@@ -714,17 +786,17 @@
 
         consent:"Je confirme l'exactitude des informations et comprends que l'envoi ne garantit ni la vérification ni l'approbation du financement. <span class='required'>*</span>",
 
-        submit:"Envoyer pour examen manuel", reviewHelp:"La demande est considérée comme envoyée uniquement si la base de données l'accepte. La décision finale revient à un examinateur autorisé.",
+        submit:"Envoyer la demande", reviewHelp:"La demande est envoyée uniquement si la base de données l'accepte. La décision finale revient à un examinateur autorisé.",
 
         login:"Veuillez vous connecter pour accéder à la vérification KYC.", loading:"Vérification du compte…",
 
-        sending:"Envoi de la demande…", success:"Vos informations KYC ont été envoyées pour examen manuel. Ce n'est pas une approbation.",
+        sending:"Envoi de la demande…", success:"Vos informations KYC ont été envoyées pour examen. Ce n'est pas une approbation.",
 
         missing:"Veuillez remplir tous les champs obligatoires et confirmer la déclaration.",
 
-        schema:"La table KYC n'est pas prête ou l'accès a été refusé. L'envoi n'a pas été confirmé. Contactez l'administrateur du site.",
+        generic:"Échec de l'envoi. Veuillez réessayer.",
 
-        generic:"Échec de l'envoi. Réessayez plus tard ou contactez le support."
+        initError:"Impossible de vérifier votre session. Actualisez la page et reconnectez-vous."
 
       },
 
@@ -732,7 +804,7 @@
 
         back:"Hallintapaneeli", eyebrow:"Tilin turvallisuus", title:"KYC-tunnistautuminen",
 
-        intro:"Lähetä tietosi manuaalista tarkistusta varten. Tunnistautuminen valmistuu vasta, kun valtuutettu tarkastaja on tarkistanut tiedot ja päivittänyt tilan.",
+        intro:"Lähetä tietosi tarkistettavaksi. Tunnistautuminen valmistuu, kun valtuutettu tarkastaja on tarkistanut tiedot ja päivittänyt tilan.",
 
         accountTitle:"Tilin tiedot", accountHelp:"Pyyntö liitetään sisäänkirjautuneeseen tiliisi.",
 
@@ -744,7 +816,7 @@
 
         documentNumber:"Asiakirjan numero <span class='required'>*</span>",
 
-        privacyNotice:"Älä lataa henkilöllisyysasiakirjoja ennen yksityisen tallennuksen ja käyttöoikeuksien määritystä. Tämä lomake kerää tällä hetkellä vain tietoja.",
+        privacyNotice:"Älä lataa henkilöllisyysasiakirjoja ennen yksityisen tallennuksen ja käyttöoikeuksien määritystä. Tämä lomake kerää vain tietoja.",
 
         businessTitle:"Yrityksen tiedot", businessHelp:"Anna rahoitushakemukseen liittyvät yritystiedot.",
 
@@ -756,17 +828,17 @@
 
         consent:"Vakuutan antamani tiedot oikeiksi ja ymmärrän, ettei lähettäminen takaa tunnistautumisen tai rahoituksen hyväksymistä. <span class='required'>*</span>",
 
-        submit:"Lähetä manuaaliseen tarkistukseen", reviewHelp:"Pyyntö katsotaan lähetetyksi vain, jos tietokanta hyväksyy sen. Valtuutettu tarkastaja tekee lopullisen päätöksen.",
+        submit:"Lähetä pyyntö", reviewHelp:"Pyyntö katsotaan lähetetyksi vain, jos tietokanta hyväksyy sen. Valtuutettu tarkastaja tekee lopullisen päätöksen.",
 
         login:"Kirjaudu sisään käyttääksesi KYC-tunnistautumista.", loading:"Tarkistetaan tiliä…",
 
-        sending:"Lähetetään pyyntöä…", success:"KYC-tietosi on lähetetty manuaaliseen tarkistukseen. Tämä ei ole hyväksyntä.",
+        sending:"Lähetetään pyyntöä…", success:"KYC-tietosi on lähetetty tarkistettavaksi. Tämä ei ole hyväksyntä.",
 
         missing:"Täytä kaikki pakolliset kentät ja vahvista ilmoitus.",
 
-        schema:"KYC-taulukkoa ei ole määritetty tai käyttö estettiin. Lähetystä ei vahvistettu. Ota yhteyttä sivuston ylläpitäjään.",
+        generic:"Lähetys epäonnistui. Yritä uudelleen.",
 
-        generic:"Lähetys epäonnistui. Yritä myöhemmin uudelleen tai ota yhteyttä tukeen."
+        initError:"Kirjautumisistuntoa ei voitu vahvistaa. Päivitä sivu ja kirjaudu uudelleen."
 
       },
 
@@ -774,7 +846,7 @@
 
         back:"Panel", eyebrow:"Seguridad de la cuenta", title:"Verificación KYC",
 
-        intro:"Envía tus datos para una revisión manual. La verificación solo se completa cuando un revisor autorizado comprueba la información y actualiza el estado.",
+        intro:"Envía tus datos para su revisión. La verificación se completa cuando un revisor autorizado comprueba la información y actualiza el estado.",
 
         accountTitle:"Información de la cuenta", accountHelp:"Tu solicitud se asociará con la cuenta que tiene la sesión iniciada.",
 
@@ -798,27 +870,37 @@
 
         consent:"Confirmo que la información proporcionada es correcta y entiendo que el envío no garantiza la verificación ni la aprobación de financiación. <span class='required'>*</span>",
 
-        submit:"Enviar para revisión manual", reviewHelp:"La solicitud solo se considerará enviada si la base de datos la acepta. Un revisor autorizado tomará la decisión final.",
+        submit:"Enviar solicitud", reviewHelp:"La solicitud solo se considerará enviada si la base de datos la acepta. Un revisor autorizado tomará la decisión final.",
 
         login:"Inicia sesión para acceder a la verificación KYC.", loading:"Comprobando tu cuenta…",
 
-        sending:"Enviando solicitud…", success:"Tus datos KYC se enviaron para revisión manual. Esto no es una aprobación.",
+        sending:"Enviando solicitud…", success:"Tus datos KYC se enviaron para revisión. Esto no es una aprobación.",
 
         missing:"Completa todos los campos obligatorios y confirma la declaración.",
 
-        schema:"La tabla KYC no está lista o se denegó el acceso. No se confirmó el envío. Contacta con el administrador del sitio.",
+        generic:"No se pudo enviar. Inténtalo de nuevo.",
 
-        generic:"No se pudo enviar. Inténtalo más tarde o contacta con soporte."
+        initError:"No se pudo verificar tu sesión. Actualiza la página e inicia sesión otra vez."
 
       }
 
     };
 
-    let currentUser = null;
-
     const $ = id => document.getElementById(id);
 
+    const form = $("kycForm");
+
+    const button = $("submitBtn");
+
     const langSelect = $("languageSelect");
+
+    let currentUser = null;
+
+    function getLanguage() {
+
+      return translations[langSelect.value] ? langSelect.value : "en";
+
+    }
 
     function showStatus(message, type = "info") {
 
@@ -834,6 +916,8 @@
 
       const lang = translations[language] ? language : "en";
 
+      const t = translations[lang];
+
       document.documentElement.lang = lang;
 
       document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
@@ -844,21 +928,21 @@
 
         const key = el.dataset.i18n;
 
-        if (translations[lang][key] !== undefined) {
-
-          el.innerHTML = translations[lang][key];
-
-        }
+        if (t[key] !== undefined) el.innerHTML = t[key];
 
       });
 
-      try { localStorage.setItem("globalbridge_language", lang); } catch (_) {}
+      try {
+
+        localStorage.setItem("globalbridge_language", lang);
+
+      } catch (_) {}
+
+      $("year").textContent = new Date().getFullYear();
 
     }
 
     async function initialize() {
-
-      $("year").textContent = new Date().getFullYear();
 
       let preferred = "en";
 
@@ -870,15 +954,23 @@
 
       applyLanguage(preferred);
 
-      langSelect.addEventListener("change", () => applyLanguage(langSelect.value));
+      langSelect.addEventListener("change", () => {
+
+        applyLanguage(langSelect.value);
+
+      });
+
+      showStatus(translations[getLanguage()].loading, "info");
 
       const { data, error } = await supabase.auth.getSession();
 
       if (error || !data.session) {
 
-        showStatus(translations[langSelect.value].login, "error");
+        currentUser = null;
 
-        $("submitBtn").disabled = true;
+        button.disabled = true;
+
+        showStatus(translations[getLanguage()].login, "error");
 
         return;
 
@@ -890,19 +982,39 @@
 
       const metadata = currentUser.user_metadata || {};
 
-      $("fullName").value = [metadata.first_name, metadata.last_name].filter(Boolean).join(" ");
+      $("fullName").value = [
+
+        metadata.first_name,
+
+        metadata.last_name
+
+      ].filter(Boolean).join(" ");
 
       $("country").value = metadata.country || "";
 
+      $("pageStatus").className = "status";
+
+      button.disabled = false;
+
     }
 
-    $("submitBtn").addEventListener("click", async () => {
+    form.addEventListener("submit", async event => {
 
-      const t = translations[langSelect.value] || translations.en;
+      event.preventDefault();
+
+      const t = translations[getLanguage()];
 
       if (!currentUser) {
 
         showStatus(t.login, "error");
+
+        return;
+
+      }
+
+      if (!form.reportValidity()) {
+
+        showStatus(t.missing, "error");
 
         return;
 
@@ -916,7 +1028,9 @@
 
       const documentNumber = $("documentNumber").value.trim();
 
-      if (!fullName || !country || !documentType || !documentNumber || !$("consent").checked) {
+      if (!fullName || !country || !documentType ||
+
+          !documentNumber || !$("consent").checked) {
 
         showStatus(t.missing, "error");
 
@@ -924,37 +1038,39 @@
 
       }
 
-      const button = $("submitBtn");
-
       button.disabled = true;
 
       button.textContent = t.sending;
 
       try {
 
-        const { error } = await supabase.from("kyc_submissions").insert({
+        const { error } = await supabase
 
-          user_id: currentUser.id,
+          .from("kyc_submissions")
 
-          full_name: fullName,
+          .insert({
 
-          country_of_residence: country,
+            user_id: currentUser.id,
 
-          document_type: documentType,
+            full_name: fullName,
 
-          document_number: documentNumber,
+            country_of_residence: country,
 
-          business_name: $("businessName").value.trim() || null,
+            document_type: documentType,
 
-          business_country: $("businessCountry").value.trim() || null,
+            document_number: documentNumber,
 
-          business_type: $("businessType").value || null,
+            business_name: $("businessName").value.trim() || null,
 
-          additional_information: $("notes").value.trim() || null,
+            business_country: $("businessCountry").value.trim() || null,
 
-          status: "pending"
+            business_type: $("businessType").value || null,
 
-        });
+            additional_information: $("notes").value.trim() || null,
+
+            status: "pending"
+
+          });
 
         if (error) {
 
@@ -962,7 +1078,9 @@
 
           showStatus(
 
-            error.code === "42P01" || error.code === "42501" ? t.schema : t.generic,
+            "Submission failed: " + error.message +
+
+            (error.code ? " (Code: " + error.code + ")" : ""),
 
             "error"
 
@@ -996,7 +1114,15 @@
 
         console.error("KYC submission failed:", error);
 
-        showStatus(t.generic, "error");
+        showStatus(
+
+          "Submission failed: " +
+
+          (error.message || t.generic),
+
+          "error"
+
+        );
 
       } finally {
 
@@ -1008,13 +1134,19 @@
 
     });
 
-    const lang = () => langSelect.value || "en";
-
     initialize().catch(error => {
 
       console.error("KYC initialization failed:", error);
 
-      showStatus(translations[lang()].generic, "error");
+      button.disabled = true;
+
+      showStatus(
+
+        translations[getLanguage()].initError,
+
+        "error"
+
+      );
 
     });
 
