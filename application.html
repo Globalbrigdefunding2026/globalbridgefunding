@@ -1,6 +1,8 @@
+
+
 <!DOCTYPE html>
 
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
 
@@ -10,23 +12,25 @@
 
   <meta name="theme-color" content="#071a35">
 
-  <title>My Applications | GlobalBridgeFunding</title>
-
-  <script src="language.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Financing Application | GlobalBridgeFunding</title>
 
   <style>
 
-    * { box-sizing: border-box; }
+    * {
 
-    body {
+      box-sizing: border-box;
 
       margin: 0;
 
+      padding: 0;
+
+    }
+
+    body {
+
       font-family: Arial, Helvetica, sans-serif;
 
-      background: #f4f7fb;
+      background: #f5f8fc;
 
       color: #172033;
 
@@ -38,7 +42,7 @@
 
       color: white;
 
-      padding: 17px 5%;
+      padding: 18px 6%;
 
       display: flex;
 
@@ -46,57 +50,25 @@
 
       align-items: center;
 
-      gap: 14px;
-
-      flex-wrap: wrap;
+      gap: 12px;
 
     }
 
     .logo {
 
-      color: white;
-
-      font-size: 20px;
+      font-size: 21px;
 
       font-weight: 800;
 
-      text-decoration: none;
+    }
+
+    .logo span {
+
+      color: #36c2ff;
 
     }
 
-    .logo span { color: #36c2ff; }
-
-    .header-actions {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      flex-wrap: wrap;
-
-    }
-
-    .language-selector {
-
-      padding: 9px;
-
-      border-radius: 7px;
-
-      border: 1px solid #cbd5e1;
-
-      background: white;
-
-      color: #071a35;
-
-      font-size: 14px;
-
-      max-width: 150px;
-
-    }
-
-    .back-link {
+    .back {
 
       color: white;
 
@@ -104,259 +76,337 @@
 
       font-size: 14px;
 
+      border: 1px solid rgba(255,255,255,.4);
+
+      padding: 9px 14px;
+
+      border-radius: 7px;
+
+      white-space: nowrap;
+
     }
 
-    .back-link:hover { text-decoration: underline; }
+    .container {
 
-    main {
-
-      width: min(100% - 32px, 900px);
+      max-width: 850px;
 
       margin: 35px auto;
 
-      min-height: 55vh;
+      padding: 0 20px;
 
     }
 
-    .page-heading { margin-bottom: 24px; }
+    .intro {
 
-    h1 {
+      margin-bottom: 25px;
 
-      margin: 0 0 10px;
+    }
 
-      font-size: clamp(25px, 5vw, 34px);
+    .intro h1 {
 
       color: #071a35;
 
+      font-size: 30px;
+
+      margin-bottom: 8px;
+
     }
 
-    .subtitle {
+    .intro p {
 
       color: #667085;
 
       line-height: 1.6;
 
-      margin: 0;
+    }
+
+    .card {
+
+      background: white;
+
+      padding: 30px;
+
+      border-radius: 15px;
+
+      box-shadow: 0 8px 28px rgba(20,40,70,.08);
+
+      margin-bottom: 20px;
 
     }
 
-    .toolbar {
-
-      display: flex;
-
-      gap: 12px;
-
-      flex-wrap: wrap;
-
-      margin: 20px 0;
-
-    }
-
-    /* Primary New Application button */
-
-    .button {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      border: 0;
-
-      border-radius: 8px;
-
-      padding: 12px 17px;
-
-      background: #36c2ff;
+    .card h2 {
 
       color: #071a35;
 
-      font-weight: 700;
+      font-size: 20px;
+
+      margin-bottom: 7px;
+
+    }
+
+    .card-intro {
+
+      color: #667085;
 
       font-size: 14px;
 
-      text-decoration: none;
+      line-height: 1.6;
 
-      cursor: pointer;
-
-      transition: background .2s ease, transform .2s ease;
+      margin-bottom: 23px;
 
     }
 
-    .button:not(.secondary):hover {
+    .field {
 
-      background: #19a9ed;
-
-      color: #071a35;
-
-      transform: translateY(-1px);
+      margin-bottom: 20px;
 
     }
 
-    .button.secondary {
+    label {
 
-      background: white;
+      display: block;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      color: #24344d;
+
+      margin-bottom: 8px;
+
+    }
+
+    input,
+
+    select,
+
+    textarea {
+
+      width: 100%;
+
+      padding: 13px;
 
       border: 1px solid #d6dee9;
 
-      color: #071a35;
+      border-radius: 8px;
 
-    }
+      font-size: 15px;
 
-    .button.secondary:hover {
+      font-family: inherit;
 
-      background: #edf4fb;
-
-    }
-
-    .button:focus-visible,
-
-    select:focus-visible,
-
-    a:focus-visible {
-
-      outline: 3px solid #36c2ff;
-
-      outline-offset: 3px;
-
-    }
-
-    .button:disabled {
-
-      opacity: .6;
-
-      cursor: not-allowed;
-
-    }
-
-    #message {
+      outline: none;
 
       background: white;
 
-      border: 1px solid #e0e7f0;
-
-      border-radius: 12px;
-
-      padding: 22px;
-
-      color: #667085;
-
-      line-height: 1.6;
+      color: #172033;
 
     }
 
-    .application-card {
+    textarea {
 
-      background: white;
+      min-height: 120px;
 
-      border: 1px solid #e3eaf3;
-
-      border-radius: 13px;
-
-      padding: 22px;
-
-      margin-bottom: 16px;
-
-      box-shadow: 0 5px 18px rgba(20, 40, 70, .04);
-
-      overflow-wrap: anywhere;
+      resize: vertical;
 
     }
 
-    .application-top {
+    input:focus,
+
+    select:focus,
+
+    textarea:focus {
+
+      border-color: #36c2ff;
+
+      box-shadow: 0 0 0 3px rgba(54,194,255,.12);
+
+    }
+
+    .row {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 17px;
+
+    }
+
+    .summary {
+
+      background: #eef8fc;
+
+      border-left: 4px solid #36c2ff;
+
+      padding: 17px;
+
+      border-radius: 7px;
+
+      margin-bottom: 25px;
+
+    }
+
+    .summary-row {
 
       display: flex;
 
       justify-content: space-between;
 
-      align-items: flex-start;
-
       gap: 12px;
 
-      flex-wrap: wrap;
+      padding: 8px 0;
 
-      margin-bottom: 16px;
+      font-size: 14px;
 
     }
 
-    .application-top h2 {
+    .summary-row span:first-child {
 
-      margin: 0;
+      color: #667085;
 
-      font-size: 19px;
+    }
+
+    .summary-row span:last-child {
 
       color: #071a35;
 
-    }
-
-    .reference {
-
-      color: #7b8797;
-
-      font-size: 12px;
-
-      margin-top: 7px;
-
-      overflow-wrap: anywhere;
-
-    }
-
-    .status {
-
-      display: inline-block;
-
-      border-radius: 20px;
-
-      padding: 7px 11px;
-
-      font-size: 12px;
-
       font-weight: 700;
 
-      background: #edf2f7;
-
-      color: #344054;
+      text-align: right;
 
     }
 
-    .status.pending { background: #fff4d6; color: #8a5b00; }
+    .notice {
 
-    .status.approved { background: #dcfce7; color: #166534; }
+      background: #f8fafc;
 
-    .status.rejected { background: #fee2e2; color: #991b1b; }
+      border: 1px solid #e4e9ef;
 
-    .details {
+      padding: 15px;
 
-      display: grid;
-
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-
-      gap: 18px;
-
-    }
-
-    .detail-label {
-
-      display: block;
+      border-radius: 8px;
 
       color: #667085;
 
       font-size: 13px;
 
-      margin-bottom: 6px;
+      line-height: 1.6;
+
+      margin-bottom: 20px;
 
     }
 
-    .detail-value {
+    .checkbox {
 
-      color: #172033;
+      display: flex;
 
-      font-size: 15px;
+      align-items: flex-start;
 
-      font-weight: 700;
+      gap: 10px;
+
+      margin-top: 15px;
+
+      margin-bottom: 20px;
+
+    }
+
+    .checkbox input {
+
+      width: auto;
+
+      margin-top: 3px;
+
+      flex-shrink: 0;
+
+    }
+
+    .checkbox label {
+
+      font-weight: 400;
+
+      line-height: 1.5;
+
+      margin: 0;
+
+    }
+
+    button {
+
+      width: 100%;
+
+      padding: 15px;
+
+      border: none;
+
+      border-radius: 8px;
+
+      background: #36c2ff;
+
+      color: #071a35;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+    }
+
+    button:disabled {
+
+      opacity: .7;
+
+      cursor: not-allowed;
+
+    }
+
+    .message {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 13px;
+
+      border-radius: 7px;
+
+      font-size: 13px;
+
+      line-height: 1.6;
 
       overflow-wrap: anywhere;
+
+    }
+
+    .message.success {
+
+      display: block;
+
+      background: #eaf8ef;
+
+      color: #176534;
+
+      border-left: 4px solid #299653;
+
+    }
+
+    .message.error {
+
+      display: block;
+
+      background: #fff1f1;
+
+      color: #a42626;
+
+      border-left: 4px solid #d64545;
+
+    }
+
+    .message a {
+
+      color: inherit;
+
+      font-weight: 700;
 
     }
 
@@ -364,31 +414,61 @@
 
       text-align: center;
 
+      padding: 35px 20px;
+
       color: #7b8797;
 
       font-size: 12px;
 
-      padding: 25px 16px;
-
     }
 
-    html[dir="rtl"] body { text-align: right; }
+    @media (max-width: 600px) {
 
-    @media (max-width: 520px) {
+      header {
 
-      header { padding: 15px 16px; }
+        padding: 16px 20px;
 
-      .logo { font-size: 18px; }
+      }
 
-      main { margin-top: 25px; }
+      .logo {
 
-      .details { grid-template-columns: 1fr; gap: 15px; }
+        font-size: 18px;
 
-      .application-card { padding: 17px; }
+      }
 
-      .header-actions { gap: 9px; }
+      .back {
 
-      .language-selector { max-width: 135px; }
+        font-size: 12px;
+
+        padding: 8px 10px;
+
+      }
+
+      .container {
+
+        margin-top: 25px;
+
+      }
+
+      .intro h1 {
+
+        font-size: 26px;
+
+      }
+
+      .card {
+
+        padding: 22px 19px;
+
+      }
+
+      .row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+      }
 
     }
 
@@ -400,111 +480,265 @@
 
   <header>
 
-    <a class="logo" href="dashboard.html">
+    <div class="logo">
 
       Global<span>Bridge</span>Funding
 
-    </a>
-
-    <div class="header-actions">
-
-      <select
-
-        id="languageSelector"
-
-        class="language-selector"
-
-        data-language-selector="true"
-
-        aria-label="Language"
-
-      >
-
-        <option value="en">English</option>
-
-        <option value="pt">Português</option>
-
-        <option value="vi">Tiếng Việt</option>
-
-        <option value="fa">فارسی</option>
-
-        <option value="id">Bahasa Indonesia</option>
-
-        <option value="fr">Français</option>
-
-        <option value="fi">Suomi</option>
-
-        <option value="es">Español</option>
-
-      </select>
-
-      <a href="dashboard.html" class="back-link" data-key="backDashboard">
-
-        ← Dashboard
-
-      </a>
-
     </div>
+
+    <a href="dashboard.html" class="back">← Dashboard</a>
 
   </header>
 
-  <main>
+  <main class="container">
 
-    <section class="page-heading">
+    <section class="intro">
 
-      <h1 data-key="title">My Applications</h1>
+      <h1>Financing Application</h1>
 
-      <p class="subtitle" data-key="subtitle">
+      <p>
 
-        Review your financing applications and their current status.
+        Complete the information below to submit your financing request.
 
       </p>
 
     </section>
 
-    <div class="toolbar">
+    <section class="card">
 
-      <!-- FIX: Opens the application form directly -->
+      <h2>Financing Request</h2>
 
-      <a href="application.html" class="button" data-key="newApplication">
+      <p class="card-intro">
 
-        New Application
+        Provide accurate information about your business and financing needs.
 
-      </a>
+      </p>
 
-      <button
+      <div class="summary">
 
-        type="button"
+        <div class="summary-row">
 
-        id="refreshButton"
+          <span>Financing range</span>
 
-        class="button secondary"
+          <span>$20,000 – $50,000</span>
 
-        data-key="refresh"
+        </div>
 
-      >
+        <div class="summary-row">
 
-        Refresh
+          <span>Illustrative annual interest</span>
 
-      </button>
+          <span>10%</span>
 
-    </div>
+        </div>
 
-    <div id="message" role="status" aria-live="polite">
+        <div class="summary-row">
 
-      Loading your applications...
+          <span>Maximum term</span>
 
-    </div>
+          <span>24 months</span>
 
-    <section id="applicationsList" aria-live="polite"></section>
+        </div>
+
+        <div class="summary-row">
+
+          <span>Collateral</span>
+
+          <span>No collateral requested</span>
+
+        </div>
+
+      </div>
+
+      <form id="applicationForm">
+
+        <div class="field">
+
+          <label for="amount">Requested financing amount (USD)</label>
+
+          <select id="amount" name="amount" required>
+
+            <option value="">Select amount</option>
+
+            <option value="20000">$20,000</option>
+
+            <option value="25000">$25,000</option>
+
+            <option value="30000">$30,000</option>
+
+            <option value="35000">$35,000</option>
+
+            <option value="40000">$40,000</option>
+
+            <option value="45000">$45,000</option>
+
+            <option value="50000">$50,000</option>
+
+          </select>
+
+        </div>
+
+        <div class="row">
+
+          <div class="field">
+
+            <label for="businessName">Business name</label>
+
+            <input
+
+              type="text"
+
+              id="businessName"
+
+              name="businessName"
+
+              placeholder="Enter business name"
+
+              maxlength="200"
+
+              required
+
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label for="businessType">Business type</label>
+
+            <select id="businessType" name="businessType" required>
+
+              <option value="">Select business type</option>
+
+              <option value="Sole Proprietorship">Sole Proprietorship</option>
+
+              <option value="Partnership">Partnership</option>
+
+              <option value="Limited Company">Limited Company</option>
+
+              <option value="Corporation">Corporation</option>
+
+              <option value="Other">Other</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="field">
+
+            <label for="years">Years in operation</label>
+
+            <select id="years" name="years" required>
+
+              <option value="">Select</option>
+
+              <option value="Less than 1 year">Less than 1 year</option>
+
+              <option value="1-2 years">1–2 years</option>
+
+              <option value="3-5 years">3–5 years</option>
+
+              <option value="6-10 years">6–10 years</option>
+
+              <option value="More than 10 years">More than 10 years</option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+
+            <label for="revenue">Estimated annual revenue</label>
+
+            <select id="revenue" name="revenue" required>
+
+              <option value="">Select range</option>
+
+              <option value="Under $50,000">Under $50,000</option>
+
+              <option value="$50,000 - $100,000">$50,000 – $100,000</option>
+
+              <option value="$100,000 - $250,000">$100,000 – $250,000</option>
+
+              <option value="$250,000 - $500,000">$250,000 – $500,000</option>
+
+              <option value="Over $500,000">Over $500,000</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="purpose">Purpose of financing</label>
+
+          <textarea
+
+            id="purpose"
+
+            name="purpose"
+
+            maxlength="3000"
+
+            placeholder="Explain how the financing will be used..."
+
+            required
+
+          ></textarea>
+
+        </div>
+
+        <div class="notice">
+
+          Your application will be reviewed based on the information provided
+
+          and any required verification. Submission does not guarantee approval.
+
+          Do not enter passwords, payment card details, or wallet recovery phrases.
+
+        </div>
+
+        <div class="checkbox">
+
+          <input type="checkbox" id="confirm" required>
+
+          <label for="confirm">
+
+            I confirm that the information provided is accurate and complete
+
+            to the best of my knowledge.
+
+          </label>
+
+        </div>
+
+        <button type="submit" id="submitButton">
+
+          Submit Financing Application
+
+        </button>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+
+      </form>
+
+    </section>
 
   </main>
 
-  <footer data-key="footer">
+  <footer>
 
     © 2026 GlobalBridgeFunding. All rights reserved.
 
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
 
@@ -520,805 +754,207 @@
 
     );
 
-    const translations = {
+    const form = document.getElementById("applicationForm");
 
-      en: {
-
-        backDashboard: "← Dashboard",
-
-        title: "My Applications",
-
-        subtitle: "Review your financing applications and their current status.",
-
-        newApplication: "New Application",
-
-        refresh: "Refresh",
-
-        loading: "Loading your applications...",
-
-        empty: "You have not submitted any financing applications yet.",
-
-        loadError: "We could not load your applications. Please try again.",
-
-        loginRequired: "Please sign in to view your applications.",
-
-        amount: "Requested amount",
-
-        business: "Business name",
-
-        businessType: "Business type",
-
-        submitted: "Submitted",
-
-        reference: "Reference",
-
-        status: "Status",
-
-        pending: "Pending review",
-
-        approved: "Approved",
-
-        rejected: "Rejected",
-
-        otherStatus: "In progress",
-
-        footer: "© 2026 GlobalBridgeFunding. All rights reserved.",
-
-        refreshError: "Unable to refresh applications. Please try again."
-
-      },
-
-      pt: {
-
-        backDashboard: "← Painel",
-
-        title: "As minhas candidaturas",
-
-        subtitle: "Consulte os seus pedidos de financiamento e o respetivo estado.",
-
-        newApplication: "Nova candidatura",
-
-        refresh: "Atualizar",
-
-        loading: "A carregar as suas candidaturas...",
-
-        empty: "Ainda não submeteu nenhum pedido de financiamento.",
-
-        loadError: "Não foi possível carregar as candidaturas. Tente novamente.",
-
-        loginRequired: "Inicie sessão para consultar as suas candidaturas.",
-
-        amount: "Montante solicitado",
-
-        business: "Nome da empresa",
-
-        businessType: "Tipo de empresa",
-
-        submitted: "Submetido em",
-
-        reference: "Referência",
-
-        status: "Estado",
-
-        pending: "Em análise",
-
-        approved: "Aprovado",
-
-        rejected: "Rejeitado",
-
-        otherStatus: "Em andamento",
-
-        footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
-
-        refreshError: "Não foi possível atualizar. Tente novamente."
-
-      },
-
-      vi: {
-
-        backDashboard: "← Bảng điều khiển",
-
-        title: "Đơn đăng ký của tôi",
-
-        subtitle: "Xem các đơn đăng ký tài chính và trạng thái hiện tại.",
-
-        newApplication: "Đơn đăng ký mới",
-
-        refresh: "Làm mới",
-
-        loading: "Đang tải đơn đăng ký...",
-
-        empty: "Bạn chưa gửi đơn đăng ký tài chính nào.",
-
-        loadError: "Không thể tải đơn đăng ký. Vui lòng thử lại.",
-
-        loginRequired: "Vui lòng đăng nhập để xem đơn đăng ký.",
-
-        amount: "Số tiền yêu cầu",
-
-        business: "Tên doanh nghiệp",
-
-        businessType: "Loại hình doanh nghiệp",
-
-        submitted: "Ngày gửi",
-
-        reference: "Mã tham chiếu",
-
-        status: "Trạng thái",
-
-        pending: "Đang xét duyệt",
-
-        approved: "Đã phê duyệt",
-
-        rejected: "Bị từ chối",
-
-        otherStatus: "Đang xử lý",
-
-        footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
-
-        refreshError: "Không thể làm mới. Vui lòng thử lại."
-
-      },
-
-      fa: {
-
-        backDashboard: "← داشبورد",
-
-        title: "درخواست‌های من",
-
-        subtitle: "درخواست‌های تأمین مالی و وضعیت فعلی آن‌ها را بررسی کنید.",
-
-        newApplication: "درخواست جدید",
-
-        refresh: "بارگذاری مجدد",
-
-        loading: "در حال بارگذاری درخواست‌ها...",
-
-        empty: "هنوز هیچ درخواست تأمین مالی ارسال نکرده‌اید.",
-
-        loadError: "بارگذاری درخواست‌ها ناموفق بود. دوباره تلاش کنید.",
-
-        loginRequired: "برای مشاهده درخواست‌ها وارد حساب خود شوید.",
-
-        amount: "مبلغ درخواستی",
-
-        business: "نام کسب‌وکار",
-
-        businessType: "نوع کسب‌وکار",
-
-        submitted: "تاریخ ارسال",
-
-        reference: "شماره مرجع",
-
-        status: "وضعیت",
-
-        pending: "در انتظار بررسی",
-
-        approved: "تأیید شده",
-
-        rejected: "رد شده",
-
-        otherStatus: "در حال انجام",
-
-        footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
-
-        refreshError: "بارگذاری مجدد ناموفق بود. دوباره تلاش کنید."
-
-      },
-
-      id: {
-
-        backDashboard: "← Dasbor",
-
-        title: "Pengajuan Saya",
-
-        subtitle: "Periksa pengajuan pembiayaan dan status terkininya.",
-
-        newApplication: "Pengajuan Baru",
-
-        refresh: "Muat Ulang",
-
-        loading: "Memuat pengajuan Anda...",
-
-        empty: "Anda belum mengirim pengajuan pembiayaan.",
-
-        loadError: "Pengajuan tidak dapat dimuat. Silakan coba lagi.",
-
-        loginRequired: "Silakan masuk untuk melihat pengajuan Anda.",
-
-        amount: "Jumlah yang diminta",
-
-        business: "Nama bisnis",
-
-        businessType: "Jenis bisnis",
-
-        submitted: "Tanggal pengajuan",
-
-        reference: "Referensi",
-
-        status: "Status",
-
-        pending: "Menunggu peninjauan",
-
-        approved: "Disetujui",
-
-        rejected: "Ditolak",
-
-        otherStatus: "Sedang diproses",
-
-        footer: "© 2026 GlobalBridgeFunding. Hak cipta dilindungi.",
-
-        refreshError: "Pengajuan tidak dapat dimuat ulang. Silakan coba lagi."
-
-      },
-
-      fr: {
-
-        backDashboard: "← Tableau de bord",
-
-        title: "Mes demandes",
-
-        subtitle: "Consultez vos demandes de financement et leur statut actuel.",
-
-        newApplication: "Nouvelle demande",
-
-        refresh: "Actualiser",
-
-        loading: "Chargement de vos demandes...",
-
-        empty: "Vous n'avez encore soumis aucune demande de financement.",
-
-        loadError: "Impossible de charger vos demandes. Veuillez réessayer.",
-
-        loginRequired: "Connectez-vous pour consulter vos demandes.",
-
-        amount: "Montant demandé",
-
-        business: "Nom de l'entreprise",
-
-        businessType: "Type d'entreprise",
-
-        submitted: "Date de soumission",
-
-        reference: "Référence",
-
-        status: "Statut",
-
-        pending: "En cours d'examen",
-
-        approved: "Approuvée",
-
-        rejected: "Refusée",
-
-        otherStatus: "En cours",
-
-        footer: "© 2026 GlobalBridgeFunding. Tous droits réservés.",
-
-        refreshError: "Impossible d'actualiser. Veuillez réessayer."
-
-      },
-
-      fi: {
-
-        backDashboard: "← Hallintapaneeli",
-
-        title: "Omat hakemukset",
-
-        subtitle: "Tarkastele rahoitushakemuksiasi ja niiden nykyistä tilaa.",
-
-        newApplication: "Uusi hakemus",
-
-        refresh: "Päivitä",
-
-        loading: "Ladataan hakemuksiasi...",
-
-        empty: "Et ole vielä lähettänyt rahoitushakemuksia.",
-
-        loadError: "Hakemusten lataaminen epäonnistui. Yritä uudelleen.",
-
-        loginRequired: "Kirjaudu sisään nähdäksesi hakemuksesi.",
-
-        amount: "Haettu summa",
-
-        business: "Yrityksen nimi",
-
-        businessType: "Yrityksen tyyppi",
-
-        submitted: "Lähetyspäivä",
-
-        reference: "Viite",
-
-        status: "Tila",
-
-        pending: "Odottaa tarkistusta",
-
-        approved: "Hyväksytty",
-
-        rejected: "Hylätty",
-
-        otherStatus: "Käsittelyssä",
-
-        footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
-
-        refreshError: "Päivittäminen epäonnistui. Yritä uudelleen."
-
-      },
-
-      es: {
-
-        backDashboard: "← Panel",
-
-        title: "Mis solicitudes",
-
-        subtitle: "Consulta tus solicitudes de financiación y su estado actual.",
-
-        newApplication: "Nueva solicitud",
-
-        refresh: "Actualizar",
-
-        loading: "Cargando tus solicitudes...",
-
-        empty: "Todavía no has enviado ninguna solicitud de financiación.",
-
-        loadError: "No se pudieron cargar las solicitudes. Inténtalo de nuevo.",
-
-        loginRequired: "Inicia sesión para consultar tus solicitudes.",
-
-        amount: "Importe solicitado",
-
-        business: "Nombre de la empresa",
-
-        businessType: "Tipo de empresa",
-
-        submitted: "Fecha de envío",
-
-        reference: "Referencia",
-
-        status: "Estado",
-
-        pending: "Pendiente de revisión",
-
-        approved: "Aprobada",
-
-        rejected: "Rechazada",
-
-        otherStatus: "En proceso",
-
-        footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
-
-        refreshError: "No se pudo actualizar. Inténtalo de nuevo."
-
-      }
-
-    };
-
-    const localeByLanguage = {
-
-      en: "en-US",
-
-      pt: "pt-PT",
-
-      vi: "vi-VN",
-
-      fa: "fa-IR",
-
-      id: "id-ID",
-
-      fr: "fr-FR",
-
-      fi: "fi-FI",
-
-      es: "es-ES"
-
-    };
-
-    const languageSelector = document.getElementById("languageSelector");
+    const submitButton = document.getElementById("submitButton");
 
     const message = document.getElementById("message");
 
-    const applicationsList = document.getElementById("applicationsList");
+    function showMessage(type, text) {
 
-    const refreshButton = document.getElementById("refreshButton");
+      message.className = "message " + type;
 
-    let currentApplications = [];
+      message.textContent = text;
 
-    let currentLanguage = "en";
+    }
 
-    let loading = false;
-
-    function getSavedLanguage() {
-
-      let saved = "en";
+    async function checkUser() {
 
       try {
 
-        if (
+        const { data, error } = await supabaseClient.auth.getUser();
 
-          window.GlobalBridgeLanguage &&
-
-          typeof window.GlobalBridgeLanguage.getLanguage === "function"
-
-        ) {
-
-          saved = window.GlobalBridgeLanguage.getLanguage();
-
-        } else {
-
-          saved =
-
-            localStorage.getItem("globalbridge_language") ||
-
-            localStorage.getItem("selectedLanguage") ||
-
-            "en";
-
-        }
-
-      } catch (_) {}
-
-      return translations[saved] ? saved : "en";
-
-    }
-
-    function t(key) {
-
-      return translations[currentLanguage][key] ??
-
-        translations.en[key] ??
-
-        key;
-
-    }
-
-    function setText(element, text) {
-
-      element.textContent =
-
-        text === null || text === undefined || text === ""
-
-          ? "—"
-
-          : String(text);
-
-    }
-
-    function applyLanguage(language) {
-
-      currentLanguage = translations[language] ? language : "en";
-
-      document.documentElement.lang = currentLanguage;
-
-      document.documentElement.dir =
-
-        currentLanguage === "fa" ? "rtl" : "ltr";
-
-      languageSelector.value = currentLanguage;
-
-      document.querySelectorAll("[data-key]").forEach(element => {
-
-        const key = element.getAttribute("data-key");
-
-        if (translations[currentLanguage][key] !== undefined) {
-
-          element.textContent = translations[currentLanguage][key];
-
-        }
-
-      });
-
-      renderApplications();
-
-      if (loading) {
-
-        message.hidden = false;
-
-        setText(message, t("loading"));
-
-      }
-
-    }
-
-    function selectLanguage(language) {
-
-      language = translations[language] ? language : "en";
-
-      try {
-
-        localStorage.setItem("globalbridge_language", language);
-
-        localStorage.setItem("selectedLanguage", language);
-
-      } catch (_) {}
-
-      if (
-
-        window.GlobalBridgeLanguage &&
-
-        typeof window.GlobalBridgeLanguage.setLanguage === "function"
-
-      ) {
-
-        window.GlobalBridgeLanguage.setLanguage(language);
-
-      }
-
-      applyLanguage(language);
-
-    }
-
-    languageSelector.addEventListener("change", () => {
-
-      selectLanguage(languageSelector.value);
-
-    });
-
-    function makeDetail(label, value) {
-
-      const wrapper = document.createElement("div");
-
-      const labelElement = document.createElement("span");
-
-      labelElement.className = "detail-label";
-
-      setText(labelElement, label);
-
-      const valueElement = document.createElement("div");
-
-      valueElement.className = "detail-value";
-
-      setText(valueElement, value);
-
-      wrapper.append(labelElement, valueElement);
-
-      return wrapper;
-
-    }
-
-    function formatAmount(amount) {
-
-      if (amount === null || amount === undefined || amount === "") {
-
-        return "—";
-
-      }
-
-      const numeric = Number(amount);
-
-      if (!Number.isFinite(numeric)) return String(amount);
-
-      return new Intl.NumberFormat(localeByLanguage[currentLanguage], {
-
-        style: "currency",
-
-        currency: "USD",
-
-        maximumFractionDigits: 2
-
-      }).format(numeric);
-
-    }
-
-    function formatDate(dateValue) {
-
-      if (!dateValue) return "—";
-
-      const date = new Date(dateValue);
-
-      if (Number.isNaN(date.getTime())) return String(dateValue);
-
-      return new Intl.DateTimeFormat(localeByLanguage[currentLanguage], {
-
-        year: "numeric",
-
-        month: "short",
-
-        day: "numeric"
-
-      }).format(date);
-
-    }
-
-    function translatedStatus(status) {
-
-      const normalized = String(status || "").trim().toLowerCase();
-
-      if (normalized === "pending" || normalized === "under review") {
-
-        return { label: t("pending"), css: "pending" };
-
-      }
-
-      if (normalized === "approved") {
-
-        return { label: t("approved"), css: "approved" };
-
-      }
-
-      if (normalized === "rejected" || normalized === "declined") {
-
-        return { label: t("rejected"), css: "rejected" };
-
-      }
-
-      return {
-
-        label: status || t("otherStatus"),
-
-        css: ""
-
-      };
-
-    }
-
-    function renderApplications() {
-
-      applicationsList.replaceChildren();
-
-      if (!currentApplications.length) return;
-
-      currentApplications.forEach(application => {
-
-        const card = document.createElement("article");
-
-        card.className = "application-card";
-
-        const top = document.createElement("div");
-
-        top.className = "application-top";
-
-        const headingWrap = document.createElement("div");
-
-        const heading = document.createElement("h2");
-
-        setText(
-
-          heading,
-
-          application.business_name || t("newApplication")
-
-        );
-
-        const reference = document.createElement("div");
-
-        reference.className = "reference";
-
-        setText(
-
-          reference,
-
-          t("reference") + ": " + (application.id || "—")
-
-        );
-
-        headingWrap.append(heading, reference);
-
-        const status = translatedStatus(application.status);
-
-        const badge = document.createElement("span");
-
-        badge.className = "status " + status.css;
-
-        setText(badge, status.label);
-
-        top.append(headingWrap, badge);
-
-        const details = document.createElement("div");
-
-        details.className = "details";
-
-        details.append(
-
-          makeDetail(t("amount"), formatAmount(application.requested_amount)),
-
-          makeDetail(t("businessType"), application.business_type),
-
-          makeDetail(t("submitted"), formatDate(application.created_at)),
-
-          makeDetail(t("status"), status.label)
-
-        );
-
-        card.append(top, details);
-
-        applicationsList.append(card);
-
-      });
-
-    }
-
-    async function loadApplications() {
-
-      if (loading) return;
-
-      loading = true;
-
-      refreshButton.disabled = true;
-
-      message.hidden = false;
-
-      setText(message, t("loading"));
-
-      applicationsList.replaceChildren();
-
-      try {
-
-        const { data: authData, error: authError } =
-
-          await supabaseClient.auth.getUser();
-
-        if (authError || !authData || !authData.user) {
+        if (error || !data.user) {
 
           window.location.replace("login.html");
 
-          return;
+          return null;
 
         }
 
-        const user = authData.user;
-
-        const { data, error } = await supabaseClient
-
-          .from("financing_applications")
-
-          .select("*")
-
-          .eq("user_id", user.id)
-
-          .order("created_at", { ascending: false });
-
-        if (error) {
-
-          console.error("Application loading error:", error);
-
-          currentApplications = [];
-
-          setText(message, t("loadError"));
-
-          return;
-
-        }
-
-        currentApplications = Array.isArray(data) ? data : [];
-
-        renderApplications();
-
-        if (currentApplications.length === 0) {
-
-          setText(message, t("empty"));
-
-          message.hidden = false;
-
-        } else {
-
-          message.hidden = true;
-
-        }
+        return data.user;
 
       } catch (error) {
 
-        console.error("Unexpected application loading error:", error);
+        showMessage(
 
-        currentApplications = [];
+          "error",
 
-        setText(message, t("loadError"));
+          "We could not verify your login. Please refresh the page or sign in again."
 
-        message.hidden = false;
+        );
 
-      } finally {
-
-        loading = false;
-
-        refreshButton.disabled = false;
+        return null;
 
       }
 
     }
 
-    refreshButton.addEventListener("click", loadApplications);
+    checkUser();
 
-    selectLanguage(getSavedLanguage());
+    form.addEventListener("submit", async function(event) {
 
-    loadApplications();
+      event.preventDefault();
+
+      message.className = "message";
+
+      message.textContent = "";
+
+      if (!form.reportValidity()) return;
+
+      submitButton.disabled = true;
+
+      submitButton.textContent = "Submitting securely...";
+
+      try {
+
+        const { data: userData, error: userError } =
+
+          await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+
+          showMessage(
+
+            "error",
+
+            "Your session has expired. Please sign in again."
+
+          );
+
+          setTimeout(() => {
+
+            window.location.href = "login.html";
+
+          }, 1200);
+
+          return;
+
+        }
+
+        const user = userData.user;
+
+        const application = {
+
+          user_id: user.id,
+
+          requested_amount: Number(
+
+            document.getElementById("amount").value
+
+          ),
+
+          business_name: document.getElementById("businessName").value.trim(),
+
+          business_type: document.getElementById("businessType").value,
+
+          years_in_operation: document.getElementById("years").value,
+
+          annual_revenue: document.getElementById("revenue").value,
+
+          financing_purpose: document.getElementById("purpose").value.trim(),
+
+          status: "pending"
+
+        };
+
+        const { error: insertError } = await supabaseClient
+
+          .from("financing_applications")
+
+          .insert([application]);
+
+        if (insertError) {
+
+          console.error("Application submission error:", insertError);
+
+          if (insertError.code === "42501") {
+
+            showMessage(
+
+              "error",
+
+              "Your application could not be saved because database permissions blocked the request. No application was submitted. Please contact the site administrator."
+
+            );
+
+          } else {
+
+            showMessage(
+
+              "error",
+
+              "We could not save your application. No success has been recorded. Please try again. If the problem continues, contact support with this error code: " +
+
+              (insertError.code || "unknown")
+
+            );
+
+          }
+
+          return;
+
+        }
+
+        form.reset();
+
+        showMessage(
+
+          "success",
+
+          "Your application was submitted successfully and is awaiting review. You can check its status on My Applications."
+
+        );
+
+        submitButton.textContent = "Application Submitted";
+
+        setTimeout(() => {
+
+          window.location.href = "applications.html";
+
+        }, 2200);
+
+      } catch (error) {
+
+        console.error("Unexpected submission error:", error);
+
+        showMessage(
+
+          "error",
+
+          "An unexpected error occurred. Please check your internet connection and try again."
+
+        );
+
+      } finally {
+
+        if (
+
+          !message.classList.contains("success") ||
+
+          submitButton.textContent !== "Application Submitted"
+
+        ) {
+
+          submitButton.disabled = false;
+
+          submitButton.textContent = "Submit Financing Application";
+
+        }
+
+      }
+
+    });
 
   </script>
 
