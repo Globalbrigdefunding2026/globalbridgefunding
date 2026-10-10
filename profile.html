@@ -1,0 +1,1115 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#071a35">
+
+  <title>My Profile | GlobalBridgeFunding</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    :root {
+
+      --navy: #071a35;
+
+      --blue: #36c2ff;
+
+      --bg: #f3f7fc;
+
+      --text: #15243a;
+
+      --muted: #6b7a90;
+
+      --border: #dce5f0;
+
+      --white: #fff;
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+    }
+
+    header {
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 18px 20px;
+
+      border-bottom: 3px solid var(--blue);
+
+    }
+
+    .header-inner {
+
+      max-width: 1050px;
+
+      margin: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+
+    }
+
+    .brand { font-size: 18px; font-weight: 800; }
+
+    .brand span { color: var(--blue); }
+
+    .header-links {
+
+      display: flex;
+
+      gap: 14px;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+    }
+
+    header a {
+
+      color: white;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+    }
+
+    main {
+
+      width: min(100% - 28px, 760px);
+
+      margin: 30px auto 50px;
+
+    }
+
+    .intro { margin-bottom: 22px; }
+
+    .intro h1 { margin: 0 0 8px; font-size: 29px; }
+
+    .intro p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .card {
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 17px;
+
+      padding: 24px;
+
+      margin-bottom: 18px;
+
+      box-shadow: 0 8px 28px rgba(7, 26, 53, .045);
+
+    }
+
+    .card h2 { margin: 0 0 8px; font-size: 19px; }
+
+    .description { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0 0 20px; }
+
+    .field { margin-bottom: 18px; }
+
+    label { display: block; font-weight: 650; font-size: 13px; margin-bottom: 8px; }
+
+    input, select {
+
+      display: block;
+
+      width: 100%;
+
+      min-height: 48px;
+
+      padding: 12px;
+
+      border: 1px solid #ccd8e6;
+
+      border-radius: 10px;
+
+      background: white;
+
+      color: var(--text);
+
+      font: inherit;
+
+      font-size: 15px;
+
+    }
+
+    input:focus, select:focus {
+
+      outline: 2px solid rgba(54, 194, 255, .35);
+
+      border-color: var(--blue);
+
+    }
+
+    input[readonly] {
+
+      background: #f0f4f8;
+
+      color: #65748a;
+
+    }
+
+    .hint { color: var(--muted); font-size: 12px; line-height: 1.5; margin-top: 7px; }
+
+    .actions {
+
+      display: flex;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 22px;
+
+    }
+
+    button, .button-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-height: 46px;
+
+      padding: 12px 18px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      background: var(--blue);
+
+      color: #06182c;
+
+      font-weight: 750;
+
+      font-size: 14px;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+    }
+
+    button:disabled { opacity: .6; cursor: not-allowed; }
+
+    .secondary {
+
+      background: #edf3fa;
+
+      color: var(--navy);
+
+    }
+
+    #notice {
+
+      display: none;
+
+      padding: 13px 14px;
+
+      border-radius: 10px;
+
+      margin-bottom: 18px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    #notice.success { display: block; background: #e7f8ef; color: #14643b; }
+
+    #notice.error { display: block; background: #fff0f0; color: #a22222; }
+
+    #notice.info { display: block; background: #eaf5ff; color: #164d7c; }
+
+    .account-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      align-items: center;
+
+      padding: 12px 0;
+
+      border-bottom: 1px solid var(--border);
+
+    }
+
+    .account-row:last-child { border-bottom: 0; }
+
+    .account-label { color: var(--muted); font-size: 13px; }
+
+    .account-value { font-size: 14px; font-weight: 650; text-align: right; overflow-wrap: anywhere; }
+
+    footer {
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      padding: 10px 20px 30px;
+
+    }
+
+    @media (max-width: 480px) {
+
+      main { margin-top: 22px; }
+
+      .card { padding: 18px; }
+
+      .intro h1 { font-size: 25px; }
+
+      .actions button, .actions a { flex: 1 1 100%; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="header-inner">
+
+      <div class="brand">GlobalBridge<span>Funding</span></div>
+
+      <nav class="header-links" aria-label="Main navigation">
+
+        <a href="dashboard.html" data-i18n="dashboard">Dashboard</a>
+
+        <a href="applications.html" data-i18n="applications">My Applications</a>
+
+        <a href="wallet.html" data-i18n="wallet">Wallet</a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <div class="intro">
+
+      <h1 data-i18n="title">My Profile</h1>
+
+      <p data-i18n="subtitle">Manage your personal details and preferred language.</p>
+
+    </div>
+
+    <div id="notice" role="status" aria-live="polite"></div>
+
+    <section class="card">
+
+      <h2 data-i18n="accountTitle">Account information</h2>
+
+      <p class="description" data-i18n="accountDescription">
+
+        Your login email is managed by Supabase Authentication and cannot be changed on this page.
+
+      </p>
+
+      <div class="account-row">
+
+        <span class="account-label" data-i18n="emailLabel">Login email</span>
+
+        <span class="account-value" id="accountEmail">Loading...</span>
+
+      </div>
+
+      <div class="account-row">
+
+        <span class="account-label" data-i18n="verificationLabel">Email verification</span>
+
+        <span class="account-value" id="verificationStatus">—</span>
+
+      </div>
+
+    </section>
+
+    <form id="profileForm" class="card">
+
+      <h2 data-i18n="detailsTitle">Personal details</h2>
+
+      <p class="description" data-i18n="detailsDescription">
+
+        Keep your details accurate. Use the same information you provide in your financing and KYC applications.
+
+      </p>
+
+      <div class="field">
+
+        <label for="fullName" data-i18n="nameLabel">Full name</label>
+
+        <input id="fullName" name="full_name" type="text" maxlength="120"
+
+          autocomplete="name" required>
+
+      </div>
+
+      <div class="field">
+
+        <label for="phone" data-i18n="phoneLabel">Phone number</label>
+
+        <input id="phone" name="phone" type="tel" maxlength="40"
+
+          autocomplete="tel" placeholder="+351...">
+
+        <div class="hint" data-i18n="phoneHint">Include your country code if possible.</div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="country" data-i18n="countryLabel">Country of residence</label>
+
+        <input id="country" name="country" type="text" maxlength="100"
+
+          autocomplete="country-name" placeholder="e.g. Portugal">
+
+      </div>
+
+      <div class="field">
+
+        <label for="language" data-i18n="languageLabel">Preferred language</label>
+
+        <select id="language" name="preferred_language">
+
+          <option value="en">English</option>
+
+          <option value="pt">Português</option>
+
+          <option value="vi">Tiếng Việt</option>
+
+          <option value="fa">فارسی</option>
+
+          <option value="id">Bahasa Indonesia</option>
+
+          <option value="fr">Français</option>
+
+          <option value="fi">Suomi</option>
+
+          <option value="es">Español</option>
+
+        </select>
+
+      </div>
+
+      <div class="actions">
+
+        <button type="submit" id="saveButton" data-i18n="saveButton">Save profile</button>
+
+        <a class="button-link secondary" href="dashboard.html" data-i18n="backButton">Back to dashboard</a>
+
+      </div>
+
+    </form>
+
+    <section class="card">
+
+      <h2 data-i18n="securityTitle">Account security</h2>
+
+      <p class="description" data-i18n="securityDescription">
+
+        Never share your password, email verification links, or authentication codes. Updating this profile does not change your login credentials.
+
+      </p>
+
+      <button type="button" class="secondary" id="signOutButton" data-i18n="signOutButton">Sign out</button>
+
+    </section>
+
+  </main>
+
+  <footer>© <span id="year"></span> GlobalBridgeFunding. <span data-i18n="footerText">Secure account access.</span></footer>
+
+  <script>
+
+    (() => {
+
+      "use strict";
+
+      const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+      const SUPABASE_ANON_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+      const LANGUAGE_KEY = "globalbridge_language";
+
+      const translations = {
+
+        en: {
+
+          dashboard:"Dashboard", applications:"My Applications", wallet:"Wallet",
+
+          title:"My Profile", subtitle:"Manage your personal details and preferred language.",
+
+          accountTitle:"Account information",
+
+          accountDescription:"Your login email is managed by Supabase Authentication and cannot be changed on this page.",
+
+          emailLabel:"Login email", verificationLabel:"Email verification",
+
+          verified:"Verified", notVerified:"Not verified", detailsTitle:"Personal details",
+
+          detailsDescription:"Keep your details accurate. Use the same information you provide in your financing and KYC applications.",
+
+          nameLabel:"Full name", phoneLabel:"Phone number", phoneHint:"Include your country code if possible.",
+
+          countryLabel:"Country of residence", languageLabel:"Preferred language",
+
+          saveButton:"Save profile", saving:"Saving...", backButton:"Back to dashboard",
+
+          securityTitle:"Account security",
+
+          securityDescription:"Never share your password, email verification links, or authentication codes. Updating this profile does not change your login credentials.",
+
+          signOutButton:"Sign out", footerText:"Secure account access.",
+
+          loading:"Loading your profile...", loaded:"Profile loaded.",
+
+          saved:"Your profile has been saved.", loadError:"Could not load your profile: ",
+
+          saveError:"Could not save your profile: ", nameRequired:"Please enter your full name.",
+
+          sessionError:"Your session has expired. Please sign in again.",
+
+          signedOut:"You have been signed out. Redirecting to login...",
+
+          genericError:"Something went wrong. Please try again."
+
+        },
+
+        pt: {
+
+          dashboard:"Painel", applications:"Minhas candidaturas", wallet:"Carteira",
+
+          title:"O meu perfil", subtitle:"Gira os seus dados pessoais e o idioma preferido.",
+
+          accountTitle:"Informações da conta",
+
+          accountDescription:"O seu e-mail de acesso é gerido pela autenticação Supabase e não pode ser alterado nesta página.",
+
+          emailLabel:"E-mail de acesso", verificationLabel:"Verificação do e-mail",
+
+          verified:"Verificado", notVerified:"Não verificado", detailsTitle:"Dados pessoais",
+
+          detailsDescription:"Mantenha os seus dados corretos e consistentes com os pedidos de financiamento e KYC.",
+
+          nameLabel:"Nome completo", phoneLabel:"Número de telefone", phoneHint:"Inclua o indicativo do país, se possível.",
+
+          countryLabel:"País de residência", languageLabel:"Idioma preferido",
+
+          saveButton:"Guardar perfil", saving:"A guardar...", backButton:"Voltar ao painel",
+
+          securityTitle:"Segurança da conta",
+
+          securityDescription:"Nunca partilhe a sua palavra-passe, ligações de verificação ou códigos de autenticação. Esta página não altera os seus dados de acesso.",
+
+          signOutButton:"Terminar sessão", footerText:"Acesso seguro à conta.",
+
+          loading:"A carregar o perfil...", loaded:"Perfil carregado.",
+
+          saved:"O seu perfil foi guardado.", loadError:"Não foi possível carregar o perfil: ",
+
+          saveError:"Não foi possível guardar o perfil: ", nameRequired:"Introduza o seu nome completo.",
+
+          sessionError:"A sua sessão expirou. Inicie sessão novamente.",
+
+          signedOut:"Sessão terminada. A redirecionar...", genericError:"Ocorreu um erro. Tente novamente."
+
+        },
+
+        vi: {
+
+          dashboard:"Bảng điều khiển", applications:"Đơn đăng ký", wallet:"Ví",
+
+          title:"Hồ sơ của tôi", subtitle:"Quản lý thông tin cá nhân và ngôn ngữ ưu tiên.",
+
+          accountTitle:"Thông tin tài khoản",
+
+          accountDescription:"Email đăng nhập được quản lý bởi Supabase Authentication và không thể thay đổi tại đây.",
+
+          emailLabel:"Email đăng nhập", verificationLabel:"Xác minh email",
+
+          verified:"Đã xác minh", notVerified:"Chưa xác minh", detailsTitle:"Thông tin cá nhân",
+
+          detailsDescription:"Hãy giữ thông tin chính xác và nhất quán với hồ sơ tài chính và KYC.",
+
+          nameLabel:"Họ và tên", phoneLabel:"Số điện thoại", phoneHint:"Nếu có thể, hãy thêm mã quốc gia.",
+
+          countryLabel:"Quốc gia cư trú", languageLabel:"Ngôn ngữ ưu tiên",
+
+          saveButton:"Lưu hồ sơ", saving:"Đang lưu...", backButton:"Quay lại bảng điều khiển",
+
+          securityTitle:"Bảo mật tài khoản",
+
+          securityDescription:"Không chia sẻ mật khẩu, liên kết xác minh email hoặc mã xác thực. Trang này không thay đổi thông tin đăng nhập.",
+
+          signOutButton:"Đăng xuất", footerText:"Truy cập tài khoản an toàn.",
+
+          loading:"Đang tải hồ sơ...", loaded:"Đã tải hồ sơ.",
+
+          saved:"Đã lưu hồ sơ.", loadError:"Không thể tải hồ sơ: ",
+
+          saveError:"Không thể lưu hồ sơ: ", nameRequired:"Vui lòng nhập họ và tên.",
+
+          sessionError:"Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+
+          signedOut:"Đã đăng xuất. Đang chuyển hướng...", genericError:"Đã xảy ra lỗi. Vui lòng thử lại."
+
+        },
+
+        fa: {
+
+          dashboard:"داشبورد", applications:"درخواست‌های من", wallet:"کیف پول",
+
+          title:"پروفایل من", subtitle:"اطلاعات شخصی و زبان دلخواه خود را مدیریت کنید.",
+
+          accountTitle:"اطلاعات حساب",
+
+          accountDescription:"ایمیل ورود توسط احراز هویت Supabase مدیریت می‌شود و در این صفحه قابل تغییر نیست.",
+
+          emailLabel:"ایمیل ورود", verificationLabel:"تأیید ایمیل",
+
+          verified:"تأیید شده", notVerified:"تأیید نشده", detailsTitle:"اطلاعات شخصی",
+
+          detailsDescription:"اطلاعات خود را دقیق و هماهنگ با درخواست‌های تأمین مالی و احراز هویت نگه دارید.",
+
+          nameLabel:"نام کامل", phoneLabel:"شماره تلفن", phoneHint:"در صورت امکان، کد کشور را وارد کنید.",
+
+          countryLabel:"کشور محل اقامت", languageLabel:"زبان دلخواه",
+
+          saveButton:"ذخیره پروفایل", saving:"در حال ذخیره...", backButton:"بازگشت به داشبورد",
+
+          securityTitle:"امنیت حساب",
+
+          securityDescription:"گذرواژه، پیوندهای تأیید ایمیل یا کدهای احراز هویت را با دیگران به اشتراک نگذارید. این صفحه اطلاعات ورود شما را تغییر نمی‌دهد.",
+
+          signOutButton:"خروج", footerText:"دسترسی امن به حساب.",
+
+          loading:"در حال بارگذاری پروفایل...", loaded:"پروفایل بارگذاری شد.",
+
+          saved:"پروفایل شما ذخیره شد.", loadError:"بارگذاری پروفایل ناموفق بود: ",
+
+          saveError:"ذخیره پروفایل ناموفق بود: ", nameRequired:"لطفاً نام کامل خود را وارد کنید.",
+
+          sessionError:"نشست شما منقضی شده است. دوباره وارد شوید.",
+
+          signedOut:"خارج شدید. در حال انتقال...", genericError:"خطایی رخ داد. دوباره تلاش کنید."
+
+        },
+
+        id: {
+
+          dashboard:"Dasbor", applications:"Pengajuan Saya", wallet:"Dompet",
+
+          title:"Profil Saya", subtitle:"Kelola informasi pribadi dan bahasa pilihan Anda.",
+
+          accountTitle:"Informasi akun",
+
+          accountDescription:"Email login dikelola oleh Supabase Authentication dan tidak dapat diubah di halaman ini.",
+
+          emailLabel:"Email login", verificationLabel:"Verifikasi email",
+
+          verified:"Terverifikasi", notVerified:"Belum terverifikasi", detailsTitle:"Informasi pribadi",
+
+          detailsDescription:"Pastikan informasi Anda akurat dan sesuai dengan pengajuan pembiayaan serta KYC.",
+
+          nameLabel:"Nama lengkap", phoneLabel:"Nomor telepon", phoneHint:"Sertakan kode negara jika memungkinkan.",
+
+          countryLabel:"Negara tempat tinggal", languageLabel:"Bahasa pilihan",
+
+          saveButton:"Simpan profil", saving:"Menyimpan...", backButton:"Kembali ke dasbor",
+
+          securityTitle:"Keamanan akun",
+
+          securityDescription:"Jangan pernah membagikan kata sandi, tautan verifikasi email, atau kode autentikasi. Halaman ini tidak mengubah kredensial login Anda.",
+
+          signOutButton:"Keluar", footerText:"Akses akun yang aman.",
+
+          loading:"Memuat profil...", loaded:"Profil dimuat.",
+
+          saved:"Profil Anda telah disimpan.", loadError:"Tidak dapat memuat profil: ",
+
+          saveError:"Tidak dapat menyimpan profil: ", nameRequired:"Masukkan nama lengkap Anda.",
+
+          sessionError:"Sesi Anda telah berakhir. Silakan login kembali.",
+
+          signedOut:"Anda telah keluar. Mengalihkan...", genericError:"Terjadi kesalahan. Silakan coba lagi."
+
+        },
+
+        fr: {
+
+          dashboard:"Tableau de bord", applications:"Mes demandes", wallet:"Portefeuille",
+
+          title:"Mon profil", subtitle:"Gérez vos informations personnelles et votre langue préférée.",
+
+          accountTitle:"Informations du compte",
+
+          accountDescription:"Votre e-mail de connexion est géré par Supabase Authentication et ne peut pas être modifié sur cette page.",
+
+          emailLabel:"E-mail de connexion", verificationLabel:"Vérification de l’e-mail",
+
+          verified:"Vérifié", notVerified:"Non vérifié", detailsTitle:"Informations personnelles",
+
+          detailsDescription:"Gardez vos informations exactes et cohérentes avec vos demandes de financement et KYC.",
+
+          nameLabel:"Nom complet", phoneLabel:"Numéro de téléphone", phoneHint:"Ajoutez l’indicatif du pays si possible.",
+
+          countryLabel:"Pays de résidence", languageLabel:"Langue préférée",
+
+          saveButton:"Enregistrer le profil", saving:"Enregistrement...", backButton:"Retour au tableau de bord",
+
+          securityTitle:"Sécurité du compte",
+
+          securityDescription:"Ne partagez jamais votre mot de passe, vos liens de vérification ou vos codes d’authentification. Cette page ne modifie pas vos identifiants.",
+
+          signOutButton:"Se déconnecter", footerText:"Accès sécurisé au compte.",
+
+          loading:"Chargement du profil...", loaded:"Profil chargé.",
+
+          saved:"Votre profil a été enregistré.", loadError:"Impossible de charger le profil : ",
+
+          saveError:"Impossible d’enregistrer le profil : ", nameRequired:"Veuillez saisir votre nom complet.",
+
+          sessionError:"Votre session a expiré. Veuillez vous reconnecter.",
+
+          signedOut:"Vous êtes déconnecté. Redirection...", genericError:"Une erreur est survenue. Réessayez."
+
+        },
+
+        fi: {
+
+          dashboard:"Hallintapaneeli", applications:"Omat hakemukset", wallet:"Lompakko",
+
+          title:"Oma profiili", subtitle:"Hallitse henkilötietojasi ja ensisijaista kieltäsi.",
+
+          accountTitle:"Tilin tiedot",
+
+          accountDescription:"Kirjautumissähköpostia hallitaan Supabase Authentication -palvelussa, eikä sitä voi muuttaa tällä sivulla.",
+
+          emailLabel:"Kirjautumissähköposti", verificationLabel:"Sähköpostin vahvistus",
+
+          verified:"Vahvistettu", notVerified:"Ei vahvistettu", detailsTitle:"Henkilötiedot",
+
+          detailsDescription:"Pidä tietosi ajan tasalla ja yhdenmukaisina rahoitus- ja KYC-hakemustesi kanssa.",
+
+          nameLabel:"Koko nimi", phoneLabel:"Puhelinnumero", phoneHint:"Lisää maakoodi, jos mahdollista.",
+
+          countryLabel:"Asuinmaa", languageLabel:"Ensisijainen kieli",
+
+          saveButton:"Tallenna profiili", saving:"Tallennetaan...", backButton:"Takaisin hallintapaneeliin",
+
+          securityTitle:"Tilin turvallisuus",
+
+          securityDescription:"Älä koskaan jaa salasanaasi, vahvistuslinkkejä tai tunnistautumiskoodeja. Tämä sivu ei muuta kirjautumistietojasi.",
+
+          signOutButton:"Kirjaudu ulos", footerText:"Turvallinen tilin käyttö.",
+
+          loading:"Ladataan profiilia...", loaded:"Profiili ladattu.",
+
+          saved:"Profiilisi on tallennettu.", loadError:"Profiilin lataaminen epäonnistui: ",
+
+          saveError:"Profiilin tallentaminen epäonnistui: ", nameRequired:"Anna koko nimesi.",
+
+          sessionError:"Istuntosi on vanhentunut. Kirjaudu uudelleen.",
+
+          signedOut:"Olet kirjautunut ulos. Siirrytään...", genericError:"Tapahtui virhe. Yritä uudelleen."
+
+        },
+
+        es: {
+
+          dashboard:"Panel", applications:"Mis solicitudes", wallet:"Billetera",
+
+          title:"Mi perfil", subtitle:"Administra tus datos personales y tu idioma preferido.",
+
+          accountTitle:"Información de la cuenta",
+
+          accountDescription:"El correo de inicio de sesión es administrado por Supabase Authentication y no puede cambiarse en esta página.",
+
+          emailLabel:"Correo de acceso", verificationLabel:"Verificación del correo",
+
+          verified:"Verificado", notVerified:"No verificado", detailsTitle:"Datos personales",
+
+          detailsDescription:"Mantén tus datos correctos y coherentes con tus solicitudes de financiación y KYC.",
+
+          nameLabel:"Nombre completo", phoneLabel:"Número de teléfono", phoneHint:"Incluye el código del país si es posible.",
+
+          countryLabel:"País de residencia", languageLabel:"Idioma preferido",
+
+          saveButton:"Guardar perfil", saving:"Guardando...", backButton:"Volver al panel",
+
+          securityTitle:"Seguridad de la cuenta",
+
+          securityDescription:"Nunca compartas tu contraseña, enlaces de verificación ni códigos de autenticación. Esta página no cambia tus credenciales de acceso.",
+
+          signOutButton:"Cerrar sesión", footerText:"Acceso seguro a la cuenta.",
+
+          loading:"Cargando perfil...", loaded:"Perfil cargado.",
+
+          saved:"Tu perfil se ha guardado.", loadError:"No se pudo cargar el perfil: ",
+
+          saveError:"No se pudo guardar el perfil: ", nameRequired:"Introduce tu nombre completo.",
+
+          sessionError:"Tu sesión ha caducado. Inicia sesión de nuevo.",
+
+          signedOut:"Has cerrado sesión. Redirigiendo...", genericError:"Ocurrió un error. Inténtalo de nuevo."
+
+        }
+
+      };
+
+      const { createClient } = window.supabase;
+
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      const $ = (id) => document.getElementById(id);
+
+      let currentUser = null;
+
+      let language = "en";
+
+      function getSavedLanguage() {
+
+        try {
+
+          const saved = localStorage.getItem(LANGUAGE_KEY);
+
+          return translations[saved] ? saved : "en";
+
+        } catch (_) {
+
+          return "en";
+
+        }
+
+      }
+
+      function showNotice(message, type = "info") {
+
+        const notice = $("notice");
+
+        notice.textContent = message;
+
+        notice.className = type;
+
+      }
+
+      function clearNotice() {
+
+        $("notice").textContent = "";
+
+        $("notice").className = "";
+
+      }
+
+      function applyLanguage(nextLanguage) {
+
+        language = translations[nextLanguage] ? nextLanguage : "en";
+
+        const dictionary = translations[language];
+
+        document.documentElement.lang = language;
+
+        document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+
+        $("language").value = language;
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+
+          const key = element.dataset.i18n;
+
+          if (dictionary[key]) element.textContent = dictionary[key];
+
+        });
+
+        $("verificationStatus").textContent =
+
+          currentUser && currentUser.email_confirmed_at
+
+            ? dictionary.verified
+
+            : dictionary.notVerified;
+
+      }
+
+      async function getCurrentSession() {
+
+        const { data, error } = await supabase.auth.getSession();
+
+        if (error) throw error;
+
+        if (!data.session || !data.session.user) {
+
+          window.location.replace("login.html");
+
+          return null;
+
+        }
+
+        return data.session.user;
+
+      }
+
+      async function loadProfile() {
+
+        showNotice(translations[language].loading, "info");
+
+        try {
+
+          currentUser = await getCurrentSession();
+
+          if (!currentUser) return;
+
+          $("accountEmail").textContent = currentUser.email || "—";
+
+          const metadata = currentUser.user_metadata || {};
+
+          const { data, error } = await supabase
+
+            .from("profiles")
+
+            .select("user_id, full_name, phone, country, preferred_language")
+
+            .eq("user_id", currentUser.id)
+
+            .maybeSingle();
+
+          if (error) throw error;
+
+          $("fullName").value =
+
+            (data && data.full_name) || metadata.full_name || metadata.name || "";
+
+          $("phone").value =
+
+            (data && data.phone) || metadata.phone || "";
+
+          $("country").value =
+
+            (data && data.country) || metadata.country || metadata.country_of_residence || "";
+
+          const preferred = data && data.preferred_language
+
+            ? data.preferred_language
+
+            : getSavedLanguage();
+
+          applyLanguage(preferred);
+
+          showNotice(translations[language].loaded, "success");
+
+        } catch (error) {
+
+          console.error("Profile load error:", error);
+
+          showNotice(
+
+            translations[language].loadError + (error.message || translations[language].genericError),
+
+            "error"
+
+          );
+
+        }
+
+      }
+
+      $("language").addEventListener("change", () => {
+
+        const selected = $("language").value;
+
+        applyLanguage(selected);
+
+        try {
+
+          localStorage.setItem(LANGUAGE_KEY, selected);
+
+        } catch (_) {}
+
+        clearNotice();
+
+      });
+
+      $("profileForm").addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        clearNotice();
+
+        const dictionary = translations[language];
+
+        const fullName = $("fullName").value.trim();
+
+        const phone = $("phone").value.trim();
+
+        const country = $("country").value.trim();
+
+        const preferredLanguage = $("language").value;
+
+        if (!fullName) {
+
+          showNotice(dictionary.nameRequired, "error");
+
+          $("fullName").focus();
+
+          return;
+
+        }
+
+        const saveButton = $("saveButton");
+
+        saveButton.disabled = true;
+
+        saveButton.textContent = dictionary.saving;
+
+        try {
+
+          const user = await getCurrentSession();
+
+          if (!user) return;
+
+          const profile = {
+
+            user_id: user.id,
+
+            full_name: fullName,
+
+            phone: phone || null,
+
+            country: country || null,
+
+            preferred_language: preferredLanguage,
+
+            updated_at: new Date().toISOString()
+
+          };
+
+          const { error } = await supabase
+
+            .from("profiles")
+
+            .upsert(profile, { onConflict: "user_id" });
+
+          if (error) throw error;
+
+          applyLanguage(preferredLanguage);
+
+          try {
+
+            localStorage.setItem(LANGUAGE_KEY, preferredLanguage);
+
+          } catch (_) {}
+
+          showNotice(translations[language].saved, "success");
+
+        } catch (error) {
+
+          console.error("Profile save error:", error);
+
+          showNotice(
+
+            translations[language].saveError + (error.message || translations[language].genericError),
+
+            "error"
+
+          );
+
+        } finally {
+
+          saveButton.disabled = false;
+
+          saveButton.textContent = translations[language].saveButton;
+
+        }
+
+      });
+
+      $("signOutButton").addEventListener("click", async () => {
+
+        $("signOutButton").disabled = true;
+
+        try {
+
+          const { error } = await supabase.auth.signOut();
+
+          if (error) throw error;
+
+          showNotice(translations[language].signedOut, "success");
+
+          window.location.replace("login.html");
+
+        } catch (error) {
+
+          console.error("Sign-out error:", error);
+
+          showNotice(error.message || translations[language].genericError, "error");
+
+          $("signOutButton").disabled = false;
+
+        }
+
+      });
+
+      $("year").textContent = new Date().getFullYear();
+
+      applyLanguage(getSavedLanguage());
+
+      loadProfile();
+
+    })();
+
+  </script>
+
+</body>
+
+</html>
