@@ -1,0 +1,1107 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#071a35">
+
+  <title>Support | GlobalBridgeFunding</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    :root {
+
+      --navy: #071a35;
+
+      --blue: #36c2ff;
+
+      --bg: #f3f7fc;
+
+      --text: #15243a;
+
+      --muted: #6b7a90;
+
+      --border: #dce5f0;
+
+      --white: #fff;
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+    }
+
+    header {
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 18px 20px;
+
+      border-bottom: 3px solid var(--blue);
+
+    }
+
+    .header-inner {
+
+      max-width: 1050px;
+
+      margin: auto;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+
+    }
+
+    .brand { font-size: 18px; font-weight: 800; }
+
+    .brand span { color: var(--blue); }
+
+    nav { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    nav a { color: white; text-decoration: none; font-size: 13px; }
+
+    main { width: min(100% - 28px, 850px); margin: 28px auto 50px; }
+
+    .intro { margin-bottom: 22px; }
+
+    .intro h1 { margin: 0 0 8px; font-size: 29px; }
+
+    .intro p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .card {
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 23px;
+
+      margin-bottom: 18px;
+
+      box-shadow: 0 8px 28px rgba(7, 26, 53, .04);
+
+    }
+
+    .card h2 { margin: 0 0 8px; font-size: 19px; }
+
+    .description { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0 0 20px; }
+
+    .field { margin-bottom: 17px; }
+
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+
+    input, select, textarea {
+
+      display: block;
+
+      width: 100%;
+
+      padding: 12px;
+
+      border: 1px solid #ccd8e6;
+
+      border-radius: 10px;
+
+      background: white;
+
+      color: var(--text);
+
+      font: inherit;
+
+      font-size: 15px;
+
+    }
+
+    input, select { min-height: 47px; }
+
+    textarea { min-height: 145px; resize: vertical; line-height: 1.5; }
+
+    input:focus, select:focus, textarea:focus {
+
+      outline: 2px solid rgba(54,194,255,.3);
+
+      border-color: var(--blue);
+
+    }
+
+    button, .button-link {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-height: 45px;
+
+      padding: 12px 17px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      background: var(--blue);
+
+      color: #06182c;
+
+      font-weight: 750;
+
+      font-size: 14px;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+    }
+
+    button:disabled { opacity: .6; cursor: not-allowed; }
+
+    .secondary { background: #edf3fa; color: var(--navy); }
+
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    #notice {
+
+      display: none;
+
+      padding: 13px 14px;
+
+      border-radius: 10px;
+
+      margin-bottom: 18px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    #notice.success { display: block; background: #e7f8ef; color: #14643b; }
+
+    #notice.error { display: block; background: #fff0f0; color: #a22222; }
+
+    #notice.info { display: block; background: #eaf5ff; color: #164d7c; }
+
+    .ticket {
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      padding: 16px;
+
+      margin-top: 12px;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    .ticket-top {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      flex-wrap: wrap;
+
+    }
+
+    .ticket h3 { margin: 0 0 8px; font-size: 16px; }
+
+    .ticket-meta { color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+    .ticket-message { white-space: pre-wrap; line-height: 1.6; font-size: 14px; margin: 14px 0; }
+
+    .reply {
+
+      border-left: 3px solid var(--blue);
+
+      padding: 10px 12px;
+
+      background: #f2f9ff;
+
+      border-radius: 0 8px 8px 0;
+
+      margin-top: 12px;
+
+    }
+
+    .reply strong { display: block; font-size: 13px; margin-bottom: 6px; }
+
+    .reply p { margin: 0; font-size: 14px; line-height: 1.6; white-space: pre-wrap; }
+
+    .status {
+
+      display: inline-block;
+
+      border-radius: 20px;
+
+      padding: 5px 9px;
+
+      background: #edf3fa;
+
+      color: #34445a;
+
+      font-size: 11px;
+
+      font-weight: 750;
+
+    }
+
+    .empty { color: var(--muted); font-size: 14px; padding: 12px 0; line-height: 1.6; }
+
+    footer { text-align: center; color: var(--muted); font-size: 12px; padding: 10px 20px 30px; }
+
+    @media (max-width: 480px) {
+
+      main { margin-top: 21px; }
+
+      .intro h1 { font-size: 25px; }
+
+      .card { padding: 17px; }
+
+      .actions button, .actions a { flex: 1 1 100%; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">GlobalBridge<span>Funding</span></div>
+
+    <nav aria-label="Main navigation">
+
+      <a href="dashboard.html" data-i18n="dashboard">Dashboard</a>
+
+      <a href="applications.html" data-i18n="applications">My Applications</a>
+
+      <a href="wallet.html" data-i18n="wallet">Wallet</a>
+
+      <a href="profile.html" data-i18n="profile">Profile</a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<main>
+
+  <div class="intro">
+
+    <h1 data-i18n="title">Customer Support</h1>
+
+    <p data-i18n="subtitle">Send us a question and follow your support requests here.</p>
+
+  </div>
+
+  <div id="notice" role="status" aria-live="polite"></div>
+
+  <section class="card">
+
+    <h2 data-i18n="formTitle">Submit a support request</h2>
+
+    <p class="description" data-i18n="formDescription">
+
+      Describe the issue clearly so the support team can understand how to help.
+
+    </p>
+
+    <form id="supportForm">
+
+      <div class="field">
+
+        <label for="category" data-i18n="categoryLabel">What do you need help with?</label>
+
+        <select id="category" required>
+
+          <option value="general" data-i18n="general">General question</option>
+
+          <option value="account" data-i18n="account">Account or login</option>
+
+          <option value="kyc" data-i18n="kyc">KYC and documents</option>
+
+          <option value="financing" data-i18n="financing">Financing application</option>
+
+          <option value="deposit" data-i18n="deposit">Deposit</option>
+
+          <option value="withdrawal" data-i18n="withdrawal">Withdrawal</option>
+
+        </select>
+
+      </div>
+
+      <div class="field">
+
+        <label for="subject" data-i18n="subjectLabel">Subject</label>
+
+        <input id="subject" type="text" maxlength="150" minlength="3" required
+
+          placeholder="Briefly describe your issue" data-i18n-placeholder="subjectPlaceholder">
+
+      </div>
+
+      <div class="field">
+
+        <label for="message" data-i18n="messageLabel">Message</label>
+
+        <textarea id="message" maxlength="5000" minlength="10" required
+
+          placeholder="Explain what happened and what help you need." data-i18n-placeholder="messagePlaceholder"></textarea>
+
+        <p class="description" style="margin:7px 0 0" data-i18n="privacyHint">
+
+          Do not include your password, verification codes, private keys, or wallet recovery phrase.
+
+        </p>
+
+      </div>
+
+      <div class="actions">
+
+        <button type="submit" id="submitButton" data-i18n="submitButton">Send support request</button>
+
+        <button type="button" class="secondary" id="refreshButton" data-i18n="refreshButton">Refresh requests</button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+  <section class="card">
+
+    <h2 data-i18n="historyTitle">My support requests</h2>
+
+    <p class="description" data-i18n="historyDescription">
+
+      View your submitted requests, their current status, and any response from the support team.
+
+    </p>
+
+    <div id="requestList" aria-live="polite">
+
+      <p class="empty" data-i18n="loading">Loading your requests...</p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>© <span id="year"></span> GlobalBridgeFunding. <span data-i18n="footer">Secure customer support.</span></footer>
+
+<script>
+
+(() => {
+
+  "use strict";
+
+  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_ANON_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+  const LANGUAGE_KEY = "globalbridge_language";
+
+  const t = {
+
+    en: {
+
+      dashboard:"Dashboard", applications:"My Applications", wallet:"Wallet", profile:"Profile",
+
+      title:"Customer Support", subtitle:"Send us a question and follow your support requests here.",
+
+      formTitle:"Submit a support request", formDescription:"Describe the issue clearly so the support team can understand how to help.",
+
+      categoryLabel:"What do you need help with?", general:"General question", account:"Account or login",
+
+      kyc:"KYC and documents", financing:"Financing application", deposit:"Deposit", withdrawal:"Withdrawal",
+
+      subjectLabel:"Subject", subjectPlaceholder:"Briefly describe your issue", messageLabel:"Message",
+
+      messagePlaceholder:"Explain what happened and what help you need.",
+
+      privacyHint:"Do not include your password, verification codes, private keys, or wallet recovery phrase.",
+
+      submitButton:"Send support request", submitting:"Submitting...", refreshButton:"Refresh requests",
+
+      historyTitle:"My support requests", historyDescription:"View your submitted requests, their current status, and any response from the support team.",
+
+      loading:"Loading your requests...", noRequests:"You have not submitted any support requests yet.",
+
+      status_open:"Open", status_in_progress:"In progress", status_resolved:"Resolved", status_closed:"Closed",
+
+      submitted:"Your support request was submitted.", submitError:"Could not submit your request: ",
+
+      loadError:"Could not load support requests: ", subjectRequired:"Please enter a subject of at least 3 characters.",
+
+      messageRequired:"Please enter a message of at least 10 characters.",
+
+      loginRequired:"Your session has expired. Please sign in again.",
+
+      category:"Category", created:"Submitted", reply:"Support team response",
+
+      footer:"Secure customer support.", genericError:"Something went wrong. Please try again."
+
+    },
+
+    pt: {
+
+      dashboard:"Painel", applications:"Minhas candidaturas", wallet:"Carteira", profile:"Perfil",
+
+      title:"Apoio ao cliente", subtitle:"Envie uma pergunta e acompanhe os seus pedidos de apoio aqui.",
+
+      formTitle:"Enviar pedido de apoio", formDescription:"Descreva o problema com clareza para que a equipa possa ajudar.",
+
+      categoryLabel:"Em que precisa de ajuda?", general:"Questão geral", account:"Conta ou acesso",
+
+      kyc:"KYC e documentos", financing:"Pedido de financiamento", deposit:"Depósito", withdrawal:"Levantamento",
+
+      subjectLabel:"Assunto", subjectPlaceholder:"Descreva brevemente o problema", messageLabel:"Mensagem",
+
+      messagePlaceholder:"Explique o que aconteceu e de que ajuda precisa.",
+
+      privacyHint:"Não inclua a palavra-passe, códigos de verificação, chaves privadas ou frase de recuperação.",
+
+      submitButton:"Enviar pedido", submitting:"A enviar...", refreshButton:"Atualizar pedidos",
+
+      historyTitle:"Os meus pedidos", historyDescription:"Consulte os pedidos enviados, o estado e as respostas da equipa.",
+
+      loading:"A carregar pedidos...", noRequests:"Ainda não enviou pedidos de apoio.",
+
+      status_open:"Aberto", status_in_progress:"Em curso", status_resolved:"Resolvido", status_closed:"Fechado",
+
+      submitted:"O seu pedido foi enviado.", submitError:"Não foi possível enviar o pedido: ",
+
+      loadError:"Não foi possível carregar os pedidos: ", subjectRequired:"Introduza um assunto com pelo menos 3 caracteres.",
+
+      messageRequired:"Introduza uma mensagem com pelo menos 10 caracteres.",
+
+      loginRequired:"A sua sessão expirou. Inicie sessão novamente.",
+
+      category:"Categoria", created:"Enviado", reply:"Resposta da equipa de apoio",
+
+      footer:"Apoio ao cliente seguro.", genericError:"Ocorreu um erro. Tente novamente."
+
+    },
+
+    vi: {
+
+      dashboard:"Bảng điều khiển", applications:"Đơn đăng ký", wallet:"Ví", profile:"Hồ sơ",
+
+      title:"Hỗ trợ khách hàng", subtitle:"Gửi câu hỏi và theo dõi yêu cầu hỗ trợ tại đây.",
+
+      formTitle:"Gửi yêu cầu hỗ trợ", formDescription:"Mô tả rõ vấn đề để đội ngũ hỗ trợ có thể giúp bạn.",
+
+      categoryLabel:"Bạn cần hỗ trợ về vấn đề gì?", general:"Câu hỏi chung", account:"Tài khoản hoặc đăng nhập",
+
+      kyc:"KYC và tài liệu", financing:"Đơn đăng ký tài chính", deposit:"Nạp tiền", withdrawal:"Rút tiền",
+
+      subjectLabel:"Tiêu đề", subjectPlaceholder:"Mô tả ngắn gọn vấn đề", messageLabel:"Nội dung",
+
+      messagePlaceholder:"Giải thích vấn đề và hỗ trợ bạn cần.",
+
+      privacyHint:"Không cung cấp mật khẩu, mã xác minh, khóa riêng tư hoặc cụm từ khôi phục ví.",
+
+      submitButton:"Gửi yêu cầu", submitting:"Đang gửi...", refreshButton:"Làm mới yêu cầu",
+
+      historyTitle:"Yêu cầu hỗ trợ của tôi", historyDescription:"Xem yêu cầu đã gửi, trạng thái và phản hồi từ đội ngũ hỗ trợ.",
+
+      loading:"Đang tải yêu cầu...", noRequests:"Bạn chưa gửi yêu cầu hỗ trợ nào.",
+
+      status_open:"Đang mở", status_in_progress:"Đang xử lý", status_resolved:"Đã giải quyết", status_closed:"Đã đóng",
+
+      submitted:"Yêu cầu hỗ trợ đã được gửi.", submitError:"Không thể gửi yêu cầu: ",
+
+      loadError:"Không thể tải yêu cầu: ", subjectRequired:"Vui lòng nhập tiêu đề có ít nhất 3 ký tự.",
+
+      messageRequired:"Vui lòng nhập nội dung có ít nhất 10 ký tự.",
+
+      loginRequired:"Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+
+      category:"Danh mục", created:"Đã gửi", reply:"Phản hồi của đội ngũ hỗ trợ",
+
+      footer:"Hỗ trợ khách hàng an toàn.", genericError:"Đã xảy ra lỗi. Vui lòng thử lại."
+
+    },
+
+    fa: {
+
+      dashboard:"داشبورد", applications:"درخواست‌های من", wallet:"کیف پول", profile:"پروفایل",
+
+      title:"پشتیبانی مشتریان", subtitle:"سؤال خود را ارسال کنید و درخواست‌های پشتیبانی را پیگیری کنید.",
+
+      formTitle:"ارسال درخواست پشتیبانی", formDescription:"مشکل را واضح توضیح دهید تا تیم پشتیبانی بتواند کمک کند.",
+
+      categoryLabel:"در چه زمینه‌ای کمک می‌خواهید؟", general:"سؤال عمومی", account:"حساب یا ورود",
+
+      kyc:"احراز هویت و مدارک", financing:"درخواست تأمین مالی", deposit:"واریز", withdrawal:"برداشت",
+
+      subjectLabel:"موضوع", subjectPlaceholder:"مشکل را کوتاه توضیح دهید", messageLabel:"پیام",
+
+      messagePlaceholder:"توضیح دهید چه اتفاقی افتاده و چه کمکی نیاز دارید.",
+
+      privacyHint:"گذرواژه، کد تأیید، کلید خصوصی یا عبارت بازیابی کیف پول را وارد نکنید.",
+
+      submitButton:"ارسال درخواست", submitting:"در حال ارسال...", refreshButton:"به‌روزرسانی درخواست‌ها",
+
+      historyTitle:"درخواست‌های پشتیبانی من", historyDescription:"درخواست‌های ارسال‌شده، وضعیت و پاسخ تیم پشتیبانی را ببینید.",
+
+      loading:"در حال بارگذاری درخواست‌ها...", noRequests:"هنوز درخواست پشتیبانی ارسال نکرده‌اید.",
+
+      status_open:"باز", status_in_progress:"در حال بررسی", status_resolved:"حل‌شده", status_closed:"بسته",
+
+      submitted:"درخواست پشتیبانی ارسال شد.", submitError:"ارسال درخواست ناموفق بود: ",
+
+      loadError:"بارگذاری درخواست‌ها ناموفق بود: ", subjectRequired:"موضوعی با حداقل ۳ نویسه وارد کنید.",
+
+      messageRequired:"پیامی با حداقل ۱۰ نویسه وارد کنید.",
+
+      loginRequired:"نشست شما منقضی شده است. دوباره وارد شوید.",
+
+      category:"دسته‌بندی", created:"زمان ارسال", reply:"پاسخ تیم پشتیبانی",
+
+      footer:"پشتیبانی امن مشتریان.", genericError:"خطایی رخ داد. دوباره تلاش کنید."
+
+    },
+
+    id: {
+
+      dashboard:"Dasbor", applications:"Pengajuan Saya", wallet:"Dompet", profile:"Profil",
+
+      title:"Dukungan Pelanggan", subtitle:"Kirim pertanyaan dan pantau permintaan dukungan Anda di sini.",
+
+      formTitle:"Kirim permintaan dukungan", formDescription:"Jelaskan masalah dengan jelas agar tim dukungan dapat membantu.",
+
+      categoryLabel:"Apa yang perlu dibantu?", general:"Pertanyaan umum", account:"Akun atau login",
+
+      kyc:"KYC dan dokumen", financing:"Pengajuan pembiayaan", deposit:"Deposit", withdrawal:"Penarikan",
+
+      subjectLabel:"Subjek", subjectPlaceholder:"Jelaskan masalah secara singkat", messageLabel:"Pesan",
+
+      messagePlaceholder:"Jelaskan apa yang terjadi dan bantuan yang Anda butuhkan.",
+
+      privacyHint:"Jangan masukkan kata sandi, kode verifikasi, kunci pribadi, atau frasa pemulihan dompet.",
+
+      submitButton:"Kirim permintaan", submitting:"Mengirim...", refreshButton:"Muat ulang permintaan",
+
+      historyTitle:"Permintaan dukungan saya", historyDescription:"Lihat permintaan, status, dan balasan dari tim dukungan.",
+
+      loading:"Memuat permintaan...", noRequests:"Anda belum mengirim permintaan dukungan.",
+
+      status_open:"Terbuka", status_in_progress:"Sedang diproses", status_resolved:"Selesai", status_closed:"Ditutup",
+
+      submitted:"Permintaan dukungan berhasil dikirim.", submitError:"Tidak dapat mengirim permintaan: ",
+
+      loadError:"Tidak dapat memuat permintaan: ", subjectRequired:"Masukkan subjek minimal 3 karakter.",
+
+      messageRequired:"Masukkan pesan minimal 10 karakter.",
+
+      loginRequired:"Sesi Anda telah berakhir. Silakan login kembali.",
+
+      category:"Kategori", created:"Dikirim", reply:"Balasan tim dukungan",
+
+      footer:"Dukungan pelanggan yang aman.", genericError:"Terjadi kesalahan. Silakan coba lagi."
+
+    },
+
+    fr: {
+
+      dashboard:"Tableau de bord", applications:"Mes demandes", wallet:"Portefeuille", profile:"Profil",
+
+      title:"Assistance client", subtitle:"Envoyez une question et suivez vos demandes d’assistance ici.",
+
+      formTitle:"Envoyer une demande", formDescription:"Décrivez clairement le problème afin que l’équipe puisse vous aider.",
+
+      categoryLabel:"De quelle aide avez-vous besoin ?", general:"Question générale", account:"Compte ou connexion",
+
+      kyc:"KYC et documents", financing:"Demande de financement", deposit:"Dépôt", withdrawal:"Retrait",
+
+      subjectLabel:"Objet", subjectPlaceholder:"Décrivez brièvement le problème", messageLabel:"Message",
+
+      messagePlaceholder:"Expliquez ce qui s’est passé et l’aide dont vous avez besoin.",
+
+      privacyHint:"N’incluez pas votre mot de passe, vos codes de vérification, clés privées ou phrase de récupération.",
+
+      submitButton:"Envoyer la demande", submitting:"Envoi...", refreshButton:"Actualiser les demandes",
+
+      historyTitle:"Mes demandes d’assistance", historyDescription:"Consultez vos demandes, leur statut et les réponses de l’équipe.",
+
+      loading:"Chargement des demandes...", noRequests:"Vous n’avez encore envoyé aucune demande.",
+
+      status_open:"Ouverte", status_in_progress:"En cours", status_resolved:"Résolue", status_closed:"Fermée",
+
+      submitted:"Votre demande a été envoyée.", submitError:"Impossible d’envoyer la demande : ",
+
+      loadError:"Impossible de charger les demandes : ", subjectRequired:"Saisissez un objet d’au moins 3 caractères.",
+
+      messageRequired:"Saisissez un message d’au moins 10 caractères.",
+
+      loginRequired:"Votre session a expiré. Veuillez vous reconnecter.",
+
+      category:"Catégorie", created:"Envoyée", reply:"Réponse de l’assistance",
+
+      footer:"Assistance client sécurisée.", genericError:"Une erreur est survenue. Réessayez."
+
+    },
+
+    fi: {
+
+      dashboard:"Hallintapaneeli", applications:"Omat hakemukset", wallet:"Lompakko", profile:"Profiili",
+
+      title:"Asiakastuki", subtitle:"Lähetä kysymys ja seuraa tukipyyntöjäsi täällä.",
+
+      formTitle:"Lähetä tukipyyntö", formDescription:"Kuvaile ongelma selkeästi, jotta tukitiimi voi auttaa.",
+
+      categoryLabel:"Mihin tarvitset apua?", general:"Yleinen kysymys", account:"Tili tai kirjautuminen",
+
+      kyc:"KYC ja asiakirjat", financing:"Rahoitushakemus", deposit:"Talletus", withdrawal:"Nosto",
+
+      subjectLabel:"Aihe", subjectPlaceholder:"Kuvaile ongelma lyhyesti", messageLabel:"Viesti",
+
+      messagePlaceholder:"Kerro, mitä tapahtui ja millaista apua tarvitset.",
+
+      privacyHint:"Älä anna salasanaasi, vahvistuskoodeja, yksityisiä avaimia tai lompakon palautuslausetta.",
+
+      submitButton:"Lähetä tukipyyntö", submitting:"Lähetetään...", refreshButton:"Päivitä pyynnöt",
+
+      historyTitle:"Tukipyyntöni", historyDescription:"Näet lähettämäsi pyynnöt, niiden tilan ja tukitiimin vastaukset.",
+
+      loading:"Ladataan pyyntöjä...", noRequests:"Et ole vielä lähettänyt tukipyyntöjä.",
+
+      status_open:"Avoin", status_in_progress:"Käsittelyssä", status_resolved:"Ratkaistu", status_closed:"Suljettu",
+
+      submitted:"Tukipyyntösi on lähetetty.", submitError:"Pyynnön lähettäminen epäonnistui: ",
+
+      loadError:"Pyyntöjen lataaminen epäonnistui: ", subjectRequired:"Anna aihe, jossa on vähintään 3 merkkiä.",
+
+      messageRequired:"Anna viesti, jossa on vähintään 10 merkkiä.",
+
+      loginRequired:"Istuntosi on vanhentunut. Kirjaudu uudelleen.",
+
+      category:"Luokka", created:"Lähetetty", reply:"Tukitiimin vastaus",
+
+      footer:"Turvallinen asiakastuki.", genericError:"Tapahtui virhe. Yritä uudelleen."
+
+    },
+
+    es: {
+
+      dashboard:"Panel", applications:"Mis solicitudes", wallet:"Billetera", profile:"Perfil",
+
+      title:"Atención al cliente", subtitle:"Envía una pregunta y consulta aquí tus solicitudes de soporte.",
+
+      formTitle:"Enviar solicitud de soporte", formDescription:"Describe el problema claramente para que el equipo pueda ayudarte.",
+
+      categoryLabel:"¿Con qué necesitas ayuda?", general:"Pregunta general", account:"Cuenta o acceso",
+
+      kyc:"KYC y documentos", financing:"Solicitud de financiación", deposit:"Depósito", withdrawal:"Retiro",
+
+      subjectLabel:"Asunto", subjectPlaceholder:"Describe brevemente el problema", messageLabel:"Mensaje",
+
+      messagePlaceholder:"Explica qué ocurrió y qué ayuda necesitas.",
+
+      privacyHint:"No incluyas contraseñas, códigos de verificación, claves privadas ni frases de recuperación.",
+
+      submitButton:"Enviar solicitud", submitting:"Enviando...", refreshButton:"Actualizar solicitudes",
+
+      historyTitle:"Mis solicitudes de soporte", historyDescription:"Consulta tus solicitudes, su estado y las respuestas del equipo.",
+
+      loading:"Cargando solicitudes...", noRequests:"Todavía no has enviado solicitudes de soporte.",
+
+      status_open:"Abierta", status_in_progress:"En curso", status_resolved:"Resuelta", status_closed:"Cerrada",
+
+      submitted:"Tu solicitud de soporte se ha enviado.", submitError:"No se pudo enviar la solicitud: ",
+
+      loadError:"No se pudieron cargar las solicitudes: ", subjectRequired:"Introduce un asunto de al menos 3 caracteres.",
+
+      messageRequired:"Introduce un mensaje de al menos 10 caracteres.",
+
+      loginRequired:"Tu sesión ha caducado. Inicia sesión de nuevo.",
+
+      category:"Categoría", created:"Enviada", reply:"Respuesta del equipo de soporte",
+
+      footer:"Atención al cliente segura.", genericError:"Ocurrió un error. Inténtalo de nuevo."
+
+    }
+
+  };
+
+  const { createClient } = window.supabase;
+
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const $ = (id) => document.getElementById(id);
+
+  let language = "en";
+
+  let currentUser = null;
+
+  function getLanguage() {
+
+    try {
+
+      const value = localStorage.getItem(LANGUAGE_KEY);
+
+      return t[value] ? value : "en";
+
+    } catch (_) {
+
+      return "en";
+
+    }
+
+  }
+
+  function tr(key) {
+
+    return (t[language] && t[language][key]) || t.en[key] || key;
+
+  }
+
+  function notice(message, type = "info") {
+
+    $("notice").textContent = message;
+
+    $("notice").className = type;
+
+  }
+
+  function clearNotice() {
+
+    $("notice").textContent = "";
+
+    $("notice").className = "";
+
+  }
+
+  function applyLanguage(next) {
+
+    language = t[next] ? next : "en";
+
+    document.documentElement.lang = language;
+
+    document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+
+      const key = el.dataset.i18n;
+
+      if (tr(key)) el.textContent = tr(key);
+
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+
+      el.placeholder = tr(el.dataset.i18nPlaceholder);
+
+    });
+
+  }
+
+  async function requireUser() {
+
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data.session || !data.session.user) {
+
+      window.location.replace("login.html");
+
+      return null;
+
+    }
+
+    return data.session.user;
+
+  }
+
+  function formatDate(value) {
+
+    if (!value) return "—";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return "—";
+
+    try {
+
+      return new Intl.DateTimeFormat(language, {
+
+        dateStyle: "medium", timeStyle: "short"
+
+      }).format(date);
+
+    } catch (_) {
+
+      return date.toLocaleString();
+
+    }
+
+  }
+
+  function makeElement(tag, className, text) {
+
+    const el = document.createElement(tag);
+
+    if (className) el.className = className;
+
+    if (text !== undefined && text !== null) el.textContent = text;
+
+    return el;
+
+  }
+
+  function renderRequests(rows) {
+
+    const list = $("requestList");
+
+    list.replaceChildren();
+
+    if (!rows || rows.length === 0) {
+
+      list.appendChild(makeElement("p", "empty", tr("noRequests")));
+
+      return;
+
+    }
+
+    rows.forEach((row) => {
+
+      const ticket = makeElement("article", "ticket");
+
+      const top = makeElement("div", "ticket-top");
+
+      const titleArea = document.createElement("div");
+
+      titleArea.appendChild(makeElement("h3", "", row.subject || ""));
+
+      titleArea.appendChild(makeElement(
+
+        "div", "ticket-meta",
+
+        tr("category") + ": " + tr(row.category || "general") +
+
+        " · " + tr("created") + ": " + formatDate(row.created_at)
+
+      ));
+
+      const statusKey = "status_" + (row.status || "open");
+
+      const status = makeElement("span", "status", tr(statusKey));
+
+      top.append(titleArea, status);
+
+      ticket.appendChild(top);
+
+      ticket.appendChild(makeElement("p", "ticket-message", row.message || ""));
+
+      if (row.admin_reply && row.admin_reply.trim()) {
+
+        const reply = makeElement("div", "reply");
+
+        reply.appendChild(makeElement("strong", "", tr("reply")));
+
+        reply.appendChild(makeElement("p", "", row.admin_reply));
+
+        ticket.appendChild(reply);
+
+      }
+
+      list.appendChild(ticket);
+
+    });
+
+  }
+
+  async function loadRequests() {
+
+    $("requestList").replaceChildren(makeElement("p", "empty", tr("loading")));
+
+    try {
+
+      currentUser = await requireUser();
+
+      if (!currentUser) return;
+
+      const { data, error } = await supabase
+
+        .from("support_messages")
+
+        .select("id, user_id, subject, category, message, status, admin_reply, created_at, updated_at")
+
+        .eq("user_id", currentUser.id)
+
+        .order("created_at", { ascending: false })
+
+        .limit(100);
+
+      if (error) throw error;
+
+      renderRequests(data || []);
+
+    } catch (error) {
+
+      console.error("Support history error:", error);
+
+      $("requestList").replaceChildren();
+
+      notice(tr("loadError") + (error.message || tr("genericError")), "error");
+
+    }
+
+  }
+
+  $("supportForm").addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    clearNotice();
+
+    const subject = $("subject").value.trim();
+
+    const message = $("message").value.trim();
+
+    const category = $("category").value;
+
+    if (subject.length < 3) {
+
+      notice(tr("subjectRequired"), "error");
+
+      $("subject").focus();
+
+      return;
+
+    }
+
+    if (message.length < 10) {
+
+      notice(tr("messageRequired"), "error");
+
+      $("message").focus();
+
+      return;
+
+    }
+
+    const button = $("submitButton");
+
+    button.disabled = true;
+
+    button.textContent = tr("submitting");
+
+    try {
+
+      currentUser = await requireUser();
+
+      if (!currentUser) return;
+
+      const { error } = await supabase
+
+        .from("support_messages")
+
+        .insert({
+
+          user_id: currentUser.id,
+
+          subject,
+
+          category,
+
+          message,
+
+          status: "open"
+
+        });
+
+      if (error) throw error;
+
+      $("supportForm").reset();
+
+      $("category").value = "general";
+
+      notice(tr("submitted"), "success");
+
+      await loadRequests();
+
+    } catch (error) {
+
+      console.error("Support submission error:", error);
+
+      notice(tr("submitError") + (error.message || tr("genericError")), "error");
+
+    } finally {
+
+      button.disabled = false;
+
+      button.textContent = tr("submitButton");
+
+    }
+
+  });
+
+  $("refreshButton").addEventListener("click", async () => {
+
+    clearNotice();
+
+    await loadRequests();
+
+  });
+
+  $("year").textContent = new Date().getFullYear();
+
+  applyLanguage(getLanguage());
+
+  loadRequests();
+
+})();
+
+</script>
+
+</body>
+
+</html>
