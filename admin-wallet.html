@@ -1,0 +1,1433 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#071a35">
+
+  <title>Admin Wallet | GlobalBridgeFunding</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+
+    :root {
+
+      --navy: #071a35;
+
+      --blue: #36c2ff;
+
+      --green: #15803d;
+
+      --red: #b91c1c;
+
+      --border: #dbe3ee;
+
+      --muted: #64748b;
+
+      --surface: #f4f7fb;
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      background: var(--surface);
+
+      color: #172338;
+
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .topbar {
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 17px 20px;
+
+    }
+
+    .top-inner {
+
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 14px;
+
+      flex-wrap: wrap;
+
+    }
+
+    .brand { font-weight: 800; font-size: 18px; }
+
+    .brand span { color: var(--blue); }
+
+    .topbar a { color: white; text-decoration: none; }
+
+    .top-actions { display: flex; gap: 14px; align-items: center; }
+
+    .top-actions select {
+
+      max-width: 145px;
+
+      padding: 8px;
+
+      border-radius: 8px;
+
+    }
+
+    main { max-width: 1200px; margin: auto; padding: 22px 15px 50px; }
+
+    h1 { color: var(--navy); font-size: 28px; margin: 8px 0; }
+
+    h2 { color: var(--navy); font-size: 19px; margin: 0 0 15px; }
+
+    .intro { color: var(--muted); line-height: 1.6; margin-bottom: 22px; }
+
+    .panel {
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      padding: 19px;
+
+      margin: 16px 0;
+
+      box-shadow: 0 4px 18px rgba(7,26,53,.04);
+
+    }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      gap: 15px;
+
+    }
+
+    .field { margin: 12px 0; }
+
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+
+    input, select, textarea {
+
+      width: 100%;
+
+      padding: 11px 12px;
+
+      border: 1px solid #cbd5e1;
+
+      border-radius: 9px;
+
+      background: white;
+
+      color: #172338;
+
+      font: inherit;
+
+      min-width: 0;
+
+    }
+
+    textarea { min-height: 76px; resize: vertical; }
+
+    button, .btn {
+
+      display: inline-block;
+
+      border: 0;
+
+      border-radius: 9px;
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 11px 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      font-size: 14px;
+
+    }
+
+    button.primary { background: #087db0; }
+
+    button.danger { background: var(--red); }
+
+    button.success { background: var(--green); }
+
+    button:disabled { opacity: .55; cursor: wait; }
+
+    .notice {
+
+      padding: 12px 14px;
+
+      border-radius: 9px;
+
+      margin: 12px 0;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    .notice.info { background: #e0f2fe; color: #075985; }
+
+    .notice.ok { background: #dcfce7; color: #166534; }
+
+    .notice.error { background: #fee2e2; color: #991b1b; }
+
+    .hidden { display: none !important; }
+
+    .table-wrap { overflow-x: auto; width: 100%; }
+
+    table { width: 100%; border-collapse: collapse; min-width: 900px; }
+
+    th, td {
+
+      text-align: left;
+
+      vertical-align: top;
+
+      padding: 12px 10px;
+
+      border-bottom: 1px solid #e2e8f0;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    th { background: #f8fafc; color: #334155; }
+
+    .status {
+
+      display: inline-block;
+
+      padding: 4px 8px;
+
+      border-radius: 20px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      background: #e2e8f0;
+
+      color: #334155;
+
+    }
+
+    .status.pending { background: #fef3c7; color: #92400e; }
+
+    .status.completed, .status.approved { background: #dcfce7; color: #166534; }
+
+    .status.rejected { background: #fee2e2; color: #991b1b; }
+
+    .muted { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    .actions { display: flex; gap: 7px; flex-wrap: wrap; }
+
+    .actions button { padding: 8px 10px; font-size: 12px; }
+
+    .record-note { min-width: 160px; }
+
+    .hash { max-width: 230px; word-break: break-all; }
+
+    .small { font-size: 12px; color: var(--muted); }
+
+    .section-head {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 12px;
+
+    }
+
+    @media (max-width: 650px) {
+
+      .grid { grid-template-columns: 1fr; }
+
+      .panel { padding: 14px; }
+
+      h1 { font-size: 24px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="top-inner">
+
+      <a class="brand" href="dashboard.html">GlobalBridge<span>Funding</span></a>
+
+      <div class="top-actions">
+
+        <select id="languageSelect" aria-label="Language">
+
+          <option value="en">English</option>
+
+          <option value="pt">Português</option>
+
+          <option value="vi">Tiếng Việt</option>
+
+          <option value="fa">فارسی</option>
+
+          <option value="id">Bahasa Indonesia</option>
+
+          <option value="fr">Français</option>
+
+          <option value="fi">Suomi</option>
+
+          <option value="es">Español</option>
+
+        </select>
+
+        <a href="dashboard.html" id="dashboardLink">Dashboard</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <h1 id="pageTitle">Admin Wallet Management</h1>
+
+    <p class="intro" id="introText">
+
+      Manage the deposit address and review customer wallet requests.
+
+      Only mark deposits completed after independently verifying payment.
+
+    </p>
+
+    <div id="pageMessage" class="notice info">Checking administrator access…</div>
+
+    <div id="adminContent" class="hidden">
+
+      <section class="panel">
+
+        <h2 id="addressTitle">USDT-TRC20 Deposit Address</h2>
+
+        <p class="muted" id="addressHelp">
+
+          Customers see this address on their wallet page. Confirm it belongs to your organization before saving.
+
+        </p>
+
+        <div class="field">
+
+          <label for="depositAddress" id="addressLabel">Deposit address</label>
+
+          <input id="depositAddress" type="text" maxlength="150" autocomplete="off"
+
+            placeholder="Enter your USDT-TRC20 receiving address">
+
+        </div>
+
+        <button type="button" class="primary" id="saveAddressBtn">Save deposit address</button>
+
+        <div id="addressMessage" aria-live="polite"></div>
+
+      </section>
+
+      <section class="panel">
+
+        <div class="section-head">
+
+          <h2 id="requestsTitle">Customer Wallet Requests</h2>
+
+          <button type="button" id="refreshBtn">Refresh requests</button>
+
+        </div>
+
+        <div class="notice info" id="reviewWarning">
+
+          Deposit: independently check the transaction hash on a trusted TRON blockchain explorer and confirm the amount and receiving address. Withdrawal approval does not transfer funds; complete the transfer first, then mark it completed and save the real transaction hash.
+
+        </div>
+
+        <div id="requestMessage" aria-live="polite"></div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Created</th>
+
+                <th>User ID</th>
+
+                <th>Type / Amount</th>
+
+                <th>Status</th>
+
+                <th>Wallet address</th>
+
+                <th>Transaction hash</th>
+
+                <th>Admin note</th>
+
+                <th>Review actions</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="requestsBody">
+
+              <tr><td colspan="8">Loading requests…</td></tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+      <section class="panel">
+
+        <h2 id="disbursementTitle">Record a Loan Disbursement</h2>
+
+        <div class="notice info" id="disbursementWarning">
+
+          Use this only after the approved loan has actually been transferred to the customer. This records the transfer in the customer's wallet ledger; it does not send USDT.
+
+        </div>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label for="applicationSelect" id="applicationLabel">Approved application</label>
+
+            <select id="applicationSelect">
+
+              <option value="">Load approved applications…</option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+
+            <label for="disbursementAmount" id="amountLabel">Actual amount transferred (USDT)</label>
+
+            <input id="disbursementAmount" type="number" min="0.000001" max="1000000000"
+
+              step="0.000001" placeholder="e.g. 20000">
+
+          </div>
+
+        </div>
+
+        <div class="field">
+
+          <label for="disbursementHash" id="disbursementHashLabel">Actual transfer transaction hash</label>
+
+          <input id="disbursementHash" type="text" maxlength="200"
+
+            placeholder="Enter the real blockchain transaction hash">
+
+        </div>
+
+        <div class="field">
+
+          <label for="disbursementNote" id="disbursementNoteLabel">Admin note</label>
+
+          <textarea id="disbursementNote" maxlength="1000"
+
+            placeholder="Record verification details"></textarea>
+
+        </div>
+
+        <button type="button" class="success" id="recordDisbursementBtn">Record completed disbursement</button>
+
+        <div id="disbursementMessage" aria-live="polite"></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    (() => {
+
+      "use strict";
+
+      const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+      const SUPABASE_ANON_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      const $ = id => document.getElementById(id);
+
+      const languageNames = {
+
+        en: "English", pt: "Português", vi: "Tiếng Việt", fa: "فارسی",
+
+        id: "Bahasa Indonesia", fr: "Français", fi: "Suomi", es: "Español"
+
+      };
+
+      const words = {
+
+        en: {
+
+          title:"Admin Wallet Management", intro:"Manage the deposit address and review customer wallet requests. Only mark deposits completed after independently verifying payment.",
+
+          dashboard:"Dashboard", checking:"Checking administrator access…", denied:"Administrator access required. Your account is not listed in admin_users.",
+
+          addressTitle:"USDT-TRC20 Deposit Address", addressHelp:"Customers see this address on their wallet page. Confirm it belongs to your organization before saving.",
+
+          addressLabel:"Deposit address", saveAddress:"Save deposit address", addressSaved:"Deposit address saved.", addressEmpty:"Enter a deposit address first.",
+
+          requestsTitle:"Customer Wallet Requests", refresh:"Refresh requests", loading:"Loading requests…", none:"No wallet requests found.",
+
+          reviewWarning:"Deposit: independently check the transaction hash on a trusted TRON blockchain explorer and confirm the amount and receiving address. Withdrawal approval does not transfer funds; complete the transfer first, then mark it completed and save the real transaction hash.",
+
+          disbursementTitle:"Record a Loan Disbursement", disbursementWarning:"Use this only after the approved loan has actually been transferred to the customer. This records the transfer in the customer's wallet ledger; it does not send USDT.",
+
+          application:"Approved application", amount:"Actual amount transferred (USDT)", hash:"Actual transfer transaction hash", note:"Admin note", record:"Record completed disbursement",
+
+          created:"Created", user:"User ID", typeAmount:"Type / Amount", status:"Status", wallet:"Wallet address", txHash:"Transaction hash", actions:"Review actions",
+
+          deposit:"Deposit", withdrawal:"Withdrawal", loan:"Loan disbursement", approve:"Approve", complete:"Mark completed", reject:"Reject", saveReview:"Save review",
+
+          pending:"Pending", approved:"Approved", completed:"Completed", rejected:"Rejected",
+
+          loadApps:"Loading approved applications…", noApps:"No approved applications available to disburse.", selectApp:"Select an application",
+
+          needReview:"Enter an admin note and choose a review action.", saved:"Request updated.", failed:"Error: ", missingHash:"A real transaction hash is required before marking this request completed.",
+
+          appMissing:"Select an approved application.", amountMissing:"Enter a valid amount greater than zero.", hashMissing:"Enter the real transaction hash for the transfer.",
+
+          duplicate:"This application already has a recorded loan disbursement.", disbursementSaved:"Completed disbursement recorded. Confirm that the transfer really occurred.", addressError:"Could not save address: ", requestError:"Could not load requests: ", appsError:"Could not load applications: ", disbursementError:"Could not record disbursement: ",
+
+          confirmComplete:"Confirm you independently verified the deposit or actually sent the withdrawal/disbursement before marking it completed?",
+
+          savedAddressError:"Could not save deposit address: ", amountLimit:"Amount exceeds the permitted limit."
+
+        },
+
+        pt: {
+
+          title:"Gestão da carteira administrativa", intro:"Gira o endereço de depósito e reveja pedidos. Só marque depósitos como concluídos depois de verificar o pagamento.",
+
+          dashboard:"Painel", checking:"A verificar o acesso de administrador…", denied:"Acesso de administrador necessário.",
+
+          addressTitle:"Endereço de depósito USDT-TRC20", addressHelp:"Este endereço é mostrado aos clientes. Confirme que pertence à sua organização.",
+
+          addressLabel:"Endereço de depósito", saveAddress:"Guardar endereço", addressSaved:"Endereço guardado.", addressEmpty:"Introduza um endereço.",
+
+          requestsTitle:"Pedidos de carteira", refresh:"Atualizar pedidos", loading:"A carregar…", none:"Não existem pedidos.",
+
+          reviewWarning:"Verifique o hash, o valor e o endereço na blockchain TRON. Aprovar um levantamento não envia fundos.",
+
+          disbursementTitle:"Registar desembolso de financiamento", disbursementWarning:"Utilize apenas depois de transferir realmente os fundos. Isto regista o movimento; não envia USDT.",
+
+          application:"Pedido aprovado", amount:"Valor transferido (USDT)", hash:"Hash real da transferência", note:"Nota administrativa", record:"Registar desembolso concluído",
+
+          created:"Data", user:"ID do utilizador", typeAmount:"Tipo / Valor", status:"Estado", wallet:"Carteira", txHash:"Hash da transação", actions:"Ações",
+
+          deposit:"Depósito", withdrawal:"Levantamento", loan:"Desembolso", approve:"Aprovar", complete:"Marcar concluído", reject:"Rejeitar", saveReview:"Guardar análise",
+
+          pending:"Pendente", approved:"Aprovado", completed:"Concluído", rejected:"Rejeitado",
+
+          loadApps:"A carregar pedidos aprovados…", noApps:"Sem pedidos aprovados.", selectApp:"Selecione um pedido",
+
+          needReview:"Introduza uma nota e escolha uma ação.", saved:"Pedido atualizado.", failed:"Erro: ", missingHash:"É necessário o hash real para concluir.",
+
+          appMissing:"Selecione um pedido aprovado.", amountMissing:"Introduza um valor válido.", hashMissing:"Introduza o hash real da transferência.",
+
+          duplicate:"Este pedido já tem um desembolso registado.", disbursementSaved:"Desembolso registado. Confirme que a transferência ocorreu.", addressError:"Erro ao guardar: ", requestError:"Erro ao carregar pedidos: ", appsError:"Erro ao carregar pedidos: ", disbursementError:"Erro ao registar: ",
+
+          confirmComplete:"Confirma que verificou o depósito ou enviou realmente os fundos?", savedAddressError:"Erro ao guardar endereço: ", amountLimit:"Valor acima do limite."
+
+        },
+
+        vi: {
+
+          title:"Quản lý ví quản trị", intro:"Quản lý địa chỉ nạp và xem yêu cầu ví. Chỉ đánh dấu hoàn tất sau khi xác minh thanh toán.",
+
+          dashboard:"Bảng điều khiển", checking:"Đang kiểm tra quyền quản trị…", denied:"Tài khoản không có quyền quản trị.",
+
+          addressTitle:"Địa chỉ nạp USDT-TRC20", addressHelp:"Khách hàng nhìn thấy địa chỉ này. Hãy xác nhận quyền sở hữu trước khi lưu.",
+
+          addressLabel:"Địa chỉ nạp", saveAddress:"Lưu địa chỉ", addressSaved:"Đã lưu địa chỉ.", addressEmpty:"Hãy nhập địa chỉ.",
+
+          requestsTitle:"Yêu cầu ví khách hàng", refresh:"Làm mới", loading:"Đang tải…", none:"Không có yêu cầu.",
+
+          reviewWarning:"Kiểm tra hash, số tiền và địa chỉ trên blockchain TRON. Duyệt rút tiền không tự chuyển tiền.",
+
+          disbursementTitle:"Ghi nhận giải ngân", disbursementWarning:"Chỉ dùng sau khi tiền đã thực sự được chuyển. Thao tác này không gửi USDT.",
+
+          application:"Đơn đã duyệt", amount:"Số tiền đã chuyển (USDT)", hash:"Hash giao dịch thực tế", note:"Ghi chú quản trị", record:"Ghi nhận giải ngân",
+
+          created:"Ngày tạo", user:"ID người dùng", typeAmount:"Loại / Số tiền", status:"Trạng thái", wallet:"Địa chỉ ví", txHash:"Hash giao dịch", actions:"Thao tác",
+
+          deposit:"Nạp tiền", withdrawal:"Rút tiền", loan:"Giải ngân", approve:"Duyệt", complete:"Đánh dấu hoàn tất", reject:"Từ chối", saveReview:"Lưu đánh giá",
+
+          pending:"Đang chờ", approved:"Đã duyệt", completed:"Hoàn tất", rejected:"Từ chối",
+
+          loadApps:"Đang tải đơn đã duyệt…", noApps:"Không có đơn đã duyệt.", selectApp:"Chọn đơn",
+
+          needReview:"Nhập ghi chú và chọn thao tác.", saved:"Đã cập nhật.", failed:"Lỗi: ", missingHash:"Cần hash thật trước khi hoàn tất.",
+
+          appMissing:"Chọn đơn đã duyệt.", amountMissing:"Nhập số tiền hợp lệ.", hashMissing:"Nhập hash giao dịch thật.",
+
+          duplicate:"Đơn này đã có giải ngân.", disbursementSaved:"Đã ghi nhận giải ngân. Hãy xác nhận tiền đã được chuyển.", addressError:"Không lưu được địa chỉ: ", requestError:"Không tải được yêu cầu: ", appsError:"Không tải được đơn: ", disbursementError:"Không ghi nhận được: ",
+
+          confirmComplete:"Bạn xác nhận đã xác minh khoản nạp hoặc thực sự gửi tiền?", savedAddressError:"Không lưu được địa chỉ: ", amountLimit:"Số tiền vượt giới hạn."
+
+        },
+
+        fa: {
+
+          title:"مدیریت کیف پول مدیر", intro:"آدرس واریز و درخواست‌ها را مدیریت کنید. واریز را فقط پس از تأیید مستقل کامل کنید.",
+
+          dashboard:"داشبورد", checking:"در حال بررسی دسترسی مدیر…", denied:"حساب شما دسترسی مدیر ندارد.",
+
+          addressTitle:"آدرس واریز USDT-TRC20", addressHelp:"این آدرس به مشتریان نمایش داده می‌شود. پیش از ذخیره، مالکیت آن را تأیید کنید.",
+
+          addressLabel:"آدرس واریز", saveAddress:"ذخیره آدرس", addressSaved:"آدرس ذخیره شد.", addressEmpty:"آدرس را وارد کنید.",
+
+          requestsTitle:"درخواست‌های کیف پول", refresh:"به‌روزرسانی", loading:"در حال بارگذاری…", none:"درخواستی وجود ندارد.",
+
+          reviewWarning:"هش، مبلغ و آدرس را در بلاکچین TRON بررسی کنید. تأیید برداشت به معنی ارسال وجه نیست.",
+
+          disbursementTitle:"ثبت پرداخت وام", disbursementWarning:"فقط پس از انتقال واقعی وجه استفاده کنید. این کار USDT ارسال نمی‌کند.",
+
+          application:"درخواست تأییدشده", amount:"مبلغ واقعی انتقال (USDT)", hash:"هش واقعی انتقال", note:"یادداشت مدیر", record:"ثبت پرداخت تکمیل‌شده",
+
+          created:"تاریخ", user:"شناسه کاربر", typeAmount:"نوع / مبلغ", status:"وضعیت", wallet:"آدرس کیف پول", txHash:"هش تراکنش", actions:"عملیات",
+
+          deposit:"واریز", withdrawal:"برداشت", loan:"پرداخت وام", approve:"تأیید", complete:"علامت‌گذاری تکمیل", reject:"رد", saveReview:"ذخیره بررسی",
+
+          pending:"در انتظار", approved:"تأییدشده", completed:"تکمیل‌شده", rejected:"ردشده",
+
+          loadApps:"در حال بارگذاری درخواست‌ها…", noApps:"درخواست تأییدشده‌ای وجود ندارد.", selectApp:"انتخاب درخواست",
+
+          needReview:"یادداشت و عملیات را انتخاب کنید.", saved:"درخواست به‌روزرسانی شد.", failed:"خطا: ", missingHash:"برای تکمیل، هش واقعی لازم است.",
+
+          appMissing:"یک درخواست تأییدشده انتخاب کنید.", amountMissing:"مبلغ معتبر وارد کنید.", hashMissing:"هش واقعی انتقال را وارد کنید.",
+
+          duplicate:"برای این درخواست پرداخت ثبت شده است.", disbursementSaved:"پرداخت ثبت شد؛ انتقال واقعی را تأیید کنید.", addressError:"خطای ذخیره آدرس: ", requestError:"خطای بارگذاری: ", appsError:"خطای بارگذاری درخواست‌ها: ", disbursementError:"خطای ثبت پرداخت: ",
+
+          confirmComplete:"تأیید می‌کنید که واریز را بررسی کرده‌اید یا واقعاً وجه را ارسال کرده‌اید؟", savedAddressError:"خطای ذخیره آدرس: ", amountLimit:"مبلغ از حد مجاز بیشتر است."
+
+        },
+
+        id: {
+
+          title:"Manajemen Dompet Admin", intro:"Kelola alamat deposit dan tinjau permintaan. Tandai selesai hanya setelah pembayaran diverifikasi.",
+
+          dashboard:"Dasbor", checking:"Memeriksa akses admin…", denied:"Akun Anda tidak memiliki akses admin.",
+
+          addressTitle:"Alamat Deposit USDT-TRC20", addressHelp:"Pelanggan melihat alamat ini. Pastikan alamat milik organisasi sebelum menyimpan.",
+
+          addressLabel:"Alamat deposit", saveAddress:"Simpan alamat", addressSaved:"Alamat disimpan.", addressEmpty:"Masukkan alamat.",
+
+          requestsTitle:"Permintaan Dompet", refresh:"Muat ulang", loading:"Memuat…", none:"Tidak ada permintaan.",
+
+          reviewWarning:"Periksa hash, jumlah, dan alamat di blockchain TRON. Persetujuan penarikan tidak mengirim dana.",
+
+          disbursementTitle:"Catat Pencairan Pembiayaan", disbursementWarning:"Gunakan hanya setelah dana benar-benar dikirim. Ini tidak mengirim USDT.",
+
+          application:"Aplikasi disetujui", amount:"Jumlah yang benar-benar dikirim (USDT)", hash:"Hash transaksi sebenarnya", note:"Catatan admin", record:"Catat pencairan selesai",
+
+          created:"Dibuat", user:"ID pengguna", typeAmount:"Jenis / Jumlah", status:"Status", wallet:"Alamat dompet", txHash:"Hash transaksi", actions:"Tindakan",
+
+          deposit:"Deposit", withdrawal:"Penarikan", loan:"Pencairan", approve:"Setujui", complete:"Tandai selesai", reject:"Tolak", saveReview:"Simpan tinjauan",
+
+          pending:"Menunggu", approved:"Disetujui", completed:"Selesai", rejected:"Ditolak",
+
+          loadApps:"Memuat aplikasi yang disetujui…", noApps:"Tidak ada aplikasi yang disetujui.", selectApp:"Pilih aplikasi",
+
+          needReview:"Masukkan catatan dan pilih tindakan.", saved:"Permintaan diperbarui.", failed:"Kesalahan: ", missingHash:"Hash transaksi asli diperlukan.",
+
+          appMissing:"Pilih aplikasi yang disetujui.", amountMissing:"Masukkan jumlah yang valid.", hashMissing:"Masukkan hash transfer asli.",
+
+          duplicate:"Pencairan sudah tercatat untuk aplikasi ini.", disbursementSaved:"Pencairan tercatat. Pastikan transfer benar-benar terjadi.", addressError:"Gagal menyimpan alamat: ", requestError:"Gagal memuat permintaan: ", appsError:"Gagal memuat aplikasi: ", disbursementError:"Gagal mencatat pencairan: ",
+
+          confirmComplete:"Konfirmasi bahwa deposit telah diverifikasi atau dana benar-benar telah dikirim?", savedAddressError:"Gagal menyimpan alamat: ", amountLimit:"Jumlah melebihi batas."
+
+        },
+
+        fr: {
+
+          title:"Gestion du portefeuille administrateur", intro:"Gérez l’adresse de dépôt et examinez les demandes. Ne validez un dépôt qu’après vérification indépendante.",
+
+          dashboard:"Tableau de bord", checking:"Vérification de l’accès administrateur…", denied:"Votre compte n’a pas accès à l’administration.",
+
+          addressTitle:"Adresse de dépôt USDT-TRC20", addressHelp:"Cette adresse est visible par les clients. Vérifiez qu’elle appartient à votre organisation.",
+
+          addressLabel:"Adresse de dépôt", saveAddress:"Enregistrer l’adresse", addressSaved:"Adresse enregistrée.", addressEmpty:"Saisissez une adresse.",
+
+          requestsTitle:"Demandes de portefeuille", refresh:"Actualiser", loading:"Chargement…", none:"Aucune demande.",
+
+          reviewWarning:"Vérifiez le hash, le montant et l’adresse sur la blockchain TRON. Approuver un retrait n’envoie pas de fonds.",
+
+          disbursementTitle:"Enregistrer un décaissement", disbursementWarning:"À utiliser seulement après le transfert réel. Cette action n’envoie pas d’USDT.",
+
+          application:"Demande approuvée", amount:"Montant réellement transféré (USDT)", hash:"Hash réel du transfert", note:"Note admin", record:"Enregistrer le décaissement",
+
+          created:"Date", user:"ID utilisateur", typeAmount:"Type / Montant", status:"Statut", wallet:"Adresse du portefeuille", txHash:"Hash de transaction", actions:"Actions",
+
+          deposit:"Dépôt", withdrawal:"Retrait", loan:"Décaissement", approve:"Approuver", complete:"Marquer terminé", reject:"Rejeter", saveReview:"Enregistrer l’examen",
+
+          pending:"En attente", approved:"Approuvé", completed:"Terminé", rejected:"Rejeté",
+
+          loadApps:"Chargement des demandes approuvées…", noApps:"Aucune demande approuvée.", selectApp:"Choisir une demande",
+
+          needReview:"Ajoutez une note et choisissez une action.", saved:"Demande mise à jour.", failed:"Erreur : ", missingHash:"Un hash réel est nécessaire pour terminer.",
+
+          appMissing:"Choisissez une demande approuvée.", amountMissing:"Saisissez un montant valide.", hashMissing:"Saisissez le hash réel du transfert.",
+
+          duplicate:"Un décaissement existe déjà pour cette demande.", disbursementSaved:"Décaissement enregistré. Vérifiez que le transfert a eu lieu.", addressError:"Erreur d’enregistrement : ", requestError:"Erreur de chargement : ", appsError:"Erreur de chargement : ", disbursementError:"Erreur de décaissement : ",
+
+          confirmComplete:"Confirmez-vous avoir vérifié le dépôt ou réellement envoyé les fonds ?", savedAddressError:"Erreur d’enregistrement : ", amountLimit:"Montant supérieur à la limite."
+
+        },
+
+        fi: {
+
+          title:"Ylläpitäjän lompakon hallinta", intro:"Hallinnoi talletusosoitetta ja tarkista pyynnöt. Merkitse talletus valmiiksi vasta riippumattoman tarkistuksen jälkeen.",
+
+          dashboard:"Hallintapaneeli", checking:"Tarkistetaan ylläpitäjän oikeuksia…", denied:"Tililläsi ei ole ylläpitäjän oikeuksia.",
+
+          addressTitle:"USDT-TRC20-talletusosoite", addressHelp:"Asiakkaat näkevät tämän osoitteen. Varmista omistajuus ennen tallennusta.",
+
+          addressLabel:"Talletusosoite", saveAddress:"Tallenna osoite", addressSaved:"Osoite tallennettu.", addressEmpty:"Anna osoite.",
+
+          requestsTitle:"Lompakkopyynnöt", refresh:"Päivitä", loading:"Ladataan…", none:"Pyyntöjä ei ole.",
+
+          reviewWarning:"Tarkista hash, summa ja osoite TRON-lohkoketjusta. Nostopyynnön hyväksyminen ei siirrä varoja.",
+
+          disbursementTitle:"Kirjaa rahoituksen maksu", disbursementWarning:"Käytä vain, kun varat on oikeasti siirretty. Tämä ei lähetä USDT:tä.",
+
+          application:"Hyväksytty hakemus", amount:"Todella siirretty summa (USDT)", hash:"Todellinen siirtohash", note:"Ylläpitäjän huomautus", record:"Kirjaa maksu valmiiksi",
+
+          created:"Luotu", user:"Käyttäjätunnus", typeAmount:"Tyyppi / summa", status:"Tila", wallet:"Lompakko-osoite", txHash:"Tapahtumahash", actions:"Toiminnot",
+
+          deposit:"Talletus", withdrawal:"Nosto", loan:"Rahoituksen maksu", approve:"Hyväksy", complete:"Merkitse valmiiksi", reject:"Hylkää", saveReview:"Tallenna arvio",
+
+          pending:"Odottaa", approved:"Hyväksytty", completed:"Valmis", rejected:"Hylätty",
+
+          loadApps:"Ladataan hyväksyttyjä hakemuksia…", noApps:"Hyväksyttyjä hakemuksia ei ole.", selectApp:"Valitse hakemus",
+
+          needReview:"Lisää huomautus ja valitse toiminto.", saved:"Pyyntö päivitetty.", failed:"Virhe: ", missingHash:"Todellinen tapahtumahash vaaditaan.",
+
+          appMissing:"Valitse hyväksytty hakemus.", amountMissing:"Anna kelvollinen summa.", hashMissing:"Anna todellinen siirtohash.",
+
+          duplicate:"Hakemukselle on jo kirjattu maksu.", disbursementSaved:"Maksu kirjattu. Varmista todellinen siirto.", addressError:"Osoitteen tallennusvirhe: ", requestError:"Pyyntöjen latausvirhe: ", appsError:"Hakemusten latausvirhe: ", disbursementError:"Maksun kirjausvirhe: ",
+
+          confirmComplete:"Vahvistatko, että talletus tarkistettiin tai varat todella lähetettiin?", savedAddressError:"Osoitteen tallennusvirhe: ", amountLimit:"Summa ylittää sallitun rajan."
+
+        },
+
+        es: {
+
+          title:"Gestión de billetera administrativa", intro:"Administre la dirección de depósito y revise solicitudes. Marque un depósito como completado solo tras verificar el pago.",
+
+          dashboard:"Panel", checking:"Verificando acceso de administrador…", denied:"Su cuenta no tiene acceso de administrador.",
+
+          addressTitle:"Dirección de depósito USDT-TRC20", addressHelp:"Los clientes ven esta dirección. Confirme que pertenece a su organización.",
+
+          addressLabel:"Dirección de depósito", saveAddress:"Guardar dirección", addressSaved:"Dirección guardada.", addressEmpty:"Introduzca una dirección.",
+
+          requestsTitle:"Solicitudes de billetera", refresh:"Actualizar", loading:"Cargando…", none:"No hay solicitudes.",
+
+          reviewWarning:"Verifique el hash, el importe y la dirección en la blockchain TRON. Aprobar un retiro no envía fondos.",
+
+          disbursementTitle:"Registrar desembolso", disbursementWarning:"Úselo solo después de transferir realmente los fondos. Esto no envía USDT.",
+
+          application:"Solicitud aprobada", amount:"Importe realmente transferido (USDT)", hash:"Hash real de transferencia", note:"Nota administrativa", record:"Registrar desembolso completado",
+
+          created:"Fecha", user:"ID de usuario", typeAmount:"Tipo / Importe", status:"Estado", wallet:"Dirección de billetera", txHash:"Hash de transacción", actions:"Acciones",
+
+          deposit:"Depósito", withdrawal:"Retiro", loan:"Desembolso", approve:"Aprobar", complete:"Marcar completado", reject:"Rechazar", saveReview:"Guardar revisión",
+
+          pending:"Pendiente", approved:"Aprobado", completed:"Completado", rejected:"Rechazado",
+
+          loadApps:"Cargando solicitudes aprobadas…", noApps:"No hay solicitudes aprobadas.", selectApp:"Seleccione una solicitud",
+
+          needReview:"Añada una nota y elija una acción.", saved:"Solicitud actualizada.", failed:"Error: ", missingHash:"Se necesita el hash real para completar.",
+
+          appMissing:"Seleccione una solicitud aprobada.", amountMissing:"Introduzca un importe válido.", hashMissing:"Introduzca el hash real de la transferencia.",
+
+          duplicate:"Esta solicitud ya tiene un desembolso registrado.", disbursementSaved:"Desembolso registrado. Confirme que la transferencia ocurrió.", addressError:"No se pudo guardar: ", requestError:"No se pudieron cargar las solicitudes: ", appsError:"No se pudieron cargar las solicitudes: ", disbursementError:"No se pudo registrar: ",
+
+          confirmComplete:"¿Confirma que verificó el depósito o envió realmente los fondos?", savedAddressError:"No se pudo guardar la dirección: ", amountLimit:"Importe superior al límite."
+
+        }
+
+      };
+
+      let lang = localStorage.getItem("globalbridge_language") || "en";
+
+      if (!words[lang]) lang = "en";
+
+      const t = key => words[lang][key] || words.en[key] || key;
+
+      const showMessage = (id, text, kind = "info") => {
+
+        const el = $(id);
+
+        el.className = "notice " + kind;
+
+        el.textContent = text;
+
+      };
+
+      const clearMessage = id => {
+
+        $(id).textContent = "";
+
+        $(id).className = "";
+
+      };
+
+      const safeText = value => value == null ? "" : String(value);
+
+      const money = value => Number(value || 0).toLocaleString(undefined, {
+
+        minimumFractionDigits: 2, maximumFractionDigits: 6
+
+      });
+
+      const statusLabel = status => t(status) || status;
+
+      const typeLabel = type => ({
+
+        deposit:t("deposit"), withdrawal:t("withdrawal"), loan_disbursement:t("loan")
+
+      }[type] || type);
+
+      function applyLanguage() {
+
+        document.documentElement.lang = lang;
+
+        $("languageSelect").value = lang;
+
+        $("pageTitle").textContent = t("title");
+
+        $("introText").textContent = t("intro");
+
+        $("dashboardLink").textContent = t("dashboard");
+
+        $("addressTitle").textContent = t("addressTitle");
+
+        $("addressHelp").textContent = t("addressHelp");
+
+        $("addressLabel").textContent = t("addressLabel");
+
+        $("saveAddressBtn").textContent = t("saveAddress");
+
+        $("requestsTitle").textContent = t("requestsTitle");
+
+        $("refreshBtn").textContent = t("refresh");
+
+        $("reviewWarning").textContent = t("reviewWarning");
+
+        $("disbursementTitle").textContent = t("disbursementTitle");
+
+        $("disbursementWarning").textContent = t("disbursementWarning");
+
+        $("applicationLabel").textContent = t("application");
+
+        $("amountLabel").textContent = t("amount");
+
+        $("disbursementHashLabel").textContent = t("hash");
+
+        $("disbursementNoteLabel").textContent = t("note");
+
+        $("recordDisbursementBtn").textContent = t("record");
+
+      }
+
+      function escapeHtml(value) {
+
+        return safeText(value).replace(/[&<>"']/g, ch => ({
+
+          "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+
+        }[ch]));
+
+      }
+
+      async function checkAdmin() {
+
+        const { data: { user }, error } = await client.auth.getUser();
+
+        if (error || !user) {
+
+          location.replace("login.html");
+
+          return false;
+
+        }
+
+        const { data, error: adminError } = await client
+
+          .from("admin_users")
+
+          .select("user_id")
+
+          .eq("user_id", user.id)
+
+          .maybeSingle();
+
+        if (adminError || !data) {
+
+          showMessage("pageMessage", t("denied"), "error");
+
+          return false;
+
+        }
+
+        $("pageMessage").classList.add("hidden");
+
+        $("adminContent").classList.remove("hidden");
+
+        return true;
+
+      }
+
+      async function loadAddress() {
+
+        const { data, error } = await client.from("wallet_settings")
+
+          .select("deposit_address").eq("id", 1).maybeSingle();
+
+        if (error) throw error;
+
+        $("depositAddress").value = data?.deposit_address || "";
+
+      }
+
+      async function saveAddress() {
+
+        clearMessage("addressMessage");
+
+        const address = $("depositAddress").value.trim();
+
+        if (!address) {
+
+          showMessage("addressMessage", t("addressEmpty"), "error");
+
+          return;
+
+        }
+
+        if (address.length < 20 || /\s/.test(address)) {
+
+          showMessage("addressMessage", "Check the address format before saving.", "error");
+
+          return;
+
+        }
+
+        const { data: { user } } = await client.auth.getUser();
+
+        const { error } = await client.from("wallet_settings").upsert({
+
+          id: 1,
+
+          deposit_address: address,
+
+          updated_at: new Date().toISOString(),
+
+          updated_by: user.id
+
+        }, { onConflict: "id" });
+
+        if (error) {
+
+          showMessage("addressMessage", t("savedAddressError") + error.message, "error");
+
+          return;
+
+        }
+
+        showMessage("addressMessage", t("addressSaved"), "ok");
+
+      }
+
+      async function loadRequests() {
+
+        $("requestsBody").innerHTML = `<tr><td colspan="8">${escapeHtml(t("loading"))}</td></tr>`;
+
+        const { data, error } = await client.from("wallet_transactions")
+
+          .select("id,user_id,transaction_type,amount,token,network,status,wallet_address,transaction_hash,source_application_id,admin_note,created_at")
+
+          .order("created_at", { ascending: false })
+
+          .limit(300);
+
+        if (error) {
+
+          $("requestsBody").innerHTML = "";
+
+          showMessage("requestMessage", t("requestError") + error.message, "error");
+
+          return;
+
+        }
+
+        clearMessage("requestMessage");
+
+        if (!data || data.length === 0) {
+
+          $("requestsBody").innerHTML = `<tr><td colspan="8">${escapeHtml(t("none"))}</td></tr>`;
+
+          return;
+
+        }
+
+        $("requestsBody").innerHTML = data.map(tx => {
+
+          const note = escapeHtml(tx.admin_note || "");
+
+          const created = tx.created_at ? new Date(tx.created_at).toLocaleString() : "";
+
+          const stateClass = ["pending","approved","completed","rejected"].includes(tx.status) ? tx.status : "";
+
+          const terminal = tx.status === "completed" || tx.status === "rejected";
+
+          return `<tr data-id="${escapeHtml(tx.id)}">
+
+            <td>${escapeHtml(created)}</td>
+
+            <td>${escapeHtml(tx.user_id)}</td>
+
+            <td><strong>${escapeHtml(typeLabel(tx.transaction_type))}</strong><br>${escapeHtml(money(tx.amount))} ${escapeHtml(tx.token || "USDT")}<br><span class="small">${escapeHtml(tx.network || "TRC20")}</span></td>
+
+            <td><span class="status ${stateClass}">${escapeHtml(statusLabel(tx.status))}</span></td>
+
+            <td class="hash">${escapeHtml(tx.wallet_address || "—")}</td>
+
+            <td class="hash">${tx.transaction_hash ? `<a href="https://tronscan.org/#/transaction/${encodeURIComponent(tx.transaction_hash)}" target="_blank" rel="noopener noreferrer">View transaction</a><br><span class="small">${escapeHtml(tx.transaction_hash)}</span>` : "—"}</td>
+
+            <td><textarea class="record-note" maxlength="1000" data-note="${escapeHtml(tx.id)}" placeholder="${escapeHtml(t("note"))}">${note}</textarea></td>
+
+            <td>
+
+              <div class="actions">
+
+                ${tx.status === "pending" ? `<button class="primary" data-action="approve" data-id="${escapeHtml(tx.id)}">${escapeHtml(t("approve"))}</button>` : ""}
+
+                ${tx.status === "pending" || tx.status === "approved" ? `<button class="success" data-action="complete" data-id="${escapeHtml(tx.id)}">${escapeHtml(t("complete"))}</button>` : ""}
+
+                ${!terminal ? `<button class="danger" data-action="reject" data-id="${escapeHtml(tx.id)}">${escapeHtml(t("reject"))}</button>` : ""}
+
+                ${terminal ? `<span class="small">—</span>` : ""}
+
+              </div>
+
+            </td>
+
+          </tr>`;
+
+        }).join("");
+
+      }
+
+      async function reviewRequest(id, action) {
+
+        const row = document.querySelector(`tr[data-id="${CSS.escape(id)}"]`);
+
+        const noteEl = row?.querySelector("textarea[data-note]");
+
+        const note = noteEl?.value.trim() || "";
+
+        if (!["approve","complete","reject"].includes(action)) return;
+
+        if (action === "complete") {
+
+          const { data: tx, error: readError } = await client.from("wallet_transactions")
+
+            .select("id,transaction_type,status,transaction_hash")
+
+            .eq("id", id).single();
+
+          if (readError || !tx) {
+
+            showMessage("requestMessage", t("failed") + (readError?.message || "Request not found."), "error");
+
+            return;
+
+          }
+
+          if (!tx.transaction_hash || !tx.transaction_hash.trim()) {
+
+            showMessage("requestMessage", t("missingHash"), "error");
+
+            return;
+
+          }
+
+          if (tx.transaction_type === "deposit" && !confirm("Have you independently verified the deposit on the TRON blockchain, including the amount and destination address?")) return;
+
+          if (tx.transaction_type === "withdrawal" && !confirm("Have you actually sent the withdrawal to the customer's destination wallet and verified the transaction hash?")) return;
+
+          if (tx.transaction_type === "loan_disbursement") {
+
+            showMessage("requestMessage", "Loan disbursements are recorded separately below.", "error");
+
+            return;
+
+          }
+
+        }
+
+        if (action === "approve" && !confirm("Approve this request? Approval does not send funds or credit a deposit.")) return;
+
+        if (action === "reject" && !confirm("Reject this request?")) return;
+
+        let status;
+
+        if (action === "approve") status = "approved";
+
+        if (action === "complete") status = "completed";
+
+        if (action === "reject") status = "rejected";
+
+        const { data: { user } } = await client.auth.getUser();
+
+        const { error } = await client.from("wallet_transactions").update({
+
+          status,
+
+          admin_note: note || null,
+
+          reviewed_by: user.id,
+
+          reviewed_at: new Date().toISOString(),
+
+          updated_at: new Date().toISOString()
+
+        }).eq("id", id);
+
+        if (error) {
+
+          showMessage("requestMessage", t("failed") + error.message, "error");
+
+          return;
+
+        }
+
+        showMessage("requestMessage", t("saved"), "ok");
+
+        await Promise.all([loadRequests(), loadApplications()]);
+
+      }
+
+      async function loadApplications() {
+
+        const select = $("applicationSelect");
+
+        select.innerHTML = `<option value="">${escapeHtml(t("loadApps"))}</option>`;
+
+        const { data: apps, error } = await client.from("financing_applications")
+
+          .select("id,user_id,requested_amount,business_name,status,created_at")
+
+          .eq("status", "approved")
+
+          .order("created_at", { ascending: false })
+
+          .limit(300);
+
+        if (error) {
+
+          select.innerHTML = `<option value="">${escapeHtml(t("noApps"))}</option>`;
+
+          showMessage("disbursementMessage", t("appsError") + error.message, "error");
+
+          return;
+
+        }
+
+        const { data: existing, error: txError } = await client.from("wallet_transactions")
+
+          .select("source_application_id")
+
+          .eq("transaction_type", "loan_disbursement");
+
+        if (txError) {
+
+          showMessage("disbursementMessage", t("disbursementError") + txError.message, "error");
+
+          return;
+
+        }
+
+        const already = new Set((existing || []).map(tx => tx.source_application_id).filter(Boolean));
+
+        const eligible = (apps || []).filter(app => app.user_id && !already.has(app.id));
+
+        select.innerHTML = `<option value="">${escapeHtml(t("selectApp"))}</option>` +
+
+          eligible.map(app => `<option value="${escapeHtml(app.id)}">${escapeHtml(app.business_name || "Business")} — ${escapeHtml(money(app.requested_amount))} USDT — ${escapeHtml(app.id.slice(0,8))}</option>`).join("");
+
+        if (!eligible.length) {
+
+          select.innerHTML = `<option value="">${escapeHtml(t("noApps"))}</option>`;
+
+        }
+
+        clearMessage("disbursementMessage");
+
+      }
+
+      async function recordDisbursement() {
+
+        clearMessage("disbursementMessage");
+
+        const applicationId = $("applicationSelect").value;
+
+        const amount = Number($("disbursementAmount").value);
+
+        const hash = $("disbursementHash").value.trim();
+
+        const note = $("disbursementNote").value.trim();
+
+        if (!applicationId) {
+
+          showMessage("disbursementMessage", t("appMissing"), "error");
+
+          return;
+
+        }
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+
+          showMessage("disbursementMessage", t("amountMissing"), "error");
+
+          return;
+
+        }
+
+        if (amount > 1000000000) {
+
+          showMessage("disbursementMessage", t("amountLimit"), "error");
+
+          return;
+
+        }
+
+        if (!hash) {
+
+          showMessage("disbursementMessage", t("hashMissing"), "error");
+
+          return;
+
+        }
+
+        if (!confirm("Confirm that this approved financing has actually been transferred to the customer and the transaction hash is real?")) return;
+
+        const { data: app, error: appError } = await client.from("financing_applications")
+
+          .select("id,user_id,status")
+
+          .eq("id", applicationId).eq("status", "approved").single();
+
+        if (appError || !app?.user_id) {
+
+          showMessage("disbursementMessage", t("failed") + (appError?.message || "Approved application not found."), "error");
+
+          return;
+
+        }
+
+        const { data: prior, error: priorError } = await client.from("wallet_transactions")
+
+          .select("id").eq("source_application_id", applicationId)
+
+          .eq("transaction_type", "loan_disbursement").limit(1);
+
+        if (priorError) {
+
+          showMessage("disbursementMessage", t("failed") + priorError.message, "error");
+
+          return;
+
+        }
+
+        if (prior?.length) {
+
+          showMessage("disbursementMessage", t("duplicate"), "error");
+
+          await loadApplications();
+
+          return;
+
+        }
+
+        const { data: { user } } = await client.auth.getUser();
+
+        const { error } = await client.from("wallet_transactions").insert({
+
+          user_id: app.user_id,
+
+          transaction_type: "loan_disbursement",
+
+          amount,
+
+          token: "USDT",
+
+          network: "TRC20",
+
+          status: "completed",
+
+          wallet_address: null,
+
+          transaction_hash: hash,
+
+          source_application_id: app.id,
+
+          admin_note: note || "Actual financing transfer recorded by administrator.",
+
+          reviewed_by: user.id,
+
+          reviewed_at: new Date().toISOString()
+
+        });
+
+        if (error) {
+
+          showMessage("disbursementMessage", t("disbursementError") + error.message, "error");
+
+          return;
+
+        }
+
+        $("disbursementAmount").value = "";
+
+        $("disbursementHash").value = "";
+
+        $("disbursementNote").value = "";
+
+        showMessage("disbursementMessage", t("disbursementSaved"), "ok");
+
+        await Promise.all([loadRequests(), loadApplications()]);
+
+      }
+
+      $("languageSelect").addEventListener("change", event => {
+
+        lang = words[event.target.value] ? event.target.value : "en";
+
+        localStorage.setItem("globalbridge_language", lang);
+
+        applyLanguage();
+
+      });
+
+      $("saveAddressBtn").addEventListener("click", saveAddress);
+
+      $("refreshBtn").addEventListener("click", async () => {
+
+        await Promise.all([loadRequests(), loadApplications()]);
+
+      });
+
+      $("recordDisbursementBtn").addEventListener("click", recordDisbursement);
+
+      $("requestsBody").addEventListener("click", event => {
+
+        const button = event.target.closest("button[data-action]");
+
+        if (button) reviewRequest(button.dataset.id, button.dataset.action);
+
+      });
+
+      async function init() {
+
+        applyLanguage();
+
+        showMessage("pageMessage", t("checking"), "info");
+
+        if (!await checkAdmin()) return;
+
+        try {
+
+          await Promise.all([loadAddress(), loadRequests(), loadApplications()]);
+
+        } catch (error) {
+
+          showMessage("pageMessage", t("failed") + error.message, "error");
+
+        }
+
+      }
+
+      init();
+
+    })();
+
+  </script>
+
+</body>
+
+</html>
