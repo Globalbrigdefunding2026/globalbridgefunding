@@ -1,0 +1,1503 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="robots" content="noindex,nofollow">
+
+  <title>Transactions | GlobalBridgeFunding</title>
+
+  <style>
+
+    :root {
+
+      --navy: #071a35;
+
+      --navy-light: #102b50;
+
+      --blue: #36c2ff;
+
+      --bg: #f3f6fb;
+
+      --white: #fff;
+
+      --text: #17253b;
+
+      --muted: #64748b;
+
+      --border: #dce5ef;
+
+      --green: #166534;
+
+      --red: #991b1b;
+
+      --orange: #92400e;
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      color: var(--text);
+
+      background: var(--bg);
+
+    }
+
+    header {
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 15px 16px;
+
+    }
+
+    .topbar {
+
+      max-width: 1120px;
+
+      margin: auto;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+    }
+
+    .brand { font-weight: 850; font-size: 18px; }
+
+    .brand span { color: var(--blue); }
+
+    nav { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+
+    nav a {
+
+      color: white;
+
+      text-decoration: none;
+
+      padding: 8px 10px;
+
+      border: 1px solid #3b5575;
+
+      border-radius: 8px;
+
+      font-size: 13px;
+
+    }
+
+    nav a:hover { background: var(--navy-light); }
+
+    button, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .btn {
+
+      border: 0;
+
+      background: var(--blue);
+
+      color: #06203b;
+
+      border-radius: 8px;
+
+      padding: 10px 13px;
+
+      font-weight: 750;
+
+      font-size: 13px;
+
+    }
+
+    .btn-dark { background: var(--navy); color: white; }
+
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+
+    main {
+
+      max-width: 1120px;
+
+      padding: 22px 14px 40px;
+
+      margin: auto;
+
+    }
+
+    h1 { margin: 0 0 8px; font-size: clamp(25px, 4vw, 34px); }
+
+    h2 { font-size: 19px; margin: 0 0 14px; }
+
+    p { line-height: 1.55; }
+
+    .muted { color: var(--muted); font-size: 14px; }
+
+    .panel {
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      padding: 18px;
+
+      margin-top: 17px;
+
+      box-shadow: 0 4px 16px rgba(7,26,53,.035);
+
+    }
+
+    .toolbar {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: end;
+
+      gap: 12px;
+
+      justify-content: space-between;
+
+    }
+
+    .field { min-width: 160px; }
+
+    label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      margin-bottom: 6px;
+
+    }
+
+    select {
+
+      width: 100%;
+
+      padding: 10px;
+
+      border: 1px solid #cbd5e1;
+
+      border-radius: 8px;
+
+      background: white;
+
+      color: var(--text);
+
+    }
+
+    .stats {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      gap: 12px;
+
+      margin-top: 17px;
+
+    }
+
+    .stat {
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      padding: 15px;
+
+      min-width: 0;
+
+    }
+
+    .stat strong {
+
+      display: block;
+
+      font-size: 21px;
+
+      margin-top: 8px;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    .notice {
+
+      border-radius: 9px;
+
+      padding: 12px;
+
+      margin-top: 14px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    .error { background: #fee2e2; color: var(--red); }
+
+    .success { background: #dcfce7; color: var(--green); }
+
+    .info { background: #e0f2fe; color: #075985; }
+
+    .hidden { display: none !important; }
+
+    .table-wrap {
+
+      overflow-x: auto;
+
+      -webkit-overflow-scrolling: touch;
+
+      width: 100%;
+
+      border: 1px solid var(--border);
+
+      border-radius: 9px;
+
+    }
+
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+
+    th, td {
+
+      padding: 12px;
+
+      border-bottom: 1px solid var(--border);
+
+      text-align: left;
+
+      vertical-align: top;
+
+      font-size: 13px;
+
+    }
+
+    th { background: #eef3f9; white-space: nowrap; }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .status {
+
+      display: inline-block;
+
+      border-radius: 20px;
+
+      padding: 5px 8px;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      background: #e2e8f0;
+
+      color: #334155;
+
+    }
+
+    .pending { background: #fef3c7; color: #92400e; }
+
+    .approved { background: #dbeafe; color: #1d4ed8; }
+
+    .completed { background: #dcfce7; color: #166534; }
+
+    .rejected { background: #fee2e2; color: #991b1b; }
+
+    .hash { overflow-wrap: anywhere; max-width: 230px; }
+
+    .empty { text-align: center; padding: 24px; color: var(--muted); }
+
+    .card-list { display: none; }
+
+    .tx-card {
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      padding: 14px;
+
+      margin-top: 12px;
+
+      background: white;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    .tx-head {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      align-items: start;
+
+      margin-bottom: 12px;
+
+    }
+
+    .tx-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 8px 0;
+
+      border-top: 1px solid #edf1f6;
+
+      font-size: 13px;
+
+    }
+
+    .tx-row span:first-child { color: var(--muted); }
+
+    .tx-row span:last-child { text-align: right; overflow-wrap: anywhere; }
+
+    .small { font-size: 12px; color: var(--muted); }
+
+    footer {
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      padding: 20px;
+
+    }
+
+    @media (max-width: 650px) {
+
+      .topbar { align-items: flex-start; }
+
+      nav { width: 100%; }
+
+      main { padding-top: 18px; }
+
+      .panel { padding: 14px; }
+
+      .stats { grid-template-columns: 1fr; }
+
+      .stat strong { font-size: 19px; }
+
+      .table-wrap { display: none; }
+
+      .card-list { display: block; }
+
+      .toolbar { align-items: stretch; }
+
+      .field { width: 100%; }
+
+      .toolbar .btn { width: 100%; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="topbar">
+
+    <div class="brand">GlobalBridge<span>Funding</span></div>
+
+    <nav aria-label="Main navigation">
+
+      <a href="dashboard.html" data-i18n="dashboard">Dashboard</a>
+
+      <a href="wallet.html" data-i18n="wallet">Wallet</a>
+
+      <a href="applications.html" data-i18n="applications">My Applications</a>
+
+      <a href="profile.html" data-i18n="profile">Profile</a>
+
+      <a href="support.html" data-i18n="support">Support</a>
+
+      <button class="btn btn-dark" id="signOutBtn" type="button" data-i18n="signOut">Sign out</button>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<main>
+
+  <h1 data-i18n="title">Transaction History</h1>
+
+  <p class="muted" data-i18n="intro">
+
+    Review your deposits, withdrawals and recorded loan disbursements.
+
+  </p>
+
+  <div id="pageMessage" class="notice info" role="status" aria-live="polite">
+
+    Loading your account…
+
+  </div>
+
+  <div id="pageContent" class="hidden">
+
+    <section class="stats">
+
+      <div class="stat">
+
+        <span class="muted" data-i18n="totalTransactions">Total transactions</span>
+
+        <strong id="totalCount">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span class="muted" data-i18n="pendingTransactions">Pending transactions</span>
+
+        <strong id="pendingCount">0</strong>
+
+      </div>
+
+      <div class="stat">
+
+        <span class="muted" data-i18n="completedTransactions">Completed transactions</span>
+
+        <strong id="completedCount">0</strong>
+
+      </div>
+
+    </section>
+
+    <section class="panel">
+
+      <div class="toolbar">
+
+        <div class="field">
+
+          <label for="languageSelect" data-i18n="language">Language</label>
+
+          <select id="languageSelect">
+
+            <option value="en">English</option>
+
+            <option value="pt">Português</option>
+
+            <option value="vi">Tiếng Việt</option>
+
+            <option value="fa">فارسی</option>
+
+            <option value="id">Bahasa Indonesia</option>
+
+            <option value="fr">Français</option>
+
+            <option value="fi">Suomi</option>
+
+            <option value="es">Español</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label for="typeFilter" data-i18n="filterType">Filter by type</label>
+
+          <select id="typeFilter">
+
+            <option value="all" data-i18n="allTypes">All types</option>
+
+            <option value="deposit" data-i18n="deposit">Deposit</option>
+
+            <option value="withdrawal" data-i18n="withdrawal">Withdrawal</option>
+
+            <option value="loan_disbursement" data-i18n="loanDisbursement">Loan disbursement</option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label for="statusFilter" data-i18n="filterStatus">Filter by status</label>
+
+          <select id="statusFilter">
+
+            <option value="all" data-i18n="allStatuses">All statuses</option>
+
+            <option value="pending" data-i18n="pending">Pending</option>
+
+            <option value="approved" data-i18n="approved">Approved</option>
+
+            <option value="rejected" data-i18n="rejected">Rejected</option>
+
+            <option value="completed" data-i18n="completed">Completed</option>
+
+          </select>
+
+        </div>
+
+        <button class="btn" id="refreshBtn" type="button" data-i18n="refresh">Refresh transactions</button>
+
+      </div>
+
+    </section>
+
+    <section class="panel">
+
+      <h2 data-i18n="history">Your transactions</h2>
+
+      <p class="muted" data-i18n="historyHelp">
+
+        Only transactions associated with your signed-in account are shown.
+
+      </p>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th data-i18n="date">Date</th>
+
+              <th data-i18n="type">Type</th>
+
+              <th data-i18n="amount">Amount</th>
+
+              <th data-i18n="status">Status</th>
+
+              <th data-i18n="reference">Transaction hash / reference</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="transactionsBody">
+
+            <tr><td colspan="5" class="empty">Loading…</td></tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div id="transactionsCards" class="card-list"></div>
+
+      <div id="emptyMessage" class="notice info hidden" data-i18n="noTransactions">
+
+        No transactions match your filters.
+
+      </div>
+
+      <p id="limitMessage" class="small hidden" data-i18n="limitMessage">
+
+        Showing the most recent 500 transactions.
+
+      </p>
+
+    </section>
+
+  </div>
+
+</main>
+
+<footer>GlobalBridgeFunding</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+(() => {
+
+  "use strict";
+
+  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const $ = (id) => document.getElementById(id);
+
+  const translations = {
+
+    en: {
+
+      dashboard:"Dashboard",wallet:"Wallet",applications:"My Applications",
+
+      profile:"Profile",support:"Support",signOut:"Sign out",
+
+      title:"Transaction History",
+
+      intro:"Review your deposits, withdrawals and recorded loan disbursements.",
+
+      totalTransactions:"Total transactions",pendingTransactions:"Pending transactions",
+
+      completedTransactions:"Completed transactions",language:"Language",
+
+      filterType:"Filter by type",allTypes:"All types",deposit:"Deposit",
+
+      withdrawal:"Withdrawal",loanDisbursement:"Loan disbursement",
+
+      filterStatus:"Filter by status",allStatuses:"All statuses",
+
+      pending:"Pending",approved:"Approved",rejected:"Rejected",
+
+      completed:"Completed",refresh:"Refresh transactions",
+
+      history:"Your transactions",
+
+      historyHelp:"Only transactions associated with your signed-in account are shown.",
+
+      date:"Date",type:"Type",amount:"Amount",status:"Status",
+
+      reference:"Transaction hash / reference",noTransactions:"No transactions match your filters.",
+
+      limitMessage:"Showing the most recent 500 transactions.",
+
+      loading:"Loading your transactions…",loadError:"Could not load transactions: ",
+
+      authError:"Your session could not be verified. Please sign in again.",
+
+      noSession:"You are not signed in. Redirecting to login…",
+
+      typeDeposit:"Deposit",typeWithdrawal:"Withdrawal",
+
+      typeLoan:"Loan disbursement",unknown:"Other transaction",
+
+      hashMissing:"Not provided",copy:"Copy reference",copied:"Reference copied.",
+
+      copyFailed:"Copy this reference:",refreshing:"Refreshing…"
+
+    },
+
+    pt: {
+
+      dashboard:"Painel",wallet:"Carteira",applications:"Minhas candidaturas",
+
+      profile:"Perfil",support:"Suporte",signOut:"Terminar sessão",
+
+      title:"Histórico de transações",
+
+      intro:"Consulte depósitos, levantamentos e desembolsos de financiamento registados.",
+
+      totalTransactions:"Total de transações",pendingTransactions:"Transações pendentes",
+
+      completedTransactions:"Transações concluídas",language:"Idioma",
+
+      filterType:"Filtrar por tipo",allTypes:"Todos os tipos",deposit:"Depósito",
+
+      withdrawal:"Levantamento",loanDisbursement:"Desembolso de financiamento",
+
+      filterStatus:"Filtrar por estado",allStatuses:"Todos os estados",
+
+      pending:"Pendente",approved:"Aprovado",rejected:"Rejeitado",
+
+      completed:"Concluído",refresh:"Atualizar transações",
+
+      history:"As suas transações",
+
+      historyHelp:"São apresentadas apenas as transações da sua conta.",
+
+      date:"Data",type:"Tipo",amount:"Montante",status:"Estado",
+
+      reference:"Hash / referência da transação",noTransactions:"Nenhuma transação corresponde aos filtros.",
+
+      limitMessage:"A mostrar as 500 transações mais recentes.",
+
+      loading:"A carregar transações…",loadError:"Não foi possível carregar: ",
+
+      authError:"Não foi possível verificar a sessão. Inicie sessão novamente.",
+
+      noSession:"Sessão não iniciada. A redirecionar…",
+
+      typeDeposit:"Depósito",typeWithdrawal:"Levantamento",
+
+      typeLoan:"Desembolso de financiamento",unknown:"Outra transação",
+
+      hashMissing:"Não fornecido",copy:"Copiar referência",copied:"Referência copiada.",
+
+      copyFailed:"Copie esta referência:",refreshing:"A atualizar…"
+
+    },
+
+    vi: {
+
+      dashboard:"Bảng điều khiển",wallet:"Ví",applications:"Đơn đăng ký",
+
+      profile:"Hồ sơ",support:"Hỗ trợ",signOut:"Đăng xuất",
+
+      title:"Lịch sử giao dịch",
+
+      intro:"Xem các khoản nạp, rút và giải ngân khoản vay đã ghi nhận.",
+
+      totalTransactions:"Tổng giao dịch",pendingTransactions:"Giao dịch đang chờ",
+
+      completedTransactions:"Giao dịch hoàn tất",language:"Ngôn ngữ",
+
+      filterType:"Lọc theo loại",allTypes:"Tất cả loại",deposit:"Nạp tiền",
+
+      withdrawal:"Rút tiền",loanDisbursement:"Giải ngân khoản vay",
+
+      filterStatus:"Lọc theo trạng thái",allStatuses:"Tất cả trạng thái",
+
+      pending:"Đang chờ",approved:"Đã duyệt",rejected:"Đã từ chối",
+
+      completed:"Hoàn tất",refresh:"Làm mới giao dịch",
+
+      history:"Giao dịch của bạn",
+
+      historyHelp:"Chỉ hiển thị giao dịch thuộc tài khoản đã đăng nhập.",
+
+      date:"Ngày",type:"Loại",amount:"Số tiền",status:"Trạng thái",
+
+      reference:"Mã giao dịch / tham chiếu",noTransactions:"Không có giao dịch phù hợp.",
+
+      limitMessage:"Hiển thị 500 giao dịch gần nhất.",
+
+      loading:"Đang tải giao dịch…",loadError:"Không thể tải giao dịch: ",
+
+      authError:"Không thể xác minh phiên. Vui lòng đăng nhập lại.",
+
+      noSession:"Bạn chưa đăng nhập. Đang chuyển hướng…",
+
+      typeDeposit:"Nạp tiền",typeWithdrawal:"Rút tiền",
+
+      typeLoan:"Giải ngân khoản vay",unknown:"Giao dịch khác",
+
+      hashMissing:"Chưa cung cấp",copy:"Sao chép mã",copied:"Đã sao chép mã.",
+
+      copyFailed:"Sao chép mã này:",refreshing:"Đang làm mới…"
+
+    },
+
+    fa: {
+
+      dashboard:"داشبورد",wallet:"کیف پول",applications:"درخواست‌های من",
+
+      profile:"پروفایل",support:"پشتیبانی",signOut:"خروج",
+
+      title:"تاریخچه تراکنش‌ها",
+
+      intro:"واریزها، برداشت‌ها و پرداخت‌های ثبت‌شده وام را بررسی کنید.",
+
+      totalTransactions:"کل تراکنش‌ها",pendingTransactions:"تراکنش‌های در انتظار",
+
+      completedTransactions:"تراکنش‌های تکمیل‌شده",language:"زبان",
+
+      filterType:"فیلتر بر اساس نوع",allTypes:"همه انواع",deposit:"واریز",
+
+      withdrawal:"برداشت",loanDisbursement:"پرداخت وام",
+
+      filterStatus:"فیلتر بر اساس وضعیت",allStatuses:"همه وضعیت‌ها",
+
+      pending:"در انتظار",approved:"تأییدشده",rejected:"ردشده",
+
+      completed:"تکمیل‌شده",refresh:"به‌روزرسانی تراکنش‌ها",
+
+      history:"تراکنش‌های شما",
+
+      historyHelp:"فقط تراکنش‌های حساب واردشده نمایش داده می‌شوند.",
+
+      date:"تاریخ",type:"نوع",amount:"مبلغ",status:"وضعیت",
+
+      reference:"شناسه / هش تراکنش",noTransactions:"تراکنشی مطابق فیلترها یافت نشد.",
+
+      limitMessage:"۵۰۰ تراکنش اخیر نمایش داده می‌شود.",
+
+      loading:"در حال بارگذاری تراکنش‌ها…",loadError:"بارگذاری ناموفق بود: ",
+
+      authError:"تأیید نشست ممکن نیست. دوباره وارد شوید.",
+
+      noSession:"وارد نشده‌اید. در حال انتقال…",
+
+      typeDeposit:"واریز",typeWithdrawal:"برداشت",
+
+      typeLoan:"پرداخت وام",unknown:"تراکنش دیگر",
+
+      hashMissing:"ثبت نشده",copy:"کپی شناسه",copied:"شناسه کپی شد.",
+
+      copyFailed:"این شناسه را کپی کنید:",refreshing:"در حال به‌روزرسانی…"
+
+    },
+
+    id: {
+
+      dashboard:"Dasbor",wallet:"Dompet",applications:"Pengajuan Saya",
+
+      profile:"Profil",support:"Dukungan",signOut:"Keluar",
+
+      title:"Riwayat Transaksi",
+
+      intro:"Lihat setoran, penarikan, dan pencairan pinjaman yang tercatat.",
+
+      totalTransactions:"Total transaksi",pendingTransactions:"Transaksi tertunda",
+
+      completedTransactions:"Transaksi selesai",language:"Bahasa",
+
+      filterType:"Filter jenis",allTypes:"Semua jenis",deposit:"Setoran",
+
+      withdrawal:"Penarikan",loanDisbursement:"Pencairan pinjaman",
+
+      filterStatus:"Filter status",allStatuses:"Semua status",
+
+      pending:"Tertunda",approved:"Disetujui",rejected:"Ditolak",
+
+      completed:"Selesai",refresh:"Muat ulang transaksi",
+
+      history:"Transaksi Anda",
+
+      historyHelp:"Hanya transaksi akun yang sedang masuk yang ditampilkan.",
+
+      date:"Tanggal",type:"Jenis",amount:"Jumlah",status:"Status",
+
+      reference:"Hash / referensi transaksi",noTransactions:"Tidak ada transaksi yang sesuai.",
+
+      limitMessage:"Menampilkan 500 transaksi terbaru.",
+
+      loading:"Memuat transaksi…",loadError:"Transaksi gagal dimuat: ",
+
+      authError:"Sesi tidak dapat diverifikasi. Silakan masuk lagi.",
+
+      noSession:"Anda belum masuk. Mengalihkan…",
+
+      typeDeposit:"Setoran",typeWithdrawal:"Penarikan",
+
+      typeLoan:"Pencairan pinjaman",unknown:"Transaksi lainnya",
+
+      hashMissing:"Tidak tersedia",copy:"Salin referensi",copied:"Referensi disalin.",
+
+      copyFailed:"Salin referensi ini:",refreshing:"Memuat ulang…"
+
+    },
+
+    fr: {
+
+      dashboard:"Tableau de bord",wallet:"Portefeuille",applications:"Mes demandes",
+
+      profile:"Profil",support:"Assistance",signOut:"Déconnexion",
+
+      title:"Historique des transactions",
+
+      intro:"Consultez les dépôts, retraits et décaissements de prêts enregistrés.",
+
+      totalTransactions:"Total des transactions",pendingTransactions:"Transactions en attente",
+
+      completedTransactions:"Transactions terminées",language:"Langue",
+
+      filterType:"Filtrer par type",allTypes:"Tous les types",deposit:"Dépôt",
+
+      withdrawal:"Retrait",loanDisbursement:"Décaissement du prêt",
+
+      filterStatus:"Filtrer par statut",allStatuses:"Tous les statuts",
+
+      pending:"En attente",approved:"Approuvé",rejected:"Rejeté",
+
+      completed:"Terminé",refresh:"Actualiser les transactions",
+
+      history:"Vos transactions",
+
+      historyHelp:"Seules les transactions de votre compte connecté sont affichées.",
+
+      date:"Date",type:"Type",amount:"Montant",status:"Statut",
+
+      reference:"Hash / référence de transaction",noTransactions:"Aucune transaction ne correspond aux filtres.",
+
+      limitMessage:"Affichage des 500 transactions les plus récentes.",
+
+      loading:"Chargement des transactions…",loadError:"Chargement impossible : ",
+
+      authError:"Impossible de vérifier la session. Veuillez vous reconnecter.",
+
+      noSession:"Vous n’êtes pas connecté. Redirection…",
+
+      typeDeposit:"Dépôt",typeWithdrawal:"Retrait",
+
+      typeLoan:"Décaissement du prêt",unknown:"Autre transaction",
+
+      hashMissing:"Non fourni",copy:"Copier la référence",copied:"Référence copiée.",
+
+      copyFailed:"Copiez cette référence :",refreshing:"Actualisation…"
+
+    },
+
+    fi: {
+
+      dashboard:"Hallintapaneeli",wallet:"Lompakko",applications:"Omat hakemukset",
+
+      profile:"Profiili",support:"Tuki",signOut:"Kirjaudu ulos",
+
+      title:"Tapahtumahistoria",
+
+      intro:"Tarkastele talletuksia, nostoja ja kirjattuja lainanmaksuja.",
+
+      totalTransactions:"Tapahtumia yhteensä",pendingTransactions:"Odottavat tapahtumat",
+
+      completedTransactions:"Valmiit tapahtumat",language:"Kieli",
+
+      filterType:"Suodata tyypin mukaan",allTypes:"Kaikki tyypit",deposit:"Talletus",
+
+      withdrawal:"Nosto",loanDisbursement:"Lainan maksu",
+
+      filterStatus:"Suodata tilan mukaan",allStatuses:"Kaikki tilat",
+
+      pending:"Odottaa",approved:"Hyväksytty",rejected:"Hylätty",
+
+      completed:"Valmis",refresh:"Päivitä tapahtumat",
+
+      history:"Tapahtumasi",
+
+      historyHelp:"Näytetään vain kirjautuneen tilin tapahtumat.",
+
+      date:"Päivämäärä",type:"Tyyppi",amount:"Summa",status:"Tila",
+
+      reference:"Tapahtuman tiiviste / viite",noTransactions:"Suodattimia vastaavia tapahtumia ei löytynyt.",
+
+      limitMessage:"Näytetään 500 viimeisintä tapahtumaa.",
+
+      loading:"Ladataan tapahtumia…",loadError:"Tapahtumien lataus epäonnistui: ",
+
+      authError:"Istuntoa ei voitu vahvistaa. Kirjaudu uudelleen.",
+
+      noSession:"Et ole kirjautunut sisään. Siirrytään kirjautumiseen…",
+
+      typeDeposit:"Talletus",typeWithdrawal:"Nosto",
+
+      typeLoan:"Lainan maksu",unknown:"Muu tapahtuma",
+
+      hashMissing:"Ei ilmoitettu",copy:"Kopioi viite",copied:"Viite kopioitu.",
+
+      copyFailed:"Kopioi tämä viite:",refreshing:"Päivitetään…"
+
+    },
+
+    es: {
+
+      dashboard:"Panel",wallet:"Billetera",applications:"Mis solicitudes",
+
+      profile:"Perfil",support:"Soporte",signOut:"Cerrar sesión",
+
+      title:"Historial de transacciones",
+
+      intro:"Consulta depósitos, retiros y desembolsos de préstamos registrados.",
+
+      totalTransactions:"Total de transacciones",pendingTransactions:"Transacciones pendientes",
+
+      completedTransactions:"Transacciones completadas",language:"Idioma",
+
+      filterType:"Filtrar por tipo",allTypes:"Todos los tipos",deposit:"Depósito",
+
+      withdrawal:"Retiro",loanDisbursement:"Desembolso del préstamo",
+
+      filterStatus:"Filtrar por estado",allStatuses:"Todos los estados",
+
+      pending:"Pendiente",approved:"Aprobado",rejected:"Rechazado",
+
+      completed:"Completado",refresh:"Actualizar transacciones",
+
+      history:"Tus transacciones",
+
+      historyHelp:"Solo se muestran las transacciones de tu cuenta iniciada.",
+
+      date:"Fecha",type:"Tipo",amount:"Importe",status:"Estado",
+
+      reference:"Hash / referencia de transacción",noTransactions:"No hay transacciones que coincidan con los filtros.",
+
+      limitMessage:"Se muestran las 500 transacciones más recientes.",
+
+      loading:"Cargando transacciones…",loadError:"No se pudieron cargar: ",
+
+      authError:"No se pudo verificar la sesión. Inicia sesión de nuevo.",
+
+      noSession:"No has iniciado sesión. Redirigiendo…",
+
+      typeDeposit:"Depósito",typeWithdrawal:"Retiro",
+
+      typeLoan:"Desembolso del préstamo",unknown:"Otra transacción",
+
+      hashMissing:"No proporcionado",copy:"Copiar referencia",copied:"Referencia copiada.",
+
+      copyFailed:"Copia esta referencia:",refreshing:"Actualizando…"
+
+    }
+
+  };
+
+  let currentLanguage = "en";
+
+  let allTransactions = [];
+
+  function t(key) {
+
+    return (translations[currentLanguage] &&
+
+      translations[currentLanguage][key]) ||
+
+      translations.en[key] || key;
+
+  }
+
+  function escapeHTML(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+
+      "&": "&amp;", "<": "&lt;", ">": "&gt;",
+
+      '"': "&quot;", "'": "&#39;"
+
+    })[char]);
+
+  }
+
+  function applyLanguage(language) {
+
+    currentLanguage = translations[language] ? language : "en";
+
+    document.documentElement.lang = currentLanguage;
+
+    document.documentElement.dir = currentLanguage === "fa" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+
+      const key = element.dataset.i18n;
+
+      if (t(key)) element.textContent = t(key);
+
+    });
+
+    $("languageSelect").value = currentLanguage;
+
+    renderTransactions();
+
+  }
+
+  function getSavedLanguage() {
+
+    try {
+
+      return localStorage.getItem("globalbridge_language") || "en";
+
+    } catch (_) {
+
+      return "en";
+
+    }
+
+  }
+
+  function saveLanguage(language) {
+
+    try {
+
+      localStorage.setItem("globalbridge_language", language);
+
+    } catch (_) {}
+
+  }
+
+  function formatDate(value) {
+
+    if (!value) return "—";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return String(value);
+
+    try {
+
+      return new Intl.DateTimeFormat(currentLanguage, {
+
+        dateStyle: "medium",
+
+        timeStyle: "short"
+
+      }).format(date);
+
+    } catch (_) {
+
+      return date.toLocaleString();
+
+    }
+
+  }
+
+  function formatAmount(amount, token) {
+
+    const value = Number(amount);
+
+    if (!Number.isFinite(value)) return String(amount ?? "—");
+
+    return value.toLocaleString(currentLanguage, {
+
+      minimumFractionDigits: 2,
+
+      maximumFractionDigits: 6
+
+    }) + " " + (token || "USDT");
+
+  }
+
+  function translateType(type) {
+
+    if (type === "deposit") return t("typeDeposit");
+
+    if (type === "withdrawal") return t("typeWithdrawal");
+
+    if (type === "loan_disbursement") return t("typeLoan");
+
+    return t("unknown");
+
+  }
+
+  function statusClass(status) {
+
+    const value = String(status || "").toLowerCase();
+
+    return ["pending", "approved", "rejected", "completed"].includes(value)
+
+      ? "status " + value
+
+      : "status";
+
+  }
+
+  function statusHTML(status) {
+
+    const value = String(status || "unknown").toLowerCase();
+
+    const label = translations[currentLanguage][value] ||
+
+      translations.en[value] || value;
+
+    return '<span class="' + statusClass(value) + '">' +
+
+      escapeHTML(label) + '</span>';
+
+  }
+
+  function showMessage(message, type = "info") {
+
+    $("pageMessage").textContent = message;
+
+    $("pageMessage").className = "notice " + type;
+
+    $("pageMessage").classList.remove("hidden");
+
+  }
+
+  function hideMessage() {
+
+    $("pageMessage").classList.add("hidden");
+
+  }
+
+  async function loadTransactions() {
+
+    $("refreshBtn").disabled = true;
+
+    $("refreshBtn").textContent = t("refreshing");
+
+    try {
+
+      const { data: userResult, error: userError } =
+
+        await client.auth.getUser();
+
+      if (userError || !userResult.user) {
+
+        showMessage(t("authError"), "error");
+
+        $("pageContent").classList.add("hidden");
+
+        return;
+
+      }
+
+      // The query explicitly limits results to the current user's ID.
+
+      const { data, error } = await client
+
+        .from("wallet_transactions")
+
+        .select("id,user_id,transaction_type,amount,token,network,status,transaction_hash,source_application_id,created_at,updated_at")
+
+        .eq("user_id", userResult.user.id)
+
+        .order("created_at", { ascending: false })
+
+        .limit(500);
+
+      if (error) {
+
+        showMessage(t("loadError") + error.message, "error");
+
+        $("pageContent").classList.remove("hidden");
+
+        return;
+
+      }
+
+      allTransactions = data || [];
+
+      $("pageContent").classList.remove("hidden");
+
+      hideMessage();
+
+      $("limitMessage").classList.toggle("hidden", allTransactions.length < 500);
+
+      renderTransactions();
+
+    } catch (error) {
+
+      showMessage(t("loadError") + (error?.message || String(error)), "error");
+
+    } finally {
+
+      $("refreshBtn").disabled = false;
+
+      $("refreshBtn").textContent = t("refresh");
+
+    }
+
+  }
+
+  function getFilteredTransactions() {
+
+    const type = $("typeFilter").value;
+
+    const status = $("statusFilter").value;
+
+    return allTransactions.filter((row) => {
+
+      const typeMatches = type === "all" || row.transaction_type === type;
+
+      const statusMatches = status === "all" || row.status === status;
+
+      return typeMatches && statusMatches;
+
+    });
+
+  }
+
+  function renderTransactions() {
+
+    const filtered = getFilteredTransactions();
+
+    $("totalCount").textContent = allTransactions.length;
+
+    $("pendingCount").textContent = allTransactions.filter(
+
+      row => row.status === "pending"
+
+    ).length;
+
+    $("completedCount").textContent = allTransactions.filter(
+
+      row => row.status === "completed"
+
+    ).length;
+
+    $("emptyMessage").classList.toggle("hidden", filtered.length > 0);
+
+    if (!filtered.length) {
+
+      $("transactionsBody").innerHTML =
+
+        '<tr><td colspan="5" class="empty">' +
+
+        escapeHTML(t("noTransactions")) + '</td></tr>';
+
+      $("transactionsCards").innerHTML =
+
+        '<div class="empty">' + escapeHTML(t("noTransactions")) + '</div>';
+
+      return;
+
+    }
+
+    $("transactionsBody").innerHTML = filtered.map((row) => {
+
+      const reference = row.transaction_hash || "";
+
+      return '<tr>' +
+
+        '<td>' + escapeHTML(formatDate(row.created_at)) + '</td>' +
+
+        '<td>' + escapeHTML(translateType(row.transaction_type)) + '</td>' +
+
+        '<td><strong>' + escapeHTML(formatAmount(row.amount, row.token || "USDT")) + '</strong></td>' +
+
+        '<td>' + statusHTML(row.status) + '</td>' +
+
+        '<td class="hash">' +
+
+          (reference
+
+            ? escapeHTML(reference) +
+
+              '<br><button class="btn btn-dark copy-btn" type="button" data-reference="' +
+
+              escapeHTML(reference) + '">' + escapeHTML(t("copy")) + '</button>'
+
+            : escapeHTML(t("hashMissing"))) +
+
+        '</td>' +
+
+        '</tr>';
+
+    }).join("");
+
+    $("transactionsCards").innerHTML = filtered.map((row) => {
+
+      const reference = row.transaction_hash || "";
+
+      return '<article class="tx-card">' +
+
+        '<div class="tx-head"><strong>' +
+
+          escapeHTML(translateType(row.transaction_type)) +
+
+          '</strong>' + statusHTML(row.status) + '</div>' +
+
+        '<div class="tx-row"><span>' + escapeHTML(t("date")) +
+
+          '</span><span>' + escapeHTML(formatDate(row.created_at)) + '</span></div>' +
+
+        '<div class="tx-row"><span>' + escapeHTML(t("amount")) +
+
+          '</span><span><strong>' + escapeHTML(formatAmount(row.amount, row.token || "USDT")) +
+
+          '</strong></span></div>' +
+
+        '<div class="tx-row"><span>' + escapeHTML(t("reference")) +
+
+          '</span><span>' + escapeHTML(reference || t("hashMissing")) + '</span></div>' +
+
+        (reference
+
+          ? '<button class="btn btn-dark copy-btn" type="button" data-reference="' +
+
+            escapeHTML(reference) + '">' + escapeHTML(t("copy")) + '</button>'
+
+          : '') +
+
+        '</article>';
+
+    }).join("");
+
+  }
+
+  async function copyReference(reference) {
+
+    try {
+
+      await navigator.clipboard.writeText(reference);
+
+      alert(t("copied"));
+
+    } catch (_) {
+
+      prompt(t("copyFailed"), reference);
+
+    }
+
+  }
+
+  document.addEventListener("click", (event) => {
+
+    const button = event.target.closest(".copy-btn");
+
+    if (button) copyReference(button.dataset.reference || "");
+
+  });
+
+  $("languageSelect").addEventListener("change", (event) => {
+
+    const language = event.target.value;
+
+    saveLanguage(language);
+
+    applyLanguage(language);
+
+  });
+
+  $("typeFilter").addEventListener("change", renderTransactions);
+
+  $("statusFilter").addEventListener("change", renderTransactions);
+
+  $("refreshBtn").addEventListener("click", loadTransactions);
+
+  $("signOutBtn").addEventListener("click", async () => {
+
+    await client.auth.signOut();
+
+    location.replace("login.html");
+
+  });
+
+  applyLanguage(getSavedLanguage());
+
+  client.auth.onAuthStateChange((event, session) => {
+
+    if (event === "SIGNED_OUT" || !session) {
+
+      location.replace("login.html");
+
+    }
+
+  });
+
+  loadTransactions();
+
+})();
+
+</script>
+
+</body>
+
+</html>
