@@ -1,0 +1,869 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Support | GlobalBridgeFunding</title>
+
+  <meta name="theme-color" content="#071a35">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    :root {
+
+      --navy: #071a35;
+
+      --blue: #36c2ff;
+
+      --bg: #f3f6fb;
+
+      --text: #18263c;
+
+      --muted: #718096;
+
+      --border: #e1e8f0;
+
+      --white: #fff;
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    }
+
+    header {
+
+      background: var(--navy);
+
+      color: white;
+
+      padding: 18px 16px;
+
+    }
+
+    .header-inner, main {
+
+      width: min(100% - 28px, 1000px);
+
+      margin: auto;
+
+    }
+
+    .brand { font-size: 19px; font-weight: 800; }
+
+    .brand span { color: var(--blue); }
+
+    .header-sub { color: #c3d0e1; font-size: 13px; margin-top: 6px; }
+
+    nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    nav a, nav button {
+
+      border: 1px solid #ffffff40;
+
+      color: white;
+
+      background: transparent;
+
+      padding: 9px 12px;
+
+      border-radius: 8px;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      cursor: pointer;
+
+    }
+
+    main { padding: 22px 0 40px; }
+
+    h1 { font-size: 25px; margin: 0 0 7px; }
+
+    .intro { color: var(--muted); margin: 0 0 20px; line-height: 1.5; }
+
+    .stats {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      gap: 10px;
+
+      margin-bottom: 18px;
+
+    }
+
+    .stat, .panel, .request {
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 13px;
+
+      padding: 15px;
+
+    }
+
+    .stat-label { color: var(--muted); font-size: 12px; }
+
+    .stat-number { font-size: 25px; font-weight: 800; margin-top: 5px; }
+
+    .panel { margin-bottom: 16px; }
+
+    .filters {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr auto;
+
+      gap: 10px;
+
+      align-items: end;
+
+    }
+
+    label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+
+    input, select, textarea {
+
+      width: 100%;
+
+      border: 1px solid #ccd7e4;
+
+      border-radius: 8px;
+
+      padding: 11px;
+
+      background: white;
+
+      color: var(--text);
+
+      font: inherit;
+
+      font-size: 14px;
+
+    }
+
+    textarea { min-height: 105px; resize: vertical; }
+
+    button.action {
+
+      background: var(--navy);
+
+      color: white;
+
+      border: 0;
+
+      padding: 11px 14px;
+
+      border-radius: 8px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      min-height: 42px;
+
+    }
+
+    button.secondary { background: #eaf5fc; color: var(--navy); }
+
+    button:disabled { opacity: .55; cursor: wait; }
+
+    #notice {
+
+      display: none;
+
+      padding: 12px;
+
+      border-radius: 8px;
+
+      margin-bottom: 15px;
+
+      font-size: 14px;
+
+      overflow-wrap: anywhere;
+
+    }
+
+    #notice.good { display: block; background: #e6f8ed; color: #17663b; }
+
+    #notice.bad { display: block; background: #fff0ef; color: #a52822; }
+
+    #notice.info { display: block; background: #e8f5ff; color: #164e78; }
+
+    .request { margin-bottom: 13px; }
+
+    .request-top {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      align-items: flex-start;
+
+      flex-wrap: wrap;
+
+    }
+
+    .request h2 { font-size: 17px; margin: 0 0 7px; overflow-wrap: anywhere; }
+
+    .meta { color: var(--muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+
+    .pill {
+
+      display: inline-block;
+
+      padding: 5px 9px;
+
+      background: #eaf5fc;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+    }
+
+    .message {
+
+      margin: 14px 0;
+
+      padding: 13px;
+
+      background: #f7f9fc;
+
+      border-radius: 8px;
+
+      white-space: pre-wrap;
+
+      overflow-wrap: anywhere;
+
+      line-height: 1.55;
+
+      font-size: 14px;
+
+    }
+
+    .reply { margin-top: 13px; }
+
+    .reply label { margin-top: 12px; }
+
+    .reply-actions { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 12px; }
+
+    .reply-actions button { flex: 1; min-width: 130px; }
+
+    .empty { text-align: center; padding: 28px 12px; color: var(--muted); }
+
+    .small-note { color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    @media (max-width: 600px) {
+
+      .stats { grid-template-columns: 1fr; }
+
+      .stat { padding: 12px 14px; }
+
+      .stat-number { font-size: 21px; }
+
+      .filters { grid-template-columns: 1fr; }
+
+      h1 { font-size: 23px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">GlobalBridge<span>Funding</span></div>
+
+    <div class="header-sub">Administrator support centre</div>
+
+    <nav>
+
+      <a href="dashboard.html">Dashboard</a>
+
+      <a href="admin-applications.html">Loan Applications</a>
+
+      <a href="admin-wallet.html">Wallet Admin</a>
+
+      <button id="signOutBtn" type="button">Sign out</button>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<main>
+
+  <h1>Client Support Requests</h1>
+
+  <p class="intro">Read client messages, reply, and manage support request statuses.</p>
+
+  <div id="notice" role="status" aria-live="polite"></div>
+
+  <section class="stats">
+
+    <div class="stat">
+
+      <div class="stat-label">Total requests</div>
+
+      <div class="stat-number" id="totalCount">—</div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-label">Open / In progress</div>
+
+      <div class="stat-number" id="activeCount">—</div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-label">Resolved / Closed</div>
+
+      <div class="stat-number" id="resolvedCount">—</div>
+
+    </div>
+
+  </section>
+
+  <section class="panel">
+
+    <div class="filters">
+
+      <div>
+
+        <label for="statusFilter">Filter by status</label>
+
+        <select id="statusFilter">
+
+          <option value="all">All statuses</option>
+
+          <option value="open">Open</option>
+
+          <option value="in_progress">In progress</option>
+
+          <option value="resolved">Resolved</option>
+
+          <option value="closed">Closed</option>
+
+        </select>
+
+      </div>
+
+      <div>
+
+        <label for="categoryFilter">Filter by category</label>
+
+        <select id="categoryFilter">
+
+          <option value="all">All categories</option>
+
+          <option value="general">General</option>
+
+          <option value="account">Account</option>
+
+          <option value="kyc">KYC</option>
+
+          <option value="financing">Financing</option>
+
+          <option value="deposit">Deposit</option>
+
+          <option value="withdrawal">Withdrawal</option>
+
+        </select>
+
+      </div>
+
+      <button class="action" id="refreshBtn" type="button">Refresh requests</button>
+
+    </div>
+
+  </section>
+
+  <div id="requestList">
+
+    <div class="panel empty">Checking administrator access…</div>
+
+  </div>
+
+  <p class="small-note">
+
+    Replies and status changes are saved to Supabase. This page does not send email notifications.
+
+  </p>
+
+</main>
+
+<script>
+
+(() => {
+
+  "use strict";
+
+  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const list = document.getElementById("requestList");
+
+  const notice = document.getElementById("notice");
+
+  let currentUser = null;
+
+  let allRequests = [];
+
+  function showNotice(message, type = "info") {
+
+    notice.textContent = message;
+
+    notice.className = type;
+
+    notice.style.display = "block";
+
+  }
+
+  function clearNotice() {
+
+    notice.textContent = "";
+
+    notice.className = "";
+
+    notice.style.display = "none";
+
+  }
+
+  function escapeHTML(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+
+      "&": "&amp;",
+
+      "<": "&lt;",
+
+      ">": "&gt;",
+
+      '"': "&quot;",
+
+      "'": "&#39;"
+
+    })[char]);
+
+  }
+
+  function readable(value) {
+
+    return String(value || "general")
+
+      .replaceAll("_", " ")
+
+      .replace(/\b\w/g, char => char.toUpperCase());
+
+  }
+
+  function formatDate(value) {
+
+    if (!value) return "Date unavailable";
+
+    const date = new Date(value);
+
+    return Number.isNaN(date.getTime())
+
+      ? "Date unavailable"
+
+      : date.toLocaleString();
+
+  }
+
+  async function checkAdmin() {
+
+    const { data: sessionData, error: sessionError } =
+
+      await db.auth.getSession();
+
+    if (sessionError) throw sessionError;
+
+    currentUser = sessionData.session?.user;
+
+    if (!currentUser) {
+
+      window.location.replace("login.html");
+
+      return false;
+
+    }
+
+    const { data: adminRow, error: adminError } = await db
+
+      .from("admin_users")
+
+      .select("user_id")
+
+      .eq("user_id", currentUser.id)
+
+      .maybeSingle();
+
+    if (adminError) throw adminError;
+
+    if (!adminRow) {
+
+      list.innerHTML = "";
+
+      showNotice("Access denied. This account is not listed as an administrator.", "bad");
+
+      return false;
+
+    }
+
+    return true;
+
+  }
+
+  async function loadRequests() {
+
+    clearNotice();
+
+    list.innerHTML = '<div class="panel empty">Loading support requests…</div>';
+
+    document.getElementById("refreshBtn").disabled = true;
+
+    try {
+
+      const { data, error } = await db
+
+        .from("support_messages")
+
+        .select("id,user_id,subject,category,message,status,admin_reply,created_at,updated_at")
+
+        .order("created_at", { ascending: false })
+
+        .limit(500);
+
+      if (error) throw error;
+
+      allRequests = data || [];
+
+      updateStats();
+
+      renderRequests();
+
+      if (!allRequests.length) {
+
+        showNotice("No support requests have been submitted yet.", "info");
+
+      }
+
+    } catch (error) {
+
+      list.innerHTML = '<div class="panel empty">Unable to load requests.</div>';
+
+      showNotice("Could not load requests: " + (error.message || "Unknown error"), "bad");
+
+    } finally {
+
+      document.getElementById("refreshBtn").disabled = false;
+
+    }
+
+  }
+
+  function updateStats() {
+
+    document.getElementById("totalCount").textContent = allRequests.length;
+
+    document.getElementById("activeCount").textContent =
+
+      allRequests.filter(item => ["open", "in_progress"].includes(item.status)).length;
+
+    document.getElementById("resolvedCount").textContent =
+
+      allRequests.filter(item => ["resolved", "closed"].includes(item.status)).length;
+
+  }
+
+  function renderRequests() {
+
+    const status = document.getElementById("statusFilter").value;
+
+    const category = document.getElementById("categoryFilter").value;
+
+    const filtered = allRequests.filter(item =>
+
+      (status === "all" || item.status === status) &&
+
+      (category === "all" || item.category === category)
+
+    );
+
+    if (!filtered.length) {
+
+      list.innerHTML = '<div class="panel empty">No requests match these filters.</div>';
+
+      return;
+
+    }
+
+    list.innerHTML = filtered.map(item => `
+
+      <article class="request" data-id="${escapeHTML(item.id)}">
+
+        <div class="request-top">
+
+          <div>
+
+            <h2>${escapeHTML(item.subject)}</h2>
+
+            <div class="meta">
+
+              Category: ${escapeHTML(readable(item.category))}<br>
+
+              Client user ID: ${escapeHTML(item.user_id)}<br>
+
+              Submitted: ${escapeHTML(formatDate(item.created_at))}<br>
+
+              Last updated: ${escapeHTML(formatDate(item.updated_at))}
+
+            </div>
+
+          </div>
+
+          <span class="pill">${escapeHTML(readable(item.status))}</span>
+
+        </div>
+
+        <div class="message">${escapeHTML(item.message)}</div>
+
+        <div class="reply">
+
+          <label for="reply-${escapeHTML(item.id)}">Administrator reply</label>
+
+          <textarea id="reply-${escapeHTML(item.id)}"
+
+            maxlength="5000"
+
+            placeholder="Write your response to the client…">${escapeHTML(item.admin_reply || "")}</textarea>
+
+          <label for="status-${escapeHTML(item.id)}">Request status</label>
+
+          <select id="status-${escapeHTML(item.id)}">
+
+            <option value="open" ${item.status === "open" ? "selected" : ""}>Open</option>
+
+            <option value="in_progress" ${item.status === "in_progress" ? "selected" : ""}>In progress</option>
+
+            <option value="resolved" ${item.status === "resolved" ? "selected" : ""}>Resolved</option>
+
+            <option value="closed" ${item.status === "closed" ? "selected" : ""}>Closed</option>
+
+          </select>
+
+          <div class="reply-actions">
+
+            <button class="action save-btn" type="button" data-id="${escapeHTML(item.id)}">
+
+              Save reply and status
+
+            </button>
+
+            <button class="action secondary clear-reply-btn" type="button" data-id="${escapeHTML(item.id)}">
+
+              Clear reply box
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    `).join("");
+
+    list.querySelectorAll(".save-btn").forEach(button => {
+
+      button.addEventListener("click", () => saveRequest(button.dataset.id, button));
+
+    });
+
+    list.querySelectorAll(".clear-reply-btn").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const field = document.getElementById("reply-" + button.dataset.id);
+
+        if (field) field.value = "";
+
+      });
+
+    });
+
+  }
+
+  async function saveRequest(id, button) {
+
+    const replyField = document.getElementById("reply-" + id);
+
+    const statusField = document.getElementById("status-" + id);
+
+    if (!replyField || !statusField) return;
+
+    const reply = replyField.value.trim();
+
+    const status = statusField.value;
+
+    if (reply.length > 5000) {
+
+      showNotice("The reply must be 5,000 characters or fewer.", "bad");
+
+      return;
+
+    }
+
+    if (!confirm("Save the administrator reply and status for this request?")) return;
+
+    button.disabled = true;
+
+    button.textContent = "Saving…";
+
+    clearNotice();
+
+    try {
+
+      const { data, error } = await db
+
+        .from("support_messages")
+
+        .update({
+
+          admin_reply: reply || null,
+
+          status: status,
+
+          updated_at: new Date().toISOString()
+
+        })
+
+        .eq("id", id)
+
+        .select("id");
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+
+        throw new Error("No row was updated. Check administrator permissions and database policies.");
+
+      }
+
+      showNotice("Reply and status saved successfully. No email was sent.", "good");
+
+      await loadRequests();
+
+    } catch (error) {
+
+      showNotice("Could not save this request: " + (error.message || "Unknown error"), "bad");
+
+      button.disabled = false;
+
+      button.textContent = "Save reply and status";
+
+    }
+
+  }
+
+  document.getElementById("refreshBtn").addEventListener("click", loadRequests);
+
+  document.getElementById("statusFilter").addEventListener("change", renderRequests);
+
+  document.getElementById("categoryFilter").addEventListener("change", renderRequests);
+
+  document.getElementById("signOutBtn").addEventListener("click", async () => {
+
+    const { error } = await db.auth.signOut();
+
+    if (error) {
+
+      showNotice("Sign out failed: " + error.message, "bad");
+
+      return;
+
+    }
+
+    window.location.replace("login.html");
+
+  });
+
+  db.auth.onAuthStateChange((event, session) => {
+
+    if (event === "SIGNED_OUT" || !session) {
+
+      window.location.replace("login.html");
+
+    }
+
+  });
+
+  (async () => {
+
+    try {
+
+      const allowed = await checkAdmin();
+
+      if (allowed) await loadRequests();
+
+    } catch (error) {
+
+      showNotice("Could not verify administrator access: " + (error.message || "Unknown error"), "bad");
+
+      list.innerHTML = "";
+
+    }
+
+  })();
+
+})();
+
+</script>
+
+</body>
+
+</html>
