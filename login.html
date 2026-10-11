@@ -1,419 +1,444 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Sign In | GlobalBridgeFunding</title>
 
-  <!-- Central GlobalBridgeFunding language system -->
   <script src="language.js"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
+
       font-family: Arial, Helvetica, sans-serif;
+
       background: #f5f8fc;
+
       color: #172033;
+
       min-height: 100vh;
+
     }
 
     header {
+
       background: #071a35;
+
       padding: 18px 6%;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
       gap: 15px;
+
     }
 
-    .logo {
-      color: white;
-      font-size: 21px;
-      font-weight: 800;
-    }
+    .logo { color: white; font-size: 21px; font-weight: 800; }
 
-    .logo span {
-      color: #36c2ff;
-    }
+    .logo span { color: #36c2ff; }
 
     .header-right {
+
       display: flex;
+
       align-items: center;
+
       gap: 15px;
+
     }
 
-    .back {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-    }
+    .back { color: white; text-decoration: none; font-size: 14px; }
 
     .language-box select {
+
       background: white;
+
       color: #071a35;
+
       border: none;
+
       border-radius: 7px;
+
       padding: 8px 10px;
+
       font-size: 13px;
+
       cursor: pointer;
+
     }
 
     .container {
+
       max-width: 500px;
+
       margin: 55px auto;
+
       padding: 0 20px;
+
     }
 
     .card {
+
       background: white;
+
       padding: 36px;
+
       border-radius: 16px;
+
       box-shadow: 0 10px 35px rgba(20, 40, 70, .10);
+
     }
 
-    h1 {
-      color: #071a35;
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+    h1 { color: #071a35; font-size: 30px; margin-bottom: 8px; }
 
     .intro {
+
       color: #667085;
+
       font-size: 15px;
+
       margin-bottom: 28px;
+
       line-height: 1.5;
+
     }
 
-    .field {
-      margin-bottom: 20px;
-    }
+    .field { margin-bottom: 20px; }
 
     label {
+
       display: block;
+
       font-size: 14px;
+
       font-weight: 700;
+
       margin-bottom: 7px;
+
       color: #24344d;
+
     }
 
     input {
+
       width: 100%;
+
       padding: 14px;
+
       border: 1px solid #d6dee9;
+
       border-radius: 8px;
+
       font-size: 15px;
+
       outline: none;
+
     }
 
-    input:focus {
-      border-color: #36c2ff;
-    }
+    input:focus { border-color: #36c2ff; }
 
     .forgot {
+
       text-align: right;
+
       margin-top: -10px;
+
       margin-bottom: 24px;
+
     }
 
-    .forgot a {
+    .forgot a, .create a {
+
       color: #087ea4;
+
       text-decoration: none;
-      font-size: 13px;
+
     }
+
+    .forgot a { font-size: 13px; }
 
     button {
+
       width: 100%;
+
       border: none;
+
       background: #36c2ff;
+
       color: #071a35;
+
       padding: 15px;
+
       border-radius: 8px;
+
       font-size: 16px;
+
       font-weight: 800;
+
       cursor: pointer;
+
     }
 
-    button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
+    button:disabled { opacity: .7; cursor: not-allowed; }
 
     .divider {
+
       display: flex;
+
       align-items: center;
+
       gap: 12px;
+
       margin: 25px 0;
+
       color: #98a2b3;
+
       font-size: 13px;
+
     }
 
-    .divider::before,
-    .divider::after {
+    .divider::before, .divider::after {
+
       content: "";
+
       height: 1px;
+
       background: #e1e7ef;
+
       flex: 1;
+
     }
 
-    .create {
-      text-align: center;
-      color: #667085;
-      font-size: 14px;
-    }
+    .create { text-align: center; color: #667085; font-size: 14px; }
 
-    .create a {
-      color: #087ea4;
-      font-weight: 700;
-      text-decoration: none;
-    }
+    .create a { font-weight: 700; }
 
     .notice {
+
       background: #eef8fc;
+
       border-left: 4px solid #36c2ff;
+
       padding: 12px;
+
       margin-bottom: 23px;
+
       font-size: 13px;
+
       color: #536477;
+
       line-height: 1.5;
+
     }
 
     .message {
+
       display: none;
+
       margin-top: 18px;
+
       padding: 12px;
+
       border-radius: 7px;
+
       font-size: 13px;
+
       line-height: 1.5;
+
     }
 
     .message.error {
+
       display: block;
+
       background: #fff1f1;
+
       color: #a42626;
+
       border-left: 4px solid #d64545;
+
     }
 
     footer {
+
       text-align: center;
+
       padding: 25px;
+
       color: #7b8797;
+
       font-size: 12px;
+
     }
 
-    /* Persian / RTL */
-    html[dir="rtl"] body {
-      direction: rtl;
-    }
+    html[dir="rtl"] body { direction: rtl; }
 
-    html[dir="rtl"] .forgot {
-      text-align: left;
-    }
+    html[dir="rtl"] .forgot { text-align: left; }
 
     html[dir="rtl"] .notice {
+
       border-left: none;
+
       border-right: 4px solid #36c2ff;
+
     }
 
     html[dir="rtl"] .message.error {
+
       border-left: none;
+
       border-right: 4px solid #d64545;
+
     }
 
     @media (max-width: 600px) {
 
-      header {
-        padding: 15px 5%;
-      }
+      header { padding: 15px 5%; }
 
-      .header-right {
-        gap: 9px;
-      }
+      .header-right { gap: 9px; }
 
-      .back {
-        font-size: 12px;
-      }
+      .back { font-size: 12px; }
 
-      .language-box select {
-        padding: 7px 6px;
-        font-size: 11px;
-      }
+      .language-box select { padding: 7px 6px; font-size: 11px; }
 
-      .logo {
-        font-size: 17px;
-      }
+      .logo { font-size: 17px; }
+
     }
 
     @media (max-width: 500px) {
 
-      .card {
-        padding: 27px 21px;
-      }
+      .card { padding: 27px 21px; }
 
-      h1 {
-        font-size: 27px;
-      }
+      h1 { font-size: 27px; }
+
     }
+
   </style>
+
 </head>
 
 <body>
 
   <header>
 
-    <div class="logo">
-      Global<span>Bridge</span>Funding
-    </div>
+    <div class="logo">Global<span>Bridge</span>Funding</div>
 
     <div class="header-right">
 
       <div class="language-box">
-        <select
-          id="languageSelector"
-          data-language-selector="true"
-          aria-label="Language"
-        >
+
+        <select id="languageSelector"
+
+                data-language-selector="true"
+
+                aria-label="Language">
+
           <option value="en">English</option>
+
           <option value="pt">Português</option>
+
           <option value="vi">Tiếng Việt</option>
+
           <option value="fa">فارسی</option>
+
           <option value="id">Bahasa Indonesia</option>
+
           <option value="fr">Français</option>
+
           <option value="fi">Suomi</option>
+
           <option value="es">Español</option>
+
         </select>
+
       </div>
 
-      <a
-        href="index.html"
-        class="back"
-        data-key="backHome"
-      >
-        ← Back to Home
-      </a>
+      <a href="index.html" class="back" data-key="backHome">← Back to Home</a>
 
     </div>
 
   </header>
 
-
   <main class="container">
 
     <div class="card">
 
-      <h1 data-key="title">
-        Welcome back
-      </h1>
+      <h1 data-key="title">Welcome back</h1>
 
-      <p
-        class="intro"
-        data-key="intro"
-      >
+      <p class="intro" data-key="intro">
+
         Sign in to access your GlobalBridgeFunding account.
+
       </p>
 
-      <div
-        class="notice"
-        data-key="notice"
-      >
-        Use the email address associated with your account.
-      </div>
+      <div class="notice" data-key="notice">
 
+        Use the email address associated with your account.
+
+      </div>
 
       <form id="loginForm">
 
         <div class="field">
 
-          <label
-            for="email"
-            data-key="emailLabel"
-          >
-            Email address
-          </label>
+          <label for="email" data-key="emailLabel">Email address</label>
 
-          <input
-            type="email"
-            id="email"
-            placeholder="you@example.com"
-            data-placeholder="emailPlaceholder"
-            autocomplete="email"
-            required
-          >
+          <input type="email" id="email"
+
+                 placeholder="you@example.com"
+
+                 data-placeholder="emailPlaceholder"
+
+                 autocomplete="email" required>
 
         </div>
-
 
         <div class="field">
 
-          <label
-            for="password"
-            data-key="passwordLabel"
-          >
-            Password
-          </label>
+          <label for="password" data-key="passwordLabel">Password</label>
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            data-placeholder="passwordPlaceholder"
-            autocomplete="current-password"
-            required
-          >
+          <input type="password" id="password"
+
+                 placeholder="Enter your password"
+
+                 data-placeholder="passwordPlaceholder"
+
+                 autocomplete="current-password" required>
 
         </div>
-
 
         <div class="forgot">
 
-          <a
-            href="#"
-            data-key="forgot"
-          >
-            Forgot your password?
-          </a>
+          <a href="#" id="forgotLink" data-key="forgot">Forgot your password?</a>
 
         </div>
 
+        <button type="submit" id="loginButton" data-key="signIn">Sign In</button>
 
-        <button
-          type="submit"
-          id="loginButton"
-          data-key="signIn"
-        >
-          Sign In
-        </button>
-
-        <div
-          id="message"
-          class="message"
-        ></div>
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
 
       </form>
 
-
-      <div class="divider">
-        <span data-key="or">OR</span>
-      </div>
-
+      <div class="divider"><span data-key="or">OR</span></div>
 
       <div class="create">
 
-        <span data-key="noAccount">
-          Don't have an account?
-        </span>
+        <span data-key="noAccount">Don't have an account?</span>
 
-        <a
-          href="register.html"
-          data-key="createAccount"
-        >
-          Create an account
-        </a>
+        <a href="register.html" data-key="createAccount">Create an account</a>
 
       </div>
 
@@ -421,596 +446,562 @@
 
   </main>
 
-
   <footer data-key="footer">
+
     © 2026 GlobalBridgeFunding. All rights reserved.
+
   </footer>
 
-
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
   <script>
-
-    /*
-      ==========================================
-      GLOBALBRIDGEFUNDING LOGIN LANGUAGE SYSTEM
-      ==========================================
-    */
 
     const loginTranslations = {
 
       en: {
-        backHome: "← Back to Home",
-        title: "Welcome back",
-        intro: "Sign in to access your GlobalBridgeFunding account.",
-        notice: "Use the email address associated with your account.",
-        emailLabel: "Email address",
-        emailPlaceholder: "you@example.com",
-        passwordLabel: "Password",
-        passwordPlaceholder: "Enter your password",
-        forgot: "Forgot your password?",
-        signIn: "Sign In",
-        signingIn: "Signing in...",
-        or: "OR",
-        noAccount: "Don't have an account?",
-        createAccount: "Create an account",
-        footer: "© 2026 GlobalBridgeFunding. All rights reserved.",
-        loginError: "Unable to sign in. Please try again.",
-        generalError: "Something went wrong. Please try again."
+
+        backHome:"← Back to Home", title:"Welcome back",
+
+        intro:"Sign in to access your GlobalBridgeFunding account.",
+
+        notice:"Use the email address associated with your account.",
+
+        emailLabel:"Email address", emailPlaceholder:"you@example.com",
+
+        passwordLabel:"Password", passwordPlaceholder:"Enter your password",
+
+        forgot:"Forgot your password?", signIn:"Sign In",
+
+        signingIn:"Signing in...", or:"OR",
+
+        noAccount:"Don't have an account?", createAccount:"Create an account",
+
+        footer:"© 2026 GlobalBridgeFunding. All rights reserved.",
+
+        loginError:"Unable to sign in. Please try again.",
+
+        generalError:"Something went wrong. Please try again.",
+
+        adminCheckError:"Your account was signed in, but administrator access could not be verified. Please try again.",
+
+        resetSent:"If your account exists, password recovery instructions will be sent to your email.",
+
+        resetError:"Unable to start password recovery. Please try again.",
+
+        enterEmail:"Enter your email address first, then select Forgot your password?"
+
       },
 
       pt: {
-        backHome: "← Voltar à página inicial",
-        title: "Bem-vindo de volta",
-        intro: "Inicie sessão para aceder à sua conta GlobalBridgeFunding.",
-        notice: "Utilize o endereço de email associado à sua conta.",
-        emailLabel: "Endereço de email",
-        emailPlaceholder: "voce@exemplo.com",
-        passwordLabel: "Palavra-passe",
-        passwordPlaceholder: "Introduza a sua palavra-passe",
-        forgot: "Esqueceu-se da palavra-passe?",
-        signIn: "Iniciar sessão",
-        signingIn: "A iniciar sessão...",
-        or: "OU",
-        noAccount: "Ainda não tem uma conta?",
-        createAccount: "Criar uma conta",
-        footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
-        loginError: "Não foi possível iniciar sessão. Tente novamente.",
-        generalError: "Ocorreu um erro. Tente novamente."
+
+        backHome:"← Voltar à página inicial", title:"Bem-vindo de volta",
+
+        intro:"Inicie sessão para aceder à sua conta GlobalBridgeFunding.",
+
+        notice:"Utilize o endereço de email associado à sua conta.",
+
+        emailLabel:"Endereço de email", emailPlaceholder:"voce@exemplo.com",
+
+        passwordLabel:"Palavra-passe", passwordPlaceholder:"Introduza a sua palavra-passe",
+
+        forgot:"Esqueceu-se da palavra-passe?", signIn:"Iniciar sessão",
+
+        signingIn:"A iniciar sessão...", or:"OU",
+
+        noAccount:"Ainda não tem uma conta?", createAccount:"Criar uma conta",
+
+        footer:"© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
+
+        loginError:"Não foi possível iniciar sessão. Tente novamente.",
+
+        generalError:"Ocorreu um erro. Tente novamente.",
+
+        adminCheckError:"Não foi possível verificar o acesso de administrador. Tente novamente.",
+
+        resetSent:"Se a conta existir, serão enviadas instruções para recuperar a palavra-passe.",
+
+        resetError:"Não foi possível iniciar a recuperação da palavra-passe.",
+
+        enterEmail:"Introduza primeiro o seu endereço de email."
+
       },
 
       vi: {
-        backHome: "← Về trang chủ",
-        title: "Chào mừng bạn trở lại",
-        intro: "Đăng nhập để truy cập tài khoản GlobalBridgeFunding của bạn.",
-        notice: "Sử dụng địa chỉ email liên kết với tài khoản của bạn.",
-        emailLabel: "Địa chỉ email",
-        emailPlaceholder: "ban@example.com",
-        passwordLabel: "Mật khẩu",
-        passwordPlaceholder: "Nhập mật khẩu của bạn",
-        forgot: "Quên mật khẩu?",
-        signIn: "Đăng nhập",
-        signingIn: "Đang đăng nhập...",
-        or: "HOẶC",
-        noAccount: "Bạn chưa có tài khoản?",
-        createAccount: "Tạo tài khoản",
-        footer: "© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
-        loginError: "Không thể đăng nhập. Vui lòng thử lại.",
-        generalError: "Đã xảy ra lỗi. Vui lòng thử lại."
+
+        backHome:"← Về trang chủ", title:"Chào mừng bạn trở lại",
+
+        intro:"Đăng nhập để truy cập tài khoản GlobalBridgeFunding của bạn.",
+
+        notice:"Sử dụng địa chỉ email liên kết với tài khoản của bạn.",
+
+        emailLabel:"Địa chỉ email", emailPlaceholder:"ban@example.com",
+
+        passwordLabel:"Mật khẩu", passwordPlaceholder:"Nhập mật khẩu của bạn",
+
+        forgot:"Quên mật khẩu?", signIn:"Đăng nhập",
+
+        signingIn:"Đang đăng nhập...", or:"HOẶC",
+
+        noAccount:"Bạn chưa có tài khoản?", createAccount:"Tạo tài khoản",
+
+        footer:"© 2026 GlobalBridgeFunding. Bảo lưu mọi quyền.",
+
+        loginError:"Không thể đăng nhập. Vui lòng thử lại.",
+
+        generalError:"Đã xảy ra lỗi. Vui lòng thử lại.",
+
+        adminCheckError:"Không thể xác minh quyền quản trị. Vui lòng thử lại.",
+
+        resetSent:"Nếu tài khoản tồn tại, hướng dẫn khôi phục mật khẩu sẽ được gửi qua email.",
+
+        resetError:"Không thể bắt đầu khôi phục mật khẩu.",
+
+        enterEmail:"Vui lòng nhập email trước."
+
       },
 
       fa: {
-        backHome: "← بازگشت به صفحه اصلی",
-        title: "خوش آمدید",
-        intro: "برای دسترسی به حساب GlobalBridgeFunding خود وارد شوید.",
-        notice: "از آدرس ایمیل مرتبط با حساب خود استفاده کنید.",
-        emailLabel: "آدرس ایمیل",
-        emailPlaceholder: "you@example.com",
-        passwordLabel: "رمز عبور",
-        passwordPlaceholder: "رمز عبور خود را وارد کنید",
-        forgot: "رمز عبور خود را فراموش کرده‌اید؟",
-        signIn: "ورود",
-        signingIn: "در حال ورود...",
-        or: "یا",
-        noAccount: "حساب کاربری ندارید؟",
-        createAccount: "ایجاد حساب",
-        footer: "© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
-        loginError: "ورود انجام نشد. لطفاً دوباره تلاش کنید.",
-        generalError: "خطایی رخ داد. لطفاً دوباره تلاش کنید."
+
+        backHome:"← بازگشت به صفحه اصلی", title:"خوش آمدید",
+
+        intro:"برای دسترسی به حساب GlobalBridgeFunding خود وارد شوید.",
+
+        notice:"از آدرس ایمیل مرتبط با حساب خود استفاده کنید.",
+
+        emailLabel:"آدرس ایمیل", emailPlaceholder:"you@example.com",
+
+        passwordLabel:"رمز عبور", passwordPlaceholder:"رمز عبور خود را وارد کنید",
+
+        forgot:"رمز عبور خود را فراموش کرده‌اید؟", signIn:"ورود",
+
+        signingIn:"در حال ورود...", or:"یا",
+
+        noAccount:"حساب کاربری ندارید؟", createAccount:"ایجاد حساب",
+
+        footer:"© 2026 GlobalBridgeFunding. تمامی حقوق محفوظ است.",
+
+        loginError:"ورود انجام نشد. لطفاً دوباره تلاش کنید.",
+
+        generalError:"خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+
+        adminCheckError:"تأیید دسترسی مدیر انجام نشد. دوباره تلاش کنید.",
+
+        resetSent:"اگر حساب وجود داشته باشد، دستورالعمل بازیابی رمز عبور ارسال می‌شود.",
+
+        resetError:"بازیابی رمز عبور آغاز نشد.",
+
+        enterEmail:"ابتدا آدرس ایمیل خود را وارد کنید."
+
       },
 
       id: {
-        backHome: "← Kembali ke Beranda",
-        title: "Selamat datang kembali",
-        intro: "Masuk untuk mengakses akun GlobalBridgeFunding Anda.",
-        notice: "Gunakan alamat email yang terkait dengan akun Anda.",
-        emailLabel: "Alamat email",
-        emailPlaceholder: "anda@example.com",
-        passwordLabel: "Kata sandi",
-        passwordPlaceholder: "Masukkan kata sandi Anda",
-        forgot: "Lupa kata sandi?",
-        signIn: "Masuk",
-        signingIn: "Sedang masuk...",
-        or: "ATAU",
-        noAccount: "Belum memiliki akun?",
-        createAccount: "Buat akun",
-        footer: "© 2026 GlobalBridgeFunding. Semua hak dilindungi.",
-        loginError: "Tidak dapat masuk. Silakan coba lagi.",
-        generalError: "Terjadi kesalahan. Silakan coba lagi."
+
+        backHome:"← Kembali ke Beranda", title:"Selamat datang kembali",
+
+        intro:"Masuk untuk mengakses akun GlobalBridgeFunding Anda.",
+
+        notice:"Gunakan alamat email yang terkait dengan akun Anda.",
+
+        emailLabel:"Alamat email", emailPlaceholder:"anda@example.com",
+
+        passwordLabel:"Kata sandi", passwordPlaceholder:"Masukkan kata sandi Anda",
+
+        forgot:"Lupa kata sandi?", signIn:"Masuk",
+
+        signingIn:"Sedang masuk...", or:"ATAU",
+
+        noAccount:"Belum memiliki akun?", createAccount:"Buat akun",
+
+        footer:"© 2026 GlobalBridgeFunding. Semua hak dilindungi.",
+
+        loginError:"Tidak dapat masuk. Silakan coba lagi.",
+
+        generalError:"Terjadi kesalahan. Silakan coba lagi.",
+
+        adminCheckError:"Akses administrator tidak dapat diverifikasi.",
+
+        resetSent:"Jika akun tersedia, instruksi pemulihan kata sandi akan dikirim melalui email.",
+
+        resetError:"Tidak dapat memulai pemulihan kata sandi.",
+
+        enterEmail:"Masukkan alamat email Anda terlebih dahulu."
+
       },
 
       fr: {
-        backHome: "← Retour à l'accueil",
-        title: "Bon retour",
-        intro: "Connectez-vous pour accéder à votre compte GlobalBridgeFunding.",
-        notice: "Utilisez l'adresse e-mail associée à votre compte.",
-        emailLabel: "Adresse e-mail",
-        emailPlaceholder: "vous@exemple.com",
-        passwordLabel: "Mot de passe",
-        passwordPlaceholder: "Entrez votre mot de passe",
-        forgot: "Mot de passe oublié ?",
-        signIn: "Se connecter",
-        signingIn: "Connexion...",
-        or: "OU",
-        noAccount: "Vous n'avez pas de compte ?",
-        createAccount: "Créer un compte",
-        footer: "© 2026 GlobalBridgeFunding. Tous droits réservés.",
-        loginError: "Impossible de se connecter. Veuillez réessayer.",
-        generalError: "Une erreur s'est produite. Veuillez réessayer."
+
+        backHome:"← Retour à l'accueil", title:"Bon retour",
+
+        intro:"Connectez-vous pour accéder à votre compte GlobalBridgeFunding.",
+
+        notice:"Utilisez l'adresse e-mail associée à votre compte.",
+
+        emailLabel:"Adresse e-mail", emailPlaceholder:"vous@exemple.com",
+
+        passwordLabel:"Mot de passe", passwordPlaceholder:"Entrez votre mot de passe",
+
+        forgot:"Mot de passe oublié ?", signIn:"Se connecter",
+
+        signingIn:"Connexion...", or:"OU",
+
+        noAccount:"Vous n'avez pas de compte ?", createAccount:"Créer un compte",
+
+        footer:"© 2026 GlobalBridgeFunding. Tous droits réservés.",
+
+        loginError:"Impossible de se connecter. Veuillez réessayer.",
+
+        generalError:"Une erreur s'est produite. Veuillez réessayer.",
+
+        adminCheckError:"Impossible de vérifier les droits administrateur.",
+
+        resetSent:"Si le compte existe, les instructions seront envoyées par e-mail.",
+
+        resetError:"Impossible de démarrer la récupération du mot de passe.",
+
+        enterEmail:"Saisissez d'abord votre adresse e-mail."
+
       },
 
       fi: {
-        backHome: "← Takaisin etusivulle",
-        title: "Tervetuloa takaisin",
-        intro: "Kirjaudu sisään päästäksesi GlobalBridgeFunding-tilillesi.",
-        notice: "Käytä tiliisi liitettyä sähköpostiosoitetta.",
-        emailLabel: "Sähköpostiosoite",
-        emailPlaceholder: "sinä@example.com",
-        passwordLabel: "Salasana",
-        passwordPlaceholder: "Anna salasanasi",
-        forgot: "Unohditko salasanasi?",
-        signIn: "Kirjaudu sisään",
-        signingIn: "Kirjaudutaan...",
-        or: "TAI",
-        noAccount: "Eikö sinulla ole tiliä?",
-        createAccount: "Luo tili",
-        footer: "© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
-        loginError: "Kirjautuminen ei onnistunut. Yritä uudelleen.",
-        generalError: "Jotain meni pieleen. Yritä uudelleen."
+
+        backHome:"← Takaisin etusivulle", title:"Tervetuloa takaisin",
+
+        intro:"Kirjaudu sisään päästäksesi GlobalBridgeFunding-tilillesi.",
+
+        notice:"Käytä tiliisi liitettyä sähköpostiosoitetta.",
+
+        emailLabel:"Sähköpostiosoite", emailPlaceholder:"sinä@example.com",
+
+        passwordLabel:"Salasana", passwordPlaceholder:"Anna salasanasi",
+
+        forgot:"Unohditko salasanasi?", signIn:"Kirjaudu sisään",
+
+        signingIn:"Kirjaudutaan...", or:"TAI",
+
+        noAccount:"Eikö sinulla ole tiliä?", createAccount:"Luo tili",
+
+        footer:"© 2026 GlobalBridgeFunding. Kaikki oikeudet pidätetään.",
+
+        loginError:"Kirjautuminen ei onnistunut. Yritä uudelleen.",
+
+        generalError:"Jotain meni pieleen. Yritä uudelleen.",
+
+        adminCheckError:"Järjestelmänvalvojan oikeuksia ei voitu vahvistaa.",
+
+        resetSent:"Jos tili on olemassa, palautusohjeet lähetetään sähköpostitse.",
+
+        resetError:"Salasanan palautusta ei voitu aloittaa.",
+
+        enterEmail:"Anna ensin sähköpostiosoitteesi."
+
       },
 
       es: {
-        backHome: "← Volver al inicio",
-        title: "Bienvenido de nuevo",
-        intro: "Inicia sesión para acceder a tu cuenta de GlobalBridgeFunding.",
-        notice: "Utiliza la dirección de correo electrónico asociada a tu cuenta.",
-        emailLabel: "Dirección de correo electrónico",
-        emailPlaceholder: "tu@ejemplo.com",
-        passwordLabel: "Contraseña",
-        passwordPlaceholder: "Introduce tu contraseña",
-        forgot: "¿Olvidaste tu contraseña?",
-        signIn: "Iniciar sesión",
-        signingIn: "Iniciando sesión...",
-        or: "O",
-        noAccount: "¿No tienes una cuenta?",
-        createAccount: "Crear una cuenta",
-        footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
-        loginError: "No se pudo iniciar sesión. Inténtalo de nuevo.",
-        generalError: "Algo salió mal. Inténtalo de nuevo."
+
+        backHome:"← Volver al inicio", title:"Bienvenido de nuevo",
+
+        intro:"Inicia sesión para acceder a tu cuenta de GlobalBridgeFunding.",
+
+        notice:"Utiliza la dirección de correo electrónico asociada a tu cuenta.",
+
+        emailLabel:"Dirección de correo electrónico", emailPlaceholder:"tu@ejemplo.com",
+
+        passwordLabel:"Contraseña", passwordPlaceholder:"Introduce tu contraseña",
+
+        forgot:"¿Olvidaste tu contraseña?", signIn:"Iniciar sesión",
+
+        signingIn:"Iniciando sesión...", or:"O",
+
+        noAccount:"¿No tienes una cuenta?", createAccount:"Crear una cuenta",
+
+        footer:"© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
+
+        loginError:"No se pudo iniciar sesión. Inténtalo de nuevo.",
+
+        generalError:"Algo salió mal. Inténtalo de nuevo.",
+
+        adminCheckError:"No se pudieron verificar los permisos de administrador.",
+
+        resetSent:"Si la cuenta existe, recibirás instrucciones por correo electrónico.",
+
+        resetError:"No se pudo iniciar la recuperación de contraseña.",
+
+        enterEmail:"Introduce primero tu dirección de correo electrónico."
+
       }
 
     };
 
-
-    /*
-      ==========================================
-      GET SAVED LANGUAGE
-      ==========================================
-    */
-
     function getSavedLanguage() {
 
-      if (
-        window.GlobalBridgeLanguage &&
-        typeof window.GlobalBridgeLanguage.getLanguage === "function"
-      ) {
+      if (window.GlobalBridgeLanguage &&
+
+          typeof window.GlobalBridgeLanguage.getLanguage === "function") {
 
         return window.GlobalBridgeLanguage.getLanguage();
 
       }
 
-      const saved =
-        localStorage.getItem("globalbridge_language");
+      return localStorage.getItem("globalbridge_language") ||
 
-      if (saved) {
-        return saved;
-      }
+             localStorage.getItem("selectedLanguage") || "en";
 
-      const oldSaved =
-        localStorage.getItem("selectedLanguage");
-
-      if (oldSaved) {
-        return oldSaved;
-      }
-
-      return "en";
     }
-
-
-    /*
-      ==========================================
-      APPLY LOGIN TRANSLATION
-      ==========================================
-    */
 
     function applyLoginLanguage(language) {
 
-      if (!loginTranslations[language]) {
-        language = "en";
-      }
+      if (!loginTranslations[language]) language = "en";
 
+      if (window.GlobalBridgeLanguage &&
 
-      /*
-        Save centrally.
-      */
-
-      if (
-        window.GlobalBridgeLanguage &&
-        typeof window.GlobalBridgeLanguage.setLanguage === "function"
-      ) {
+          typeof window.GlobalBridgeLanguage.setLanguage === "function") {
 
         window.GlobalBridgeLanguage.setLanguage(language);
 
       } else {
 
-        localStorage.setItem(
-          "globalbridge_language",
-          language
-        );
+        localStorage.setItem("globalbridge_language", language);
 
-        localStorage.setItem(
-          "selectedLanguage",
-          language
-        );
+        localStorage.setItem("selectedLanguage", language);
 
       }
 
+      document.documentElement.lang = language;
 
-      document.documentElement.lang =
-        language;
+      document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
 
+      const translations = loginTranslations[language];
 
-      if (language === "fa") {
+      document.querySelectorAll("[data-key]").forEach(element => {
 
-        document.documentElement.dir =
-          "rtl";
+        const key = element.getAttribute("data-key");
 
-        document.body.classList.add(
-          "rtl-language"
-        );
+        if (translations[key] !== undefined) {
 
-      } else {
+          element.textContent = translations[key];
 
-        document.documentElement.dir =
-          "ltr";
+        }
 
-        document.body.classList.remove(
-          "rtl-language"
-        );
+      });
 
-      }
+      document.querySelectorAll("[data-placeholder]").forEach(element => {
 
+        const key = element.getAttribute("data-placeholder");
 
-      const translations =
-        loginTranslations[language];
+        if (translations[key] !== undefined) {
 
+          element.placeholder = translations[key];
 
-      /*
-        Translate normal text.
-      */
+        }
 
-      document
-        .querySelectorAll("[data-key]")
-        .forEach(element => {
+      });
 
-          const key =
-            element.getAttribute("data-key");
+      const selector = document.getElementById("languageSelector");
 
-          if (
-            translations[key] !== undefined
-          ) {
-
-            element.textContent =
-              translations[key];
-
-          }
-
-        });
-
-
-      /*
-        Translate placeholders.
-      */
-
-      document
-        .querySelectorAll("[data-placeholder]")
-        .forEach(element => {
-
-          const key =
-            element.getAttribute(
-              "data-placeholder"
-            );
-
-          if (
-            translations[key] !== undefined
-          ) {
-
-            element.placeholder =
-              translations[key];
-
-          }
-
-        });
-
-
-      /*
-        Keep the selector synchronized.
-      */
-
-      const selector =
-        document.getElementById(
-          "languageSelector"
-        );
-
-      if (selector) {
-        selector.value = language;
-      }
+      if (selector) selector.value = language;
 
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
 
-    /*
-      ==========================================
-      LANGUAGE SELECTOR
-      ==========================================
-    */
+      const selector = document.getElementById("languageSelector");
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      function() {
+      applyLoginLanguage(getSavedLanguage());
 
-        const selector =
-          document.getElementById(
-            "languageSelector"
-          );
+      if (selector) {
 
+        selector.addEventListener("change", function () {
 
-        const savedLanguage =
-          getSavedLanguage();
+          applyLoginLanguage(this.value);
 
-
-        /*
-          Apply the language that was already
-          selected on the previous page.
-        */
-
-        applyLoginLanguage(
-          savedLanguage
-        );
-
-
-        if (selector) {
-
-          selector.addEventListener(
-            "change",
-            function() {
-
-              applyLoginLanguage(
-                this.value
-              );
-
-            }
-          );
-
-        }
+        });
 
       }
+
+    });
+
+    const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+    const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+    const supabaseClient = window.supabase.createClient(
+
+      SUPABASE_URL,
+
+      SUPABASE_KEY
+
     );
 
+    const loginForm = document.getElementById("loginForm");
 
-    /*
-      ==========================================
-      SUPABASE
-      ==========================================
-    */
+    const loginButton = document.getElementById("loginButton");
 
-    const SUPABASE_URL =
-      "https://siykgexfdsmkiqwyxker.supabase.co";
+    const message = document.getElementById("message");
 
-    const SUPABASE_KEY =
-      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+    function showError(text) {
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
+      message.className = "message error";
 
+      message.textContent = text;
 
-    /*
-      ==========================================
-      LOGIN
-      ==========================================
-    */
+    }
 
-    const loginForm =
-      document.getElementById("loginForm");
+    loginForm.addEventListener("submit", async function (event) {
 
-    const loginButton =
-      document.getElementById("loginButton");
+      event.preventDefault();
 
-    const message =
-      document.getElementById("message");
+      message.className = "message";
 
+      message.textContent = "";
 
-    loginForm.addEventListener(
-      "submit",
-      async function(event) {
+      const email = document.getElementById("email").value.trim();
 
-        event.preventDefault();
+      const password = document.getElementById("password").value;
 
+      const translations = loginTranslations[getSavedLanguage()] || loginTranslations.en;
 
-        message.className =
-          "message";
+      loginButton.disabled = true;
 
-        message.textContent =
-          "";
+      loginButton.textContent = translations.signingIn;
 
+      try {
 
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
+        const result = await supabaseClient.auth.signInWithPassword({
 
+          email,
 
-        const password =
-          document
-            .getElementById("password")
-            .value;
+          password
 
+        });
 
-        loginButton.disabled =
-          true;
+        if (result.error || !result.data?.user) {
 
+          showError(result.error?.message || translations.loginError);
 
-        const currentLanguage =
-          getSavedLanguage();
+          loginButton.disabled = false;
 
+          loginButton.textContent = translations.signIn;
 
-        if (
-          loginTranslations[currentLanguage]
-        ) {
-
-          loginButton.textContent =
-            loginTranslations[
-              currentLanguage
-            ].signingIn;
-
-        } else {
-
-          loginButton.textContent =
-            "Signing in...";
+          return;
 
         }
 
+        const user = result.data.user;
 
-        try {
+        // Check the authenticated user's ID against the admin_users table.
 
-          const result =
-            await supabaseClient.auth.signInWithPassword({
+        const adminCheck = await supabaseClient
 
-              email: email,
+          .from("admin_users")
 
-              password: password
+          .select("user_id")
 
-            });
+          .eq("user_id", user.id)
 
+          .maybeSingle();
 
-          if (result.error) {
+        if (adminCheck.error) {
 
-            message.className =
-              "message error";
+          console.error("Admin verification failed:", adminCheck.error);
 
-            message.textContent =
-              result.error.message;
+          showError(translations.adminCheckError);
 
-            loginButton.disabled =
-              false;
+          loginButton.disabled = false;
 
-            loginButton.textContent =
-              loginTranslations[
-                getSavedLanguage()
-              ]?.signIn || "Sign In";
+          loginButton.textContent = translations.signIn;
 
-            return;
-
-          }
-
-
-          if (
-            result.data &&
-            result.data.user
-          ) {
-
-            /*
-              IMPORTANT:
-              Do NOT reset or change the
-              selected language during login.
-
-              The saved language remains in
-              localStorage and will be read by
-              dashboard.html.
-            */
-
-            window.location.replace(
-              "dashboard.html"
-            );
-
-            return;
-
-          }
-
-
-          message.className =
-            "message error";
-
-          message.textContent =
-            loginTranslations[
-              getSavedLanguage()
-            ]?.loginError ||
-            "Unable to sign in. Please try again.";
-
-
-          loginButton.disabled =
-            false;
-
-          loginButton.textContent =
-            loginTranslations[
-              getSavedLanguage()
-            ]?.signIn ||
-            "Sign In";
-
-
-        } catch (error) {
-
-          message.className =
-            "message error";
-
-          message.textContent =
-            loginTranslations[
-              getSavedLanguage()
-            ]?.generalError ||
-            "Something went wrong. Please try again.";
-
-
-          loginButton.disabled =
-            false;
-
-          loginButton.textContent =
-            loginTranslations[
-              getSavedLanguage()
-            ]?.signIn ||
-            "Sign In";
+          return;
 
         }
+
+        if (adminCheck.data) {
+
+          window.location.replace("admin.html");
+
+          return;
+
+        }
+
+        window.location.replace("dashboard.html");
+
+      } catch (error) {
+
+        console.error("Login error:", error);
+
+        showError(translations.generalError);
+
+        loginButton.disabled = false;
+
+        loginButton.textContent = translations.signIn;
 
       }
-    );
+
+    });
+
+    // Password recovery uses Supabase's configured recovery email flow.
+
+    document.getElementById("forgotLink").addEventListener("click", async function (event) {
+
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+
+      const translations = loginTranslations[getSavedLanguage()] || loginTranslations.en;
+
+      if (!email) {
+
+        showError(translations.enterEmail);
+
+        document.getElementById("email").focus();
+
+        return;
+
+      }
+
+      message.className = "message";
+
+      message.textContent = "";
+
+      try {
+
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+
+          redirectTo: window.location.origin + "/login.html"
+
+        });
+
+        if (error) {
+
+          console.error("Password recovery error:", error);
+
+          showError(translations.resetError);
+
+          return;
+
+        }
+
+        message.className = "message";
+
+        message.style.display = "block";
+
+        message.style.background = "#eef8fc";
+
+        message.style.color = "#24566b";
+
+        message.textContent = translations.resetSent;
+
+      } catch (error) {
+
+        console.error("Password recovery error:", error);
+
+        showError(translations.resetError);
+
+      }
+
+    });
 
   </script>
 
 </body>
+
 </html>
