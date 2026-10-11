@@ -1,7 +1,7 @@
 
 /* =========================================
    GLOBALBRIDGEFUNDING
-   Premium responsive design system
+   Premium responsive website styling
    ========================================= */
 
 :root {
@@ -56,7 +56,7 @@ textarea {
   font: inherit;
 }
 
-/* Navigation */
+/* NAVIGATION */
 
 .nav {
   min-height: 78px;
@@ -135,7 +135,7 @@ textarea {
   background: #fff;
 }
 
-/* Buttons */
+/* BUTTONS */
 
 .btn {
   display: inline-flex;
@@ -178,7 +178,7 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
-/* Hero */
+/* HOMEPAGE HERO WITH YOUR PHOTO */
 
 .hero {
   position: relative;
@@ -190,10 +190,16 @@ textarea:focus-visible {
   grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
   gap: 60px;
   align-items: center;
+  color: #fff;
   background:
-    radial-gradient(ellipse at 88% 12%, rgba(54, 194, 255, 0.2), transparent 32%),
-    radial-gradient(ellipse at 8% 90%, rgba(23, 105, 224, 0.08), transparent 35%),
-    linear-gradient(135deg, #fff 0%, #f1f7ff 55%, #eaf5ff 100%);
+    linear-gradient(
+      90deg,
+      rgba(4, 20, 43, 0.96) 0%,
+      rgba(4, 20, 43, 0.84) 36%,
+      rgba(4, 20, 43, 0.48) 68%,
+      rgba(4, 20, 43, 0.28) 100%
+    ),
+    url("/images/hero-business.jpeg") center 38% / cover no-repeat;
 }
 
 .hero::before {
@@ -204,11 +210,11 @@ textarea:focus-visible {
   height: 420px;
   right: -180px;
   bottom: -220px;
-  border: 1px solid rgba(23, 105, 224, 0.13);
+  border: 1px solid rgba(54, 194, 255, 0.22);
   border-radius: 50%;
   box-shadow:
-    0 0 0 35px rgba(23, 105, 224, 0.025),
-    0 0 0 75px rgba(23, 105, 224, 0.02);
+    0 0 0 35px rgba(54, 194, 255, 0.025),
+    0 0 0 75px rgba(54, 194, 255, 0.02);
   pointer-events: none;
 }
 
@@ -217,7 +223,7 @@ textarea:focus-visible {
   align-items: center;
   gap: 9px;
   margin-bottom: 20px;
-  color: var(--blue);
+  color: var(--ice);
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: 850;
@@ -235,7 +241,7 @@ textarea:focus-visible {
 .hero h1 {
   max-width: 790px;
   margin: 0 0 24px;
-  color: var(--navy);
+  color: #fff;
   font-size: clamp(43px, 5.7vw, 74px);
   line-height: 1.04;
   letter-spacing: -3.4px;
@@ -243,13 +249,13 @@ textarea:focus-visible {
 }
 
 .hero h1 em {
-  color: var(--blue);
+  color: var(--ice);
   font-style: normal;
 }
 
 .lead {
   max-width: 620px;
-  color: #526176;
+  color: #e1eaf5;
   font-size: 18px;
   line-height: 1.8;
 }
@@ -264,13 +270,14 @@ textarea:focus-visible {
 
 .hero-actions .text-link {
   padding: 12px 5px;
+  color: #fff;
 }
 
 .trust-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 20px;
-  color: #526176;
+  color: #edf5ff;
   font-size: 12px;
   font-weight: 650;
 }
@@ -281,19 +288,28 @@ textarea:focus-visible {
   gap: 7px;
 }
 
-/* Financing overview card */
+/* FINANCING OVERVIEW CARD */
 
 .hero-card {
   position: relative;
   overflow: hidden;
   padding: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 26px;
   color: #fff;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(54, 194, 255, 0.23), transparent 42%),
-    linear-gradient(145deg, #102b50 0%, #071a35 65%, #061326 100%);
-  box-shadow: 0 28px 75px rgba(7, 26, 53, 0.24);
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(54, 194, 255, 0.23),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(16, 43, 80, 0.96),
+      rgba(7, 26, 53, 0.97) 65%,
+      rgba(6, 19, 38, 0.98)
+    );
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.25);
 }
 
 .hero-card::after {
@@ -376,7 +392,7 @@ textarea:focus-visible {
   color: #fff;
 }
 
-/* Statistics strip */
+/* STATISTICS */
 
 .stats {
   display: grid;
@@ -415,7 +431,7 @@ textarea:focus-visible {
   font-size: 12px;
 }
 
-/* General content sections */
+/* GENERAL SECTIONS */
 
 .section {
   padding: 94px 7%;
@@ -445,7 +461,7 @@ textarea:focus-visible {
   line-height: 1.8;
 }
 
-/* Feature cards */
+/* FINANCING FEATURE CARDS */
 
 .cards {
   display: grid;
@@ -500,7 +516,7 @@ textarea:focus-visible {
   line-height: 1.8;
 }
 
-/* Financing calculator */
+/* FINANCING CALCULATOR */
 
 .calculator-wrap {
   padding: 20px 7% 95px;
@@ -513,7 +529,11 @@ textarea:focus-visible {
   border: 1px solid #e0e8f3;
   border-radius: 26px;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(54, 194, 255, 0.09), transparent 38%),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(54, 194, 255, 0.09),
+      transparent 38%
+    ),
     #fff;
   box-shadow: var(--shadow);
 }
@@ -575,7 +595,7 @@ textarea:focus-visible {
   font-size: 13px;
 }
 
-/* Process steps */
+/* APPLICATION PROCESS */
 
 .steps {
   display: grid;
@@ -621,7 +641,7 @@ textarea:focus-visible {
   line-height: 1.8;
 }
 
-/* Dark feature section */
+/* DARK FEATURE SECTION */
 
 .dark-section {
   position: relative;
@@ -633,7 +653,11 @@ textarea:focus-visible {
   align-items: center;
   color: #fff;
   background:
-    radial-gradient(ellipse at 90% 15%, rgba(54, 194, 255, 0.16), transparent 35%),
+    radial-gradient(
+      ellipse at 90% 15%,
+      rgba(54, 194, 255, 0.16),
+      transparent 35%
+    ),
     linear-gradient(135deg, #10294b, #071a35 65%, #061326);
 }
 
@@ -651,7 +675,7 @@ textarea:focus-visible {
   margin-top: 12px;
 }
 
-/* Final call to action */
+/* FINAL CALL TO ACTION */
 
 .apply {
   padding: 76px 7%;
@@ -660,7 +684,11 @@ textarea:focus-visible {
   align-items: center;
   gap: 35px;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(54, 194, 255, 0.17), transparent 42%),
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(54, 194, 255, 0.17),
+      transparent 42%
+    ),
     linear-gradient(120deg, #eaf4ff, #f5faff);
   border-top: 1px solid #deebfa;
 }
@@ -679,7 +707,7 @@ textarea:focus-visible {
   flex-shrink: 0;
 }
 
-/* Footer */
+/* FOOTER */
 
 footer {
   padding: 48px 7%;
@@ -707,7 +735,7 @@ footer a:hover {
   line-height: 1.8;
 }
 
-/* Tablet */
+/* TABLET */
 
 @media (max-width: 1000px) {
   .nav {
@@ -754,7 +782,7 @@ footer a:hover {
   }
 }
 
-/* iPhone and smaller screens */
+/* IPHONE AND SMALLER SCREENS */
 
 @media (max-width: 800px) {
   html {
@@ -793,6 +821,7 @@ footer a:hover {
     grid-template-columns: minmax(0, 1fr);
     gap: 35px;
     padding: 62px 5% 52px;
+    background-position: 58% center;
   }
 
   .hero h1 {
@@ -962,7 +991,7 @@ footer a:hover {
   }
 }
 
-/* Very narrow phones */
+/* VERY NARROW PHONES */
 
 @media (max-width: 380px) {
   .brand {
@@ -981,6 +1010,7 @@ footer a:hover {
 
   .hero {
     padding-top: 48px;
+    background-position: 61% center;
   }
 
   .hero h1 {
@@ -1006,7 +1036,7 @@ footer a:hover {
   }
 }
 
-/* Respect reduced-motion preferences */
+/* ACCESSIBILITY */
 
 @media (prefers-reduced-motion: reduce) {
   *,
