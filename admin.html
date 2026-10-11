@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Admin Control Center | GlobalBridgeFunding</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    *{box-sizing:border-box}
+
+    body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+
+    header{background:#071a35;color:white;padding:20px}
+
+    .top,.container{max-width:1050px;margin:auto}
+
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    .brand{font-size:20px;font-weight:bold}
+
+    .tag{font-size:12px;color:#c8d7ea;margin-top:6px}
+
+    main{max-width:1050px;margin:30px auto;padding:0 16px}
+
+    h1{font-size:29px;margin-bottom:8px}
+
+    .intro{color:#667085;line-height:1.6;margin-bottom:24px}
+
+    .notice{padding:14px;border-radius:10px;background:#fff;border:1px solid #e2e8f0;margin:16px 0;line-height:1.5}
+
+    .error{color:#b42318;background:#fee4e2}
+
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+
+    .card{background:#fff;border:1px solid #e4e9f1;border-radius:16px;padding:22px;box-shadow:0 4px 16px #1018280b}
+
+    .symbol{font-size:28px;margin-bottom:16px}
+
+    h2{font-size:19px;margin:0 0 10px}
+
+    .card p{color:#667085;font-size:14px;line-height:1.6;min-height:66px}
+
+    .button{display:block;text-align:center;text-decoration:none;background:#36c2ff;color:#071a35;font-weight:bold;padding:13px 12px;border-radius:9px;margin-top:16px}
+
+    .button:hover{filter:brightness(.96)}
+
+    .secondary{background:#fff;color:#172033;border:1px solid #d0d5dd;cursor:pointer;font-size:14px}
+
+    .footer{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+
+    .small{font-size:12px;color:#667085;margin-top:22px;line-height:1.6}
+
+    [hidden]{display:none!important}
+
+    @media(max-width:720px){.grid{grid-template-columns:1fr}h1{font-size:25px}.card p{min-height:0}}
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="top">
+
+    <div>
+
+      <div class="brand">GlobalBridgeFunding</div>
+
+      <div class="tag">ADMINISTRATOR CONTROL CENTER</div>
+
+    </div>
+
+    <div id="adminEmail">Verifying administrator…</div>
+
+  </div>
+
+</header>
+
+<main>
+
+  <h1>Admin Control Center</h1>
+
+  <p class="intro">Manage financing applications, wallet requests and client support from one central dashboard.</p>
+
+  <div id="message" class="notice">Checking your administrator access…</div>
+
+  <section id="adminPanel" hidden>
+
+    <div class="grid">
+
+      <article class="card">
+
+        <div class="symbol">📋</div>
+
+        <h2>Applications</h2>
+
+        <p>Review financing applications and manage approval or rejection decisions.</p>
+
+        <a class="button" href="admin-applications.html">Open Applications</a>
+
+      </article>
+
+      <article class="card">
+
+        <div class="symbol">💳</div>
+
+        <h2>Wallet Administration</h2>
+
+        <p>Review deposits and withdrawals, manage wallet settings and record verified disbursements.</p>
+
+        <a class="button" href="admin-wallet.html">Open Wallet</a>
+
+      </article>
+
+      <article class="card">
+
+        <div class="symbol">💬</div>
+
+        <h2>Client Support</h2>
+
+        <p>Read support requests, reply to clients and update ticket statuses.</p>
+
+        <a class="button" href="admin-support.html">Open Support</a>
+
+      </article>
+
+    </div>
+
+    <div class="footer">
+
+      <button id="signOut" class="button secondary" type="button">Sign out of administrator account</button>
+
+    </div>
+
+    <p class="small">Only your authenticated administrator account should have access to these functions. Database permissions must also enforce administrator access.</p>
+
+  </section>
+
+</main>
+
+<script>
+
+(() => {
+
+  const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+
+  const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const message = document.getElementById("message");
+
+  const panel = document.getElementById("adminPanel");
+
+  const email = document.getElementById("adminEmail");
+
+  async function verifyAdmin() {
+
+    panel.hidden = true;
+
+    message.hidden = false;
+
+    message.className = "notice";
+
+    message.textContent = "Checking your administrator access…";
+
+    const { data: sessionData, error: sessionError } = await db.auth.getSession();
+
+    const session = sessionData?.session;
+
+    if (sessionError || !session?.user) {
+
+      window.location.replace("login.html");
+
+      return;
+
+    }
+
+    const { data: userData, error: userError } = await db.auth.getUser();
+
+    const user = userData?.user;
+
+    if (userError || !user || user.id !== session.user.id) {
+
+      await db.auth.signOut();
+
+      window.location.replace("login.html");
+
+      return;
+
+    }
+
+    const { data: admin, error: adminError } = await db
+
+      .from("admin_users")
+
+      .select("user_id")
+
+      .eq("user_id", user.id)
+
+      .maybeSingle();
+
+    if (adminError || !admin || admin.user_id !== user.id) {
+
+      message.className = "notice error";
+
+      message.textContent = "Access denied. Sign in with the account registered in admin_users.";
+
+      email.textContent = "";
+
+      return;
+
+    }
+
+    email.textContent = user.email || "Administrator";
+
+    message.hidden = true;
+
+    panel.hidden = false;
+
+  }
+
+  document.getElementById("signOut").addEventListener("click", async () => {
+
+    const button = document.getElementById("signOut");
+
+    button.disabled = true;
+
+    button.textContent = "Signing out…";
+
+    const { error } = await db.auth.signOut();
+
+    if (error) {
+
+      button.disabled = false;
+
+      button.textContent = "Sign out of administrator account";
+
+      message.hidden = false;
+
+      message.className = "notice error";
+
+      message.textContent = "Could not sign out: " + error.message;
+
+      return;
+
+    }
+
+    window.location.replace("login.html");
+
+  });
+
+  db.auth.onAuthStateChange((event, session) => {
+
+    if (event === "SIGNED_OUT" || !session?.user) {
+
+      window.location.replace("login.html");
+
+    }
+
+  });
+
+  verifyAdmin();
+
+})();
+
+</script>
+
+</body>
+
+</html>
