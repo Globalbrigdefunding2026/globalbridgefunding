@@ -258,6 +258,8 @@
 
       line-height: 1.5;
 
+      overflow-wrap: anywhere;
+
     }
 
     .message.error {
@@ -269,6 +271,18 @@
       color: #a42626;
 
       border-left: 4px solid #d64545;
+
+    }
+
+    .message.success {
+
+      display: block;
+
+      background: #eef8fc;
+
+      color: #24566b;
+
+      border-left: 4px solid #36c2ff;
 
     }
 
@@ -422,11 +436,19 @@
 
         <div class="forgot">
 
-          <a href="#" id="forgotLink" data-key="forgot">Forgot your password?</a>
+          <a href="#" id="forgotLink" data-key="forgot">
+
+            Forgot your password?
+
+          </a>
 
         </div>
 
-        <button type="submit" id="loginButton" data-key="signIn">Sign In</button>
+        <button type="submit" id="loginButton" data-key="signIn">
+
+          Sign In
+
+        </button>
 
         <div id="message" class="message" role="alert" aria-live="polite"></div>
 
@@ -488,7 +510,9 @@
 
         resetError:"Unable to start password recovery. Please try again.",
 
-        enterEmail:"Enter your email address first, then select Forgot your password?"
+        enterEmail:"Enter your email address first.",
+
+        recoveryRedirect:"If your account exists, password recovery instructions will be sent to your email."
 
       },
 
@@ -516,13 +540,15 @@
 
         generalError:"Ocorreu um erro. Tente novamente.",
 
-        adminCheckError:"Não foi possível verificar o acesso de administrador. Tente novamente.",
+        adminCheckError:"Não foi possível verificar o acesso de administrador.",
 
         resetSent:"Se a conta existir, serão enviadas instruções para recuperar a palavra-passe.",
 
         resetError:"Não foi possível iniciar a recuperação da palavra-passe.",
 
-        enterEmail:"Introduza primeiro o seu endereço de email."
+        enterEmail:"Introduza primeiro o seu endereço de email.",
+
+        recoveryRedirect:"Se a conta existir, serão enviadas instruções por email."
 
       },
 
@@ -550,13 +576,15 @@
 
         generalError:"Đã xảy ra lỗi. Vui lòng thử lại.",
 
-        adminCheckError:"Không thể xác minh quyền quản trị. Vui lòng thử lại.",
+        adminCheckError:"Không thể xác minh quyền quản trị.",
 
         resetSent:"Nếu tài khoản tồn tại, hướng dẫn khôi phục mật khẩu sẽ được gửi qua email.",
 
         resetError:"Không thể bắt đầu khôi phục mật khẩu.",
 
-        enterEmail:"Vui lòng nhập email trước."
+        enterEmail:"Vui lòng nhập email trước.",
+
+        recoveryRedirect:"Nếu tài khoản tồn tại, hướng dẫn sẽ được gửi qua email."
 
       },
 
@@ -584,13 +612,15 @@
 
         generalError:"خطایی رخ داد. لطفاً دوباره تلاش کنید.",
 
-        adminCheckError:"تأیید دسترسی مدیر انجام نشد. دوباره تلاش کنید.",
+        adminCheckError:"تأیید دسترسی مدیر انجام نشد.",
 
         resetSent:"اگر حساب وجود داشته باشد، دستورالعمل بازیابی رمز عبور ارسال می‌شود.",
 
         resetError:"بازیابی رمز عبور آغاز نشد.",
 
-        enterEmail:"ابتدا آدرس ایمیل خود را وارد کنید."
+        enterEmail:"ابتدا آدرس ایمیل خود را وارد کنید.",
+
+        recoveryRedirect:"اگر حساب وجود داشته باشد، دستورالعمل بازیابی ارسال می‌شود."
 
       },
 
@@ -624,7 +654,9 @@
 
         resetError:"Tidak dapat memulai pemulihan kata sandi.",
 
-        enterEmail:"Masukkan alamat email Anda terlebih dahulu."
+        enterEmail:"Masukkan alamat email Anda terlebih dahulu.",
+
+        recoveryRedirect:"Jika akun tersedia, instruksi pemulihan akan dikirim melalui email."
 
       },
 
@@ -658,7 +690,9 @@
 
         resetError:"Impossible de démarrer la récupération du mot de passe.",
 
-        enterEmail:"Saisissez d'abord votre adresse e-mail."
+        enterEmail:"Saisissez d'abord votre adresse e-mail.",
+
+        recoveryRedirect:"Si le compte existe, les instructions seront envoyées par e-mail."
 
       },
 
@@ -692,7 +726,9 @@
 
         resetError:"Salasanan palautusta ei voitu aloittaa.",
 
-        enterEmail:"Anna ensin sähköpostiosoitteesi."
+        enterEmail:"Anna ensin sähköpostiosoitteesi.",
+
+        recoveryRedirect:"Jos tili on olemassa, ohjeet lähetetään sähköpostitse."
 
       },
 
@@ -726,7 +762,9 @@
 
         resetError:"No se pudo iniciar la recuperación de contraseña.",
 
-        enterEmail:"Introduce primero tu dirección de correo electrónico."
+        enterEmail:"Introduce primero tu dirección de correo electrónico.",
+
+        recoveryRedirect:"Si la cuenta existe, recibirás instrucciones por correo electrónico."
 
       }
 
@@ -802,7 +840,7 @@
 
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
 
       const selector = document.getElementById("languageSelector");
 
@@ -810,7 +848,7 @@
 
       if (selector) {
 
-        selector.addEventListener("change", function () {
+        selector.addEventListener("change", function() {
 
           applyLoginLanguage(this.value);
 
@@ -844,15 +882,29 @@
 
       message.textContent = text;
 
+      message.style.display = "block";
+
     }
 
-    loginForm.addEventListener("submit", async function (event) {
+    function showSuccess(text) {
+
+      message.className = "message success";
+
+      message.textContent = text;
+
+      message.style.display = "block";
+
+    }
+
+    loginForm.addEventListener("submit", async function(event) {
 
       event.preventDefault();
 
       message.className = "message";
 
       message.textContent = "";
+
+      message.style.display = "none";
 
       const email = document.getElementById("email").value.trim();
 
@@ -868,9 +920,9 @@
 
         const result = await supabaseClient.auth.signInWithPassword({
 
-          email,
+          email: email,
 
-          password
+          password: password
 
         });
 
@@ -887,8 +939,6 @@
         }
 
         const user = result.data.user;
-
-        // Check the authenticated user's ID against the admin_users table.
 
         const adminCheck = await supabaseClient
 
@@ -938,9 +988,7 @@
 
     });
 
-    // Password recovery uses Supabase's configured recovery email flow.
-
-    document.getElementById("forgotLink").addEventListener("click", async function (event) {
+    document.getElementById("forgotLink").addEventListener("click", async function(event) {
 
       event.preventDefault();
 
@@ -962,33 +1010,27 @@
 
       message.textContent = "";
 
+      message.style.display = "none";
+
       try {
 
         const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
 
-          redirectTo: window.location.origin + "/login.html"
+          redirectTo: window.location.origin + "/reset-password.html"
 
         });
 
         if (error) {
 
-          console.error("Password recovery error:", error);
+          console.error("Password recovery request failed:", error);
 
-          showError(translations.resetError);
+          showError(error.message || translations.resetError);
 
           return;
 
         }
 
-        message.className = "message";
-
-        message.style.display = "block";
-
-        message.style.background = "#eef8fc";
-
-        message.style.color = "#24566b";
-
-        message.textContent = translations.resetSent;
+        showSuccess(translations.resetSent);
 
       } catch (error) {
 
