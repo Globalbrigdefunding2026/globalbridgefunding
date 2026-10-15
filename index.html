@@ -8,9 +8,9 @@
 
 <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="GlobalBridgeFunding — international business financing platform.">
+<meta name="description" content="GlobalBridgeFunding — international business financing.">
 
 <meta name="theme-color" content="#07172c">
 
@@ -24,129 +24,109 @@
 
 *{box-sizing:border-box}
 
-html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;width:100%;overflow-x:hidden}
 
-body{margin:0;max-width:100%;overflow-x:hidden}
+body{margin:0;width:100%;overflow-x:hidden;background:#07172c;color:#f5f7fb}
 
 img{max-width:100%;height:auto}
 
-/* Navigation */
+a{transition:opacity .2s ease}
 
-.nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+a:hover{opacity:.85}
 
-.brand{display:inline-flex;align-items:center;gap:10px;min-width:0;text-decoration:none}
+.nav{
 
-.main-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+position:relative;z-index:10;display:flex;align-items:center;
 
-.nav-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:100%}
+justify-content:space-between;gap:18px;flex-wrap:wrap;
 
-/* Hero layout */
-
-.hero{
-
- display:grid;
-
- grid-template-columns:minmax(0,1fr) minmax(0,0.95fr);
-
- align-items:center;
-
- gap:38px;
-
- width:100%;
-
- min-width:0;
-
- max-width:1240px;
-
- margin:0 auto;
-
- padding:54px 24px;
+padding:18px 24px;background:#07172c;color:#f5f7fb
 
 }
+
+.brand{display:inline-flex;align-items:center;gap:10px;min-width:0;
+
+color:#f5f7fb;text-decoration:none;font-weight:700}
+
+.logo{display:grid;place-items:center;width:40px;height:40px;
+
+border-radius:12px;background:#d7b46a;color:#07172c;font-weight:900}
+
+.brand-accent{color:#d7b46a}
+
+.main-nav,.nav-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+
+.nav a{color:#f5f7fb}
+
+.nav .btn{color:#07172c}
+
+.nav .lang{max-width:100%;padding:9px;border-radius:8px}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+
+overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+
+padding:13px 19px;border:1px solid #d7b46a;border-radius:10px;
+
+background:#d7b46a;color:#07172c;text-decoration:none;font-weight:700}
+
+.btn-small{padding:10px 14px}
+
+.btn-ghost{background:transparent;color:#f5f7fb!important;border-color:#60718a}
+
+.signin{text-decoration:none}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);
+
+align-items:center;gap:38px;width:100%;max-width:1240px;min-width:0;
+
+margin:0 auto;padding:54px 24px}
 
 .hero-copy,.hero-visual{min-width:0;width:100%}
 
-.hero-copy{position:relative;z-index:1}
+.hero-copy{position:relative;z-index:1;color:#f5f7fb}
 
-.hero-visual{
+.hero-copy h1{font-size:clamp(36px,5vw,60px);line-height:1.1;letter-spacing:-1.5px}
 
- position:relative;
+.hero-copy h1 strong{color:#d7b46a}
 
- isolation:isolate;
+.hero-copy p{line-height:1.8;color:#d4deeb}
 
- width:100%;
+.pill,.eyebrow{color:#d7b46a;font-size:12px;font-weight:800;letter-spacing:1.5px}
 
- height:440px;
+.pill{display:flex;align-items:center;gap:9px}
 
- min-height:0;
+.pill-dot,.live-dot{width:9px;height:9px;display:inline-block;border-radius:50%;background:#d7b46a}
 
- overflow:hidden;
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
 
- border-radius:24px;
+.micro{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#d4deeb}
 
- background:#07172c;
+.trust-note{display:flex;gap:10px;align-items:center;margin-top:22px;font-size:13px;color:#d4deeb}
 
-}
+.trust-mark{color:#d7b46a}
 
-.hero-photo{
+.hero-visual{position:relative;isolation:isolate;height:440px;overflow:hidden;
 
- position:absolute;
+border-radius:24px;background:#102b49}
 
- inset:0;
+.hero-photo{position:absolute;inset:0;z-index:0;display:block;width:100%;
 
- z-index:0;
+height:100%;max-width:none;object-fit:cover;object-position:center}
 
- display:block;
+.photo-shade{position:absolute;inset:0;z-index:1;
 
- width:100%;
+background:linear-gradient(180deg,rgba(4,20,42,.02),rgba(4,20,42,.35));
 
- height:100%;
+pointer-events:none}
 
- max-width:none;
+.image-fallback{position:absolute;inset:0;z-index:0;background:#102b49;
 
- object-fit:cover;
+color:#fff;align-items:center;justify-content:center;flex-direction:column;
 
- object-position:center;
-
-}
-
-.photo-shade{
-
- position:absolute;
-
- inset:0;
-
- z-index:1;
-
- background:linear-gradient(180deg,rgba(4,20,42,.02),rgba(4,20,42,.52));
-
- pointer-events:none;
-
-}
-
-.image-fallback{
-
- position:absolute;
-
- inset:0;
-
- z-index:0;
-
- background:radial-gradient(circle at 70% 25%,#1c5780,#07172c 70%);
-
- color:white;
-
- align-items:center;
-
- justify-content:center;
-
- flex-direction:column;
-
- text-align:center;
-
- padding:24px;
-
-}
+text-align:center;padding:24px}
 
 .image-fallback:not([hidden]){display:flex}
 
@@ -154,173 +134,89 @@ img{max-width:100%;height:auto}
 
 .fallback-orbit{width:120px;height:120px;border:2px solid #8bdcf1;border-radius:50%}
 
-/* Financing card stays inside the image */
+.finance-card{position:absolute;z-index:3;top:50%;left:50%;
 
-.finance-card{
+width:calc(100% - 44px);max-width:390px;margin:0;padding:20px;
 
- position:absolute;
+transform:translate(-50%,-50%);color:#f5f7fb;
 
- z-index:3;
+background:rgba(7,23,44,.94);border:1px solid rgba(215,180,106,.6);
 
- top:50%;
+border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.28)}
 
- left:50%;
+.finance-card *{color:inherit}
 
- right:auto;
+.card-head,.card-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
 
- width:calc(100% - 44px);
+.card-head{font-size:11px;letter-spacing:1px}
 
- max-width:390px;
+.finance-card .big{font-size:clamp(21px,2.5vw,30px);font-weight:800;line-height:1.3;margin:18px 0 8px;overflow-wrap:anywhere}
 
- margin:0;
+.finance-card .muted{font-size:13px;color:#c3d0df}
 
- padding:20px;
+.finance-card .line{height:1px;background:#40516a;margin:16px 0}
 
- transform:translate(-50%,-50%);
+.finance-card .card-row{margin:12px 0;flex-wrap:wrap;font-size:13px}
 
- box-sizing:border-box;
+.mini-chart{height:35px;display:flex;align-items:end;gap:7px;margin:18px 0}
 
-}
+.mini-chart span{width:12%;border-radius:4px 4px 0 0;background:#d7b46a}
 
-.finance-card .big{
+.mini-chart span:nth-child(1){height:25%}
 
- font-size:clamp(21px,2.5vw,30px);
+.mini-chart span:nth-child(2){height:40%}
 
- line-height:1.3;
+.mini-chart span:nth-child(3){height:32%}
 
- overflow-wrap:anywhere;
+.mini-chart span:nth-child(4){height:62%}
 
-}
+.mini-chart span:nth-child(5){height:50%}
 
-.finance-card .card-row{gap:8px;flex-wrap:wrap}
+.mini-chart span:nth-child(6){height:78%}
 
-.float-card{
+.mini-chart span:nth-child(7){height:100%}
 
- position:absolute;
+.card-link{display:flex;justify-content:space-between;gap:8px;color:#e5c477!important;text-decoration:none;font-weight:700;font-size:13px}
 
- z-index:4;
+.float-card{position:absolute;z-index:4;left:18px;bottom:14px;max-width:calc(100% - 36px);
 
- left:18px;
+padding:12px 16px;display:flex;align-items:center;gap:10px;color:#fff;
 
- right:auto;
+background:rgba(7,23,44,.96);border:1px solid rgba(215,180,106,.45);border-radius:12px}
 
- bottom:14px;
+.float-number{color:#d7b46a;font-weight:900}
 
- max-width:calc(100% - 36px);
+.numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
 
- box-sizing:border-box;
+max-width:1192px;margin:0 auto;padding:18px 24px}
 
-}
+.numbers>div{display:grid;gap:7px;padding:18px;background:#10243d;
 
-/* Mobile and tablet */
+border:1px solid #263b54;border-radius:14px}
 
-@media(max-width:900px){
+.numbers b{font-size:23px;color:#e5c477}
 
- .hero{
+.numbers span{font-size:12px;color:#d4deeb}
 
-  grid-template-columns:minmax(0,1fr);
+.section,.why-section,.apply-section{padding:54px 24px;max-width:1240px;margin:0 auto}
 
-  gap:26px;
+.section-heading{max-width:760px;margin:0 auto 28px}
 
-  padding:36px 22px;
+.section-heading h2,.why-section h2,.apply-section h2{font-size:clamp(27px,4vw,40px);line-height:1.2}
 
- }
+.section-heading p,.section p,.why-section p,.apply-section p{color:#c7d2e0;line-height:1.7}
 
- .hero-copy{width:100%}
+.feature-grid,.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 
- .hero-visual{
+.feature-card,.process-grid article{min-width:0;padding:24px;background:#10243d;
 
-  width:100%;
+border:1px solid #263b54;border-radius:18px}
 
-  height:420px;
+.feature-icon,.process-grid article>span{color:#d7b46a;font-weight:900}
 
-  min-height:0;
+.feature-card h3,.process-grid h3{color:#f5f7fb}
 
- }
-
- .finance-card{max-width:410px}
-
-}
-
-@media(max-width:600px){
-
- .nav{padding:14px 16px;gap:12px}
-
- .nav-actions{gap:8px}
-
- .main-nav{width:100%;display:flex;flex-wrap:wrap;gap:12px}
-
- .hero{padding:26px 16px;gap:22px}
-
- .hero-visual{
-
-  height:390px;
-
-  min-height:0;
-
-  border-radius:18px;
-
- }
-
- .finance-card{
-
-  top:47%;
-
-  left:50%;
-
-  width:calc(100% - 28px);
-
-  max-width:360px;
-
-  padding:15px;
-
-  border-radius:16px;
-
- }
-
- .finance-card .big{font-size:clamp(21px,6vw,28px);line-height:1.3}
-
- .finance-card .card-row{gap:7px}
-
- .float-card{left:12px;bottom:10px;max-width:calc(100% - 24px)}
-
- .hero .actions{flex-wrap:wrap;gap:12px}
-
- .hero .actions .btn{max-width:100%}
-
- .hero .micro{flex-wrap:wrap;gap:10px}
-
- .numbers{grid-template-columns:repeat(2,minmax(0,1fr))}
-
- .feature-grid,.process-grid{grid-template-columns:minmax(0,1fr)}
-
- .apply-section{flex-wrap:wrap;gap:20px}
-
-}
-
-@media(max-width:380px){
-
- .hero{padding-left:12px;padding-right:12px}
-
- .hero-visual{height:370px;min-height:0}
-
- .finance-card{top:46%;padding:12px;width:calc(100% - 22px)}
-
- .finance-card .big{font-size:21px}
-
- .float-card{left:10px;bottom:8px}
-
-}
-
-/* Persian layout support */
-
-.rtl-language{direction:rtl}
-
-.rtl-language .hero-copy{text-align:right}
-
-.rtl-language .finance-card{text-align:right}
-
-.rtl-language .card-row{flex-direction:row}
+.feature-card a{color:#e5c477}
 
 </style>
 
@@ -330,55 +226,55 @@ img{max-width:100%;height:auto}
 
 <header class="nav">
 
- <a class="brand" href="index.html" aria-label="GlobalBridgeFunding home">
+<a class="brand" href="index.html" aria-label="GlobalBridgeFunding home">
 
-  <span class="logo">G</span>
+<span class="logo">G</span>
 
-  <span>GlobalBridge<span class="brand-accent">Funding</span></span>
+<span>GlobalBridge<span class="brand-accent">Funding</span></span>
 
- </a>
+</a>
 
- <nav class="main-nav" aria-label="Main navigation">
+<nav class="main-nav" aria-label="Main navigation">
 
-  <a href="#financing" data-key="navFinancing">Financing</a>
+<a href="#financing" data-key="navFinancing">Financing</a>
 
-  <a href="#process" data-key="navProcess">How it works</a>
+<a href="#process" data-key="navProcess">How it works</a>
 
-  <a href="#why" data-key="navWhy">Why us</a>
+<a href="#why" data-key="navWhy">Why us</a>
 
-  <a href="#support" data-key="navSupport">Support</a>
+<a href="#support" data-key="navSupport">Support</a>
 
- </nav>
+</nav>
 
- <div class="nav-actions">
+<div class="nav-actions">
 
-  <label class="sr-only" for="languageSelector">Language</label>
+<label class="sr-only" for="languageSelector">Language</label>
 
-  <select class="lang" id="languageSelector" data-language-selector="true" aria-label="Language">
+<select class="lang" id="languageSelector" data-language-selector="true" aria-label="Language">
 
-   <option value="en">EN</option>
+<option value="en">EN</option>
 
-   <option value="pt">PT</option>
+<option value="pt">PT</option>
 
-   <option value="vi">VI</option>
+<option value="vi">VI</option>
 
-   <option value="fa">FA</option>
+<option value="fa">FA</option>
 
-   <option value="id">ID</option>
+<option value="id">ID</option>
 
-   <option value="fr">FR</option>
+<option value="fr">FR</option>
 
-   <option value="fi">FI</option>
+<option value="fi">FI</option>
 
-   <option value="es">ES</option>
+<option value="es">ES</option>
 
-  </select>
+</select>
 
-  <a class="signin" href="login.html" data-key="signin">Sign in</a>
+<a class="signin" href="login.html" data-key="signin">Sign in</a>
 
-  <a class="btn btn-small" href="register.html" data-key="applyNow">Apply now</a>
+<a class="btn btn-small" href="register.html" data-key="applyNow">Apply now</a>
 
- </div>
+</div>
 
 </header>
 
@@ -386,324 +282,252 @@ img{max-width:100%;height:auto}
 
 <section class="hero">
 
- <div class="hero-copy">
+<div class="hero-copy">
 
-  <div class="pill">
+<div class="pill"><span class="pill-dot"></span><span data-key="pill">INTERNATIONAL BUSINESS FINANCING</span></div>
 
-   <span class="pill-dot"></span>
+<h1 data-html="title">Capital for your next <strong>business move.</strong></h1>
 
-   <span data-key="pill">INTERNATIONAL BUSINESS FINANCING</span>
+<p class="hero-text" data-html="hero">Access a streamlined digital financing experience built for eligible businesses seeking growth capital from <b>$20,000 to $50,000.</b></p>
 
-  </div>
+<div class="actions">
 
-  <h1 data-html="title">Capital for your next <strong>business move.</strong></h1>
+<a class="btn" href="register.html"><span data-key="start">Start an application</span><span aria-hidden="true">→</span></a>
 
-  <p class="hero-text" data-html="hero">
+<a class="btn btn-ghost" href="#calculator" data-key="calculate">Calculate payment</a>
 
-   Access a streamlined digital financing experience built for eligible businesses seeking growth capital from
+</div>
 
-   <b>$20,000 to $50,000.</b>
+<div class="micro">
 
-  </p>
+<span data-key="micro1">✓ Digital application</span>
 
-  <div class="actions">
+<span data-key="micro2">✓ Manual review</span>
 
-   <a class="btn" href="register.html">
+<span data-key="micro3">✓ Secure document process</span>
 
-    <span data-key="start">Start an application</span>
+</div>
 
-    <span aria-hidden="true">→</span>
+<div class="trust-note"><span class="trust-mark">✓</span><span>Clear information. Human review. Secure account access.</span></div>
 
-   </a>
+</div>
 
-   <a class="btn btn-ghost" href="#calculator" data-key="calculate">Calculate payment</a>
+<div class="hero-visual">
 
-  </div>
+<img class="hero-photo" src="images/IMG_0373.jpeg" alt="GlobalBridgeFunding business financing" fetchpriority="high" onerror="this.style.display='none';this.nextElementSibling.hidden=false">
 
-  <div class="micro">
+<div class="image-fallback" hidden><div class="fallback-orbit"></div><div class="fallback-building">GBF</div><p>Capital for your next business move</p></div>
 
-   <span data-key="micro1">✓ Digital application</span>
+<div class="photo-shade"></div>
 
-   <span data-key="micro2">✓ Manual review</span>
+<div class="finance-card">
 
-   <span data-key="micro3">✓ Secure document process</span>
+<div class="card-head"><span data-key="overview">FINANCING OVERVIEW</span><span class="live-dot" aria-label="Information"></span></div>
 
-  </div>
+<div class="big">$20,000 — $50,000</div>
 
-  <div class="trust-note">
+<div class="muted" data-key="available">Available financing range</div>
 
-   <span class="trust-mark">✓</span>
+<div class="line"></div>
 
-   <span>Clear information. Human review. Secure account access.</span>
+<div class="card-row"><span data-key="interest">Illustrative annual interest</span><b>10%</b></div>
 
-  </div>
+<div class="card-row"><span data-key="term">Illustrative term</span><b data-key="termValue">Up to 24 months</b></div>
 
- </div>
+<div class="mini-chart" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
- <div class="hero-visual">
+<a href="#calculator" class="card-link"><span data-key="estimate">Estimate your payment</span><span>→</span></a>
 
-  <img class="hero-photo"
+</div>
 
-   src="images/IMG_0373.jpeg"
+<div class="float-card"><span class="float-number">01</span><span data-key="floatCard">Simple digital application</span></div>
 
-   alt="GlobalBridgeFunding business financing"
-
-   fetchpriority="high"
-
-   onerror="this.style.display='none';this.nextElementSibling.hidden=false">
-
-  <div class="image-fallback" hidden>
-
-   <div class="fallback-orbit"></div>
-
-   <div class="fallback-building">GBF</div>
-
-   <p>Capital for your next business move</p>
-
-  </div>
-
-  <div class="photo-shade"></div>
-
-  <div class="finance-card">
-
-   <div class="card-head">
-
-    <span data-key="overview">FINANCING OVERVIEW</span>
-
-    <span class="live-dot" aria-label="Information"></span>
-
-   </div>
-
-   <div class="big">$20,000 <i>—</i> $50,000</div>
-
-   <div class="muted" data-key="available">Available financing range</div>
-
-   <div class="line"></div>
-
-   <div class="card-row">
-
-    <span data-key="interest">Illustrative annual interest</span><b>10%</b>
-
-   </div>
-
-   <div class="card-row">
-
-    <span data-key="term">Illustrative term</span>
-
-    <b data-key="termValue">Up to 24 months</b>
-
-   </div>
-
-   <div class="mini-chart" aria-hidden="true">
-
-    <span></span><span></span><span></span><span></span>
-
-    <span></span><span></span><span></span>
-
-   </div>
-
-   <a href="#calculator" class="card-link">
-
-    <span data-key="estimate">Estimate your payment</span><span>→</span>
-
-   </a>
-
-  </div>
-
-  <div class="float-card">
-
-   <span class="float-number">01</span>
-
-   <span data-key="floatCard">Simple digital application</span>
-
-  </div>
-
- </div>
+</div>
 
 </section>
 
+
 <section class="numbers" aria-label="Financing highlights">
 
- <div><b>$20K–$50K</b><span data-key="number1">Financing range</span></div>
+<div><b>$20K–$50K</b><span data-key="number1">Financing range</span></div>
 
- <div><b>10%</b><span data-key="number2">Illustrative annual rate</span></div>
+<div><b>10%</b><span data-key="number2">Illustrative annual rate</span></div>
 
- <div><b>24 mo.</b><span data-key="number3">Illustrative maximum term</span></div>
+<div><b>24 mo.</b><span data-key="number3">Illustrative maximum term</span></div>
 
- <div><b>8</b><span data-key="number4">Languages</span></div>
+<div><b>8</b><span data-key="number4">Languages</span></div>
 
 </section>
 
 <section id="financing" class="section">
 
- <div class="section-heading">
+<div class="section-heading">
 
-  <div class="eyebrow" data-key="financing">FINANCING</div>
+<div class="eyebrow" data-key="financing">FINANCING</div>
 
-  <h2 data-key="designed">Designed around your business.</h2>
+<h2 data-key="designed">Designed around your business.</h2>
 
-  <p data-key="financingIntro">Explore the core financing structure before starting your application.</p>
+<p data-key="financingIntro">Explore the core financing structure before starting your application.</p>
 
- </div>
+</div>
 
- <div class="feature-grid">
+<div class="feature-grid">
 
-  <article class="feature-card">
+<article class="feature-card">
 
-   <div class="feature-icon">01</div>
+<div class="feature-icon">01</div>
 
-   <h3 data-key="card1Title">Growth capital</h3>
+<h3 data-key="card1Title">Growth capital</h3>
 
-   <p data-key="card1Text">Financing from $20,000 to $50,000 for eligible business needs, subject to review and approval.</p>
+<p data-key="card1Text">Financing from $20,000 to $50,000 for eligible business needs, subject to review and approval.</p>
 
-   <a href="financing.html" data-key="card1Link">Learn more →</a>
+<a href="financing.html" data-key="card1Link">Learn more →</a>
 
-  </article>
+</article>
 
-  <article class="feature-card">
+<article class="feature-card">
 
-   <div class="feature-icon">02</div>
+<div class="feature-icon">02</div>
 
-   <h3 data-key="card2Title">Clear structure</h3>
+<h3 data-key="card2Title">Clear structure</h3>
 
-   <p data-key="card2Text">An illustrative 10% annual interest rate and up to 24-month term are shown for planning purposes.</p>
+<p data-key="card2Text">An illustrative 10% annual interest rate and up to 24-month term are shown for planning purposes.</p>
 
-   <a href="#calculator" data-key="card2Link">Use calculator →</a>
+<a href="#calculator" data-key="card2Link">Use calculator →</a>
 
-  </article>
+</article>
 
-  <article class="feature-card">
+<article class="feature-card">
 
-   <div class="feature-icon">03</div>
+<div class="feature-icon">03</div>
 
-   <h3 data-key="card3Title">Digital experience</h3>
+<h3 data-key="card3Title">Digital experience</h3>
 
-   <p data-key="card3Text">Register, submit your information, complete KYC and track your application from one account.</p>
+<p data-key="card3Text">Register, submit your information, complete KYC and track your application from one account.</p>
 
-   <a href="#process" data-key="card3Link">See the process →</a>
+<a href="#process" data-key="card3Link">See the process →</a>
 
-  </article>
+</article>
 
- </div>
+</div>
 
 </section>
 
 <section id="calculator" class="calc-section">
 
- <div class="calc-box">
+<div class="calc-box">
 
-  <div class="section-heading">
+<div class="section-heading">
 
-   <div class="eyebrow" data-key="calculatorEyebrow">FINANCING CALCULATOR</div>
+<div class="eyebrow" data-key="calculatorEyebrow">FINANCING CALCULATOR</div>
 
-   <h2 data-key="calculatorTitle">Plan before you apply.</h2>
+<h2 data-key="calculatorTitle">Plan before you apply.</h2>
 
-   <p data-key="calculatorText">Adjust the amount and term to see an illustrative monthly payment.</p>
+<p data-key="calculatorText">Adjust the amount and term to see an illustrative monthly payment.</p>
 
-  </div>
+</div>
 
-  <div class="sliders">
+<div class="sliders">
 
-   <label>
+<label>
 
-    <span data-key="amountLabel">Financing amount</span>
+<span data-key="amountLabel">Financing amount</span>
 
-    <output id="amountOut" for="amount">$20,000</output>
+<output id="amountOut" for="amount">$20,000</output>
 
-    <input id="amount" type="range" min="20000" max="50000" step="1000" value="20000">
+<input id="amount" type="range" min="20000" max="50000" step="1000" value="20000">
 
-   </label>
+</label>
 
-   <label>
+<label>
 
-    <span data-key="termLabel">Term</span>
+<span data-key="termLabel">Term</span>
 
-    <output id="termOut" for="term">24 months</output>
+<output id="termOut" for="term">24 months</output>
 
-    <input id="term" type="range" min="12" max="24" step="1" value="24">
+<input id="term" type="range" min="12" max="24" step="1" value="24">
 
-   </label>
+</label>
 
-  </div>
+</div>
 
-  <div class="estimate">
+<div class="estimate">
 
-   <span data-key="monthlyPayment">Illustrative monthly payment</span>
+<span data-key="monthlyPayment">Illustrative monthly payment</span>
 
-   <strong id="payment">$923.06</strong>
+<strong id="payment">$923.06</strong>
 
-  </div>
+</div>
 
-  <small data-key="calculatorDisclaimer">Illustration only. Final financing terms are subject to eligibility, review and applicable terms.</small>
+<small data-key="calculatorDisclaimer">Illustration only. Final financing terms are subject to eligibility, review and applicable terms.</small>
 
- </div>
+</div>
 
 </section>
 
 <section id="process" class="section">
 
- <div class="section-heading">
+<div class="section-heading">
 
-  <div class="eyebrow" data-key="process">HOW IT WORKS</div>
+<div class="eyebrow" data-key="process">HOW IT WORKS</div>
 
-  <h2 data-key="processTitle">From application to decision.</h2>
+<h2 data-key="processTitle">From application to decision.</h2>
 
- </div>
+</div>
 
- <div class="process-grid">
+<div class="process-grid">
 
-  <article><span>01</span><h3 data-key="step1Title">Create your account</h3><p data-key="step1Text">Register securely using your email and create your profile.</p></article>
+<article><span>01</span><h3 data-key="step1Title">Create your account</h3><p data-key="step1Text">Register securely using your email and create your profile.</p></article>
 
-  <article><span>02</span><h3 data-key="step2Title">Tell us about your business</h3><p data-key="step2Text">Provide the requested business and financing information.</p></article>
+<article><span>02</span><h3 data-key="step2Title">Tell us about your business</h3><p data-key="step2Text">Provide the requested business and financing information.</p></article>
 
-  <article><span>03</span><h3 data-key="step3Title">Complete KYC</h3><p data-key="step3Text">Submit the required identity and business documents for review.</p></article>
+<article><span>03</span><h3 data-key="step3Title">Complete KYC</h3><p data-key="step3Text">Submit the required identity and business documents for review.</p></article>
 
-  <article><span>04</span><h3 data-key="step4Title">Receive a decision</h3><p data-key="step4Text">Track your application and receive updates through your account.</p></article>
+</div>
 
- </div>
+<div class="process-grid" style="margin-top:18px">
+
+<article><span>04</span><h3 data-key="step4Title">Receive a decision</h3><p data-key="step4Text">Track your application and receive updates through your account.</p></article>
+
+</div>
 
 </section>
 
-
 <section id="why" class="why-section">
 
- <div>
+<div>
 
-  <div class="eyebrow" data-key="why">THE GLOBALBRIDGE APPROACH</div>
+<div class="eyebrow" data-key="why">THE GLOBALBRIDGE APPROACH</div>
 
-  <h2 data-key="whyTitle">A simpler digital financing journey.</h2>
+<h2 data-key="whyTitle">A simpler digital financing journey.</h2>
 
- </div>
+</div>
 
- <div class="why-list">
+<div class="why-list">
 
-  <div><b>01</b><p><strong data-key="why1Title">Clear information</strong><span data-key="why1Text">Understand the illustrative structure before you apply.</span></p></div>
+<div><b>01</b><p><strong data-key="why1Title">Clear information</strong><span data-key="why1Text">Understand the illustrative structure before you apply.</span></p></div>
 
-  <div><b>02</b><p><strong data-key="why2Title">Human review</strong><span data-key="why2Text">Applications and submitted information can be reviewed manually.</span></p></div>
+<div><b>02</b><p><strong data-key="why2Title">Human review</strong><span data-key="why2Text">Applications and submitted information can be reviewed manually.</span></p></div>
 
-  <div><b>03</b><p><strong data-key="why3Title">Built for mobile</strong><span data-key="why3Text">A responsive experience designed to work beautifully on your phone.</span></p></div>
+<div><b>03</b><p><strong data-key="why3Title">Built for mobile</strong><span data-key="why3Text">A responsive experience designed to work on your phone.</span></p></div>
 
- </div>
+</div>
 
 </section>
 
 <section id="apply" class="apply-section">
 
- <div>
+<div>
 
-  <div class="eyebrow" data-key="apply">READY TO START?</div>
+<div class="eyebrow" data-key="apply">READY TO START?</div>
 
-  <h2 data-key="applyTitle">Take the first step.</h2>
+<h2 data-key="applyTitle">Take the first step.</h2>
 
-  <p data-key="applyText">Create an account and begin your financing application.</p>
+<p data-key="applyText">Create an account and begin your financing application.</p>
 
- </div>
+</div>
 
- <a class="btn" href="register.html">
-
-  <span data-key="createAccount">Create your account</span><span aria-hidden="true">→</span>
-
- </a>
+<a class="btn" href="register.html"><span data-key="createAccount">Create your account</span><span aria-hidden="true">→</span></a>
 
 </section>
 
@@ -711,613 +535,23 @@ img{max-width:100%;height:auto}
 
 <footer id="support" class="footer">
 
- <a class="brand brand-light" href="index.html">
+<a class="brand brand-light" href="index.html"><span class="logo">G</span><span>GlobalBridge<span class="brand-accent">Funding</span></span></a>
 
-  <span class="logo">G</span>
+<p>International business financing</p>
 
-  <span>GlobalBridge<span class="brand-accent">Funding</span></span>
+<div class="footer-links">
 
- </a>
+<a href="financing.html">Financing</a>
 
- <p>International business financing</p>
+<a href="login.html">Sign in</a>
 
- <div class="footer-links">
+<a href="register.html">Create account</a>
 
-  <a href="financing.html">Financing</a>
+</div>
 
-  <a href="login.html">Sign in</a>
-
-  <a href="register.html">Create account</a>
-
- </div>
-
- <small>Financing is subject to eligibility, review, approval and applicable terms. Calculator figures are illustrative and are not an offer of credit.</small>
+<small>Financing is subject to eligibility, review, approval and applicable terms. Calculator figures are illustrative and are not an offer of credit.</small>
 
 </footer>
-
-<script>
-
-(function(){
-
-"use strict";
-
-const translations={
-
-en:{
-
-pill:"INTERNATIONAL BUSINESS FINANCING",
-
-title:"Capital for your next <strong>business move.</strong>",
-
-hero:"Access a streamlined digital financing experience built for eligible businesses seeking growth capital from <b>$20,000 to $50,000.</b>",
-
-start:"Start an application",calculate:"Calculate payment",
-
-overview:"FINANCING OVERVIEW",available:"Available financing range",
-
-interest:"Illustrative annual interest",term:"Illustrative term",
-
-termValue:"Up to 24 months",estimate:"Estimate your payment",
-
-floatCard:"Simple digital application",
-
-micro1:"✓ Digital application",micro2:"✓ Manual review",micro3:"✓ Secure document process",
-
-number1:"Financing range",number2:"Illustrative annual rate",number3:"Illustrative maximum term",number4:"Languages",
-
-financing:"FINANCING",designed:"Designed around your business.",
-
-financingIntro:"Explore the core financing structure before starting your application.",
-
-card1Title:"Growth capital",card1Text:"Financing from $20,000 to $50,000 for eligible business needs, subject to review and approval.",card1Link:"Learn more →",
-
-card2Title:"Clear structure",card2Text:"An illustrative 10% annual interest rate and up to 24-month term are shown for planning purposes.",card2Link:"Use calculator →",
-
-card3Title:"Digital experience",card3Text:"Register, submit your information, complete KYC and track your application from one account.",card3Link:"See the process →",
-
-calculatorEyebrow:"FINANCING CALCULATOR",calculatorTitle:"Plan before you apply.",calculatorText:"Adjust the amount and term to see an illustrative monthly payment.",
-
-amountLabel:"Financing amount",termLabel:"Term",monthlyPayment:"Illustrative monthly payment",
-
-calculatorDisclaimer:"Illustration only. Final financing terms are subject to eligibility, review and applicable terms.",
-
-process:"HOW IT WORKS",processTitle:"From application to decision.",
-
-step1Title:"Create your account",step1Text:"Register securely using your email and create your profile.",
-
-step2Title:"Tell us about your business",step2Text:"Provide the requested business and financing information.",
-
-step3Title:"Complete KYC",step3Text:"Submit the required identity and business documents for review.",
-
-step4Title:"Receive a decision",step4Text:"Track your application and receive updates through your account.",
-
-why:"THE GLOBALBRIDGE APPROACH",whyTitle:"A simpler digital financing journey.",
-
-why1Title:"Clear information",why1Text:"Understand the illustrative structure before you apply.",
-
-why2Title:"Human review",why2Text:"Applications and submitted information can be reviewed manually.",
-
-why3Title:"Built for mobile",why3Text:"A responsive experience designed to work beautifully on your phone.",
-
-apply:"READY TO START?",applyTitle:"Take the first step.",applyText:"Create an account and begin your financing application.",
-
-createAccount:"Create your account",signin:"Sign in",applyNow:"Apply now",
-
-navFinancing:"Financing",navProcess:"How it works",navWhy:"Why us",navSupport:"Support"
-
-},
-
-pt:{
-
-pill:"FINANCIAMENTO EMPRESARIAL INTERNACIONAL",title:"Capital para o seu próximo <strong>movimento empresarial.</strong>",
-
-hero:"Aceda a uma experiência de financiamento digital para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>",
-
-start:"Iniciar candidatura",calculate:"Calcular pagamento",overview:"VISÃO GERAL DO FINANCIAMENTO",available:"Intervalo de financiamento disponível",
-
-interest:"Taxa de juro anual indicativa",term:"Prazo indicativo",termValue:"Até 24 meses",estimate:"Estimar o pagamento",floatCard:"Candidatura digital simples",
-
-micro1:"✓ Candidatura digital",micro2:"✓ Análise manual",micro3:"✓ Processo seguro de documentos",
-
-number1:"Intervalo de financiamento",number2:"Taxa anual indicativa",number3:"Prazo máximo indicativo",number4:"Idiomas",
-
-financing:"FINANCIAMENTO",designed:"Pensado para o seu negócio.",financingIntro:"Explore a estrutura de financiamento antes de iniciar a candidatura.",
-
-card1Title:"Capital de crescimento",card1Text:"Financiamento de $20.000 a $50.000 para necessidades empresariais elegíveis, sujeito a análise e aprovação.",card1Link:"Saiba mais →",
-
-card2Title:"Estrutura clara",card2Text:"Taxa anual indicativa de 10% e prazo até 24 meses para planeamento.",card2Link:"Usar calculadora →",
-
-card3Title:"Experiência digital",card3Text:"Registe-se, envie informações, conclua o KYC e acompanhe a candidatura numa conta.",card3Link:"Ver o processo →",
-
-calculatorEyebrow:"CALCULADORA DE FINANCIAMENTO",calculatorTitle:"Planeie antes de se candidatar.",calculatorText:"Ajuste o montante e o prazo para ver uma prestação mensal indicativa.",
-
-amountLabel:"Montante do financiamento",termLabel:"Prazo",monthlyPayment:"Prestação mensal indicativa",
-
-calculatorDisclaimer:"Apenas uma simulação. Os termos finais estão sujeitos a elegibilidade, análise e condições aplicáveis.",
-
-process:"COMO FUNCIONA",processTitle:"Da candidatura à decisão.",step1Title:"Crie a sua conta",step1Text:"Registe-se com segurança usando o seu e-mail e crie o perfil.",
-
-step2Title:"Conte-nos sobre o seu negócio",step2Text:"Forneça as informações empresariais e de financiamento solicitadas.",
-
-step3Title:"Conclua o KYC",step3Text:"Envie os documentos de identidade e empresariais necessários.",
-
-step4Title:"Receba uma decisão",step4Text:"Acompanhe a candidatura e receba atualizações na sua conta.",
-
-why:"A ABORDAGEM GLOBALBRIDGE",whyTitle:"Uma experiência de financiamento digital mais simples.",
-
-why1Title:"Informação clara",why1Text:"Compreenda a estrutura indicativa antes de se candidatar.",
-
-why2Title:"Análise humana",why2Text:"As candidaturas e informações podem ser analisadas manualmente.",
-
-why3Title:"Pensado para dispositivos móveis",why3Text:"Uma experiência responsiva concebida para o telemóvel.",
-
-apply:"PRONTO PARA COMEÇAR?",applyTitle:"Dê o primeiro passo.",applyText:"Crie uma conta e comece a candidatura.",
-
-createAccount:"Criar a sua conta",signin:"Iniciar sessão",applyNow:"Candidatar-se",
-
-navFinancing:"Financiamento",navProcess:"Como funciona",navWhy:"Porquê nós",navSupport:"Suporte"
-
-},
-
-vi:{
-
-pill:"TÀI TRỢ DOANH NGHIỆP QUỐC TẾ",title:"Nguồn vốn cho <strong>bước tiến kinh doanh tiếp theo.</strong>",
-
-hero:"Trải nghiệm tài trợ kỹ thuật số cho doanh nghiệp đủ điều kiện tìm kiếm vốn tăng trưởng từ <b>$20.000 đến $50.000.</b>",
-
-start:"Bắt đầu hồ sơ",calculate:"Tính khoản thanh toán",overview:"TỔNG QUAN TÀI TRỢ",available:"Khoản tài trợ khả dụng",
-
-interest:"Lãi suất hàng năm minh họa",term:"Thời hạn minh họa",termValue:"Tối đa 24 tháng",estimate:"Ước tính khoản thanh toán",floatCard:"Hồ sơ kỹ thuật số đơn giản",
-
-micro1:"✓ Đăng ký kỹ thuật số",micro2:"✓ Xem xét thủ công",micro3:"✓ Quy trình tài liệu an toàn",
-
-number1:"Khoản tài trợ",number2:"Lãi suất minh họa",number3:"Thời hạn tối đa",number4:"Ngôn ngữ",
-
-financing:"TÀI TRỢ",designed:"Được thiết kế cho doanh nghiệp của bạn.",financingIntro:"Khám phá cấu trúc tài trợ trước khi bắt đầu hồ sơ.",
-
-card1Title:"Vốn tăng trưởng",card1Text:"Tài trợ từ $20.000 đến $50.000 cho nhu cầu kinh doanh đủ điều kiện, tùy thuộc xem xét và phê duyệt.",card1Link:"Tìm hiểu thêm →",
-
-card2Title:"Cấu trúc rõ ràng",card2Text:"Lãi suất minh họa 10% mỗi năm và thời hạn tối đa 24 tháng để lập kế hoạch.",card2Link:"Dùng công cụ tính →",
-
-card3Title:"Trải nghiệm kỹ thuật số",card3Text:"Đăng ký, gửi thông tin, hoàn tất KYC và theo dõi hồ sơ trong một tài khoản.",card3Link:"Xem quy trình →",
-
-calculatorEyebrow:"CÔNG CỤ TÍNH TÀI TRỢ",calculatorTitle:"Lập kế hoạch trước khi đăng ký.",calculatorText:"Điều chỉnh số tiền và thời hạn để xem khoản thanh toán hàng tháng minh họa.",
-
-amountLabel:"Số tiền tài trợ",termLabel:"Thời hạn",monthlyPayment:"Khoản thanh toán hàng tháng minh họa",
-
-calculatorDisclaimer:"Chỉ mang tính minh họa. Điều khoản cuối cùng phụ thuộc vào điều kiện và xem xét.",
-
-process:"CÁCH THỨC HOẠT ĐỘNG",processTitle:"Từ hồ sơ đến quyết định.",step1Title:"Tạo tài khoản",step1Text:"Đăng ký bằng email và tạo hồ sơ.",
-
-step2Title:"Cho chúng tôi biết về doanh nghiệp",step2Text:"Cung cấp thông tin kinh doanh và tài trợ được yêu cầu.",
-
-step3Title:"Hoàn tất KYC",step3Text:"Gửi giấy tờ nhận dạng và doanh nghiệp cần thiết.",
-
-step4Title:"Nhận quyết định",step4Text:"Theo dõi hồ sơ và nhận cập nhật qua tài khoản.",
-
-why:"CÁCH TIẾP CẬN GLOBALBRIDGE",whyTitle:"Hành trình tài trợ kỹ thuật số đơn giản hơn.",
-
-why1Title:"Thông tin rõ ràng",why1Text:"Hiểu cấu trúc minh họa trước khi đăng ký.",
-
-why2Title:"Xem xét thủ công",why2Text:"Hồ sơ và thông tin có thể được xem xét thủ công.",
-
-why3Title:"Thiết kế cho điện thoại",why3Text:"Trải nghiệm đáp ứng hoạt động tốt trên điện thoại.",
-
-apply:"SẴN SÀNG BẮT ĐẦU?",applyTitle:"Hãy thực hiện bước đầu tiên.",applyText:"Tạo tài khoản và bắt đầu hồ sơ tài trợ.",
-
-createAccount:"Tạo tài khoản",signin:"Đăng nhập",applyNow:"Đăng ký ngay",
-
-navFinancing:"Tài trợ",navProcess:"Cách hoạt động",navWhy:"Vì sao chọn chúng tôi",navSupport:"Hỗ trợ"
-
-},
-
-fa:{
-
-pill:"تأمین مالی کسب‌وکار بین‌المللی",title:"سرمایه برای <strong>گام بعدی کسب‌وکار شما.</strong>",
-
-hero:"تجربه تأمین مالی دیجیتال برای کسب‌وکارهای واجد شرایط با سرمایه رشد از <b>$20,000 تا $50,000</b>.",
-
-start:"شروع درخواست",calculate:"محاسبه پرداخت",overview:"نمای کلی تأمین مالی",available:"محدوده تأمین مالی",
-
-interest:"نرخ سود سالانه نمونه",term:"مدت نمونه",termValue:"تا ۲۴ ماه",estimate:"برآورد پرداخت",floatCard:"درخواست دیجیتال ساده",
-
-micro1:"✓ درخواست دیجیتال",micro2:"✓ بررسی دستی",micro3:"✓ فرآیند امن اسناد",
-
-number1:"محدوده تأمین مالی",number2:"نرخ سالانه نمونه",number3:"حداکثر مدت نمونه",number4:"زبان",
-
-financing:"تأمین مالی",designed:"طراحی‌شده برای کسب‌وکار شما.",financingIntro:"ساختار تأمین مالی را پیش از شروع درخواست بررسی کنید.",
-
-card1Title:"سرمایه رشد",card1Text:"تأمین مالی ۲۰٬۰۰۰ تا ۵۰٬۰۰۰ دلار برای نیازهای واجد شرایط، مشروط به بررسی و تأیید.",card1Link:"اطلاعات بیشتر ←",
-
-card2Title:"ساختار شفاف",card2Text:"نرخ سالانه نمونه ۱۰٪ و مدت تا ۲۴ ماه برای برنامه‌ریزی.",card2Link:"محاسبه‌گر ←",
-
-card3Title:"تجربه دیجیتال",card3Text:"ثبت‌نام کنید، اطلاعات ارسال کنید، KYC را تکمیل و درخواست را پیگیری کنید.",card3Link:"مشاهده مراحل ←",
-
-calculatorEyebrow:"محاسبه‌گر تأمین مالی",calculatorTitle:"پیش از درخواست برنامه‌ریزی کنید.",calculatorText:"مبلغ و مدت را برای مشاهده پرداخت ماهانه نمونه تنظیم کنید.",
-
-amountLabel:"مبلغ تأمین مالی",termLabel:"مدت",monthlyPayment:"پرداخت ماهانه نمونه",
-
-calculatorDisclaimer:"صرفاً نمونه است. شرایط نهایی منوط به واجد شرایط بودن و بررسی است.",
-
-process:"نحوه کار",processTitle:"از درخواست تا تصمیم.",step1Title:"حساب ایجاد کنید",step1Text:"با ایمیل ثبت‌نام کنید و پروفایل بسازید.",
-
-step2Title:"درباره کسب‌وکار بگویید",step2Text:"اطلاعات موردنیاز کسب‌وکار و تأمین مالی را ارائه دهید.",
-
-step3Title:"KYC را تکمیل کنید",step3Text:"مدارک هویتی و کسب‌وکار را ارسال کنید.",
-
-step4Title:"تصمیم را دریافت کنید",step4Text:"درخواست را از حساب خود پیگیری کنید.",
-
-why:"رویکرد GLOBALBRIDGE",whyTitle:"مسیر ساده‌تر تأمین مالی دیجیتال.",
-
-why1Title:"اطلاعات شفاف",why1Text:"پیش از درخواست ساختار نمونه را بررسی کنید.",
-
-why2Title:"بررسی انسانی",why2Text:"درخواست‌ها می‌توانند به‌صورت دستی بررسی شوند.",
-
-why3Title:"طراحی‌شده برای موبایل",why3Text:"تجربه‌ای واکنش‌گرا برای تلفن همراه.",
-
-apply:"آماده شروع هستید؟",applyTitle:"اولین قدم را بردارید.",applyText:"حساب ایجاد کنید و درخواست را آغاز کنید.",
-
-createAccount:"ایجاد حساب",signin:"ورود",applyNow:"درخواست اکنون",
-
-navFinancing:"تأمین مالی",navProcess:"نحوه کار",navWhy:"چرا ما",navSupport:"پشتیبانی"
-
-},
-
-id:{
-
-pill:"PEMBIAYAAN BISNIS INTERNASIONAL",title:"Modal untuk <strong>langkah bisnis Anda berikutnya.</strong>",
-
-hero:"Pengalaman pembiayaan digital untuk bisnis yang memenuhi syarat dengan modal pertumbuhan <b>$20.000 hingga $50.000.</b>",
-
-start:"Mulai pengajuan",calculate:"Hitung pembayaran",overview:"RINGKASAN PEMBIAYAAN",available:"Kisaran pembiayaan tersedia",
-
-interest:"Suku bunga tahunan ilustratif",term:"Jangka waktu ilustratif",termValue:"Hingga 24 bulan",estimate:"Perkirakan pembayaran",floatCard:"Pengajuan digital sederhana",
-
-micro1:"✓ Pengajuan digital",micro2:"✓ Peninjauan manual",micro3:"✓ Proses dokumen aman",
-
-number1:"Kisaran pembiayaan",number2:"Suku bunga ilustratif",number3:"Jangka waktu maksimum",number4:"Bahasa",
-
-financing:"PEMBIAYAAN",designed:"Dirancang untuk bisnis Anda.",financingIntro:"Pelajari struktur pembiayaan sebelum mengajukan.",
-
-card1Title:"Modal pertumbuhan",card1Text:"Pembiayaan $20.000 hingga $50.000 untuk kebutuhan bisnis yang memenuhi syarat, setelah peninjauan dan persetujuan.",card1Link:"Pelajari lebih lanjut →",
-
-card2Title:"Struktur jelas",card2Text:"Suku bunga ilustratif 10% per tahun dan jangka waktu hingga 24 bulan untuk perencanaan.",card2Link:"Gunakan kalkulator →",
-
-card3Title:"Pengalaman digital",card3Text:"Daftar, kirim informasi, selesaikan KYC, dan pantau pengajuan dari satu akun.",card3Link:"Lihat proses →",
-
-calculatorEyebrow:"KALKULATOR PEMBIAYAAN",calculatorTitle:"Rencanakan sebelum mengajukan.",calculatorText:"Sesuaikan jumlah dan jangka waktu untuk melihat perkiraan pembayaran bulanan.",
-
-amountLabel:"Jumlah pembiayaan",termLabel:"Jangka waktu",monthlyPayment:"Perkiraan pembayaran bulanan",
-
-calculatorDisclaimer:"Hanya ilustrasi. Ketentuan akhir bergantung pada kelayakan dan peninjauan.",
-
-process:"CARA KERJA",processTitle:"Dari pengajuan hingga keputusan.",step1Title:"Buat akun",step1Text:"Daftar dengan email dan buat profil.",
-
-step2Title:"Ceritakan bisnis Anda",step2Text:"Berikan informasi bisnis dan pembiayaan yang diminta.",
-
-step3Title:"Selesaikan KYC",step3Text:"Kirim dokumen identitas dan bisnis yang diperlukan.",
-
-step4Title:"Terima keputusan",step4Text:"Pantau pengajuan melalui akun Anda.",
-
-why:"PENDEKATAN GLOBALBRIDGE",whyTitle:"Perjalanan pembiayaan digital yang lebih sederhana.",
-
-why1Title:"Informasi jelas",why1Text:"Pahami struktur ilustratif sebelum mengajukan.",
-
-why2Title:"Peninjauan manusia",why2Text:"Pengajuan dapat ditinjau secara manual.",
-
-why3Title:"Dibuat untuk ponsel",why3Text:"Pengalaman responsif untuk perangkat seluler.",
-
-apply:"SIAP MEMULAI?",applyTitle:"Ambil langkah pertama.",applyText:"Buat akun dan mulai pengajuan pembiayaan.",
-
-createAccount:"Buat akun",signin:"Masuk",applyNow:"Ajukan sekarang",
-
-navFinancing:"Pembiayaan",navProcess:"Cara kerja",navWhy:"Mengapa kami",navSupport:"Dukungan"
-
-},
-
-fr:{
-
-pill:"FINANCEMENT D'ENTREPRISE INTERNATIONAL",title:"Des capitaux pour votre <strong>prochain projet professionnel.</strong>",
-
-hero:"Une expérience de financement numérique pour les entreprises éligibles recherchant un capital de croissance de <b>$20 000 à $50 000.</b>",
-
-start:"Commencer une demande",calculate:"Calculer le paiement",overview:"APERÇU DU FINANCEMENT",available:"Montant de financement disponible",
-
-interest:"Taux annuel indicatif",term:"Durée indicative",termValue:"Jusqu'à 24 mois",estimate:"Estimer votre paiement",floatCard:"Demande numérique simple",
-
-micro1:"✓ Demande numérique",micro2:"✓ Examen manuel",micro3:"✓ Documents sécurisés",
-
-number1:"Montant du financement",number2:"Taux annuel indicatif",number3:"Durée maximale indicative",number4:"Langues",
-
-financing:"FINANCEMENT",designed:"Conçu pour votre entreprise.",financingIntro:"Découvrez la structure du financement avant de commencer.",
-
-card1Title:"Capital de croissance",card1Text:"Financement de 20 000 $ à 50 000 $ pour les besoins professionnels éligibles, sous réserve d'examen et d'approbation.",card1Link:"En savoir plus →",
-
-card2Title:"Structure claire",card2Text:"Taux annuel indicatif de 10 % et durée jusqu'à 24 mois à titre de planification.",card2Link:"Utiliser le calculateur →",
-
-card3Title:"Expérience numérique",card3Text:"Inscrivez-vous, fournissez vos informations, complétez le KYC et suivez votre demande.",card3Link:"Voir le processus →",
-
-calculatorEyebrow:"CALCULATEUR DE FINANCEMENT",calculatorTitle:"Planifiez avant de faire votre demande.",calculatorText:"Ajustez le montant et la durée pour voir un paiement mensuel indicatif.",
-
-amountLabel:"Montant du financement",termLabel:"Durée",monthlyPayment:"Paiement mensuel indicatif",
-
-calculatorDisclaimer:"Illustration uniquement. Les conditions finales dépendent de l'éligibilité et de l'examen.",
-
-process:"COMMENT ÇA MARCHE",processTitle:"De la demande à la décision.",step1Title:"Créez votre compte",step1Text:"Inscrivez-vous avec votre adresse e-mail et créez votre profil.",
-
-step2Title:"Parlez-nous de votre entreprise",step2Text:"Fournissez les informations demandées.",
-
-step3Title:"Complétez le KYC",step3Text:"Soumettez les documents requis.",
-
-step4Title:"Recevez une décision",step4Text:"Suivez votre demande depuis votre compte.",
-
-why:"L'APPROCHE GLOBALBRIDGE",whyTitle:"Un parcours de financement numérique plus simple.",
-
-why1Title:"Informations claires",why1Text:"Comprenez la structure indicative avant de demander.",
-
-why2Title:"Examen humain",why2Text:"Les demandes peuvent être examinées manuellement.",
-
-why3Title:"Conçu pour le mobile",why3Text:"Une expérience adaptée à votre téléphone.",
-
-apply:"PRÊT À COMMENCER ?",applyTitle:"Faites le premier pas.",applyText:"Créez un compte et commencez votre demande.",
-
-createAccount:"Créer votre compte",signin:"Se connecter",applyNow:"Faire une demande",
-
-navFinancing:"Financement",navProcess:"Comment ça marche",navWhy:"Pourquoi nous",navSupport:"Assistance"
-
-},
-
-fi:{
-
-pill:"KANSAINVÄLINEN YRITYSRAHOITUS",title:"Pääomaa yrityksesi <strong>seuraavaan askeleeseen.</strong>",
-
-hero:"Digitaalinen rahoituspalvelu tukikelpoisille yrityksille, jotka etsivät kasvurahoitusta <b>$20 000–$50 000.</b>",
-
-start:"Aloita hakemus",calculate:"Laske maksu",overview:"RAHOITUKSEN YLEISKATSAUS",available:"Saatavilla oleva rahoitus",
-
-interest:"Ohjeellinen vuosikorko",term:"Ohjeellinen laina-aika",termValue:"Enintään 24 kuukautta",estimate:"Arvioi maksusi",floatCard:"Helppo digitaalinen hakemus",
-
-micro1:"✓ Digitaalinen hakemus",micro2:"✓ Manuaalinen tarkistus",micro3:"✓ Turvallinen asiakirjaprosessi",
-
-number1:"Rahoitusmäärä",number2:"Ohjeellinen vuosikorko",number3:"Ohjeellinen enimmäisaika",number4:"Kielet",
-
-financing:"RAHOITUS",designed:"Suunniteltu yrityksellesi.",financingIntro:"Tutustu rahoituksen rakenteeseen ennen hakemista.",
-
-card1Title:"Kasvurahoitus",card1Text:"20 000–50 000 dollarin rahoitus tukikelpoisiin yritystarpeisiin tarkistuksen ja hyväksynnän perusteella.",card1Link:"Lue lisää →",
-
-card2Title:"Selkeä rakenne",card2Text:"Ohjeellinen 10 %:n vuosikorko ja enintään 24 kuukauden laina-aika.",card2Link:"Käytä laskuria →",
-
-card3Title:"Digitaalinen käyttökokemus",card3Text:"Rekisteröidy, lähetä tietosi, suorita KYC ja seuraa hakemustasi.",card3Link:"Katso prosessi →",
-
-calculatorEyebrow:"RAHOITUSLASKURI",calculatorTitle:"Suunnittele ennen hakemista.",calculatorText:"Säädä summaa ja laina-aikaa nähdäksesi ohjeellisen kuukausimaksun.",
-
-amountLabel:"Rahoitusmäärä",termLabel:"Laina-aika",monthlyPayment:"Ohjeellinen kuukausimaksu",
-
-calculatorDisclaimer:"Vain suuntaa-antava laskelma. Lopulliset ehdot riippuvat kelpoisuudesta ja tarkistuksesta.",
-
-process:"NÄIN SE TOIMII",processTitle:"Hakemuksesta päätökseen.",step1Title:"Luo tilisi",step1Text:"Rekisteröidy sähköpostillasi ja luo profiili.",
-
-step2Title:"Kerro yrityksestäsi",step2Text:"Anna pyydetyt yritys- ja rahoitustiedot.",
-
-step3Title:"Suorita KYC",step3Text:"Lähetä tarvittavat asiakirjat tarkistettavaksi.",
-
-step4Title:"Saat päätöksen",step4Text:"Seuraa hakemustasi tilisi kautta.",
-
-why:"GLOBALBRIDGEN LÄHESTYMISTAPA",whyTitle:"Yksinkertaisempi digitaalinen rahoituspolku.",
-
-why1Title:"Selkeät tiedot",why1Text:"Ymmärrä ohjeellinen rakenne ennen hakemista.",
-
-why2Title:"Manuaalinen tarkistus",why2Text:"Hakemukset voidaan tarkistaa manuaalisesti.",
-
-why3Title:"Suunniteltu mobiilille",why3Text:"Responsiivinen kokemus puhelimellasi.",
-
-apply:"VALMIS ALOITTAMAAN?",applyTitle:"Ota ensimmäinen askel.",applyText:"Luo tili ja aloita rahoitushakemus.",
-
-createAccount:"Luo tilisi",signin:"Kirjaudu sisään",applyNow:"Hae nyt",
-
-navFinancing:"Rahoitus",navProcess:"Näin se toimii",navWhy:"Miksi me",navSupport:"Tuki"
-
-},
-
-es:{
-
-pill:"FINANCIACIÓN EMPRESARIAL INTERNACIONAL",title:"Capital para su próximo <strong>movimiento empresarial.</strong>",
-
-hero:"Experiencia de financiación digital para empresas elegibles que buscan capital de crecimiento de <b>$20.000 a $50.000.</b>",
-
-start:"Iniciar solicitud",calculate:"Calcular pago",overview:"RESUMEN DE FINANCIACIÓN",available:"Rango de financiación disponible",
-
-interest:"Tasa anual ilustrativa",term:"Plazo ilustrativo",termValue:"Hasta 24 meses",estimate:"Estimar su pago",floatCard:"Solicitud digital sencilla",
-
-micro1:"✓ Solicitud digital",micro2:"✓ Revisión manual",micro3:"✓ Proceso seguro de documentos",
-
-number1:"Rango de financiación",number2:"Tasa anual ilustrativa",number3:"Plazo máximo ilustrativo",number4:"Idiomas",
-
-financing:"FINANCIACIÓN",designed:"Diseñado para su negocio.",financingIntro:"Explore la estructura de financiación antes de comenzar.",
-
-card1Title:"Capital de crecimiento",card1Text:"Financiación de $20.000 a $50.000 para necesidades empresariales elegibles, sujeta a revisión y aprobación.",card1Link:"Más información →",
-
-card2Title:"Estructura clara",card2Text:"Tasa anual ilustrativa del 10 % y plazo de hasta 24 meses para planificación.",card2Link:"Usar calculadora →",
-
-card3Title:"Experiencia digital",card3Text:"Regístrese, envíe información, complete el KYC y haga seguimiento desde una cuenta.",card3Link:"Ver el proceso →",
-
-calculatorEyebrow:"CALCULADORA DE FINANCIACIÓN",calculatorTitle:"Planifique antes de solicitar.",calculatorText:"Ajuste el importe y el plazo para ver un pago mensual ilustrativo.",
-
-amountLabel:"Importe de financiación",termLabel:"Plazo",monthlyPayment:"Pago mensual ilustrativo",
-
-calculatorDisclaimer:"Solo como ilustración. Las condiciones finales dependen de elegibilidad y revisión.",
-
-process:"CÓMO FUNCIONA",processTitle:"De la solicitud a la decisión.",step1Title:"Cree su cuenta",step1Text:"Regístrese con su correo electrónico y cree su perfil.",
-
-step2Title:"Cuéntenos sobre su negocio",step2Text:"Proporcione la información solicitada.",
-
-step3Title:"Complete el KYC",step3Text:"Envíe los documentos necesarios para su revisión.",
-
-step4Title:"Reciba una decisión",step4Text:"Haga seguimiento desde su cuenta.",
-
-why:"EL ENFOQUE GLOBALBRIDGE",whyTitle:"Un proceso de financiación digital más sencillo.",
-
-why1Title:"Información clara",why1Text:"Comprenda la estructura ilustrativa antes de solicitar.",
-
-why2Title:"Revisión humana",why2Text:"Las solicitudes pueden revisarse manualmente.",
-
-why3Title:"Diseñado para móviles",why3Text:"Una experiencia adaptable para su teléfono.",
-
-apply:"¿LISTO PARA EMPEZAR?",applyTitle:"Dé el primer paso.",applyText:"Cree una cuenta y comience su solicitud.",
-
-createAccount:"Crear su cuenta",signin:"Iniciar sesión",applyNow:"Solicitar ahora",
-
-navFinancing:"Financiación",navProcess:"Cómo funciona",navWhy:"Por qué nosotros",navSupport:"Soporte"
-
-}
-
-};
-
-const languageKeys=["globalbridge_language","selectedLanguage"];
-
-function getLanguage(){
-
- for(const key of languageKeys){
-
-  try{
-
-   const value=localStorage.getItem(key);
-
-   if(value&&translations[value])return value;
-
-  }catch(error){}
-
- }
-
- return "en";
-
-}
-
-function updateCalculator(){
-
- const amount=document.getElementById("amount");
-
- const term=document.getElementById("term");
-
- const amountOut=document.getElementById("amountOut");
-
- const termOut=document.getElementById("termOut");
-
- const payment=document.getElementById("payment");
-
- if(!amount||!term||!amountOut||!termOut||!payment)return;
-
- const principal=Number(amount.value);
-
- const months=Number(term.value);
-
- const rate=0.10/12;
-
- const monthly=principal*rate*Math.pow(1+rate,months)/(Math.pow(1+rate,months)-1);
-
- amountOut.textContent="$"+principal.toLocaleString("en-US");
-
- const language=getLanguage();
-
- const suffix={
-
-  pt:"meses",vi:"tháng",fa:" ماه",id:"bulan",
-
-  fr:"mois",fi:" kuukautta",es:"meses",en:"months"
-
- };
-
- termOut.textContent=months+" "+(suffix[language]||"months");
-
- payment.textContent="$"+monthly.toLocaleString("en-US",{
-
-  minimumFractionDigits:2,maximumFractionDigits:2
-
- });
-
-}
-
-function applyLanguage(language){
-
- const lang=translations[language]?language:"en";
-
- const dictionary=translations[lang];
-
- document.documentElement.lang=lang;
-
- document.documentElement.dir=lang==="fa"?"rtl":"ltr";
-
- document.body.classList.toggle("rtl-language",lang==="fa");
-
- document.querySelectorAll("[data-key]").forEach(element=>{
-
-  const key=element.dataset.key;
-
-  if(Object.prototype.hasOwnProperty.call(dictionary,key)){
-
-   element.textContent=dictionary[key];
-
-  }
-
- });
-
- document.querySelectorAll("[data-html]").forEach(element=>{
-
-  const key=element.dataset.html;
-
-  if(Object.prototype.hasOwnProperty.call(dictionary,key)){
-
-   element.innerHTML=dictionary[key];
-
-  }
-
- });
-
- document.querySelectorAll("[data-language-selector],#languageSelector").forEach(element=>{
-
-  element.value=lang;
-
- });
-
- try{
-
-  localStorage.setItem("globalbridge_language",lang);
-
-  localStorage.setItem("selectedLanguage",lang);
-
- }catch(error){}
-
- updateCalculator();
-
-}
-
-window.changeLanguage=applyLanguage;
-
-const selector=document.getElementById("languageSelector");
-
-if(selector){
-
- selector.addEventListener("change",function(){
-
-  applyLanguage(selector.value);
-
- });
-
-}
-
-["amount","term"].forEach(id=>{
-
- const element=document.getElementById(id);
-
- if(element)element.addEventListener("input",updateCalculator);
-
-});
-
-applyLanguage(getLanguage());
-
-})();
-
-</script>
 
 </body>
 
