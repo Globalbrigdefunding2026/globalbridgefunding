@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="GlobalBridgeFunding — international business financing platform.">
+<meta name="theme-color" content="#071426">
+<title>GlobalBridgeFunding — Business Financing</title>
+<link rel="stylesheet" href="styles.css">
+<script src="language.js"></script>
+
+<style>
+/* =========================================
+   HOMEPAGE HERO + MOBILE FIXES
+   (hero image stays visible)
+   ========================================= */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Hero layout */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.hero-left {
+  min-width: 0;
+}
+
+/* Visual container – fixed height so photo has room */
+.visual {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  width: 100%;
+  height: 520px;
+  min-height: 520px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #10243b;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .22);
+}
+
+/* Hero photo fills the whole container */
+.visual .hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.92;
+}
+
+.visual .image-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    160deg,
+    rgba(5, 18, 35, .08) 0%,
+    rgba(5, 18, 35, .28) 40%,
+    rgba(5, 18, 35, .72) 100%
+  );
+}
+
+.visual .glow {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 78% 12%,
+    rgba(71, 151, 255, .20),
+    transparent 50%
+  );
+}
+
+/* Finance card – higher + smaller so photo shows around it */
+.visual .finance-card {
+  position: absolute;
+  z-index: 3;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 360px);
+  margin: 0;
+  padding: 18px 16px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, .97);
+  color: #10233b;
+  border: 1px solid rgba(255, 255, 255, .75);
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.visual .finance-card .muted {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.visual .finance-card .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.visual .finance-card .row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #64748b;
+}
+
+.visual .finance-card .big {
+  margin: 12px 0 4px;
+  font-size: clamp(22px, 5.5vw, 28px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.visual .finance-card .line {
+  height: 1px;
+  margin: 12px 0;
+  background: #e5ebf3;
+}
+
+.visual .finance-card .mini-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 36px;
+  margin: 10px 0 4px;
+}
+
+.visual .finance-card .mini-chart span {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(#69d5e9, #2866e9);
+  opacity: 0.85;
+}
+
+.visual .finance-card .mini-chart span:nth-child(1) { height: 28%; }
+.visual .finance-card .mini-chart span:nth-child(2) { height: 42%; }
+.visual .finance-card .mini-chart span:nth-child(3) { height: 35%; }
+.visual .finance-card .mini-chart span:nth-child(4) { height: 58%; }
+.visual .finance-card .mini-chart span:nth-child(5) { height: 50%; }
+.visual .finance-card .mini-chart span:nth-child(6) { height: 72%; }
+.visual .finance-card .mini-chart span:nth-child(7) { height: 100%; }
+
+.visual .finance-card .card-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5ebf3;
+  color: #1d5ee8;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Float card – bottom left, out of the way */
+.visual .float-card {
+  position: absolute;
+  z-index: 4;
+  left: 14px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 75%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, .97);
+  color: #10233b;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .22);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.visual .float-card b {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #e8f1ff;
+  color: #1d5ee8;
+  font-size: 12px;
+}
+
+/* Navigation */
+.nav {
+  gap: 20px;
+}
+
+.nav nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-actions .lang {
+  max-width: 75px;
+}
+
+/* ========== TABLET ========== */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .visual {
+    width: 100%;
+    height: 500px;
+    min-height: 500px;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+  }
+
+  .nav nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 600px) {
+  .hero {
+    gap: 22px;
+  }
+
+  .visual {
+    height: 480px;
+    min-height: 480px;
+    border-radius: 18px;
+  }
+
+  .visual .finance-card {
+    top: 26%;
+    width: min(92%, 340px);
+    padding: 15px 14px;
+    border-radius: 14px;
+  }
+
+  .visual .finance-card .big {
+    font-size: clamp(20px, 6vw, 26px);
+  }
+
+  .visual .float-card {
+    left: 12px;
+    bottom: 14px;
+    max-width: 78%;
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .nav {
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav .brand {
+    max-width: 65%;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav nav {
+    justify-content: flex-start;
+    gap: 10px 16px;
+    overflow-x: auto;
+    padding: 6px 0;
+  }
+
+  .nav nav a {
+    white-space: nowrap;
+  }
+
+  .numbers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .process {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .why {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .apply {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .calc-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ========== VERY SMALL PHONES ========== */
+@media (max-width: 380px) {
+  .visual {
+    height: 460px;
+    min-height: 460px;
+  }
+
+  .visual .finance-card {
+    top: 25%;
+    padding: 13px 12px;
+  }
+
+  .visual .float-card {
+    left: 10px;
+    bottom: 12px;
+  }
+
+  .nav-actions .btn {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .nav .brand {
+    font-size: 14px;
+  }
+}
+
+/* RTL support */
+.rtl-language {
+  direction: rtl;
+}
+
+.rtl-language .nav,
+.rtl-language .nav-actions,
+.rtl-language .actions {
+  direction: rtl;
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="index.html">
+    <span class="logo">G</span>
+    <span>GlobalBridge<span>Funding</span></span>
+  </a>
+  <nav>
+    <a href="#financing" data-key="navFinancing">Financing</a>
+    <a href="#process" data-key="navProcess">How it works</a>
+    <a href="#why" data-key="navWhy">Why us</a>
+    <a href="#support" data-key="navSupport">Support</a>
+  </nav>
+  <div class="nav-actions">
+    <select
+      class="lang"
+      id="languageSelector"
+      data-language-selector="true"
+      aria-label="Language"
+      onchange="changeLanguage(this.value)"
+    >
+      <option value="en">EN</option>
+      <option value="pt">PT</option>
+      <option value="vi">VI</option>
+      <option value="fa">FA</option>
+      <option value="id">ID</option>
+      <option value="fr">FR</option>
+      <option value="fi">FI</option>
+      <option value="es">ES</option>
+    </select>
+    <a href="login.html" data-key="signin">Sign in</a>
+    <a class="btn small" href="#apply" data-key="applyNow">Apply now</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-left">
+    <div class="pill">
+      <span></span>
+      <span data-key="pill">INTERNATIONAL BUSINESS FINANCING</span>
+    </div>
+    <h1 data-html="title">
+      Capital for your next <strong>business move.</strong>
+    </h1>
+    <p class="hero-text" data-html="hero">
+      Access a streamlined digital financing experience built for eligible
+      businesses seeking growth capital from <b>$20,000 to $50,000.</b>
+    </p>
+    <div class="actions">
+      <a class="btn" href="#apply">
+        <span data-key="start">Start an application</span>
+        <span>→</span>
+      </a>
+      <a class="ghost" href="#calculator" data-key="calculate">
+        Calculate payment
+      </a>
+    </div>
+    <div class="micro">
+      <span data-key="micro1">✓ Digital application</span>
+      <span data-key="micro2">✓ Manual review</span>
+      <span data-key="micro3">✓ Secure document process</span>
+    </div>
+  </div>
+
+  <div class="visual">
+    <img
+      class="hero-photo"
+      src="https://globalbridgefunding.com/images/IMG_0373.jpeg"
+      alt="Business and finance setting"
+      fetchpriority="high"
+      loading="eager"
+      onerror="this.style.display='none';"
+    >
+    <div class="image-shade" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+
+    <div class="finance-card">
+      <div class="card-head">
+        <span data-key="overview">FINANCING OVERVIEW</span>
+        <span class="live">●</span>
+      </div>
+      <div class="big">
+        $20,000 <i>—</i> $50,000
+      </div>
+      <div class="muted" data-key="available">
+        Available financing range
+      </div>
+      <div class="line"></div>
+      <div class="row">
+        <span data-key="interest">Illustrative annual interest</span>
+        <b>10%</b>
+      </div>
+      <div class="row">
+        <span data-key="term">Illustrative term</span>
+        <b data-key="termValue">Up to 24 months</b>
+      </div>
+      <div class="mini-chart">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      <a href="#calculator" class="card-link">
+        <span data-key="estimate">Estimate your payment</span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <div class="float-card">
+      <b>01</b>
+      <span data-key="floatCard">Simple digital application</span>
+    </div>
+  </div>
+</section>
+
+<section class="numbers">
+  <div>
+    <b>$20K–$50K</b>
+    <span data-key="number1">Financing range</span>
+  </div>
+  <div>
+    <b>10%</b>
+    <span data-key="number2">Illustrative annual rate</span>
+  </div>
+  <div>
+    <b>24 mo.</b>
+    <span data-key="number3">Illustrative maximum term</span>
+  </div>
+  <div>
+    <b>8</b>
+    <span data-key="number4">Languages</span>
+  </div>
+</section>
+
+<section id="financing" class="section">
+  <div class="heading">
+    <div class="eyebrow" data-key="financing">FINANCING</div>
+    <h2 data-key="designed">Designed around your business.</h2>
+    <p data-key="financingIntro">
+      Explore the core financing structure
