@@ -28,51 +28,123 @@ html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
 
 body{margin:0;max-width:100%;overflow-x:hidden}
 
-img{max-width:100%}
+img{max-width:100%;height:auto}
 
-.hero{width:100%;min-width:0}
+/* Navigation */
 
-.hero-copy,.hero-visual{min-width:0}
+.nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+.brand{display:inline-flex;align-items:center;gap:10px;min-width:0;text-decoration:none}
+
+.main-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+
+.nav-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:100%}
+
+/* Hero layout */
+
+.hero{
+
+ display:grid;
+
+ grid-template-columns:minmax(0,1fr) minmax(0,0.95fr);
+
+ align-items:center;
+
+ gap:38px;
+
+ width:100%;
+
+ min-width:0;
+
+ max-width:1240px;
+
+ margin:0 auto;
+
+ padding:54px 24px;
+
+}
+
+.hero-copy,.hero-visual{min-width:0;width:100%}
+
+.hero-copy{position:relative;z-index:1}
 
 .hero-visual{
 
- position:relative;isolation:isolate;width:100%;
+ position:relative;
 
- height:520px;min-height:520px;overflow:hidden;
+ isolation:isolate;
 
- border-radius:24px
+ width:100%;
+
+ height:440px;
+
+ min-height:0;
+
+ overflow:hidden;
+
+ border-radius:24px;
+
+ background:#07172c;
 
 }
 
 .hero-photo{
 
- position:absolute;inset:0;z-index:0;display:block;
+ position:absolute;
 
- width:100%;height:100%;object-fit:cover;
+ inset:0;
 
- object-position:center
+ z-index:0;
+
+ display:block;
+
+ width:100%;
+
+ height:100%;
+
+ max-width:none;
+
+ object-fit:cover;
+
+ object-position:center;
 
 }
 
 .photo-shade{
 
- position:absolute;inset:0;z-index:1;
+ position:absolute;
 
- background:linear-gradient(180deg,rgba(4,20,42,.05),rgba(4,20,42,.6));
+ inset:0;
 
- pointer-events:none
+ z-index:1;
+
+ background:linear-gradient(180deg,rgba(4,20,42,.02),rgba(4,20,42,.52));
+
+ pointer-events:none;
 
 }
 
 .image-fallback{
 
- position:absolute;inset:0;z-index:0;
+ position:absolute;
+
+ inset:0;
+
+ z-index:0;
 
  background:radial-gradient(circle at 70% 25%,#1c5780,#07172c 70%);
 
- color:white;align-items:center;justify-content:center;
+ color:white;
 
- flex-direction:column;text-align:center;padding:24px
+ align-items:center;
+
+ justify-content:center;
+
+ flex-direction:column;
+
+ text-align:center;
+
+ padding:24px;
 
 }
 
@@ -82,21 +154,41 @@ img{max-width:100%}
 
 .fallback-orbit{width:120px;height:120px;border:2px solid #8bdcf1;border-radius:50%}
 
+/* Financing card stays inside the image */
+
 .finance-card{
 
- position:absolute;z-index:3;top:40%;left:6%;right:6%;
+ position:absolute;
 
- width:auto;max-width:440px;margin:0 auto;padding:22px;
+ z-index:3;
 
- transform:translateY(-50%);box-sizing:border-box
+ top:50%;
+
+ left:50%;
+
+ right:auto;
+
+ width:calc(100% - 44px);
+
+ max-width:390px;
+
+ margin:0;
+
+ padding:20px;
+
+ transform:translate(-50%,-50%);
+
+ box-sizing:border-box;
 
 }
 
 .finance-card .big{
 
- font-size:clamp(21px,6vw,30px);line-height:1.3;
+ font-size:clamp(21px,2.5vw,30px);
 
- overflow-wrap:anywhere
+ line-height:1.3;
+
+ overflow-wrap:anywhere;
 
 }
 
@@ -104,45 +196,93 @@ img{max-width:100%}
 
 .float-card{
 
- position:absolute;z-index:4;left:5%;right:auto;
+ position:absolute;
 
- bottom:14px;max-width:90%;box-sizing:border-box
+ z-index:4;
+
+ left:18px;
+
+ right:auto;
+
+ bottom:14px;
+
+ max-width:calc(100% - 36px);
+
+ box-sizing:border-box;
 
 }
 
+/* Mobile and tablet */
+
 @media(max-width:900px){
 
- .hero{grid-template-columns:minmax(0,1fr);gap:28px}
+ .hero{
 
- .hero-visual{width:100%;height:500px;min-height:500px}
+  grid-template-columns:minmax(0,1fr);
+
+  gap:26px;
+
+  padding:36px 22px;
+
+ }
+
+ .hero-copy{width:100%}
+
+ .hero-visual{
+
+  width:100%;
+
+  height:420px;
+
+  min-height:0;
+
+ }
+
+ .finance-card{max-width:410px}
 
 }
 
 @media(max-width:600px){
 
- .nav{flex-wrap:wrap;gap:12px}
+ .nav{padding:14px 16px;gap:12px}
 
- .nav-actions{max-width:100%;flex-wrap:wrap}
+ .nav-actions{gap:8px}
 
- .main-nav{width:100%;display:flex;flex-wrap:wrap;gap:14px}
+ .main-nav{width:100%;display:flex;flex-wrap:wrap;gap:12px}
 
- .hero{padding-left:18px;padding-right:18px}
+ .hero{padding:26px 16px;gap:22px}
 
- .hero-visual{height:500px;min-height:500px;border-radius:18px}
+ .hero-visual{
 
- .finance-card{
+  height:390px;
 
-  top:39%;left:4%;right:4%;width:auto;padding:17px;
+  min-height:0;
 
-  border-radius:16px
+  border-radius:18px;
 
  }
 
- .finance-card .big{font-size:clamp(21px,6vw,30px);line-height:1.3}
+ .finance-card{
 
- .finance-card .card-row{gap:8px}
+  top:47%;
 
- .float-card{left:4%;bottom:12px;max-width:92%}
+  left:50%;
+
+  width:calc(100% - 28px);
+
+  max-width:360px;
+
+  padding:15px;
+
+  border-radius:16px;
+
+ }
+
+ .finance-card .big{font-size:clamp(21px,6vw,28px);line-height:1.3}
+
+ .finance-card .card-row{gap:7px}
+
+ .float-card{left:12px;bottom:10px;max-width:calc(100% - 24px)}
 
  .hero .actions{flex-wrap:wrap;gap:12px}
 
@@ -160,11 +300,27 @@ img{max-width:100%}
 
 @media(max-width:380px){
 
- .hero-visual{height:490px;min-height:490px}
+ .hero{padding-left:12px;padding-right:12px}
 
- .finance-card{top:38%;padding:14px}
+ .hero-visual{height:370px;min-height:0}
+
+ .finance-card{top:46%;padding:12px;width:calc(100% - 22px)}
+
+ .finance-card .big{font-size:21px}
+
+ .float-card{left:10px;bottom:8px}
 
 }
+
+/* Persian layout support */
+
+.rtl-language{direction:rtl}
+
+.rtl-language .hero-copy{text-align:right}
+
+.rtl-language .finance-card{text-align:right}
+
+.rtl-language .card-row{flex-direction:row}
 
 </style>
 
@@ -431,6 +587,7 @@ img{max-width:100%}
  </div>
 
 </section>
+
 <section id="calculator" class="calc-section">
 
  <div class="calc-box">
@@ -507,6 +664,7 @@ img{max-width:100%}
 
 </section>
 
+
 <section id="why" class="why-section">
 
  <div>
@@ -581,547 +739,581 @@ img{max-width:100%}
 
 (function(){
 
- "use strict";
+"use strict";
 
- const translations={
+const translations={
 
- en:{
+en:{
 
- pill:"INTERNATIONAL BUSINESS FINANCING",
+pill:"INTERNATIONAL BUSINESS FINANCING",
 
- title:"Capital for your next <strong>business move.</strong>",
+title:"Capital for your next <strong>business move.</strong>",
 
- hero:"Access a streamlined digital financing experience built for eligible businesses seeking growth capital from <b>$20,000 to $50,000.</b>",
+hero:"Access a streamlined digital financing experience built for eligible businesses seeking growth capital from <b>$20,000 to $50,000.</b>",
 
- start:"Start an application",calculate:"Calculate payment",
+start:"Start an application",calculate:"Calculate payment",
 
- overview:"FINANCING OVERVIEW",available:"Available financing range",
+overview:"FINANCING OVERVIEW",available:"Available financing range",
 
- interest:"Illustrative annual interest",term:"Illustrative term",
+interest:"Illustrative annual interest",term:"Illustrative term",
 
- termValue:"Up to 24 months",estimate:"Estimate your payment",
+termValue:"Up to 24 months",estimate:"Estimate your payment",
 
- floatCard:"Simple digital application",
+floatCard:"Simple digital application",
 
- micro1:"✓ Digital application",micro2:"✓ Manual review",micro3:"✓ Secure document process",
+micro1:"✓ Digital application",micro2:"✓ Manual review",micro3:"✓ Secure document process",
 
- number1:"Financing range",number2:"Illustrative annual rate",number3:"Illustrative maximum term",number4:"Languages",
+number1:"Financing range",number2:"Illustrative annual rate",number3:"Illustrative maximum term",number4:"Languages",
 
- financing:"FINANCING",designed:"Designed around your business.",
+financing:"FINANCING",designed:"Designed around your business.",
 
- financingIntro:"Explore the core financing structure before starting your application.",
+financingIntro:"Explore the core financing structure before starting your application.",
 
- card1Title:"Growth capital",card1Text:"Financing from $20,000 to $50,000 for eligible business needs, subject to review and approval.",card1Link:"Learn more →",
+card1Title:"Growth capital",card1Text:"Financing from $20,000 to $50,000 for eligible business needs, subject to review and approval.",card1Link:"Learn more →",
 
- card2Title:"Clear structure",card2Text:"An illustrative 10% annual interest rate and up to 24-month term are shown for planning purposes.",card2Link:"Use calculator →",
+card2Title:"Clear structure",card2Text:"An illustrative 10% annual interest rate and up to 24-month term are shown for planning purposes.",card2Link:"Use calculator →",
 
- card3Title:"Digital experience",card3Text:"Register, submit your information, complete KYC and track your application from one account.",card3Link:"See the process →",
+card3Title:"Digital experience",card3Text:"Register, submit your information, complete KYC and track your application from one account.",card3Link:"See the process →",
 
- calculatorEyebrow:"FINANCING CALCULATOR",calculatorTitle:"Plan before you apply.",calculatorText:"Adjust the amount and term to see an illustrative monthly payment.",
+calculatorEyebrow:"FINANCING CALCULATOR",calculatorTitle:"Plan before you apply.",calculatorText:"Adjust the amount and term to see an illustrative monthly payment.",
 
- amountLabel:"Financing amount",termLabel:"Term",monthlyPayment:"Illustrative monthly payment",
+amountLabel:"Financing amount",termLabel:"Term",monthlyPayment:"Illustrative monthly payment",
 
- calculatorDisclaimer:"Illustration only. Final financing terms are subject to eligibility, review and applicable terms.",
+calculatorDisclaimer:"Illustration only. Final financing terms are subject to eligibility, review and applicable terms.",
 
- process:"HOW IT WORKS",processTitle:"From application to decision.",
+process:"HOW IT WORKS",processTitle:"From application to decision.",
 
- step1Title:"Create your account",step1Text:"Register securely using your email and create your profile.",
+step1Title:"Create your account",step1Text:"Register securely using your email and create your profile.",
 
- step2Title:"Tell us about your business",step2Text:"Provide the requested business and financing information.",
+step2Title:"Tell us about your business",step2Text:"Provide the requested business and financing information.",
 
- step3Title:"Complete KYC",step3Text:"Submit the required identity and business documents for review.",
+step3Title:"Complete KYC",step3Text:"Submit the required identity and business documents for review.",
 
- step4Title:"Receive a decision",step4Text:"Track your application and receive updates through your account.",
+step4Title:"Receive a decision",step4Text:"Track your application and receive updates through your account.",
 
- why:"THE GLOBALBRIDGE APPROACH",whyTitle:"A simpler digital financing journey.",
+why:"THE GLOBALBRIDGE APPROACH",whyTitle:"A simpler digital financing journey.",
 
- why1Title:"Clear information",why1Text:"Understand the illustrative structure before you apply.",
+why1Title:"Clear information",why1Text:"Understand the illustrative structure before you apply.",
 
- why2Title:"Human review",why2Text:"Applications and submitted information can be reviewed manually.",
+why2Title:"Human review",why2Text:"Applications and submitted information can be reviewed manually.",
 
- why3Title:"Built for mobile",why3Text:"A responsive experience designed to work beautifully on your phone.",
+why3Title:"Built for mobile",why3Text:"A responsive experience designed to work beautifully on your phone.",
 
- apply:"READY TO START?",applyTitle:"Take the first step.",
+apply:"READY TO START?",applyTitle:"Take the first step.",applyText:"Create an account and begin your financing application.",
 
- applyText:"Create an account and begin your financing application.",
+createAccount:"Create your account",signin:"Sign in",applyNow:"Apply now",
 
- createAccount:"Create your account",signin:"Sign in",applyNow:"Apply now",
+navFinancing:"Financing",navProcess:"How it works",navWhy:"Why us",navSupport:"Support"
 
- navFinancing:"Financing",navProcess:"How it works",navWhy:"Why us",navSupport:"Support"
+},
 
- },
+pt:{
 
- pt:{
+pill:"FINANCIAMENTO EMPRESARIAL INTERNACIONAL",title:"Capital para o seu próximo <strong>movimento empresarial.</strong>",
 
- pill:"FINANCIAMENTO EMPRESARIAL INTERNACIONAL",title:"Capital para o seu próximo <strong>movimento empresarial.</strong>",
+hero:"Aceda a uma experiência de financiamento digital para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>",
 
- hero:"Aceda a uma experiência de financiamento digital para empresas elegíveis que procuram capital de crescimento de <b>$20.000 a $50.000.</b>",
+start:"Iniciar candidatura",calculate:"Calcular pagamento",overview:"VISÃO GERAL DO FINANCIAMENTO",available:"Intervalo de financiamento disponível",
 
- start:"Iniciar candidatura",calculate:"Calcular pagamento",overview:"VISÃO GERAL DO FINANCIAMENTO",available:"Intervalo de financiamento disponível",
+interest:"Taxa de juro anual indicativa",term:"Prazo indicativo",termValue:"Até 24 meses",estimate:"Estimar o pagamento",floatCard:"Candidatura digital simples",
 
- interest:"Taxa de juro anual indicativa",term:"Prazo indicativo",termValue:"Até 24 meses",estimate:"Estimar o pagamento",floatCard:"Candidatura digital simples",
+micro1:"✓ Candidatura digital",micro2:"✓ Análise manual",micro3:"✓ Processo seguro de documentos",
 
- micro1:"✓ Candidatura digital",micro2:"✓ Análise manual",micro3:"✓ Processo seguro de documentos",
+number1:"Intervalo de financiamento",number2:"Taxa anual indicativa",number3:"Prazo máximo indicativo",number4:"Idiomas",
 
- number1:"Intervalo de financiamento",number2:"Taxa anual indicativa",number3:"Prazo máximo indicativo",number4:"Idiomas",
+financing:"FINANCIAMENTO",designed:"Pensado para o seu negócio.",financingIntro:"Explore a estrutura de financiamento antes de iniciar a candidatura.",
 
- financing:"FINANCIAMENTO",designed:"Pensado para o seu negócio.",financingIntro:"Explore a estrutura de financiamento antes de iniciar a candidatura.",
+card1Title:"Capital de crescimento",card1Text:"Financiamento de $20.000 a $50.000 para necessidades empresariais elegíveis, sujeito a análise e aprovação.",card1Link:"Saiba mais →",
 
- card1Title:"Capital de crescimento",card1Text:"Financiamento de $20.000 a $50.000 para necessidades empresariais elegíveis, sujeito a análise e aprovação.",card1Link:"Saiba mais →",
+card2Title:"Estrutura clara",card2Text:"Taxa anual indicativa de 10% e prazo até 24 meses para planeamento.",card2Link:"Usar calculadora →",
 
- card2Title:"Estrutura clara",card2Text:"Taxa anual indicativa de 10% e prazo até 24 meses para planeamento.",card2Link:"Usar calculadora →",
+card3Title:"Experiência digital",card3Text:"Registe-se, envie informações, conclua o KYC e acompanhe a candidatura numa conta.",card3Link:"Ver o processo →",
 
- card3Title:"Experiência digital",card3Text:"Registe-se, envie informações, conclua o KYC e acompanhe a candidatura numa conta.",card3Link:"Ver o processo →",
+calculatorEyebrow:"CALCULADORA DE FINANCIAMENTO",calculatorTitle:"Planeie antes de se candidatar.",calculatorText:"Ajuste o montante e o prazo para ver uma prestação mensal indicativa.",
 
- calculatorEyebrow:"CALCULADORA DE FINANCIAMENTO",calculatorTitle:"Planeie antes de se candidatar.",calculatorText:"Ajuste o montante e o prazo para ver uma prestação mensal indicativa.",
+amountLabel:"Montante do financiamento",termLabel:"Prazo",monthlyPayment:"Prestação mensal indicativa",
 
- amountLabel:"Montante do financiamento",termLabel:"Prazo",monthlyPayment:"Prestação mensal indicativa",
+calculatorDisclaimer:"Apenas uma simulação. Os termos finais estão sujeitos a elegibilidade, análise e condições aplicáveis.",
 
- calculatorDisclaimer:"Apenas uma simulação. Os termos finais estão sujeitos a elegibilidade, análise e condições aplicáveis.",
+process:"COMO FUNCIONA",processTitle:"Da candidatura à decisão.",step1Title:"Crie a sua conta",step1Text:"Registe-se com segurança usando o seu e-mail e crie o perfil.",
 
- process:"COMO FUNCIONA",processTitle:"Da candidatura à decisão.",step1Title:"Crie a sua conta",step1Text:"Registe-se com segurança usando o seu e-mail e crie o perfil.",
+step2Title:"Conte-nos sobre o seu negócio",step2Text:"Forneça as informações empresariais e de financiamento solicitadas.",
 
- step2Title:"Conte-nos sobre o seu negócio",step2Text:"Forneça as informações empresariais e de financiamento solicitadas.",
+step3Title:"Conclua o KYC",step3Text:"Envie os documentos de identidade e empresariais necessários.",
 
- step3Title:"Conclua o KYC",step3Text:"Envie os documentos de identidade e empresariais necessários.",
+step4Title:"Receba uma decisão",step4Text:"Acompanhe a candidatura e receba atualizações na sua conta.",
 
- step4Title:"Receba uma decisão",step4Text:"Acompanhe a candidatura e receba atualizações na sua conta.",
+why:"A ABORDAGEM GLOBALBRIDGE",whyTitle:"Uma experiência de financiamento digital mais simples.",
 
- why:"A ABORDAGEM GLOBALBRIDGE",whyTitle:"Uma experiência de financiamento digital mais simples.",
+why1Title:"Informação clara",why1Text:"Compreenda a estrutura indicativa antes de se candidatar.",
 
- why1Title:"Informação clara",why1Text:"Compreenda a estrutura indicativa antes de se candidatar.",
+why2Title:"Análise humana",why2Text:"As candidaturas e informações podem ser analisadas manualmente.",
 
- why2Title:"Análise humana",why2Text:"As candidaturas e informações podem ser analisadas manualmente.",
+why3Title:"Pensado para dispositivos móveis",why3Text:"Uma experiência responsiva concebida para o telemóvel.",
 
- why3Title:"Pensado para dispositivos móveis",why3Text:"Uma experiência responsiva concebida para o telemóvel.",
+apply:"PRONTO PARA COMEÇAR?",applyTitle:"Dê o primeiro passo.",applyText:"Crie uma conta e comece a candidatura.",
 
- apply:"PRONTO PARA COMEÇAR?",applyTitle:"Dê o primeiro passo.",applyText:"Crie uma conta e comece a candidatura.",
+createAccount:"Criar a sua conta",signin:"Iniciar sessão",applyNow:"Candidatar-se",
 
- createAccount:"Criar a sua conta",signin:"Iniciar sessão",applyNow:"Candidatar-se",
+navFinancing:"Financiamento",navProcess:"Como funciona",navWhy:"Porquê nós",navSupport:"Suporte"
 
- navFinancing:"Financiamento",navProcess:"Como funciona",navWhy:"Porquê nós",navSupport:"Suporte"
+},
 
- },
+vi:{
 
- vi:{
+pill:"TÀI TRỢ DOANH NGHIỆP QUỐC TẾ",title:"Nguồn vốn cho <strong>bước tiến kinh doanh tiếp theo.</strong>",
 
- pill:"TÀI TRỢ DOANH NGHIỆP QUỐC TẾ",title:"Nguồn vốn cho <strong>bước tiến kinh doanh tiếp theo.</strong>",
+hero:"Trải nghiệm tài trợ kỹ thuật số cho doanh nghiệp đủ điều kiện tìm kiếm vốn tăng trưởng từ <b>$20.000 đến $50.000.</b>",
 
- hero:"Trải nghiệm tài trợ kỹ thuật số cho doanh nghiệp đủ điều kiện tìm kiếm vốn tăng trưởng từ <b>$20.000 đến $50.000.</b>",
+start:"Bắt đầu hồ sơ",calculate:"Tính khoản thanh toán",overview:"TỔNG QUAN TÀI TRỢ",available:"Khoản tài trợ khả dụng",
 
- start:"Bắt đầu hồ sơ",calculate:"Tính khoản thanh toán",overview:"TỔNG QUAN TÀI TRỢ",available:"Khoản tài trợ khả dụng",
+interest:"Lãi suất hàng năm minh họa",term:"Thời hạn minh họa",termValue:"Tối đa 24 tháng",estimate:"Ước tính khoản thanh toán",floatCard:"Hồ sơ kỹ thuật số đơn giản",
 
- interest:"Lãi suất hàng năm minh họa",term:"Thời hạn minh họa",termValue:"Tối đa 24 tháng",estimate:"Ước tính khoản thanh toán",floatCard:"Hồ sơ kỹ thuật số đơn giản",
+micro1:"✓ Đăng ký kỹ thuật số",micro2:"✓ Xem xét thủ công",micro3:"✓ Quy trình tài liệu an toàn",
 
- micro1:"✓ Đăng ký kỹ thuật số",micro2:"✓ Xem xét thủ công",micro3:"✓ Quy trình tài liệu an toàn",
+number1:"Khoản tài trợ",number2:"Lãi suất minh họa",number3:"Thời hạn tối đa",number4:"Ngôn ngữ",
 
- number1:"Khoản tài trợ",number2:"Lãi suất minh họa",number3:"Thời hạn tối đa",number4:"Ngôn ngữ",
+financing:"TÀI TRỢ",designed:"Được thiết kế cho doanh nghiệp của bạn.",financingIntro:"Khám phá cấu trúc tài trợ trước khi bắt đầu hồ sơ.",
 
- financing:"TÀI TRỢ",designed:"Được thiết kế cho doanh nghiệp của bạn.",financingIntro:"Khám phá cấu trúc tài trợ trước khi bắt đầu hồ sơ.",
+card1Title:"Vốn tăng trưởng",card1Text:"Tài trợ từ $20.000 đến $50.000 cho nhu cầu kinh doanh đủ điều kiện, tùy thuộc xem xét và phê duyệt.",card1Link:"Tìm hiểu thêm →",
 
- card1Title:"Vốn tăng trưởng",card1Text:"Tài trợ từ $20.000 đến $50.000 cho nhu cầu kinh doanh đủ điều kiện, tùy thuộc xem xét và phê duyệt.",card1Link:"Tìm hiểu thêm →",
+card2Title:"Cấu trúc rõ ràng",card2Text:"Lãi suất minh họa 10% mỗi năm và thời hạn tối đa 24 tháng để lập kế hoạch.",card2Link:"Dùng công cụ tính →",
 
- card2Title:"Cấu trúc rõ ràng",card2Text:"Lãi suất minh họa 10% mỗi năm và thời hạn tối đa 24 tháng để lập kế hoạch.",card2Link:"Dùng công cụ tính →",
+card3Title:"Trải nghiệm kỹ thuật số",card3Text:"Đăng ký, gửi thông tin, hoàn tất KYC và theo dõi hồ sơ trong một tài khoản.",card3Link:"Xem quy trình →",
 
- card3Title:"Trải nghiệm kỹ thuật số",card3Text:"Đăng ký, gửi thông tin, hoàn tất KYC và theo dõi hồ sơ trong một tài khoản.",card3Link:"Xem quy trình →",
+calculatorEyebrow:"CÔNG CỤ TÍNH TÀI TRỢ",calculatorTitle:"Lập kế hoạch trước khi đăng ký.",calculatorText:"Điều chỉnh số tiền và thời hạn để xem khoản thanh toán hàng tháng minh họa.",
 
- calculatorEyebrow:"CÔNG CỤ TÍNH TÀI TRỢ",calculatorTitle:"Lập kế hoạch trước khi đăng ký.",calculatorText:"Điều chỉnh số tiền và thời hạn để xem khoản thanh toán hàng tháng minh họa.",
+amountLabel:"Số tiền tài trợ",termLabel:"Thời hạn",monthlyPayment:"Khoản thanh toán hàng tháng minh họa",
 
- amountLabel:"Số tiền tài trợ",termLabel:"Thời hạn",monthlyPayment:"Khoản thanh toán hàng tháng minh họa",
+calculatorDisclaimer:"Chỉ mang tính minh họa. Điều khoản cuối cùng phụ thuộc vào điều kiện và xem xét.",
 
- calculatorDisclaimer:"Chỉ mang tính minh họa. Điều khoản cuối cùng phụ thuộc vào điều kiện và xem xét.",
+process:"CÁCH THỨC HOẠT ĐỘNG",processTitle:"Từ hồ sơ đến quyết định.",step1Title:"Tạo tài khoản",step1Text:"Đăng ký bằng email và tạo hồ sơ.",
 
- process:"CÁCH THỨC HOẠT ĐỘNG",processTitle:"Từ hồ sơ đến quyết định.",step1Title:"Tạo tài khoản",step1Text:"Đăng ký bằng email và tạo hồ sơ.",
+step2Title:"Cho chúng tôi biết về doanh nghiệp",step2Text:"Cung cấp thông tin kinh doanh và tài trợ được yêu cầu.",
 
- step2Title:"Cho chúng tôi biết về doanh nghiệp",step2Text:"Cung cấp thông tin kinh doanh và tài trợ được yêu cầu.",
+step3Title:"Hoàn tất KYC",step3Text:"Gửi giấy tờ nhận dạng và doanh nghiệp cần thiết.",
 
- step3Title:"Hoàn tất KYC",step3Text:"Gửi giấy tờ nhận dạng và doanh nghiệp cần thiết.",
+step4Title:"Nhận quyết định",step4Text:"Theo dõi hồ sơ và nhận cập nhật qua tài khoản.",
 
- step4Title:"Nhận quyết định",step4Text:"Theo dõi hồ sơ và nhận cập nhật qua tài khoản.",
+why:"CÁCH TIẾP CẬN GLOBALBRIDGE",whyTitle:"Hành trình tài trợ kỹ thuật số đơn giản hơn.",
 
- why:"CÁCH TIẾP CẬN GLOBALBRIDGE",whyTitle:"Hành trình tài trợ kỹ thuật số đơn giản hơn.",
+why1Title:"Thông tin rõ ràng",why1Text:"Hiểu cấu trúc minh họa trước khi đăng ký.",
 
- why1Title:"Thông tin rõ ràng",why1Text:"Hiểu cấu trúc minh họa trước khi đăng ký.",
+why2Title:"Xem xét thủ công",why2Text:"Hồ sơ và thông tin có thể được xem xét thủ công.",
 
- why2Title:"Xem xét thủ công",why2Text:"Hồ sơ và thông tin có thể được xem xét thủ công.",
+why3Title:"Thiết kế cho điện thoại",why3Text:"Trải nghiệm đáp ứng hoạt động tốt trên điện thoại.",
 
- why3Title:"Thiết kế cho điện thoại",why3Text:"Trải nghiệm đáp ứng hoạt động tốt trên điện thoại.",
+apply:"SẴN SÀNG BẮT ĐẦU?",applyTitle:"Hãy thực hiện bước đầu tiên.",applyText:"Tạo tài khoản và bắt đầu hồ sơ tài trợ.",
 
- apply:"SẴN SÀNG BẮT ĐẦU?",applyTitle:"Hãy thực hiện bước đầu tiên.",applyText:"Tạo tài khoản và bắt đầu hồ sơ tài trợ.",
+createAccount:"Tạo tài khoản",signin:"Đăng nhập",applyNow:"Đăng ký ngay",
 
- createAccount:"Tạo tài khoản",signin:"Đăng nhập",applyNow:"Đăng ký ngay",
+navFinancing:"Tài trợ",navProcess:"Cách hoạt động",navWhy:"Vì sao chọn chúng tôi",navSupport:"Hỗ trợ"
 
- navFinancing:"Tài trợ",navProcess:"Cách hoạt động",navWhy:"Vì sao chọn chúng tôi",navSupport:"Hỗ trợ"
+},
 
- },
+fa:{
 
- fa:{
+pill:"تأمین مالی کسب‌وکار بین‌المللی",title:"سرمایه برای <strong>گام بعدی کسب‌وکار شما.</strong>",
 
- pill:"تأمین مالی کسب‌وکار بین‌المللی",title:"سرمایه برای <strong>گام بعدی کسب‌وکار شما.</strong>",
+hero:"تجربه تأمین مالی دیجیتال برای کسب‌وکارهای واجد شرایط با سرمایه رشد از <b>$20,000 تا $50,000</b>.",
 
- hero:"تجربه تأمین مالی دیجیتال برای کسب‌وکارهای واجد شرایط با سرمایه رشد از <b>$20,000 تا $50,000</b>.",
+start:"شروع درخواست",calculate:"محاسبه پرداخت",overview:"نمای کلی تأمین مالی",available:"محدوده تأمین مالی",
 
- start:"شروع درخواست",calculate:"محاسبه پرداخت",overview:"نمای کلی تأمین مالی",available:"محدوده تأمین مالی",
+interest:"نرخ سود سالانه نمونه",term:"مدت نمونه",termValue:"تا ۲۴ ماه",estimate:"برآورد پرداخت",floatCard:"درخواست دیجیتال ساده",
 
- interest:"نرخ سود سالانه نمونه",term:"مدت نمونه",termValue:"تا ۲۴ ماه",estimate:"برآورد پرداخت",floatCard:"درخواست دیجیتال ساده",
+micro1:"✓ درخواست دیجیتال",micro2:"✓ بررسی دستی",micro3:"✓ فرآیند امن اسناد",
 
- micro1:"✓ درخواست دیجیتال",micro2:"✓ بررسی دستی",micro3:"✓ فرآیند امن اسناد",
+number1:"محدوده تأمین مالی",number2:"نرخ سالانه نمونه",number3:"حداکثر مدت نمونه",number4:"زبان",
 
- number1:"محدوده تأمین مالی",number2:"نرخ سالانه نمونه",number3:"حداکثر مدت نمونه",number4:"زبان",
+financing:"تأمین مالی",designed:"طراحی‌شده برای کسب‌وکار شما.",financingIntro:"ساختار تأمین مالی را پیش از شروع درخواست بررسی کنید.",
 
- financing:"تأمین مالی",designed:"طراحی‌شده برای کسب‌وکار شما.",financingIntro:"ساختار تأمین مالی را پیش از شروع درخواست بررسی کنید.",
+card1Title:"سرمایه رشد",card1Text:"تأمین مالی ۲۰٬۰۰۰ تا ۵۰٬۰۰۰ دلار برای نیازهای واجد شرایط، مشروط به بررسی و تأیید.",card1Link:"اطلاعات بیشتر ←",
 
- card1Title:"سرمایه رشد",card1Text:"تأمین مالی ۲۰٬۰۰۰ تا ۵۰٬۰۰۰ دلار برای نیازهای واجد شرایط، مشروط به بررسی و تأیید.",card1Link:"اطلاعات بیشتر ←",
+card2Title:"ساختار شفاف",card2Text:"نرخ سالانه نمونه ۱۰٪ و مدت تا ۲۴ ماه برای برنامه‌ریزی.",card2Link:"محاسبه‌گر ←",
 
- card2Title:"ساختار شفاف",card2Text:"نرخ سالانه نمونه ۱۰٪ و مدت تا ۲۴ ماه برای برنامه‌ریزی.",card2Link:"محاسبه‌گر ←",
+card3Title:"تجربه دیجیتال",card3Text:"ثبت‌نام کنید، اطلاعات ارسال کنید، KYC را تکمیل و درخواست را پیگیری کنید.",card3Link:"مشاهده مراحل ←",
 
- card3Title:"تجربه دیجیتال",card3Text:"ثبت‌نام کنید، اطلاعات ارسال کنید، KYC را تکمیل و درخواست را پیگیری کنید.",card3Link:"مشاهده مراحل ←",
+calculatorEyebrow:"محاسبه‌گر تأمین مالی",calculatorTitle:"پیش از درخواست برنامه‌ریزی کنید.",calculatorText:"مبلغ و مدت را برای مشاهده پرداخت ماهانه نمونه تنظیم کنید.",
 
- calculatorEyebrow:"محاسبه‌گر تأمین مالی",calculatorTitle:"پیش از درخواست برنامه‌ریزی کنید.",calculatorText:"مبلغ و مدت را برای مشاهده پرداخت ماهانه نمونه تنظیم کنید.",
+amountLabel:"مبلغ تأمین مالی",termLabel:"مدت",monthlyPayment:"پرداخت ماهانه نمونه",
 
- amountLabel:"مبلغ تأمین مالی",termLabel:"مدت",monthlyPayment:"پرداخت ماهانه نمونه",
+calculatorDisclaimer:"صرفاً نمونه است. شرایط نهایی منوط به واجد شرایط بودن و بررسی است.",
 
- calculatorDisclaimer:"صرفاً نمونه است. شرایط نهایی منوط به واجد شرایط بودن و بررسی است.",
+process:"نحوه کار",processTitle:"از درخواست تا تصمیم.",step1Title:"حساب ایجاد کنید",step1Text:"با ایمیل ثبت‌نام کنید و پروفایل بسازید.",
 
- process:"نحوه کار",processTitle:"از درخواست تا تصمیم.",step1Title:"حساب ایجاد کنید",step1Text:"با ایمیل ثبت‌نام کنید و پروفایل بسازید.",
+step2Title:"درباره کسب‌وکار بگویید",step2Text:"اطلاعات موردنیاز کسب‌وکار و تأمین مالی را ارائه دهید.",
 
- step2Title:"درباره کسب‌وکار بگویید",step2Text:"اطلاعات موردنیاز کسب‌وکار و تأمین مالی را ارائه دهید.",
+step3Title:"KYC را تکمیل کنید",step3Text:"مدارک هویتی و کسب‌وکار را ارسال کنید.",
 
- step3Title:"KYC را تکمیل کنید",step3Text:"مدارک هویتی و کسب‌وکار را ارسال کنید.",
+step4Title:"تصمیم را دریافت کنید",step4Text:"درخواست را از حساب خود پیگیری کنید.",
 
- step4Title:"تصمیم را دریافت کنید",step4Text:"درخواست را از حساب خود پیگیری کنید.",
+why:"رویکرد GLOBALBRIDGE",whyTitle:"مسیر ساده‌تر تأمین مالی دیجیتال.",
 
- why:"رویکرد GLOBALBRIDGE",whyTitle:"مسیر ساده‌تر تأمین مالی دیجیتال.",
+why1Title:"اطلاعات شفاف",why1Text:"پیش از درخواست ساختار نمونه را بررسی کنید.",
 
- why1Title:"اطلاعات شفاف",why1Text:"پیش از درخواست ساختار نمونه را بررسی کنید.",
+why2Title:"بررسی انسانی",why2Text:"درخواست‌ها می‌توانند به‌صورت دستی بررسی شوند.",
 
- why2Title:"بررسی انسانی",why2Text:"درخواست‌ها می‌توانند به‌صورت دستی بررسی شوند.",
+why3Title:"طراحی‌شده برای موبایل",why3Text:"تجربه‌ای واکنش‌گرا برای تلفن همراه.",
 
- why3Title:"طراحی‌شده برای موبایل",why3Text:"تجربه‌ای واکنش‌گرا برای تلفن همراه.",
+apply:"آماده شروع هستید؟",applyTitle:"اولین قدم را بردارید.",applyText:"حساب ایجاد کنید و درخواست را آغاز کنید.",
 
- apply:"آماده شروع هستید؟",applyTitle:"اولین قدم را بردارید.",applyText:"حساب ایجاد کنید و درخواست را آغاز کنید.",
+createAccount:"ایجاد حساب",signin:"ورود",applyNow:"درخواست اکنون",
 
- createAccount:"ایجاد حساب",signin:"ورود",applyNow:"درخواست اکنون",
+navFinancing:"تأمین مالی",navProcess:"نحوه کار",navWhy:"چرا ما",navSupport:"پشتیبانی"
 
- navFinancing:"تأمین مالی",navProcess:"نحوه کار",navWhy:"چرا ما",navSupport:"پشتیبانی"
+},
 
- },
+id:{
 
- id:{
+pill:"PEMBIAYAAN BISNIS INTERNASIONAL",title:"Modal untuk <strong>langkah bisnis Anda berikutnya.</strong>",
 
- pill:"PEMBIAYAAN BISNIS INTERNASIONAL",title:"Modal untuk <strong>langkah bisnis Anda berikutnya.</strong>",
+hero:"Pengalaman pembiayaan digital untuk bisnis yang memenuhi syarat dengan modal pertumbuhan <b>$20.000 hingga $50.000.</b>",
 
- hero:"Pengalaman pembiayaan digital untuk bisnis yang memenuhi syarat dengan modal pertumbuhan <b>$20.000 hingga $50.000.</b>",
+start:"Mulai pengajuan",calculate:"Hitung pembayaran",overview:"RINGKASAN PEMBIAYAAN",available:"Kisaran pembiayaan tersedia",
 
- start:"Mulai pengajuan",calculate:"Hitung pembayaran",overview:"RINGKASAN PEMBIAYAAN",available:"Kisaran pembiayaan tersedia",
+interest:"Suku bunga tahunan ilustratif",term:"Jangka waktu ilustratif",termValue:"Hingga 24 bulan",estimate:"Perkirakan pembayaran",floatCard:"Pengajuan digital sederhana",
 
- interest:"Suku bunga tahunan ilustratif",term:"Jangka waktu ilustratif",termValue:"Hingga 24 bulan",estimate:"Perkirakan pembayaran",floatCard:"Pengajuan digital sederhana",
+micro1:"✓ Pengajuan digital",micro2:"✓ Peninjauan manual",micro3:"✓ Proses dokumen aman",
 
- micro1:"✓ Pengajuan digital",micro2:"✓ Peninjauan manual",micro3:"✓ Proses dokumen aman",
+number1:"Kisaran pembiayaan",number2:"Suku bunga ilustratif",number3:"Jangka waktu maksimum",number4:"Bahasa",
 
- number1:"Kisaran pembiayaan",number2:"Suku bunga ilustratif",number3:"Jangka waktu maksimum",number4:"Bahasa",
+financing:"PEMBIAYAAN",designed:"Dirancang untuk bisnis Anda.",financingIntro:"Pelajari struktur pembiayaan sebelum mengajukan.",
 
- financing:"PEMBIAYAAN",designed:"Dirancang untuk bisnis Anda.",financingIntro:"Pelajari struktur pembiayaan sebelum mengajukan.",
+card1Title:"Modal pertumbuhan",card1Text:"Pembiayaan $20.000 hingga $50.000 untuk kebutuhan bisnis yang memenuhi syarat, setelah peninjauan dan persetujuan.",card1Link:"Pelajari lebih lanjut →",
 
- card1Title:"Modal pertumbuhan",card1Text:"Pembiayaan $20.000 hingga $50.000 untuk kebutuhan bisnis yang memenuhi syarat, setelah peninjauan dan persetujuan.",card1Link:"Pelajari lebih lanjut →",
+card2Title:"Struktur jelas",card2Text:"Suku bunga ilustratif 10% per tahun dan jangka waktu hingga 24 bulan untuk perencanaan.",card2Link:"Gunakan kalkulator →",
 
- card2Title:"Struktur jelas",card2Text:"Suku bunga ilustratif 10% per tahun dan jangka waktu hingga 24 bulan untuk perencanaan.",card2Link:"Gunakan kalkulator →",
+card3Title:"Pengalaman digital",card3Text:"Daftar, kirim informasi, selesaikan KYC, dan pantau pengajuan dari satu akun.",card3Link:"Lihat proses →",
 
- card3Title:"Pengalaman digital",card3Text:"Daftar, kirim informasi, selesaikan KYC, dan pantau pengajuan dari satu akun.",card3Link:"Lihat proses →",
+calculatorEyebrow:"KALKULATOR PEMBIAYAAN",calculatorTitle:"Rencanakan sebelum mengajukan.",calculatorText:"Sesuaikan jumlah dan jangka waktu untuk melihat perkiraan pembayaran bulanan.",
 
- calculatorEyebrow:"KALKULATOR PEMBIAYAAN",calculatorTitle:"Rencanakan sebelum mengajukan.",calculatorText:"Sesuaikan jumlah dan jangka waktu untuk melihat perkiraan pembayaran bulanan.",
+amountLabel:"Jumlah pembiayaan",termLabel:"Jangka waktu",monthlyPayment:"Perkiraan pembayaran bulanan",
 
- amountLabel:"Jumlah pembiayaan",termLabel:"Jangka waktu",monthlyPayment:"Perkiraan pembayaran bulanan",
+calculatorDisclaimer:"Hanya ilustrasi. Ketentuan akhir bergantung pada kelayakan dan peninjauan.",
 
- calculatorDisclaimer:"Hanya ilustrasi. Ketentuan akhir bergantung pada kelayakan dan peninjauan.",
+process:"CARA KERJA",processTitle:"Dari pengajuan hingga keputusan.",step1Title:"Buat akun",step1Text:"Daftar dengan email dan buat profil.",
 
- process:"CARA KERJA",processTitle:"Dari pengajuan hingga keputusan.",step1Title:"Buat akun",step1Text:"Daftar dengan email dan buat profil.",
+step2Title:"Ceritakan bisnis Anda",step2Text:"Berikan informasi bisnis dan pembiayaan yang diminta.",
 
- step2Title:"Ceritakan bisnis Anda",step2Text:"Berikan informasi bisnis dan pembiayaan yang diminta.",
+step3Title:"Selesaikan KYC",step3Text:"Kirim dokumen identitas dan bisnis yang diperlukan.",
 
- step3Title:"Selesaikan KYC",step3Text:"Kirim dokumen identitas dan bisnis yang diperlukan.",
+step4Title:"Terima keputusan",step4Text:"Pantau pengajuan melalui akun Anda.",
 
- step4Title:"Terima keputusan",step4Text:"Pantau pengajuan melalui akun Anda.",
+why:"PENDEKATAN GLOBALBRIDGE",whyTitle:"Perjalanan pembiayaan digital yang lebih sederhana.",
 
- why:"PENDEKATAN GLOBALBRIDGE",whyTitle:"Perjalanan pembiayaan digital yang lebih sederhana.",
+why1Title:"Informasi jelas",why1Text:"Pahami struktur ilustratif sebelum mengajukan.",
 
- why1Title:"Informasi jelas",why1Text:"Pahami struktur ilustratif sebelum mengajukan.",
+why2Title:"Peninjauan manusia",why2Text:"Pengajuan dapat ditinjau secara manual.",
 
- why2Title:"Peninjauan manusia",why2Text:"Pengajuan dapat ditinjau secara manual.",
+why3Title:"Dibuat untuk ponsel",why3Text:"Pengalaman responsif untuk perangkat seluler.",
 
- why3Title:"Dibuat untuk ponsel",why3Text:"Pengalaman responsif untuk perangkat seluler.",
+apply:"SIAP MEMULAI?",applyTitle:"Ambil langkah pertama.",applyText:"Buat akun dan mulai pengajuan pembiayaan.",
 
- apply:"SIAP MEMULAI?",applyTitle:"Ambil langkah pertama.",applyText:"Buat akun dan mulai pengajuan pembiayaan.",
+createAccount:"Buat akun",signin:"Masuk",applyNow:"Ajukan sekarang",
 
- createAccount:"Buat akun",signin:"Masuk",applyNow:"Ajukan sekarang",
+navFinancing:"Pembiayaan",navProcess:"Cara kerja",navWhy:"Mengapa kami",navSupport:"Dukungan"
 
- navFinancing:"Pembiayaan",navProcess:"Cara kerja",navWhy:"Mengapa kami",navSupport:"Dukungan"
+},
 
- },
+fr:{
 
- fr:{
+pill:"FINANCEMENT D'ENTREPRISE INTERNATIONAL",title:"Des capitaux pour votre <strong>prochain projet professionnel.</strong>",
 
- pill:"FINANCEMENT D'ENTREPRISE INTERNATIONAL",title:"Des capitaux pour votre <strong>prochain projet professionnel.</strong>",
+hero:"Une expérience de financement numérique pour les entreprises éligibles recherchant un capital de croissance de <b>$20 000 à $50 000.</b>",
 
- hero:"Une expérience de financement numérique pour les entreprises éligibles recherchant un capital de croissance de <b>$20 000 à $50 000.</b>",
+start:"Commencer une demande",calculate:"Calculer le paiement",overview:"APERÇU DU FINANCEMENT",available:"Montant de financement disponible",
 
- start:"Commencer une demande",calculate:"Calculer le paiement",overview:"APERÇU DU FINANCEMENT",available:"Montant de financement disponible",
+interest:"Taux annuel indicatif",term:"Durée indicative",termValue:"Jusqu'à 24 mois",estimate:"Estimer votre paiement",floatCard:"Demande numérique simple",
 
- interest:"Taux annuel indicatif",term:"Durée indicative",termValue:"Jusqu'à 24 mois",estimate:"Estimer votre paiement",floatCard:"Demande numérique simple",
+micro1:"✓ Demande numérique",micro2:"✓ Examen manuel",micro3:"✓ Documents sécurisés",
 
- micro1:"✓ Demande numérique",micro2:"✓ Examen manuel",micro3:"✓ Documents sécurisés",
+number1:"Montant du financement",number2:"Taux annuel indicatif",number3:"Durée maximale indicative",number4:"Langues",
 
- number1:"Montant du financement",number2:"Taux annuel indicatif",number3:"Durée maximale indicative",number4:"Langues",
+financing:"FINANCEMENT",designed:"Conçu pour votre entreprise.",financingIntro:"Découvrez la structure du financement avant de commencer.",
 
- financing:"FINANCEMENT",designed:"Conçu pour votre entreprise.",financingIntro:"Découvrez la structure du financement avant de commencer.",
+card1Title:"Capital de croissance",card1Text:"Financement de 20 000 $ à 50 000 $ pour les besoins professionnels éligibles, sous réserve d'examen et d'approbation.",card1Link:"En savoir plus →",
 
- card1Title:"Capital de croissance",card1Text:"Financement de 20 000 $ à 50 000 $ pour les besoins professionnels éligibles, sous réserve d'examen et d'approbation.",card1Link:"En savoir plus →",
+card2Title:"Structure claire",card2Text:"Taux annuel indicatif de 10 % et durée jusqu'à 24 mois à titre de planification.",card2Link:"Utiliser le calculateur →",
 
- card2Title:"Structure claire",card2Text:"Taux annuel indicatif de 10 % et durée jusqu'à 24 mois à titre de planification.",card2Link:"Utiliser le calculateur →",
+card3Title:"Expérience numérique",card3Text:"Inscrivez-vous, fournissez vos informations, complétez le KYC et suivez votre demande.",card3Link:"Voir le processus →",
 
- card3Title:"Expérience numérique",card3Text:"Inscrivez-vous, fournissez vos informations, complétez le KYC et suivez votre demande.",card3Link:"Voir le processus →",
+calculatorEyebrow:"CALCULATEUR DE FINANCEMENT",calculatorTitle:"Planifiez avant de faire votre demande.",calculatorText:"Ajustez le montant et la durée pour voir un paiement mensuel indicatif.",
 
- calculatorEyebrow:"CALCULATEUR DE FINANCEMENT",calculatorTitle:"Planifiez avant de faire votre demande.",calculatorText:"Ajustez le montant et la durée pour voir un paiement mensuel indicatif.",
+amountLabel:"Montant du financement",termLabel:"Durée",monthlyPayment:"Paiement mensuel indicatif",
 
- amountLabel:"Montant du financement",termLabel:"Durée",monthlyPayment:"Paiement mensuel indicatif",
+calculatorDisclaimer:"Illustration uniquement. Les conditions finales dépendent de l'éligibilité et de l'examen.",
 
- calculatorDisclaimer:"Illustration uniquement. Les conditions finales dépendent de l'éligibilité et de l'examen.",
+process:"COMMENT ÇA MARCHE",processTitle:"De la demande à la décision.",step1Title:"Créez votre compte",step1Text:"Inscrivez-vous avec votre adresse e-mail et créez votre profil.",
 
- process:"COMMENT ÇA MARCHE",processTitle:"De la demande à la décision.",step1Title:"Créez votre compte",step1Text:"Inscrivez-vous avec votre adresse e-mail et créez votre profil.",
+step2Title:"Parlez-nous de votre entreprise",step2Text:"Fournissez les informations demandées.",
 
- step2Title:"Parlez-nous de votre entreprise",step2Text:"Fournissez les informations demandées.",
+step3Title:"Complétez le KYC",step3Text:"Soumettez les documents requis.",
 
- step3Title:"Complétez le KYC",step3Text:"Soumettez les documents requis.",
+step4Title:"Recevez une décision",step4Text:"Suivez votre demande depuis votre compte.",
 
- step4Title:"Recevez une décision",step4Text:"Suivez votre demande depuis votre compte.",
+why:"L'APPROCHE GLOBALBRIDGE",whyTitle:"Un parcours de financement numérique plus simple.",
 
- why:"L'APPROCHE GLOBALBRIDGE",whyTitle:"Un parcours de financement numérique plus simple.",
+why1Title:"Informations claires",why1Text:"Comprenez la structure indicative avant de demander.",
 
- why1Title:"Informations claires",why1Text:"Comprenez la structure indicative avant de demander.",
+why2Title:"Examen humain",why2Text:"Les demandes peuvent être examinées manuellement.",
 
- why2Title:"Examen humain",why2Text:"Les demandes peuvent être examinées manuellement.",
+why3Title:"Conçu pour le mobile",why3Text:"Une expérience adaptée à votre téléphone.",
 
- why3Title:"Conçu pour le mobile",why3Text:"Une expérience adaptée à votre téléphone.",
+apply:"PRÊT À COMMENCER ?",applyTitle:"Faites le premier pas.",applyText:"Créez un compte et commencez votre demande.",
 
- apply:"PRÊT À COMMENCER ?",applyTitle:"Faites le premier pas.",applyText:"Créez un compte et commencez votre demande.",
+createAccount:"Créer votre compte",signin:"Se connecter",applyNow:"Faire une demande",
 
- createAccount:"Créer votre compte",signin:"Se connecter",applyNow:"Faire une demande",
+navFinancing:"Financement",navProcess:"Comment ça marche",navWhy:"Pourquoi nous",navSupport:"Assistance"
 
- navFinancing:"Financement",navProcess:"Comment ça marche",navWhy:"Pourquoi nous",navSupport:"Assistance"
+},
 
- },
+fi:{
 
- fi:{
+pill:"KANSAINVÄLINEN YRITYSRAHOITUS",title:"Pääomaa yrityksesi <strong>seuraavaan askeleeseen.</strong>",
 
- pill:"KANSAINVÄLINEN YRITYSRAHOITUS",title:"Pääomaa yrityksesi <strong>seuraavaan askeleeseen.</strong>",
+hero:"Digitaalinen rahoituspalvelu tukikelpoisille yrityksille, jotka etsivät kasvurahoitusta <b>$20 000–$50 000.</b>",
 
- hero:"Digitaalinen rahoituspalvelu tukikelpoisille yrityksille, jotka etsivät kasvurahoitusta <b>$20 000–$50 000.</b>",
+start:"Aloita hakemus",calculate:"Laske maksu",overview:"RAHOITUKSEN YLEISKATSAUS",available:"Saatavilla oleva rahoitus",
 
- start:"Aloita hakemus",calculate:"Laske maksu",overview:"RAHOITUKSEN YLEISKATSAUS",available:"Saatavilla oleva rahoitus",
+interest:"Ohjeellinen vuosikorko",term:"Ohjeellinen laina-aika",termValue:"Enintään 24 kuukautta",estimate:"Arvioi maksusi",floatCard:"Helppo digitaalinen hakemus",
 
- interest:"Ohjeellinen vuosikorko",term:"Ohjeellinen laina-aika",termValue:"Enintään 24 kuukautta",estimate:"Arvioi maksusi",floatCard:"Helppo digitaalinen hakemus",
+micro1:"✓ Digitaalinen hakemus",micro2:"✓ Manuaalinen tarkistus",micro3:"✓ Turvallinen asiakirjaprosessi",
 
- micro1:"✓ Digitaalinen hakemus",micro2:"✓ Manuaalinen tarkistus",micro3:"✓ Turvallinen asiakirjaprosessi",
+number1:"Rahoitusmäärä",number2:"Ohjeellinen vuosikorko",number3:"Ohjeellinen enimmäisaika",number4:"Kielet",
 
- number1:"Rahoitusmäärä",number2:"Ohjeellinen vuosikorko",number3:"Ohjeellinen enimmäisaika",number4:"Kielet",
+financing:"RAHOITUS",designed:"Suunniteltu yrityksellesi.",financingIntro:"Tutustu rahoituksen rakenteeseen ennen hakemista.",
 
- financing:"RAHOITUS",designed:"Suunniteltu yrityksellesi.",financingIntro:"Tutustu rahoituksen rakenteeseen ennen hakemista.",
+card1Title:"Kasvurahoitus",card1Text:"20 000–50 000 dollarin rahoitus tukikelpoisiin yritystarpeisiin tarkistuksen ja hyväksynnän perusteella.",card1Link:"Lue lisää →",
 
- card1Title:"Kasvurahoitus",card1Text:"20 000–50 000 dollarin rahoitus tukikelpoisiin yritystarpeisiin tarkistuksen ja hyväksynnän perusteella.",card1Link:"Lue lisää →",
+card2Title:"Selkeä rakenne",card2Text:"Ohjeellinen 10 %:n vuosikorko ja enintään 24 kuukauden laina-aika.",card2Link:"Käytä laskuria →",
 
- card2Title:"Selkeä rakenne",card2Text:"Ohjeellinen 10 %:n vuosikorko ja enintään 24 kuukauden laina-aika.",card2Link:"Käytä laskuria →",
+card3Title:"Digitaalinen käyttökokemus",card3Text:"Rekisteröidy, lähetä tietosi, suorita KYC ja seuraa hakemustasi.",card3Link:"Katso prosessi →",
 
- card3Title:"Digitaalinen käyttökokemus",card3Text:"Rekisteröidy, lähetä tietosi, suorita KYC ja seuraa hakemustasi.",card3Link:"Katso prosessi →",
+calculatorEyebrow:"RAHOITUSLASKURI",calculatorTitle:"Suunnittele ennen hakemista.",calculatorText:"Säädä summaa ja laina-aikaa nähdäksesi ohjeellisen kuukausimaksun.",
 
- calculatorEyebrow:"RAHOITUSLASKURI",calculatorTitle:"Suunnittele ennen hakemista.",calculatorText:"Säädä summaa ja laina-aikaa nähdäksesi ohjeellisen kuukausimaksun.",
+amountLabel:"Rahoitusmäärä",termLabel:"Laina-aika",monthlyPayment:"Ohjeellinen kuukausimaksu",
 
- amountLabel:"Rahoitusmäärä",termLabel:"Laina-aika",monthlyPayment:"Ohjeellinen kuukausimaksu",
+calculatorDisclaimer:"Vain suuntaa-antava laskelma. Lopulliset ehdot riippuvat kelpoisuudesta ja tarkistuksesta.",
 
- calculatorDisclaimer:"Vain suuntaa-antava laskelma. Lopulliset ehdot riippuvat kelpoisuudesta ja tarkistuksesta.",
+process:"NÄIN SE TOIMII",processTitle:"Hakemuksesta päätökseen.",step1Title:"Luo tilisi",step1Text:"Rekisteröidy sähköpostillasi ja luo profiili.",
 
- process:"NÄIN SE TOIMII",processTitle:"Hakemuksesta päätökseen.",step1Title:"Luo tilisi",step1Text:"Rekisteröidy sähköpostillasi ja luo profiili.",
+step2Title:"Kerro yrityksestäsi",step2Text:"Anna pyydetyt yritys- ja rahoitustiedot.",
 
- step2Title:"Kerro yrityksestäsi",step2Text:"Anna pyydetyt yritys- ja rahoitustiedot.",
+step3Title:"Suorita KYC",step3Text:"Lähetä tarvittavat asiakirjat tarkistettavaksi.",
 
- step3Title:"Suorita KYC",step3Text:"Lähetä tarvittavat asiakirjat tarkistettavaksi.",
+step4Title:"Saat päätöksen",step4Text:"Seuraa hakemustasi tilisi kautta.",
 
- step4Title:"Saat päätöksen",step4Text:"Seuraa hakemustasi tilisi kautta.",
+why:"GLOBALBRIDGEN LÄHESTYMISTAPA",whyTitle:"Yksinkertaisempi digitaalinen rahoituspolku.",
 
- why:"GLOBALBRIDGEN LÄHESTYMISTAPA",whyTitle:"Yksinkertaisempi digitaalinen rahoituspolku.",
+why1Title:"Selkeät tiedot",why1Text:"Ymmärrä ohjeellinen rakenne ennen hakemista.",
 
- why1Title:"Selkeät tiedot",why1Text:"Ymmärrä ohjeellinen rakenne ennen hakemista.",
+why2Title:"Manuaalinen tarkistus",why2Text:"Hakemukset voidaan tarkistaa manuaalisesti.",
 
- why2Title:"Manuaalinen tarkistus",why2Text:"Hakemukset voidaan tarkistaa manuaalisesti.",
+why3Title:"Suunniteltu mobiilille",why3Text:"Responsiivinen kokemus puhelimellasi.",
 
- why3Title:"Suunniteltu mobiilille",why3Text:"Responsiivinen kokemus puhelimellasi.",
+apply:"VALMIS ALOITTAMAAN?",applyTitle:"Ota ensimmäinen askel.",applyText:"Luo tili ja aloita rahoitushakemus.",
 
- apply:"VALMIS ALOITTAMAAN?",applyTitle:"Ota ensimmäinen askel.",applyText:"Luo tili ja aloita rahoitushakemus.",
+createAccount:"Luo tilisi",signin:"Kirjaudu sisään",applyNow:"Hae nyt",
 
- createAccount:"Luo tilisi",signin:"Kirjaudu sisään",applyNow:"Hae nyt",
+navFinancing:"Rahoitus",navProcess:"Näin se toimii",navWhy:"Miksi me",navSupport:"Tuki"
 
- navFinancing:"Rahoitus",navProcess:"Näin se toimii",navWhy:"Miksi me",navSupport:"Tuki"
+},
 
- },
+es:{
 
- es:{
+pill:"FINANCIACIÓN EMPRESARIAL INTERNACIONAL",title:"Capital para su próximo <strong>movimiento empresarial.</strong>",
 
- pill:"FINANCIACIÓN EMPRESARIAL INTERNACIONAL",title:"Capital para su próximo <strong>movimiento empresarial.</strong>",
+hero:"Experiencia de financiación digital para empresas elegibles que buscan capital de crecimiento de <b>$20.000 a $50.000.</b>",
 
- hero:"Experiencia de financiación digital para empresas elegibles que buscan capital de crecimiento de <b>$20.000 a $50.000.</b>",
+start:"Iniciar solicitud",calculate:"Calcular pago",overview:"RESUMEN DE FINANCIACIÓN",available:"Rango de financiación disponible",
 
- start:"Iniciar solicitud",calculate:"Calcular pago",overview:"RESUMEN DE FINANCIACIÓN",available:"Rango de financiación disponible",
+interest:"Tasa anual ilustrativa",term:"Plazo ilustrativo",termValue:"Hasta 24 meses",estimate:"Estimar su pago",floatCard:"Solicitud digital sencilla",
 
- interest:"Tasa anual ilustrativa",term:"Plazo ilustrativo",termValue:"Hasta 24 meses",estimate:"Estimar su pago",floatCard:"Solicitud digital sencilla",
+micro1:"✓ Solicitud digital",micro2:"✓ Revisión manual",micro3:"✓ Proceso seguro de documentos",
 
- micro1:"✓ Solicitud digital",micro2:"✓ Revisión manual",micro3:"✓ Proceso seguro de documentos",
+number1:"Rango de financiación",number2:"Tasa anual ilustrativa",number3:"Plazo máximo ilustrativo",number4:"Idiomas",
 
- number1:"Rango de financiación",number2:"Tasa anual ilustrativa",number3:"Plazo máximo ilustrativo",number4:"Idiomas",
+financing:"FINANCIACIÓN",designed:"Diseñado para su negocio.",financingIntro:"Explore la estructura de financiación antes de comenzar.",
 
- financing:"FINANCIACIÓN",designed:"Diseñado para su negocio.",financingIntro:"Explore la estructura de financiación antes de comenzar.",
+card1Title:"Capital de crecimiento",card1Text:"Financiación de $20.000 a $50.000 para necesidades empresariales elegibles, sujeta a revisión y aprobación.",card1Link:"Más información →",
 
- card1Title:"Capital de crecimiento",card1Text:"Financiación de $20.000 a $50.000 para necesidades empresariales elegibles, sujeta a revisión y aprobación.",card1Link:"Más información →",
+card2Title:"Estructura clara",card2Text:"Tasa anual ilustrativa del 10 % y plazo de hasta 24 meses para planificación.",card2Link:"Usar calculadora →",
 
- card2Title:"Estructura clara",card2Text:"Tasa anual ilustrativa del 10 % y plazo de hasta 24 meses para planificación.",card2Link:"Usar calculadora →",
+card3Title:"Experiencia digital",card3Text:"Regístrese, envíe información, complete el KYC y haga seguimiento desde una cuenta.",card3Link:"Ver el proceso →",
 
- card3Title:"Experiencia digital",card3Text:"Regístrese, envíe información, complete el KYC y haga seguimiento desde una cuenta.",card3Link:"Ver el proceso →",
+calculatorEyebrow:"CALCULADORA DE FINANCIACIÓN",calculatorTitle:"Planifique antes de solicitar.",calculatorText:"Ajuste el importe y el plazo para ver un pago mensual ilustrativo.",
 
- calculatorEyebrow:"CALCULADORA DE FINANCIACIÓN",calculatorTitle:"Planifique antes de solicitar.",calculatorText:"Ajuste el importe y el plazo para ver un pago mensual ilustrativo.",
+amountLabel:"Importe de financiación",termLabel:"Plazo",monthlyPayment:"Pago mensual ilustrativo",
 
- amountLabel:"Importe de financiación",termLabel:"Plazo",monthlyPayment:"Pago mensual ilustrativo",
+calculatorDisclaimer:"Solo como ilustración. Las condiciones finales dependen de elegibilidad y revisión.",
 
- calculatorDisclaimer:"Solo como ilustración. Las condiciones finales dependen de elegibilidad y revisión.",
+process:"CÓMO FUNCIONA",processTitle:"De la solicitud a la decisión.",step1Title:"Cree su cuenta",step1Text:"Regístrese con su correo electrónico y cree su perfil.",
 
- process:"CÓMO FUNCIONA",processTitle:"De la solicitud a la decisión.",step1Title:"Cree su cuenta",step1Text:"Regístrese con su correo electrónico y cree su perfil.",
+step2Title:"Cuéntenos sobre su negocio",step2Text:"Proporcione la información solicitada.",
 
- step2Title:"Cuéntenos sobre su negocio",step2Text:"Proporcione la información solicitada.",
+step3Title:"Complete el KYC",step3Text:"Envíe los documentos necesarios para su revisión.",
 
- step3Title:"Complete el KYC",step3Text:"Envíe los documentos necesarios para su revisión.",
+step4Title:"Reciba una decisión",step4Text:"Haga seguimiento desde su cuenta.",
 
- step4Title:"Reciba una decisión",step4Text:"Haga seguimiento desde su cuenta.",
+why:"EL ENFOQUE GLOBALBRIDGE",whyTitle:"Un proceso de financiación digital más sencillo.",
 
- why:"EL ENFOQUE GLOBALBRIDGE",whyTitle:"Un proceso de financiación digital más sencillo.",
+why1Title:"Información clara",why1Text:"Comprenda la estructura ilustrativa antes de solicitar.",
 
- why1Title:"Información clara",why1Text:"Comprenda la estructura ilustrativa antes de solicitar.",
+why2Title:"Revisión humana",why2Text:"Las solicitudes pueden revisarse manualmente.",
 
- why2Title:"Revisión humana",why2Text:"Las solicitudes pueden revisarse manualmente.",
+why3Title:"Diseñado para móviles",why3Text:"Una experiencia adaptable para su teléfono.",
 
- why3Title:"Diseñado para móviles",why3Text:"Una experiencia adaptable para su teléfono.",
+apply:"¿LISTO PARA EMPEZAR?",applyTitle:"Dé el primer paso.",applyText:"Cree una cuenta y comience su solicitud.",
 
- apply:"¿LISTO PARA EMPEZAR?",applyTitle:"Dé el primer paso.",applyText:"Cree una cuenta y comience su solicitud.",
+createAccount:"Crear su cuenta",signin:"Iniciar sesión",applyNow:"Solicitar ahora",
 
- createAccount:"Crear su cuenta",signin:"Iniciar sesión",applyNow:"Solicitar ahora",
+navFinancing:"Financiación",navProcess:"Cómo funciona",navWhy:"Por qué nosotros",navSupport:"Soporte"
 
- navFinancing:"Financiación",navProcess:"Cómo funciona",navWhy:"Por qué nosotros",navSupport:"Soporte"
+}
 
- }
+};
 
- };
+const languageKeys=["globalbridge_language","selectedLanguage"];
 
- const languageKeys=["globalbridge_language","selectedLanguage"];
+function getLanguage(){
 
- function getLanguage(){
-
-  for(const key of languageKeys){
-
-   try{const v=localStorage.getItem(key);if(v&&translations[v])return v}catch(e){}
-
-  }
-
-  return "en";
-
- }
-
- function applyLanguage(language){
-
-  const lang=translations[language]?language:"en";
-
-  const t=translations[lang];
-
-  document.documentElement.lang=lang;
-
-  document.documentElement.dir=lang==="fa"?"rtl":"ltr";
-
-  document.body.classList.toggle("rtl-language",lang==="fa");
-
-  document.querySelectorAll("[data-key]").forEach(el=>{
-
-   const k=el.dataset.key;
-
-   if(Object.prototype.hasOwnProperty.call(t,k))el.textContent=t[k];
-
-  });
-
-  document.querySelectorAll("[data-html]").forEach(el=>{
-
-   const k=el.dataset.html;
-
-   if(Object.prototype.hasOwnProperty.call(t,k))el.innerHTML=t[k];
-
-  });
-
-  document.querySelectorAll("[data-language-selector],#languageSelector").forEach(el=>el.value=lang);
+ for(const key of languageKeys){
 
   try{
 
-   localStorage.setItem("globalbridge_language",lang);
+   const value=localStorage.getItem(key);
 
-   localStorage.setItem("selectedLanguage",lang);
+   if(value&&translations[value])return value;
 
-  }catch(e){}
-
-  updateCalculator();
+  }catch(error){}
 
  }
 
- window.changeLanguage=applyLanguage;
+ return "en";
 
- const selector=document.getElementById("languageSelector");
+}
 
- if(selector)selector.addEventListener("change",()=>applyLanguage(selector.value));
+function updateCalculator(){
 
- function updateCalculator(){
+ const amount=document.getElementById("amount");
 
-  const amount=document.getElementById("amount");
+ const term=document.getElementById("term");
 
-  const term=document.getElementById("term");
+ const amountOut=document.getElementById("amountOut");
 
-  const amountOut=document.getElementById("amountOut");
+ const termOut=document.getElementById("termOut");
 
-  const termOut=document.getElementById("termOut");
+ const payment=document.getElementById("payment");
 
-  const payment=document.getElementById("payment");
+ if(!amount||!term||!amountOut||!termOut||!payment)return;
 
-  if(!amount||!term||!amountOut||!termOut||!payment)return;
+ const principal=Number(amount.value);
 
-  const principal=Number(amount.value);
+ const months=Number(term.value);
 
-  const months=Number(term.value);
+ const rate=0.10/12;
 
-  const r=0.10/12;
+ const monthly=principal*rate*Math.pow(1+rate,months)/(Math.pow(1+rate,months)-1);
 
-  const monthly=principal*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);
+ amountOut.textContent="$"+principal.toLocaleString("en-US");
 
-  amountOut.textContent="$"+principal.toLocaleString("en-US");
+ const language=getLanguage();
 
-  const lang=getLanguage();
+ const suffix={
 
-  const suffix={pt:"meses",vi:"tháng",fa:" ماه",id:"bulan",fr:"mois",fi:" kuukautta",es:"meses",en:"months"};
+  pt:"meses",vi:"tháng",fa:" ماه",id:"bulan",
 
-  termOut.textContent=months+" "+(suffix[lang]||"months");
+  fr:"mois",fi:" kuukautta",es:"meses",en:"months"
 
-  payment.textContent="$"+monthly.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+ };
 
- }
+ termOut.textContent=months+" "+(suffix[language]||"months");
 
- ["amount","term"].forEach(id=>{
+ payment.textContent="$"+monthly.toLocaleString("en-US",{
 
-  const el=document.getElementById(id);
-
-  if(el)el.addEventListener("input",updateCalculator);
+  minimumFractionDigits:2,maximumFractionDigits:2
 
  });
 
- applyLanguage(getLanguage());
+}
+
+function applyLanguage(language){
+
+ const lang=translations[language]?language:"en";
+
+ const dictionary=translations[lang];
+
+ document.documentElement.lang=lang;
+
+ document.documentElement.dir=lang==="fa"?"rtl":"ltr";
+
+ document.body.classList.toggle("rtl-language",lang==="fa");
+
+ document.querySelectorAll("[data-key]").forEach(element=>{
+
+  const key=element.dataset.key;
+
+  if(Object.prototype.hasOwnProperty.call(dictionary,key)){
+
+   element.textContent=dictionary[key];
+
+  }
+
+ });
+
+ document.querySelectorAll("[data-html]").forEach(element=>{
+
+  const key=element.dataset.html;
+
+  if(Object.prototype.hasOwnProperty.call(dictionary,key)){
+
+   element.innerHTML=dictionary[key];
+
+  }
+
+ });
+
+ document.querySelectorAll("[data-language-selector],#languageSelector").forEach(element=>{
+
+  element.value=lang;
+
+ });
+
+ try{
+
+  localStorage.setItem("globalbridge_language",lang);
+
+  localStorage.setItem("selectedLanguage",lang);
+
+ }catch(error){}
+
+ updateCalculator();
+
+}
+
+window.changeLanguage=applyLanguage;
+
+const selector=document.getElementById("languageSelector");
+
+if(selector){
+
+ selector.addEventListener("change",function(){
+
+  applyLanguage(selector.value);
+
+ });
+
+}
+
+["amount","term"].forEach(id=>{
+
+ const element=document.getElementById(id);
+
+ if(element)element.addEventListener("input",updateCalculator);
+
+});
+
+applyLanguage(getLanguage());
 
 })();
 
