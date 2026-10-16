@@ -1,280 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="GlobalBridgeFunding international business financing.">
-<meta name="theme-color" content="#07172c">
-<title>GlobalBridgeFunding | International Business Financing</title>
-<style>
-:root{--navy:#07172c;--navy2:#0c2340;--gold:#d9b66d;--gold2:#f1dba3;--muted:#64748b;--light:#f5f7fb;--border:#e4e9f0}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:25px}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--navy);background:white;line-height:1.6}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-img{max-width:100%;display:block}
-.container{width:min(1160px,calc(100% - 40px));margin:auto}
-header{background:#fff;border-bottom:1px solid var(--border);position:relative;z-index:10}
-.navbar{min-height:120px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 0}
-.brand{display:flex;align-items:center}
-.brand-logo{height:88px;width:auto;object-fit:contain}
-.nav-links,.nav-actions{display:flex;align-items:center;gap:16px}
-.nav-links{font-size:14px;font-weight:700}
-.nav-links a:hover,footer a:hover{color:#b58a3c}
-#languageSelector{max-width:130px;padding:9px 5px;border:1px solid var(--border);border-radius:9px;background:white}
-.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;border:1px solid transparent}
-.btn-gold{background:var(--gold);color:var(--navy)}
-.btn-outline{border-color:#d4dce6;background:white;color:var(--navy)}
-.btn-dark{background:var(--navy);color:white}
-.hero-wrap{background:linear-gradient(135deg,#f8fafc,#edf2f8);padding:55px 0}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:1.5px;font-size:12px;font-weight:800;color:#8c6928}
-.eyebrow:before{content:"";width:25px;height:2px;background:var(--gold)}
-h1{font-size:clamp(38px,5vw,62px);line-height:1.08;letter-spacing:-1.8px;margin:18px 0}
-.hero-copy p{font-size:17px;color:#526176}
-.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.trust-line{display:flex;gap:16px;flex-wrap:wrap;margin-top:25px;font-size:13px;color:#526176}
-.trust-line span:before{content:"✓";color:#a57b2b;margin-right:6px}
-.hero-visual{position:relative;height:500px;min-height:350px;border-radius:24px;overflow:hidden;background:linear-gradient(135deg,#07172c,#17446b);box-shadow:0 22px 55px #07172c25}
-.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-.photo-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 20%,#07172cb3 100%);pointer-events:none}
-.image-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:white;background:linear-gradient(135deg,#07172c,#17446b)}
-.image-fallback strong{font-size:24px;color:var(--gold)}
-.float-card{position:absolute;z-index:2;left:16px;top:16px;padding:12px 15px;border-radius:13px;background:white;font-size:13px;font-weight:700}
-.float-card b{display:block;color:#a57b2b;font-size:18px}
-.finance-card{position:absolute;z-index:3;right:16px;bottom:16px;width:calc(100% - 32px);padding:18px;border-radius:17px;background:#fffffff5;box-shadow:0 12px 35px #0002}
-.card-label{font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:1px}
-.big-amount{font-size:clamp(25px,3vw,34px);font-weight:800;line-height:1.3;margin:6px 0}
-.card-bottom{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border);padding-top:12px;margin-top:12px;font-size:12px;color:#64748b}
-.card-bottom strong{display:block;font-size:14px;color:var(--navy)}
-.stats{background:var(--navy);color:white;padding:25px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.stat{text-align:center;border-right:1px solid #ffffff25}
-.stat:last-child{border:0}
-.stat strong{display:block;font-size:25px;color:var(--gold)}
-.stat span{font-size:12px;color:#d3dce8}
-section{padding:70px 0;scroll-margin-top:20px}
-.section-head{text-align:center;max-width:720px;margin:0 auto 35px}
-.section-head .eyebrow{justify-content:center}
-h2{font-size:clamp(28px,4vw,42px);line-height:1.2;margin:12px 0}
-.section-head p{color:var(--muted)}
-.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.feature,.step{padding:24px;border:1px solid var(--border);border-radius:18px;background:white}
-.feature-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:#fbf4e5;color:#8b6727;font-size:22px}
-.feature h3{margin:15px 0 8px}
-.feature p,.step p{font-size:14px;color:var(--muted)}
-.feature img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:15px}
-.calculator-section{background:var(--light)}
-.calculator{max-width:780px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:25px;background:white;border:1px solid var(--border);border-radius:22px;padding:25px}
-.calc-control{margin-bottom:25px}
-.calc-label{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:700;margin-bottom:12px}
-.calc-label output{color:#9a742d}
-input[type=range]{width:100%;accent-color:#b78b3a}
-.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
-.calc-result{background:var(--navy);color:white;border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:center}
-.calc-result .card-label{color:#cbd5e1}
-.calc-result .big-amount{color:var(--gold);font-size:clamp(28px,4vw,39px)}
-.calc-result p{font-size:12px;color:#d4dce7}
-.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.step-number{font-size:28px;font-weight:800;color:#c29a4c}
-.step h3{font-size:16px}
-.cta{background:linear-gradient(120deg,#07172c,#153858);color:white;border-radius:24px;padding:38px;display:flex;justify-content:space-between;align-items:center;gap:25px}
-.cta h2{max-width:620px;margin:0}
-.cta p{color:#d0dae6}
-footer{background:#061326;color:white;padding:38px 0 24px}
-.footer-top{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
-footer p,footer a{font-size:13px;color:#c5d0df}
-.footer-links{display:flex;gap:18px;flex-wrap:wrap}
-.footer-bottom{border-top:1px solid #ffffff20;margin-top:25px;padding-top:18px;font-size:12px;color:#aebccd}
-[dir=rtl] body{text-align:right}
-[dir=rtl] .finance-card{right:auto;left:16px}
-[dir=rtl] .float-card{left:auto;right:16px}
-@media(max-width:900px){.hero{gap:25px}.hero-visual{height:430px}.features{grid-template-columns:repeat(2,minmax(0,1fr))}.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){
-.container{width:calc(100% - 28px)}
-.navbar{gap:10px;padding:18px 0 14px;min-height:auto}
-.brand{flex:1 1 100%;margin-bottom:6px}
-.brand-logo{height:76px !important;max-width:240px;width:auto}
-.nav-links{order:3;width:100%;justify-content:space-evenly;gap:4px;font-size:13px;padding:12px 0 6px;border-top:1px solid #eef2f6;margin-top:6px}
-.nav-actions{margin-left:auto;gap:8px}
-#languageSelector{max-width:110px;font-size:13px;padding:9px 8px}
-.nav-actions .btn{padding:10px 16px;font-size:13px}
-.hero-wrap{padding:36px 0}
-.hero{grid-template-columns:minmax(0,1fr);gap:28px}
-h1{font-size:clamp(36px,10vw,49px);letter-spacing:-1.3px}
-.hero-copy p{font-size:15px}
-.hero-visual{height:390px;min-height:350px}
-.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 8px}
-.stat:nth-child(2){border:0}
-section{padding:52px 0}
-.features,.steps,.calculator{grid-template-columns:minmax(0,1fr)}
-.calculator{padding:18px;gap:18px}
-.cta{padding:26px;align-items:flex-start;flex-direction:column}
-.footer-top{flex-direction:column}
-.footer .brand-logo{height:58px !important}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlobalBridgeFunding | International Business Financing</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; color: #07172c; background: white; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    header { background: #07172c; color: white; padding: 18px 6%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: 800; }
+    .logo span { color: #d9b66d; }
+    nav a { margin-left: 20px; font-weight: 600; font-size: 15px; }
+    nav a:hover { color: #d9b66d; }
+    .hero { background: linear-gradient(135deg, #07172c 0%, #0c2340 100%); color: white; padding: 100px 20px; text-align: center; }
+    .hero h1 { font-size: 48px; margin-bottom: 16px; }
+    .hero p { font-size: 20px; max-width: 700px; margin: 0 auto 30px; opacity: 0.9; }
+    .btn { display: inline-block; background: #d9b66d; color: #07172c; padding: 14px 32px; border-radius: 8px; font-weight: 700; }
+    section { padding: 80px 20px; }
+    .container { max-width: 1100px; margin: auto; }
+    h2 { font-size: 36px; text-align: center; margin-bottom: 16px; }
+    .subtitle { font-size: 22px; color: #d9b66d; text-align: center; margin-bottom: 30px; font-weight: 600; }
+    .card { background: #f8fafc; padding: 24px; border-radius: 12px; margin-bottom: 16px; }
+    footer { background: #07172c; color: white; text-align: center; padding: 30px; font-size: 14px; }
+    @media (max-width: 600px) { .hero h1 { font-size: 32px; } nav a { display: block; margin: 10px 0; } }
+  </style>
 </head>
 <body>
+
 <header>
-<div class="container navbar">
-<a class="brand" href="#home" aria-label="GlobalBridgeFunding home">
-  <img src="images/IMG_0532.jpeg" alt="GlobalBridgeFunding" class="brand-logo">
-</a>
-<nav class="nav-links" aria-label="Main navigation">
-<a href="#home" data-key="navHome">Home</a>
-<a href="#financing" data-key="navFinancing">Financing</a>
-<a href="#process" data-key="navProcess">How it works</a>
-<a href="#about" data-key="navAbout">About</a>
-</nav>
-<div class="nav-actions">
-<select id="languageSelector" aria-label="Language">
-<option value="en">English</option><option value="pt">Português</option><option value="vi">Tiếng Việt</option><option value="fa">فارسی</option><option value="id">Bahasa Indonesia</option><option value="fr">Français</option><option value="fi">Suomi</option><option value="es">Español</option>
-</select>
-<a class="btn btn-outline" href="login.html" data-key="signIn">Sign in</a>
-</div>
-</div>
+  <div class="logo">Global<span>Bridge</span>Funding</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#loans">Loans</a>
+    <a href="#process">How It Works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="register.html" class="btn" style="padding: 8px 18px;">Apply</a>
+  </nav>
 </header>
-<main>
-<div class="hero-wrap" id="home"><div class="container hero">
-<div class="hero-copy">
-<span class="eyebrow" data-key="eyebrow">International business financing</span>
-<h1 data-key="heroTitle">Capital for your next business move.</h1>
-<p data-key="heroText">Flexible financing solutions designed to help ambitious businesses grow, expand and reach new markets.</p>
-<div class="hero-buttons"><a class="btn btn-gold" href="register.html" data-key="getStarted">Get started →</a><a class="btn btn-outline" href="#financing" data-key="exploreFinancing">Explore financing</a></div>
-<div class="trust-line"><span data-key="trust1">Secure application process</span><span data-key="trust2">Manual application review</span><span data-key="trust3">International focus</span></div>
-</div>
-<div class="hero-visual">
-<div class="image-fallback" id="imageFallback"><strong>GlobalBridgeFunding</strong><span data-key="imageFallbackText">International business opportunities</span></div>
-<img class="hero-photo" id="heroPhoto" src="images/IMG_0551.jpeg" alt="International business and finance">
-<div class="photo-shade"></div>
-<div class="float-card"><span data-key="floatLabel">Business growth</span><b data-key="floatValue">Built for progress</b></div>
-<div class="finance-card"><div class="card-label" data-key="financeCardLabel">Business financing solutions</div><div class="big-amount">$20,000 – $50,000</div><div data-key="financeCardText">Financing options for eligible businesses</div><div class="card-bottom"><div><span data-key="interestLabel">Illustrative annual interest</span><strong>10%</strong></div><div><span data-key="termLabel">Repayment term</span><strong data-key="upTo24">Up to 24 months</strong></div></div></div>
-</div>
-</div></div>
-<div class="stats"><div class="container stats-grid">
-<div class="stat"><strong>$20K–$50K</strong><span data-key="stat1">Financing range</span></div>
-<div class="stat"><strong>8</strong><span data-key="stat2">Available languages</span></div>
-<div class="stat"><strong>24 mo.</strong><span data-key="stat3">Maximum illustrative term</span></div>
-<div class="stat"><strong>1:1</strong><span data-key="stat4">Application review</span></div>
-</div></div>
-<section id="about"><div class="container">
-<div class="section-head"><span class="eyebrow" data-key="aboutEyebrow">Why GlobalBridgeFunding</span><h2 data-key="aboutTitle">A clearer path to business growth.</h2><p data-key="aboutText">We aim to make the financing application process straightforward, transparent and accessible to eligible businesses.</p></div>
-<div class="features">
-<article class="feature"><img src="images/IMG_0552.jpeg" alt="Premium office"><div class="feature-icon">↗</div><h3 data-key="feature1Title">Growth-focused financing</h3><p data-key="feature1Text">Explore financing options intended to support expansion, inventory, equipment and other business needs.</p></article>
-<article class="feature"><img src="images/IMG_0538.jpeg" alt="Business meeting"><div class="feature-icon">◇</div><h3 data-key="feature2Title">A clear review process</h3><p data-key="feature2Text">Applications are reviewed manually. Submitting an application does not guarantee approval.</p></article>
-<article class="feature"><img src="images/IMG_0550.jpeg" alt="International trade"><div class="feature-icon">⌘</div><h3 data-key="feature3Title">A convenient online journey</h3><p data-key="feature3Text">Create an account, submit your business information and follow your application through your account.</p></article>
-</div>
-</div></section>
-<section class="calculator-section" id="financing"><div class="container">
-<div class="section-head"><span class="eyebrow" data-key="calcEyebrow">Plan ahead</span><h2 data-key="calcTitle">Explore your estimated repayments.</h2><p data-key="calcIntro">Adjust the amount and term to see an illustrative monthly repayment estimate.</p></div>
-<div class="calculator"><div>
-<div class="calc-control"><div class="calc-label"><label for="amountRange" data-key="amountLabel">Financing amount</label><output id="amountOut">$20,000</output></div><input id="amountRange" type="range" min="20000" max="50000" step="1000" value="20000"><div class="range-ends"><span>$20,000</span><span>$50,000</span></div></div>
-<div class="calc-control"><div class="calc-label"><label for="termRange" data-key="termLabelCalc">Repayment term</label><output id="termOut">24 months</output></div><input id="termRange" type="range" min="12" max="24" step="1" value="24"><div class="range-ends"><span data-key="12Months">12 months</span><span data-key="24Months">24 months</span></div></div>
-<p style="font-size:12px;color:#64748b" data-key="calcDisclaimer">Illustration only, using a 10% nominal annual interest rate. Actual offers, fees and repayment schedules may differ.</p>
-</div><div class="calc-result"><div class="card-label" data-key="monthlyEstimate">Estimated monthly repayment</div><div class="big-amount" id="payment">$923.06</div><p data-key="estimateNote">This calculator is for guidance only and is not a financing offer or approval.</p><a class="btn btn-gold" href="register.html" data-key="applyNow">Apply now →</a></div>
-</div></div></section>
-<section id="process"><div class="container">
-<div class="section-head"><span class="eyebrow" data-key="processEyebrow">Simple steps</span><h2 data-key="processTitle">How the process works.</h2><p data-key="processText">Get started online and keep track of your application from your account.</p></div>
-<div class="steps">
-<article class="step"><div class="step-number">01</div><h3 data-key="step1Title">Create your account</h3><p data-key="step1Text">Register with your email and verify your account.</p></article>
-<article class="step"><div class="step-number">02</div><h3 data-key="step2Title">Submit your details</h3><p data-key="step2Text">Provide your business information and requested documents.</p></article>
-<article class="step"><div class="step-number">03</div><h3 data-key="step3Title">Application review</h3><p data-key="step3Text">Your application is assessed through a manual review process.</p></article>
-<article class="step"><div class="step-number">04</div><h3 data-key="step4Title">Track your status</h3><p data-key="step4Text">Sign in to check updates and any next steps for your application.</p></article>
-</div></div></section>
-<section style="padding-top:0"><div class="container cta"><div><h2 data-key="ctaTitle">Ready to take your business forward?</h2><p data-key="ctaText">Start your application online. All applications are subject to review and eligibility.</p></div><a class="btn btn-gold" href="register.html" data-key="createAccount">Create an account →</a></div></section>
-</main>
-<footer><div class="container">
-<div class="footer-top"><div><a class="brand" href="#home">
-  <img src="images/IMG_0532.jpeg" alt="GlobalBridgeFunding" class="brand-logo">
-</a><p data-key="footerText">International business financing solutions.</p></div>
-<div class="footer-links"><a href="#financing" data-key="footerFinancing">Financing</a><a href="login.html" data-key="signIn">Sign in</a><a href="register.html" data-key="createAccount">Create an account</a><a href="application.html" data-key="footerApplication">Application</a></div></div>
-<div class="footer-bottom">© <span id="currentYear">2026</span> GlobalBridgeFunding. <span data-key="footerDisclaimer">Financing is subject to eligibility, review and applicable terms. No approval is guaranteed.</span></div>
-</div></footer>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ad1e264946ed834cdf0033d/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<section class="hero">
+  <h1>Finance Without Borders</h1>
+  <p>International business financing through a secure digital experience.</p>
+  <a href="register.html" class="btn">Apply for Financing</a>
+</section>
 
-<script>
-(function(){
-"use strict";
-const dictionaries={
-en:{navHome:"Home",navFinancing:"Financing",navProcess:"How it works",navAbout:"About",signIn:"Sign in",eyebrow:"International business financing",heroTitle:"Capital for your next business move.",heroText:"Flexible financing solutions designed to help ambitious businesses grow, expand and reach new markets.",getStarted:"Get started →",exploreFinancing:"Explore financing",trust1:"Secure application process",trust2:"Manual application review",trust3:"International focus",imageFallbackText:"International business opportunities",floatLabel:"Business growth",floatValue:"Built for progress",financeCardLabel:"Business financing solutions",financeCardText:"Financing options for eligible businesses",interestLabel:"Illustrative annual interest",termLabel:"Repayment term",upTo24:"Up to 24 months",stat1:"Financing range",stat2:"Available languages",stat3:"Maximum illustrative term",stat4:"Application review",aboutEyebrow:"Why GlobalBridgeFunding",aboutTitle:"A clearer path to business growth.",aboutText:"We aim to make the financing application process straightforward, transparent and accessible to eligible businesses.",feature1Title:"Growth-focused financing",feature1Text:"Explore financing options intended to support expansion, inventory, equipment and other business needs.",feature2Title:"A clear review process",feature2Text:"Applications are reviewed manually. Submitting an application does not guarantee approval.",feature3Title:"A convenient online journey",feature3Text:"Create an account, submit your business information and follow your application through your account.",calcEyebrow:"Plan ahead",calcTitle:"Explore your estimated repayments.",calcIntro:"Adjust the amount and term to see an illustrative monthly repayment estimate.",amountLabel:"Financing amount",termLabelCalc:"Repayment term","12Months":"12 months","24Months":"24 months",calcDisclaimer:"Illustration only, using a 10% nominal annual interest rate. Actual offers, fees and repayment schedules may differ.",monthlyEstimate:"Estimated monthly repayment",estimateNote:"This calculator is for guidance only and is not a financing offer or approval.",applyNow:"Apply now →",processEyebrow:"Simple steps",processTitle:"How the process works.",processText:"Get started online and keep track of your application from your account.",step1Title:"Create your account",step1Text:"Register with your email and verify your account.",step2Title:"Submit your details",step2Text:"Provide your business information and requested documents.",step3Title:"Application review",step3Text:"Your application is assessed through a manual review process.",step4Title:"Track your status",step4Text:"Sign in to check updates and any next steps for your application.",ctaTitle:"Ready to take your business forward?",ctaText:"Start your application online. All applications are subject to review and eligibility.",createAccount:"Create an account →",footerText:"International business financing solutions.",footerFinancing:"Financing",footerApplication:"Application",footerDisclaimer:"Financing is subject to eligibility, review and applicable terms. No approval is guaranteed."},
-pt:{navHome:"Início",navFinancing:"Financiamento",navProcess:"Como funciona",navAbout:"Sobre",signIn:"Entrar",eyebrow:"Financiamento empresarial internacional",heroTitle:"Capital para o próximo passo do seu negócio.",heroText:"Soluções flexíveis para ajudar empresas a crescer, expandir e alcançar novos mercados.",getStarted:"Começar →",exploreFinancing:"Explorar financiamento",trust1:"Processo seguro",trust2:"Análise manual",trust3:"Foco internacional",floatLabel:"Crescimento empresarial",floatValue:"Feito para progredir",financeCardLabel:"Soluções de financiamento",financeCardText:"Opções para empresas elegíveis",interestLabel:"Juros anuais ilustrativos",termLabel:"Prazo de reembolso",upTo24:"Até 24 meses",stat1:"Intervalo de financiamento",stat2:"Idiomas disponíveis",stat3:"Prazo máximo ilustrativo",stat4:"Análise da candidatura",aboutEyebrow:"Porquê GlobalBridgeFunding",aboutTitle:"Um caminho claro para o crescimento.",aboutText:"Queremos tornar o processo de candidatura simples e transparente.",feature1Title:"Financiamento para crescer",feature1Text:"Opções para expansão, inventário, equipamento e outras necessidades.",feature2Title:"Análise clara",feature2Text:"As candidaturas são analisadas manualmente. A aprovação não é garantida.",feature3Title:"Processo online",feature3Text:"Crie uma conta, envie os dados da empresa e acompanhe a candidatura.",calcEyebrow:"Planeie",calcTitle:"Estime as suas prestações.",calcIntro:"Altere o montante e o prazo para ver uma estimativa.",amountLabel:"Montante do financiamento",termLabelCalc:"Prazo de reembolso","12Months":"12 meses","24Months":"24 meses",calcDisclaimer:"Simulação com taxa nominal anual de 10%. As condições reais podem variar.",monthlyEstimate:"Prestação mensal estimada",estimateNote:"Estimativa indicativa, não é uma oferta de financiamento.",applyNow:"Candidatar-se →",processEyebrow:"Passos simples",processTitle:"Como funciona o processo.",processText:"Comece online e acompanhe a candidatura na sua conta.",step1Title:"Crie a sua conta",step1Text:"Registe-se por email e confirme a conta.",step2Title:"Envie os seus dados",step2Text:"Forneça os dados da empresa e os documentos solicitados.",step3Title:"Análise da candidatura",step3Text:"A candidatura é analisada manualmente.",step4Title:"Acompanhe o estado",step4Text:"Entre na conta para ver atualizações.",ctaTitle:"Pronto para fazer crescer o seu negócio?",ctaText:"Inicie a candidatura online; aplicam-se critérios de elegibilidade.",createAccount:"Criar conta →",footerText:"Soluções internacionais de financiamento empresarial.",footerFinancing:"Financiamento",footerApplication:"Candidatura",footerDisclaimer:"O financiamento depende da elegibilidade e análise. A aprovação não é garantida."},
-vi:{navHome:"Trang chủ",navFinancing:"Tài trợ",navProcess:"Quy trình",navAbout:"Giới thiệu",signIn:"Đăng nhập",eyebrow:"Tài trợ doanh nghiệp quốc tế",heroTitle:"Nguồn vốn cho bước tiến tiếp theo của doanh nghiệp.",heroText:"Giải pháp linh hoạt giúp doanh nghiệp phát triển và tiếp cận thị trường mới.",getStarted:"Bắt đầu →",exploreFinancing:"Khám phá tài trợ",trust1:"Quy trình an toàn",trust2:"Xét duyệt thủ công",trust3:"Định hướng quốc tế",floatLabel:"Phát triển doanh nghiệp",floatValue:"Hướng tới tiến bộ",financeCardLabel:"Giải pháp tài trợ",financeCardText:"Dành cho doanh nghiệp đủ điều kiện",interestLabel:"Lãi suất năm minh họa",termLabel:"Thời hạn trả nợ",upTo24:"Tối đa 24 tháng",stat1:"Khoản tài trợ",stat2:"Ngôn ngữ hỗ trợ",stat3:"Thời hạn tối đa",stat4:"Xét duyệt hồ sơ",aboutEyebrow:"Vì sao chọn GlobalBridgeFunding",aboutTitle:"Con đường rõ ràng hơn để phát triển.",aboutText:"Chúng tôi hướng tới quy trình đăng ký đơn giản và minh bạch.",feature1Title:"Tài trợ tăng trưởng",feature1Text:"Các lựa chọn cho mở rộng, hàng tồn kho, thiết bị và nhu cầu khác.",feature2Title:"Quy trình rõ ràng",feature2Text:"Hồ sơ được xem xét thủ công. Nộp hồ sơ không đảm bảo phê duyệt.",feature3Title:"Quy trình trực tuyến",feature3Text:"Tạo tài khoản, gửi thông tin và theo dõi hồ sơ.",calcEyebrow:"Lập kế hoạch",calcTitle:"Ước tính khoản trả góp.",calcIntro:"Điều chỉnh số tiền và thời hạn để xem khoản trả hàng tháng.",amountLabel:"Số tiền tài trợ",termLabelCalc:"Thời hạn trả nợ","12Months":"12 tháng","24Months":"24 tháng",calcDisclaimer:"Minh họa với lãi suất danh nghĩa 10% mỗi năm. Điều kiện thực tế có thể khác.",monthlyEstimate:"Khoản trả hàng tháng ước tính",estimateNote:"Chỉ mang tính tham khảo, không phải đề nghị tài trợ.",applyNow:"Đăng ký ngay →",processEyebrow:"Các bước đơn giản",processTitle:"Quy trình hoạt động.",processText:"Bắt đầu trực tuyến và theo dõi hồ sơ trong tài khoản.",step1Title:"Tạo tài khoản",step1Text:"Đăng ký bằng email và xác minh.",step2Title:"Gửi thông tin",step2Text:"Cung cấp thông tin doanh nghiệp và tài liệu cần thiết.",step3Title:"Xét duyệt hồ sơ",step3Text:"Hồ sơ được đánh giá thủ công.",step4Title:"Theo dõi trạng thái",step4Text:"Đăng nhập để xem cập nhật.",ctaTitle:"Sẵn sàng phát triển doanh nghiệp?",ctaText:"Bắt đầu đăng ký trực tuyến; hồ sơ cần đáp ứng điều kiện.",createAccount:"Tạo tài khoản →",footerText:"Giải pháp tài trợ doanh nghiệp quốc tế.",footerFinancing:"Tài trợ",footerApplication:"Hồ sơ",footerDisclaimer:"Tài trợ tùy thuộc điều kiện và xét duyệt. Không đảm bảo phê duyệt."},
-fa:{navHome:"خانه",navFinancing:"تأمین مالی",navProcess:"نحوه کار",navAbout:"درباره ما",signIn:"ورود",eyebrow:"تأمین مالی بین‌المللی کسب‌وکار",heroTitle:"سرمایه برای گام بعدی کسب‌وکار شما.",heroText:"راهکارهای انعطاف‌پذیر برای رشد کسب‌وکار و ورود به بازارهای جدید.",getStarted:"شروع کنید ←",exploreFinancing:"بررسی تأمین مالی",trust1:"فرایند امن درخواست",trust2:"بررسی دستی",trust3:"تمرکز بین‌المللی",floatLabel:"رشد کسب‌وکار",floatValue:"برای پیشرفت",financeCardLabel:"راهکارهای تأمین مالی",financeCardText:"برای کسب‌وکارهای واجد شرایط",interestLabel:"نرخ سود سالانه نمونه",termLabel:"مدت بازپرداخت",upTo24:"تا ۲۴ ماه",stat1:"محدوده تأمین مالی",stat2:"زبان‌های موجود",stat3:"حداکثر مدت",stat4:"بررسی درخواست",aboutEyebrow:"چرا GlobalBridgeFunding",aboutTitle:"مسیر روشن‌تر برای رشد کسب‌وکار.",aboutText:"هدف ما ساده و شفاف کردن فرایند درخواست است.",feature1Title:"تأمین مالی برای رشد",feature1Text:"گزینه‌هایی برای توسعه، موجودی، تجهیزات و نیازهای دیگر.",feature2Title:"فرایند بررسی شفاف",feature2Text:"درخواست‌ها دستی بررسی می‌شوند؛ تأیید تضمین نمی‌شود.",feature3Title:"فرایند آنلاین آسان",feature3Text:"حساب بسازید، اطلاعات را ارسال و درخواست را پیگیری کنید.",calcEyebrow:"برنامه‌ریزی",calcTitle:"بازپرداخت تخمینی را بررسی کنید.",calcIntro:"مبلغ و مدت را تغییر دهید تا برآورد ماهانه را ببینید.",amountLabel:"مبلغ تأمین مالی",termLabelCalc:"مدت بازپرداخت","12Months":"۱۲ ماه","24Months":"۲۴ ماه",calcDisclaimer:"نمونه با نرخ اسمی سالانه ۱۰٪؛ شرایط واقعی ممکن است متفاوت باشد.",monthlyEstimate:"پرداخت ماهانه تخمینی",estimateNote:"این ابزار راهنماست و پیشنهاد تأمین مالی نیست.",applyNow:"درخواست دهید ←",processEyebrow:"مراحل ساده",processTitle:"فرایند چگونه کار می‌کند.",processText:"آنلاین شروع کنید و درخواست را پیگیری کنید.",step1Title:"حساب بسازید",step1Text:"با ایمیل ثبت‌نام و حساب را تأیید کنید.",step2Title:"اطلاعات را ارسال کنید",step2Text:"اطلاعات کسب‌وکار و مدارک را ارائه دهید.",step3Title:"بررسی درخواست",step3Text:"درخواست به‌صورت دستی بررسی می‌شود.",step4Title:"پیگیری وضعیت",step4Text:"برای مشاهده به‌روزرسانی‌ها وارد شوید.",ctaTitle:"آماده پیشرفت کسب‌وکار هستید؟",ctaText:"درخواست آنلاین را آغاز کنید؛ شرایط بررسی می‌شود.",createAccount:"ایجاد حساب ←",footerText:"راهکارهای بین‌المللی تأمین مالی کسب‌وکار.",footerFinancing:"تأمین مالی",footerApplication:"درخواست",footerDisclaimer:"تأمین مالی به شرایط و بررسی بستگی دارد؛ تأیید تضمین نمی‌شود."},
-id:{navHome:"Beranda",navFinancing:"Pembiayaan",navProcess:"Cara kerja",navAbout:"Tentang",signIn:"Masuk",eyebrow:"Pembiayaan bisnis internasional",heroTitle:"Modal untuk langkah bisnis Anda berikutnya.",heroText:"Solusi fleksibel untuk membantu bisnis tumbuh dan menjangkau pasar baru.",getStarted:"Mulai →",exploreFinancing:"Jelajahi pembiayaan",trust1:"Proses aman",trust2:"Peninjauan manual",trust3:"Fokus internasional",floatLabel:"Pertumbuhan bisnis",floatValue:"Dibuat untuk maju",financeCardLabel:"Solusi pembiayaan bisnis",financeCardText:"Untuk bisnis yang memenuhi syarat",interestLabel:"Bunga tahunan ilustratif",termLabel:"Jangka waktu pembayaran",upTo24:"Hingga 24 bulan",stat1:"Rentang pembiayaan",stat2:"Bahasa tersedia",stat3:"Maksimum jangka waktu",stat4:"Peninjauan pengajuan",aboutEyebrow:"Mengapa GlobalBridgeFunding",aboutTitle:"Jalan yang lebih jelas menuju pertumbuhan.",aboutText:"Kami berupaya membuat pengajuan lebih mudah dan transparan.",feature1Title:"Pembiayaan pertumbuhan",feature1Text:"Opsi untuk ekspansi, inventaris, peralatan, dan kebutuhan bisnis.",feature2Title:"Proses peninjauan jelas",feature2Text:"Pengajuan ditinjau manual. Persetujuan tidak dijamin.",feature3Title:"Proses online praktis",feature3Text:"Buat akun, kirim informasi bisnis, dan pantau pengajuan.",calcEyebrow:"Rencanakan",calcTitle:"Lihat perkiraan pembayaran.",calcIntro:"Sesuaikan jumlah dan jangka waktu untuk melihat perkiraan bulanan.",amountLabel:"Jumlah pembiayaan",termLabelCalc:"Jangka waktu pembayaran","12Months":"12 bulan","24Months":"24 bulan",calcDisclaimer:"Ilustrasi dengan bunga nominal tahunan 10%. Ketentuan aktual dapat berbeda.",monthlyEstimate:"Perkiraan pembayaran bulanan",estimateNote:"Kalkulator ini hanya panduan, bukan penawaran pembiayaan.",applyNow:"Ajukan sekarang →",processEyebrow:"Langkah sederhana",processTitle:"Cara proses ini berjalan.",processText:"Mulai online dan pantau pengajuan dari akun Anda.",step1Title:"Buat akun",step1Text:"Daftar dengan email dan verifikasi akun.",step2Title:"Kirim detail",step2Text:"Berikan informasi bisnis dan dokumen yang diminta.",step3Title:"Peninjauan pengajuan",step3Text:"Pengajuan ditinjau secara manual.",step4Title:"Pantau status",step4Text:"Masuk untuk melihat pembaruan.",ctaTitle:"Siap memajukan bisnis Anda?",ctaText:"Mulai pengajuan online; semua pengajuan ditinjau.",createAccount:"Buat akun →",footerText:"Solusi pembiayaan bisnis internasional.",footerFinancing:"Pembiayaan",footerApplication:"Pengajuan",footerDisclaimer:"Pembiayaan bergantung pada kelayakan dan peninjauan. Persetujuan tidak dijamin."},
-fr:{navHome:"Accueil",navFinancing:"Financement",navProcess:"Fonctionnement",navAbout:"À propos",signIn:"Connexion",eyebrow:"Financement international des entreprises",heroTitle:"Le capital pour la prochaine étape de votre entreprise.",heroText:"Des solutions flexibles pour aider les entreprises à se développer et accéder à de nouveaux marchés.",getStarted:"Commencer →",exploreFinancing:"Découvrir le financement",trust1:"Processus sécurisé",trust2:"Examen manuel",trust3:"Orientation internationale",floatLabel:"Croissance de l'entreprise",floatValue:"Avancer ensemble",financeCardLabel:"Solutions de financement",financeCardText:"Options pour entreprises admissibles",interestLabel:"Taux annuel indicatif",termLabel:"Durée de remboursement",upTo24:"Jusqu'à 24 mois",stat1:"Fourchette de financement",stat2:"Langues disponibles",stat3:"Durée maximale indicative",stat4:"Examen de la demande",aboutEyebrow:"Pourquoi GlobalBridgeFunding",aboutTitle:"Une voie plus claire vers la croissance.",aboutText:"Nous souhaitons rendre les demandes simples et transparentes.",feature1Title:"Financement de croissance",feature1Text:"Options pour l'expansion, les stocks, l'équipement et d'autres besoins.",feature2Title:"Examen transparent",feature2Text:"Les demandes sont examinées manuellement. L'approbation n'est pas garantie.",feature3Title:"Parcours en ligne pratique",feature3Text:"Créez un compte, envoyez les informations et suivez votre dossier.",calcEyebrow:"Anticipez",calcTitle:"Estimez vos remboursements.",calcIntro:"Modifiez le montant et la durée pour obtenir une estimation mensuelle.",amountLabel:"Montant du financement",termLabelCalc:"Durée de remboursement","12Months":"12 mois","24Months":"24 mois",calcDisclaimer:"Simulation avec un taux nominal annuel de 10 %. Les conditions réelles peuvent varier.",monthlyEstimate:"Mensualité estimée",estimateNote:"Ce calculateur est indicatif et ne constitue pas une offre.",applyNow:"Postuler →",processEyebrow:"Étapes simples",processTitle:"Comment fonctionne le processus.",processText:"Commencez en ligne et suivez votre demande.",step1Title:"Créez votre compte",step1Text:"Inscrivez-vous par email et vérifiez votre compte.",step2Title:"Envoyez vos informations",step2Text:"Fournissez les informations et documents demandés.",step3Title:"Examen de la demande",step3Text:"Votre demande est évaluée manuellement.",step4Title:"Suivez votre dossier",step4Text:"Connectez-vous pour consulter les mises à jour.",ctaTitle:"Prêt à faire avancer votre entreprise ?",ctaText:"Commencez votre demande en ligne; des critères s'appliquent.",createAccount:"Créer un compte →",footerText:"Solutions internationales de financement des entreprises.",footerFinancing:"Financement",footerApplication:"Demande",footerDisclaimer:"Le financement dépend de l'éligibilité et de l'examen. L'approbation n'est pas garantie."},
-fi:{navHome:"Etusivu",navFinancing:"Rahoitus",navProcess:"Näin se toimii",navAbout:"Tietoa",signIn:"Kirjaudu",eyebrow:"Kansainvälinen yritysrahoitus",heroTitle:"Pääomaa yrityksesi seuraavaan vaiheeseen.",heroText:"Joustavia ratkaisuja yritysten kasvuun ja uusille markkinoille.",getStarted:"Aloita →",exploreFinancing:"Tutustu rahoitukseen",trust1:"Turvallinen hakuprosessi",trust2:"Manuaalinen arviointi",trust3:"Kansainvälinen näkökulma",floatLabel:"Yrityksen kasvu",floatValue:"Kohti edistystä",financeCardLabel:"Yritysrahoitusratkaisut",financeCardText:"Vaihtoehtoja kelpoisille yrityksille",interestLabel:"Ohjeellinen vuosikorko",termLabel:"Takaisinmaksuaika",upTo24:"Enintään 24 kuukautta",stat1:"Rahoitusväli",stat2:"Käytettävissä olevat kielet",stat3:"Enimmäisaika",stat4:"Hakemuksen arviointi",aboutEyebrow:"Miksi GlobalBridgeFunding",aboutTitle:"Selkeämpi polku yrityksen kasvuun.",aboutText:"Tavoitteemme on tehdä hakemisesta selkeää ja läpinäkyvää.",feature1Title:"Kasvua tukeva rahoitus",feature1Text:"Vaihtoehtoja laajentumiseen, varastoon ja laitteisiin.",feature2Title:"Selkeä arviointi",feature2Text:"Hakemukset arvioidaan manuaalisesti. Hyväksyntää ei taata.",feature3Title:"Kätevä verkkopalvelu",feature3Text:"Luo tili, lähetä tiedot ja seuraa hakemustasi.",calcEyebrow:"Suunnittele",calcTitle:"Arvioi takaisinmaksusi.",calcIntro:"Muuta summaa ja laina-aikaa nähdäksesi kuukausierän.",amountLabel:"Rahoituksen määrä",termLabelCalc:"Takaisinmaksuaika","12Months":"12 kuukautta","24Months":"24 kuukautta",calcDisclaimer:"Esimerkki 10 prosentin nimellisellä vuosikorolla. Todelliset ehdot voivat vaihdella.",monthlyEstimate:"Arvioitu kuukausierä",estimateNote:"Laskuri on suuntaa antava, ei rahoitustarjous.",applyNow:"Hae nyt →",processEyebrow:"Yksinkertaiset vaiheet",processTitle:"Näin prosessi toimii.",processText:"Aloita verkossa ja seuraa hakemustasi.",step1Title:"Luo tili",step1Text:"Rekisteröidy sähköpostilla ja vahvista tilisi.",step2Title:"Lähetä tiedot",step2Text:"Anna yrityksen tiedot ja pyydetyt asiakirjat.",step3Title:"Hakemuksen arviointi",step3Text:"Hakemus arvioidaan manuaalisesti.",step4Title:"Seuraa tilannetta",step4Text:"Kirjaudu sisään nähdäksesi päivitykset.",ctaTitle:"Valmis viemään yritystäsi eteenpäin?",ctaText:"Aloita hakemus verkossa; kelpoisuus arvioidaan.",createAccount:"Luo tili →",footerText:"Kansainväliset yritysrahoitusratkaisut.",footerFinancing:"Rahoitus",footerApplication:"Hakemus",footerDisclaimer:"Rahoitus edellyttää kelpoisuutta ja arviointia. Hyväksyntää ei taata."},
-es:{navHome:"Inicio",navFinancing:"Financiación",navProcess:"Cómo funciona",navAbout:"Nosotros",signIn:"Iniciar sesión",eyebrow:"Financiación empresarial internacional",heroTitle:"Capital para el próximo paso de tu negocio.",heroText:"Soluciones flexibles para ayudar a las empresas a crecer y llegar a nuevos mercados.",getStarted:"Comenzar →",exploreFinancing:"Explorar financiación",trust1:"Proceso seguro",trust2:"Revisión manual",trust3:"Enfoque internacional",floatLabel:"Crecimiento empresarial",floatValue:"Avanzar juntos",financeCardLabel:"Soluciones de financiación",financeCardText:"Opciones para empresas elegibles",interestLabel:"Interés anual ilustrativo",termLabel:"Plazo de devolución",upTo24:"Hasta 24 meses",stat1:"Rango de financiación",stat2:"Idiomas disponibles",stat3:"Plazo máximo ilustrativo",stat4:"Revisión de solicitudes",aboutEyebrow:"Por qué GlobalBridgeFunding",aboutTitle:"Un camino más claro hacia el crecimiento.",aboutText:"Buscamos que el proceso sea sencillo y transparente.",feature1Title:"Financiación para crecer",feature1Text:"Opciones para expansión, inventario, equipos y otras necesidades.",feature2Title:"Revisión clara",feature2Text:"Las solicitudes se revisan manualmente. No se garantiza aprobación.",feature3Title:"Proceso online práctico",feature3Text:"Crea una cuenta, envía los datos y sigue tu solicitud.",calcEyebrow:"Planifica",calcTitle:"Consulta tus pagos estimados.",calcIntro:"Ajusta el importe y el plazo para ver una estimación mensual.",amountLabel:"Importe de financiación",termLabelCalc:"Plazo de devolución","12Months":"12 meses","24Months":"24 meses",calcDisclaimer:"Estimación con interés nominal anual del 10 %. Las condiciones reales pueden variar.",monthlyEstimate:"Pago mensual estimado",estimateNote:"Esta calculadora es orientativa, no una oferta.",applyNow:"Solicitar ahora →",processEyebrow:"Pasos sencillos",processTitle:"Cómo funciona el proceso.",processText:"Empieza online y sigue tu solicitud desde tu cuenta.",step1Title:"Crea tu cuenta",step1Text:"Regístrate por correo y verifica la cuenta.",step2Title:"Envía tus datos",step2Text:"Proporciona la información y los documentos solicitados.",step3Title:"Revisión de la solicitud",step3Text:"Tu solicitud se evalúa manualmente.",step4Title:"Consulta el estado",step4Text:"Inicia sesión para consultar novedades.",ctaTitle:"¿Listo para impulsar tu negocio?",ctaText:"Inicia tu solicitud online; se aplican criterios de elegibilidad.",createAccount:"Crear una cuenta →",footerText:"Soluciones internacionales de financiación empresarial.",footerFinancing:"Financiación",footerApplication:"Solicitud",footerDisclaimer:"La financiación depende de la elegibilidad y revisión. No se garantiza aprobación."}
-};
-const names={en:"English",pt:"Português",vi:"Tiếng Việt",fa:"فارسی",id:"Bahasa Indonesia",fr:"Français",fi:"Suomi",es:"Español"};
-const supported=Object.keys(dictionaries);
-const $=id=>document.getElementById(id);
-function getLanguage(){try{let v=localStorage.getItem("globalbridge_language")||localStorage.getItem("selectedLanguage")||"en";return supported.includes(v)?v:"en"}catch(e){return"en"}}
-function setLanguage(lang){if(!supported.includes(lang))lang="en";try{localStorage.setItem("globalbridge_language",lang);localStorage.setItem("selectedLanguage",lang)}catch(e){}applyLanguage(lang)}
-function applyLanguage(lang){
-if(!supported.includes(lang))lang="en";
-const d=dictionaries[lang];
-document.documentElement.lang=lang;
-document.documentElement.dir=lang==="fa"?"rtl":"ltr";
-document.querySelectorAll("[data-key]").forEach(el=>{const k=el.getAttribute("data-key");if(Object.prototype.hasOwnProperty.call(d,k))el.textContent=d[k]});
-const sel=$("languageSelector");if(sel)sel.value=lang;
-document.title="GlobalBridgeFunding | "+(d.eyebrow||"Business Financing");
-}
-function updateCalculator(){
-const a=$("amountRange"),t=$("termRange"),ao=$("amountOut"),to=$("termOut"),p=$("payment");
-if(!a||!t||!ao||!to||!p)return;
-const amount=Number(a.value),months=Number(t.value),r=.10/12;
-const payment=amount*r/(1-Math.pow(1+r,-months));
-ao.textContent="$"+amount.toLocaleString("en-US");
-to.textContent=months+" "+(months===1?"month":"months");
-p.textContent=payment.toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2,maximumFractionDigits:2});
-}
-function scrollToSection(hash){
-const target=document.querySelector(hash);
-if(target){target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState(null,"",hash)}
-}
-function initialize(){
-const sel=$("languageSelector");
-if(sel){
-sel.innerHTML="";
-supported.forEach(code=>{const opt=document.createElement("option");opt.value=code;opt.textContent=names[code];sel.appendChild(opt)});
-sel.addEventListener("change",()=>setLanguage(sel.value));
-}
-["amountRange","termRange"].forEach(id=>{const el=$(id);if(el)el.addEventListener("input",updateCalculator)});
-document.querySelectorAll('a[href="#home"],a[href="#financing"],a[href="#process"],a[href="#about"]').forEach(link=>{
-link.addEventListener("click",function(e){
-const hash=this.getAttribute("href");
-if(document.querySelector(hash)){e.preventDefault();scrollToSection(hash)}
-});
-});
-const photo=$("heroPhoto"),fallback=$("imageFallback");
-if(photo&&fallback){
-const showFallback=()=>{photo.style.display="none";fallback.style.display="flex"};
-photo.addEventListener("error",showFallback);
-photo.addEventListener("load",()=>{photo.style.display="block";fallback.style.display="none"});
-if(photo.complete&&photo.naturalWidth===0)showFallback();
-}
-const year=$("currentYear");if(year)year.textContent=new Date().getFullYear();
-applyLanguage(getLanguage());
-updateCalculator();
-}
-window.GlobalBridgeHomepage={setLanguage,getLanguage,applyLanguage,updateCalculator};
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initialize);else initialize();
-})();
-</script>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2>About Us</h2>
+    <p class="subtitle">Finance Without Borders.</p>
+    <p style="text-align:center; max-width:800px; margin:0 auto 20px;">GlobalBridge Finance is an international lending platform designed to connect eligible borrowers with financing through a secure digital experience and country-specific verification partners.</p>
+    <p style="text-align:center; max-width:800px; margin:0 auto 40px;">Our platform focuses on transparent lending, responsible credit assessment, secure identity verification, and convenient digital loan management.</p>
+    <h3 style="text-align:center; margin-bottom:20px;">Our Principles</h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:800px; margin:0 auto;">
+      <div class="card">Transparency</div>
+      <div class="card">Responsible lending</div>
+      <div class="card">Data protection</div>
+      <div class="card">Secure transactions</div>
+      <div class="card">International accessibility</div>
+      <div class="card">Customer support</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOANS -->
+<section id="loans" style="background:#f8fafc;">
+  <div class="container">
+    <h2>Loans</h2>
+    <p class="subtitle">Financing Designed Around Your Needs</p>
+    <p style="text-align:center; max-width:800px; margin:0 auto 40px;">Eligible customers can apply for unsecured financing ranging from $20,000 to $100,000.</p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; max-width:900px; margin:0 auto;">
+      <div class="card" style="text-align:center;"><strong>Loan amount</strong><br>$20,000 – $100,000</div>
+      <div class="card" style="text-align:center;"><strong>Interest rate</strong><br>10% per annum*</div>
+      <div class="card" style="text-align:center;"><strong>Repayment period</strong><br>12 – 24 months</div>
+      <div class="card" style="text-align:center;"><strong>Collateral</strong><br>Not required*</div>
+      <div class="card" style="text-align:center;"><strong>Payment</strong><br>USDT / USDC</div>
+    </div>
+    <p style="font-size:14px; color:#64748b; text-align:center; margin-top:30px;">*Final eligibility, pricing, fees, loan amount and repayment terms are subject to credit assessment and the laws applicable in the borrower’s jurisdiction.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="process">
+  <div class="container">
+    <h2>How It Works</h2>
+    <p class="subtitle">A Simple Digital Lending Process</p>
+    <div style="max-width:800px; margin:0 auto;">
+      <div class="card"><strong>01 — Register</strong><p>Create your secure account and provide your basic information.</p></div>
+      <div class="card"><strong>02 — Verify</strong><p>Complete identity and financial verification. Where permitted, we obtain your authorization before accessing relevant credit information through authorized providers.</p></div>
+      <div class="card"><strong>03 — Apply</strong><p>Select your desired loan amount and repayment period.</p></div>
+      <div class="card"><strong>04 — Assessment</strong><p>Our lending system evaluates your application, affordability and available credit information.</p></div>
+      <div class="card"><strong>05 — Approval & Agreement</strong><p>If approved, you’ll receive your loan offer and applicable terms for review before accepting.</p></div>
+      <div class="card"><strong>06 — Receive Funds</strong><p>After the required agreements and conditions are completed, funds are transferred using the supported payment process.</p></div>
+      <div class="card"><strong>07 — Repay & Build Your Record</strong><p>Make scheduled repayments through your account. Successful repayment history may be considered when determining eligibility for future financing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#f8fafc;">
+  <div class="container">
+    <h2>FAQ</h2>
+    <p class="subtitle">Frequently Asked Questions</p>
+    <div style="max-width:800px; margin:0 auto;">
+      <div class="card"><strong>How much can I borrow?</strong><p>Eligible applicants may apply for between $20,000 and $100,000, subject to credit assessment and applicable lending regulations.</p></div>
+      <div class="card"><strong>What is the interest rate?</strong><p>The platform’s proposed standard rate is 10% per annum, subject to applicable laws, disclosures and the final loan agreement.</p></div>
+      <div class="card"><strong>Do I need collateral?</strong><p>The proposed product is unsecured, meaning physical collateral is not required. Approval is subject to eligibility and credit assessment.</p></div>
+      <div class="card"><strong>How long do I have to repay?</strong><p>Available terms are proposed at 12 to 24 months, depending on the approved loan.</p></div>
+      <div class="card"><strong>How is my credit history checked?</strong><p>With the required authorization, relevant information may be verified through authorized credit-information providers and approved local partners.</p></div>
+      <div class="card"><strong>What information do I need to apply?</strong><p>Applicants may be required to provide identity, contact, residence, employment/income, banking/payment and other information necessary for KYC, affordability and credit assessment.</p></div>
+      <div class="card"><strong>Which countries do you operate in?</strong><p>The website should list only jurisdictions where the company or its relevant local entity/partner is legally authorized to provide the advertised service.</p></div>
+      <div class="card"><strong>How do I make repayments?</strong><p>Repayment methods available to a borrower will be displayed in their account. If your business is genuinely accepting only USDT and USDC, state that clearly in the applicable terms and disclosures.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <p class="subtitle">We’re Here to Help</p>
+    <p style="text-align:center; margin-bottom:30px;">Have a question about your application, account or repayment?</p>
+    <div class="card" style="max-width:600px; margin:0 auto 30px;">
+      <p><strong>Customer Support</strong></p>
+      <p>Email: support@globalbridgefunding.com</p>
+      <p>Head Office: Porto, Portugal</p>
+      <p>Support Hours: Monday–Friday, 09:00–18:00 WET</p>
+    </div>
+    <form class="card" style="max-width:600px; margin:0 auto;">
+      <div style="margin-bottom:14px;"><label>Full name</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
+      <div style="margin-bottom:14px;"><label>Email address</label><input type="email" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
+      <div style="margin-bottom:14px;"><label>Phone number</label><input type="tel" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label>Country</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label>Subject</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label>Message</label><textarea style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;height:90px;" required></textarea></div>
+      <button type="submit" style="width:100%;padding:12px;background:#36c2ff;color:#07172c;border:none;border-radius:6px;font-weight:700;">Submit</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2026 GlobalBridgeFunding. All rights reserved.
+</footer>
+
 </body>
 </html>
