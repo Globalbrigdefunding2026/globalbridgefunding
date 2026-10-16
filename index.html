@@ -26,6 +26,7 @@
     .card { background: #f8fafc; padding: 22px; border-radius: 12px; margin-bottom: 16px; }
     .section-img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 12px; margin: 30px 0; }
     footer { background: #07172c; color: white; text-align: center; padding: 30px; font-size: 14px; }
+    html[dir="rtl"] body { text-align: right; }
     @media (max-width: 700px) { 
       header { flex-direction: column; gap: 12px; text-align: center; }
       .header-right { flex-direction: column; }
@@ -48,6 +49,7 @@
       <option value="pt">Português</option>
       <option value="fr">Français</option>
       <option value="es">Español</option>
+      <option value="fa">فارسی</option>
     </select>
     <nav>
       <a href="#about" data-key="navAbout">About</a>
@@ -167,7 +169,6 @@
   © 2026 GlobalBridgeFunding. All rights reserved.
 </footer>
 
-<!-- Tawk.to -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
@@ -305,6 +306,37 @@ const translations = {
     formName: "Nombre completo", formEmail: "Dirección de email", formPhone: "Número de teléfono", formCountry: "País", formSubject: "Asunto", formMessage: "Mensaje", formSubmit: "Enviar",
     footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
     formSuccess: "¡Gracias! Su mensaje ha sido recibido. Nos pondremos en contacto pronto."
+  },
+  fa: {
+    navAbout: "درباره ما", navLoans: "وام‌ها", navProcess: "نحوه کار", navFaq: "سوالات متداول", navContact: "تماس", navApply: "درخواست",
+    heroTitle: "مالی بدون مرز", heroSubtitle: "تأمین مالی کسب‌وکار بین‌المللی از طریق یک تجربه دیجیتال امن.", heroButton: "درخواست تأمین مالی",
+    aboutTitle: "درباره ما", aboutSubtitle: "مالی بدون مرز.", aboutText1: "GlobalBridge Finance یک پلتفرم وام‌دهی بین‌المللی است که برای اتصال وام‌گیرندگان واجد شرایط به تأمین مالی از طریق تجربه دیجیتال امن و شرکای تأیید هویت خاص هر کشور طراحی شده است.", aboutText2: "پلتفرم ما بر وام‌دهی شفاف، ارزیابی مسئولانه اعتبار، تأیید هویت امن و مدیریت دیجیتال راحت وام تمرکز دارد.",
+    principlesTitle: "اصول ما", principle1: "شفافیت", principle2: "وام‌دهی مسئولانه", principle3: "حفاظت از داده‌ها", principle4: "تراکنش‌های امن", principle5: "دسترسی بین‌المللی", principle6: "پشتیبانی مشتری",
+    loansTitle: "وام‌ها", loansSubtitle: "تأمین مالی متناسب با نیازهای شما", loansText: "مشتریان واجد شرایط می‌توانند برای تأمین مالی بدون وثیقه از ۲۰,۰۰۰ تا ۱۰۰,۰۰۰ دلار درخواست دهند.",
+    loanAmount: "مبلغ وام", interestRate: "نرخ بهره", repayment: "دوره بازپرداخت", collateral: "وثیقه", collateralValue: "نیاز نیست*", payment: "پرداخت",
+    loanDisclaimer: "*واجد شرایط بودن نهایی، قیمت‌گذاری، هزینه‌ها، مبلغ وام و شرایط بازپرداخت مشروط به ارزیابی اعتبار و قوانین قابل اجرا در حوزه قضایی وام‌گیرنده است.",
+    processTitle: "نحوه کار", processSubtitle: "یک فرآیند وام‌دهی دیجیتال ساده",
+    step1Title: "۰۱ — ثبت‌نام", step1Text: "حساب امن خود را ایجاد کنید و اطلاعات اولیه خود را ارائه دهید.",
+    step2Title: "۰۲ — تأیید", step2Text: "تأیید هویت و مالی را تکمیل کنید. در صورت مجاز بودن، قبل از دسترسی به اطلاعات اعتباری مرتبط از طریق ارائه‌دهندگان مجاز، مجوز شما را دریافت می‌کنیم.",
+    step3Title: "۰۳ — درخواست", step3Text: "مبلغ وام و دوره بازپرداخت مورد نظر خود را انتخاب کنید.",
+    step4Title: "۰۴ — ارزیابی", step4Text: "سیستم وام‌دهی ما درخواست، توانایی بازپرداخت و اطلاعات اعتباری موجود شما را ارزیابی می‌کند.",
+    step5Title: "۰۵ — تأیید و توافق", step5Text: "در صورت تأیید، پیشنهاد وام و شرایط قابل اجرا را برای بررسی قبل از پذیرش دریافت خواهید کرد.",
+    step6Title: "۰۶ — دریافت وجوه", step6Text: "پس از تکمیل توافق‌ها و شرایط لازم، وجوه با استفاده از فرآیند پرداخت پشتیبانی‌شده منتقل می‌شوند.",
+    step7Title: "۰۷ — بازپرداخت و ساخت سابقه", step7Text: "بازپرداخت‌های برنامه‌ریزی‌شده را از طریق حساب خود انجام دهید. سابقه بازپرداخت موفق ممکن است برای تعیین واجد شرایط بودن تأمین مالی آینده در نظر گرفته شود.",
+    faqTitle: "سوالات متداول", faqSubtitle: "سؤالات متداول",
+    faq1q: "چقدر می‌توانم وام بگیرم؟", faq1a: "متقاضیان واجد شرایط می‌توانند بین ۲۰,۰۰۰ تا ۱۰۰,۰۰۰ دلار درخواست دهند، مشروط به ارزیابی اعتبار و مقررات وام‌دهی قابل اجرا.",
+    faq2q: "نرخ بهره چقدر است؟", faq2a: "نرخ استاندارد پیشنهادی پلتفرم ۱۰٪ در سال است، مشروط به قوانین قابل اجرا، افشاها و توافق نهایی وام.",
+    faq3q: "آیا به وثیقه نیاز دارم؟", faq3a: "محصول پیشنهادی بدون وثیقه است، به این معنی که وثیقه فیزیکی لازم نیست. تأیید مشروط به واجد شرایط بودن و ارزیابی اعتبار است.",
+    faq4q: "چقدر زمان برای بازپرداخت دارم؟", faq4a: "دوره‌های موجود از ۱۲ تا ۲۴ ماه پیشنهاد می‌شود، بسته به وام تأییدشده.",
+    faq5q: "سابقه اعتباری من چگونه بررسی می‌شود؟", faq5a: "با مجوز لازم، اطلاعات مرتبط ممکن است از طریق ارائه‌دهندگان اطلاعات اعتباری مجاز و شرکای محلی تأییدشده بررسی شود.",
+    faq6q: "برای درخواست به چه اطلاعاتی نیاز دارم؟", faq6a: "متقاضیان ممکن است ملزم به ارائه هویت، تماس، محل سکونت، اشتغال/درآمد، بانکداری/پرداخت و سایر اطلاعات لازم برای KYC، توانایی بازپرداخت و ارزیابی اعتبار باشند.",
+    faq7q: "در چه کشورهایی فعالیت می‌کنید؟", faq7a: "وب‌سایت باید فقط حوزه‌های قضایی را فهرست کند که شرکت یا نهاد/شریک محلی مربوطه آن قانوناً مجاز به ارائه خدمات تبلیغ‌شده است.",
+    faq8q: "چگونه بازپرداخت کنم؟", faq8a: "روش‌های بازپرداخت موجود برای وام‌گیرنده در حساب او نمایش داده می‌شود. اگر کسب‌وکار شما فقط USDT و USDC می‌پذیرد، آن را به وضوح در شرایط و افشاهای قابل اجرا ذکر کنید.",
+    contactTitle: "تماس", contactSubtitle: "ما اینجا هستیم تا کمک کنیم", contactText: "سؤالی در مورد درخواست، حساب یا بازپرداخت خود دارید؟",
+    supportTitle: "پشتیبانی مشتری", supportEmail: "ایمیل: support@globalbridgefunding.com", supportOffice: "دفتر مرکزی: پورتو، پرتغال", supportHours: "ساعات پشتیبانی: دوشنبه تا جمعه، ۰۹:۰۰–۱۸:۰۰ WET",
+    formName: "نام کامل", formEmail: "آدرس ایمیل", formPhone: "شماره تلفن", formCountry: "کشور", formSubject: "موضوع", formMessage: "پیام", formSubmit: "ارسال",
+    footer: "© ۲۰۲۶ GlobalBridgeFunding. تمامی حقوق محفوظ است.",
+    formSuccess: "متشکریم! پیام شما دریافت شد. به زودی با شما تماس خواهیم گرفت."
   }
 };
 
@@ -312,6 +344,7 @@ function applyLanguage(lang) {
   if (!translations[lang]) lang = "en";
   localStorage.setItem("globalbridge_language", lang);
   document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "fa") ? "rtl" : "ltr";
 
   document.querySelectorAll("[data-key]").forEach(el => {
     const key = el.getAttribute("data-key");
@@ -332,10 +365,18 @@ document.addEventListener("DOMContentLoaded", () => {
     applyLanguage(this.value);
   });
 
-  // Contact form
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const lang = localStorage.getItem("globalbridge_language") || "en";
+    const name = document.getElementById("contactName").value;
+    const email = document.getElementById("contactEmail").value;
+    const message = document.getElementById("contactMessage").value;
+
+    if (!name || !email || !message) {
+      alert("Please fill in name, email and message.");
+      return;
+    }
+
     alert(translations[lang].formSuccess);
     this.reset();
   });
