@@ -1882,44 +1882,24 @@
 
         try {
 
-
           /*
             SUPABASE REGISTRATION
-
-            Existing registration logic
-            remains unchanged.
           */
 
           const { data, error } =
             await supabaseClient.auth.signUp({
 
-              email:
-                email,
-
-              password:
-                password,
+              email: email,
+              password: password,
 
               options: {
-
                 data: {
-
-                  first_name:
-                    firstName,
-
-                  last_name:
-                    lastName,
-
-                  country:
-                    country,
-
-                  phone:
-                    phone,
-
-                  preferred_language:
-                    language
-
+                  first_name: firstName,
+                  last_name: lastName,
+                  country: country,
+                  phone: phone,
+                  preferred_language: language
                 }
-
               }
 
             });
@@ -1936,14 +1916,8 @@
               error.message
             );
 
-
-            registerButton.disabled =
-              false;
-
-
-            registerButton.textContent =
-              translations.createAccount;
-
+            registerButton.disabled = false;
+            registerButton.textContent = translations.createAccount;
 
             return;
 
@@ -1951,34 +1925,36 @@
 
 
           /*
-            SUCCESS
+            SUCCESS — INSERT INTO PROFILES TABLE
           */
 
           if (data.user) {
 
-            alert(
-              translations.success
-            );
+            const fullName = firstName + " " + lastName;
 
+            const { error: profileError } = await supabaseClient
+              .from("profiles")
+              .insert({
+                user_id: data.user.id,
+                full_name: fullName,
+                phone: phone,
+                preferred_language: language,
+                country: country
+              });
+
+            if (profileError) {
+              console.error("Profile insert error:", profileError);
+            }
+
+            alert(translations.success);
 
             registerForm.reset();
 
-
-            /*
-              Keep the website language
-              after resetting the form.
-            */
-
-            applyRegisterLanguage(
-              currentLanguage
-            );
-
+            applyRegisterLanguage(currentLanguage);
 
           } else {
 
-            alert(
-              translations.submitted
-            );
+            alert(translations.submitted);
 
           }
 
@@ -1986,11 +1962,7 @@
         } catch (error) {
 
           console.error(error);
-
-
-          alert(
-            translations.error
-          );
+          alert(translations.error);
 
         }
 
