@@ -46,28 +46,24 @@
     <select id="languageSelector" class="lang-select">
       <option value="en">English</option>
       <option value="pt">Português</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="fa">فارسی</option>
-      <option value="id">Bahasa Indonesia</option>
       <option value="fr">Français</option>
-      <option value="fi">Suomi</option>
       <option value="es">Español</option>
     </select>
     <nav>
-      <a href="#about">About</a>
-      <a href="#loans">Loans</a>
-      <a href="#process">How It Works</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="register.html" class="btn" style="padding:8px 16px; margin-left:12px;">Apply</a>
+      <a href="#about" data-key="navAbout">About</a>
+      <a href="#loans" data-key="navLoans">Loans</a>
+      <a href="#process" data-key="navProcess">How It Works</a>
+      <a href="#faq" data-key="navFaq">FAQ</a>
+      <a href="#contact" data-key="navContact">Contact</a>
+      <a href="register.html" class="btn" style="padding:8px 16px; margin-left:12px;" data-key="navApply">Apply</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <h1>Finance Without Borders</h1>
-  <p>International business financing through a secure digital experience.</p>
-  <a href="register.html" class="btn">Apply for Financing</a>
+  <h1 data-key="heroTitle">Finance Without Borders</h1>
+  <p data-key="heroSubtitle">International business financing through a secure digital experience.</p>
+  <a href="register.html" class="btn" data-key="heroButton">Apply for Financing</a>
 </section>
 
 <div class="container" style="margin-top: -40px;">
@@ -76,102 +72,102 @@
 
 <section id="about">
   <div class="container">
-    <h2>About Us</h2>
-    <p class="subtitle">Finance Without Borders.</p>
+    <h2 data-key="aboutTitle">About Us</h2>
+    <p class="subtitle" data-key="aboutSubtitle">Finance Without Borders.</p>
     <img src="images/IMG_0550.jpeg" class="section-img" alt="">
-    <p style="text-align:center; max-width:800px; margin:0 auto 20px;">GlobalBridge Finance is an international lending platform designed to connect eligible borrowers with financing through a secure digital experience and country-specific verification partners.</p>
-    <p style="text-align:center; max-width:800px; margin:0 auto 40px;">Our platform focuses on transparent lending, responsible credit assessment, secure identity verification, and convenient digital loan management.</p>
-    <h3 style="text-align:center; margin-bottom:20px;">Our Principles</h3>
+    <p style="text-align:center; max-width:800px; margin:0 auto 20px;" data-key="aboutText1">GlobalBridge Finance is an international lending platform designed to connect eligible borrowers with financing through a secure digital experience and country-specific verification partners.</p>
+    <p style="text-align:center; max-width:800px; margin:0 auto 40px;" data-key="aboutText2">Our platform focuses on transparent lending, responsible credit assessment, secure identity verification, and convenient digital loan management.</p>
+    <h3 style="text-align:center; margin-bottom:20px;" data-key="principlesTitle">Our Principles</h3>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:800px; margin:0 auto;">
-      <div class="card">Transparency</div>
-      <div class="card">Responsible lending</div>
-      <div class="card">Data protection</div>
-      <div class="card">Secure transactions</div>
-      <div class="card">International accessibility</div>
-      <div class="card">Customer support</div>
+      <div class="card" data-key="principle1">Transparency</div>
+      <div class="card" data-key="principle2">Responsible lending</div>
+      <div class="card" data-key="principle3">Data protection</div>
+      <div class="card" data-key="principle4">Secure transactions</div>
+      <div class="card" data-key="principle5">International accessibility</div>
+      <div class="card" data-key="principle6">Customer support</div>
     </div>
   </div>
 </section>
 
 <section id="loans" style="background:#f8fafc;">
   <div class="container">
-    <h2>Loans</h2>
-    <p class="subtitle">Financing Designed Around Your Needs</p>
-    <p style="text-align:center; max-width:800px; margin:0 auto 40px;">Eligible customers can apply for unsecured financing ranging from $20,000 to $100,000.</p>
+    <h2 data-key="loansTitle">Loans</h2>
+    <p class="subtitle" data-key="loansSubtitle">Financing Designed Around Your Needs</p>
+    <p style="text-align:center; max-width:800px; margin:0 auto 40px;" data-key="loansText">Eligible customers can apply for unsecured financing ranging from $20,000 to $100,000.</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; max-width:900px; margin:0 auto;">
-      <div class="card" style="text-align:center;"><strong>Loan amount</strong><br>$20,000 – $100,000</div>
-      <div class="card" style="text-align:center;"><strong>Interest rate</strong><br>10% per annum*</div>
-      <div class="card" style="text-align:center;"><strong>Repayment period</strong><br>12 – 24 months</div>
-      <div class="card" style="text-align:center;"><strong>Collateral</strong><br>Not required*</div>
-      <div class="card" style="text-align:center;"><strong>Payment</strong><br>USDT / USDC</div>
+      <div class="card" style="text-align:center;"><strong data-key="loanAmount">Loan amount</strong><br>$20,000 – $100,000</div>
+      <div class="card" style="text-align:center;"><strong data-key="interestRate">Interest rate</strong><br>10% per annum*</div>
+      <div class="card" style="text-align:center;"><strong data-key="repayment">Repayment period</strong><br>12 – 24 months</div>
+      <div class="card" style="text-align:center;"><strong data-key="collateral">Collateral</strong><br data-key="collateralValue">Not required*</div>
+      <div class="card" style="text-align:center;"><strong data-key="payment">Payment</strong><br>USDT / USDC</div>
     </div>
-    <p style="font-size:14px; color:#64748b; text-align:center; margin-top:30px;">*Final eligibility, pricing, fees, loan amount and repayment terms are subject to credit assessment and the laws applicable in the borrower’s jurisdiction.</p>
+    <p style="font-size:14px; color:#64748b; text-align:center; margin-top:30px;" data-key="loanDisclaimer">*Final eligibility, pricing, fees, loan amount and repayment terms are subject to credit assessment and the laws applicable in the borrower’s jurisdiction.</p>
   </div>
 </section>
 
 <section id="process">
   <div class="container">
-    <h2>How It Works</h2>
-    <p class="subtitle">A Simple Digital Lending Process</p>
+    <h2 data-key="processTitle">How It Works</h2>
+    <p class="subtitle" data-key="processSubtitle">A Simple Digital Lending Process</p>
     <img src="images/IMG_0538.jpeg" class="section-img" alt="">
     <div style="max-width:800px; margin:0 auto;">
-      <div class="card"><strong>01 — Register</strong><p>Create your secure account and provide your basic information.</p></div>
-      <div class="card"><strong>02 — Verify</strong><p>Complete identity and financial verification. Where permitted, we obtain your authorization before accessing relevant credit information through authorized providers.</p></div>
-      <div class="card"><strong>03 — Apply</strong><p>Select your desired loan amount and repayment period.</p></div>
-      <div class="card"><strong>04 — Assessment</strong><p>Our lending system evaluates your application, affordability and available credit information.</p></div>
-      <div class="card"><strong>05 — Approval & Agreement</strong><p>If approved, you’ll receive your loan offer and applicable terms for review before accepting.</p></div>
-      <div class="card"><strong>06 — Receive Funds</strong><p>After the required agreements and conditions are completed, funds are transferred using the supported payment process.</p></div>
-      <div class="card"><strong>07 — Repay & Build Your Record</strong><p>Make scheduled repayments through your account. Successful repayment history may be considered when determining eligibility for future financing.</p></div>
+      <div class="card"><strong data-key="step1Title">01 — Register</strong><p data-key="step1Text">Create your secure account and provide your basic information.</p></div>
+      <div class="card"><strong data-key="step2Title">02 — Verify</strong><p data-key="step2Text">Complete identity and financial verification. Where permitted, we obtain your authorization before accessing relevant credit information through authorized providers.</p></div>
+      <div class="card"><strong data-key="step3Title">03 — Apply</strong><p data-key="step3Text">Select your desired loan amount and repayment period.</p></div>
+      <div class="card"><strong data-key="step4Title">04 — Assessment</strong><p data-key="step4Text">Our lending system evaluates your application, affordability and available credit information.</p></div>
+      <div class="card"><strong data-key="step5Title">05 — Approval & Agreement</strong><p data-key="step5Text">If approved, you’ll receive your loan offer and applicable terms for review before accepting.</p></div>
+      <div class="card"><strong data-key="step6Title">06 — Receive Funds</strong><p data-key="step6Text">After the required agreements and conditions are completed, funds are transferred using the supported payment process.</p></div>
+      <div class="card"><strong data-key="step7Title">07 — Repay & Build Your Record</strong><p data-key="step7Text">Make scheduled repayments through your account. Successful repayment history may be considered when determining eligibility for future financing.</p></div>
     </div>
   </div>
 </section>
 
 <section id="faq" style="background:#f8fafc;">
   <div class="container">
-    <h2>FAQ</h2>
-    <p class="subtitle">Frequently Asked Questions</p>
+    <h2 data-key="faqTitle">FAQ</h2>
+    <p class="subtitle" data-key="faqSubtitle">Frequently Asked Questions</p>
     <div style="max-width:800px; margin:0 auto;">
-      <div class="card"><strong>How much can I borrow?</strong><p>Eligible applicants may apply for between $20,000 and $100,000, subject to credit assessment and applicable lending regulations.</p></div>
-      <div class="card"><strong>What is the interest rate?</strong><p>The platform’s proposed standard rate is 10% per annum, subject to applicable laws, disclosures and the final loan agreement.</p></div>
-      <div class="card"><strong>Do I need collateral?</strong><p>The proposed product is unsecured, meaning physical collateral is not required. Approval is subject to eligibility and credit assessment.</p></div>
-      <div class="card"><strong>How long do I have to repay?</strong><p>Available terms are proposed at 12 to 24 months, depending on the approved loan.</p></div>
-      <div class="card"><strong>How is my credit history checked?</strong><p>With the required authorization, relevant information may be verified through authorized credit-information providers and approved local partners.</p></div>
-      <div class="card"><strong>What information do I need to apply?</strong><p>Applicants may be required to provide identity, contact, residence, employment/income, banking/payment and other information necessary for KYC, affordability and credit assessment.</p></div>
-      <div class="card"><strong>Which countries do you operate in?</strong><p>The website should list only jurisdictions where the company or its relevant local entity/partner is legally authorized to provide the advertised service.</p></div>
-      <div class="card"><strong>How do I make repayments?</strong><p>Repayment methods available to a borrower will be displayed in their account. If your business is genuinely accepting only USDT and USDC, state that clearly in the applicable terms and disclosures.</p></div>
+      <div class="card"><strong data-key="faq1q">How much can I borrow?</strong><p data-key="faq1a">Eligible applicants may apply for between $20,000 and $100,000, subject to credit assessment and applicable lending regulations.</p></div>
+      <div class="card"><strong data-key="faq2q">What is the interest rate?</strong><p data-key="faq2a">The platform’s proposed standard rate is 10% per annum, subject to applicable laws, disclosures and the final loan agreement.</p></div>
+      <div class="card"><strong data-key="faq3q">Do I need collateral?</strong><p data-key="faq3a">The proposed product is unsecured, meaning physical collateral is not required. Approval is subject to eligibility and credit assessment.</p></div>
+      <div class="card"><strong data-key="faq4q">How long do I have to repay?</strong><p data-key="faq4a">Available terms are proposed at 12 to 24 months, depending on the approved loan.</p></div>
+      <div class="card"><strong data-key="faq5q">How is my credit history checked?</strong><p data-key="faq5a">With the required authorization, relevant information may be verified through authorized credit-information providers and approved local partners.</p></div>
+      <div class="card"><strong data-key="faq6q">What information do I need to apply?</strong><p data-key="faq6a">Applicants may be required to provide identity, contact, residence, employment/income, banking/payment and other information necessary for KYC, affordability and credit assessment.</p></div>
+      <div class="card"><strong data-key="faq7q">Which countries do you operate in?</strong><p data-key="faq7a">The website should list only jurisdictions where the company or its relevant local entity/partner is legally authorized to provide the advertised service.</p></div>
+      <div class="card"><strong data-key="faq8q">How do I make repayments?</strong><p data-key="faq8a">Repayment methods available to a borrower will be displayed in their account. If your business is genuinely accepting only USDT and USDC, state that clearly in the applicable terms and disclosures.</p></div>
     </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="container">
-    <h2>Contact</h2>
-    <p class="subtitle">We’re Here to Help</p>
+    <h2 data-key="contactTitle">Contact</h2>
+    <p class="subtitle" data-key="contactSubtitle">We’re Here to Help</p>
     <img src="images/IMG_0552.jpeg" class="section-img" alt="">
-    <p style="text-align:center; margin-bottom:30px;">Have a question about your application, account or repayment?</p>
+    <p style="text-align:center; margin-bottom:30px;" data-key="contactText">Have a question about your application, account or repayment?</p>
     <div class="card" style="max-width:600px; margin:0 auto 30px;">
-      <p><strong>Customer Support</strong></p>
-      <p>Email: support@globalbridgefunding.com</p>
-      <p>Head Office: Porto, Portugal</p>
-      <p>Support Hours: Monday–Friday, 09:00–18:00 WET</p>
+      <p><strong data-key="supportTitle">Customer Support</strong></p>
+      <p data-key="supportEmail">Email: support@globalbridgefunding.com</p>
+      <p data-key="supportOffice">Head Office: Porto, Portugal</p>
+      <p data-key="supportHours">Support Hours: Monday–Friday, 09:00–18:00 WET</p>
     </div>
-    <form class="card" style="max-width:600px; margin:0 auto;">
-      <div style="margin-bottom:14px;"><label>Full name</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
-      <div style="margin-bottom:14px;"><label>Email address</label><input type="email" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
-      <div style="margin-bottom:14px;"><label>Phone number</label><input type="tel" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
-      <div style="margin-bottom:14px;"><label>Country</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
-      <div style="margin-bottom:14px;"><label>Subject</label><input type="text" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
-      <div style="margin-bottom:14px;"><label>Message</label><textarea style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;height:90px;" required></textarea></div>
-      <button type="submit" style="width:100%;padding:12px;background:#36c2ff;color:#07172c;border:none;border-radius:6px;font-weight:700;">Submit</button>
+    <form id="contactForm" class="card" style="max-width:600px; margin:0 auto;">
+      <div style="margin-bottom:14px;"><label data-key="formName">Full name</label><input type="text" id="contactName" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
+      <div style="margin-bottom:14px;"><label data-key="formEmail">Email address</label><input type="email" id="contactEmail" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;" required></div>
+      <div style="margin-bottom:14px;"><label data-key="formPhone">Phone number</label><input type="tel" id="contactPhone" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label data-key="formCountry">Country</label><input type="text" id="contactCountry" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label data-key="formSubject">Subject</label><input type="text" id="contactSubject" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;"></div>
+      <div style="margin-bottom:14px;"><label data-key="formMessage">Message</label><textarea id="contactMessage" style="width:100%;padding:10px;margin-top:4px;border:1px solid #ddd;border-radius:6px;height:90px;" required></textarea></div>
+      <button type="submit" style="width:100%;padding:12px;background:#36c2ff;color:#07172c;border:none;border-radius:6px;font-weight:700;" data-key="formSubmit">Submit</button>
     </form>
   </div>
 </section>
 
-<footer>
+<footer data-key="footer">
   © 2026 GlobalBridgeFunding. All rights reserved.
 </footer>
 
-<!-- Tawk.to Live Chat -->
+<!-- Tawk.to -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
@@ -184,18 +180,166 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 
-<script src="language.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const sel = document.getElementById("languageSelector");
-    if (sel && window.GlobalBridgeLanguage) {
-      sel.value = window.GlobalBridgeLanguage.getLanguage() || "en";
-      sel.addEventListener("change", function() {
-        window.GlobalBridgeLanguage.setLanguage(this.value);
-        location.reload();
-      });
+const translations = {
+  en: {
+    navAbout: "About", navLoans: "Loans", navProcess: "How It Works", navFaq: "FAQ", navContact: "Contact", navApply: "Apply",
+    heroTitle: "Finance Without Borders", heroSubtitle: "International business financing through a secure digital experience.", heroButton: "Apply for Financing",
+    aboutTitle: "About Us", aboutSubtitle: "Finance Without Borders.", aboutText1: "GlobalBridge Finance is an international lending platform designed to connect eligible borrowers with financing through a secure digital experience and country-specific verification partners.", aboutText2: "Our platform focuses on transparent lending, responsible credit assessment, secure identity verification, and convenient digital loan management.",
+    principlesTitle: "Our Principles", principle1: "Transparency", principle2: "Responsible lending", principle3: "Data protection", principle4: "Secure transactions", principle5: "International accessibility", principle6: "Customer support",
+    loansTitle: "Loans", loansSubtitle: "Financing Designed Around Your Needs", loansText: "Eligible customers can apply for unsecured financing ranging from $20,000 to $100,000.",
+    loanAmount: "Loan amount", interestRate: "Interest rate", repayment: "Repayment period", collateral: "Collateral", collateralValue: "Not required*", payment: "Payment",
+    loanDisclaimer: "*Final eligibility, pricing, fees, loan amount and repayment terms are subject to credit assessment and the laws applicable in the borrower’s jurisdiction.",
+    processTitle: "How It Works", processSubtitle: "A Simple Digital Lending Process",
+    step1Title: "01 — Register", step1Text: "Create your secure account and provide your basic information.",
+    step2Title: "02 — Verify", step2Text: "Complete identity and financial verification. Where permitted, we obtain your authorization before accessing relevant credit information through authorized providers.",
+    step3Title: "03 — Apply", step3Text: "Select your desired loan amount and repayment period.",
+    step4Title: "04 — Assessment", step4Text: "Our lending system evaluates your application, affordability and available credit information.",
+    step5Title: "05 — Approval & Agreement", step5Text: "If approved, you’ll receive your loan offer and applicable terms for review before accepting.",
+    step6Title: "06 — Receive Funds", step6Text: "After the required agreements and conditions are completed, funds are transferred using the supported payment process.",
+    step7Title: "07 — Repay & Build Your Record", step7Text: "Make scheduled repayments through your account. Successful repayment history may be considered when determining eligibility for future financing.",
+    faqTitle: "FAQ", faqSubtitle: "Frequently Asked Questions",
+    faq1q: "How much can I borrow?", faq1a: "Eligible applicants may apply for between $20,000 and $100,000, subject to credit assessment and applicable lending regulations.",
+    faq2q: "What is the interest rate?", faq2a: "The platform’s proposed standard rate is 10% per annum, subject to applicable laws, disclosures and the final loan agreement.",
+    faq3q: "Do I need collateral?", faq3a: "The proposed product is unsecured, meaning physical collateral is not required. Approval is subject to eligibility and credit assessment.",
+    faq4q: "How long do I have to repay?", faq4a: "Available terms are proposed at 12 to 24 months, depending on the approved loan.",
+    faq5q: "How is my credit history checked?", faq5a: "With the required authorization, relevant information may be verified through authorized credit-information providers and approved local partners.",
+    faq6q: "What information do I need to apply?", faq6a: "Applicants may be required to provide identity, contact, residence, employment/income, banking/payment and other information necessary for KYC, affordability and credit assessment.",
+    faq7q: "Which countries do you operate in?", faq7a: "The website should list only jurisdictions where the company or its relevant local entity/partner is legally authorized to provide the advertised service.",
+    faq8q: "How do I make repayments?", faq8a: "Repayment methods available to a borrower will be displayed in their account. If your business is genuinely accepting only USDT and USDC, state that clearly in the applicable terms and disclosures.",
+    contactTitle: "Contact", contactSubtitle: "We’re Here to Help", contactText: "Have a question about your application, account or repayment?",
+    supportTitle: "Customer Support", supportEmail: "Email: support@globalbridgefunding.com", supportOffice: "Head Office: Porto, Portugal", supportHours: "Support Hours: Monday–Friday, 09:00–18:00 WET",
+    formName: "Full name", formEmail: "Email address", formPhone: "Phone number", formCountry: "Country", formSubject: "Subject", formMessage: "Message", formSubmit: "Submit",
+    footer: "© 2026 GlobalBridgeFunding. All rights reserved.",
+    formSuccess: "Thank you! Your message has been received. We will contact you soon."
+  },
+  pt: {
+    navAbout: "Sobre", navLoans: "Empréstimos", navProcess: "Como Funciona", navFaq: "FAQ", navContact: "Contacto", navApply: "Candidatar",
+    heroTitle: "Financiamento Sem Fronteiras", heroSubtitle: "Financiamento empresarial internacional através de uma experiência digital segura.", heroButton: "Candidatar-se a Financiamento",
+    aboutTitle: "Sobre Nós", aboutSubtitle: "Financiamento Sem Fronteiras.", aboutText1: "A GlobalBridge Finance é uma plataforma internacional de crédito concebida para ligar mutuários elegíveis a financiamento através de uma experiência digital segura e parceiros de verificação específicos de cada país.", aboutText2: "A nossa plataforma foca-se em crédito transparente, avaliação responsável de crédito, verificação segura de identidade e gestão digital conveniente de empréstimos.",
+    principlesTitle: "Os Nossos Princípios", principle1: "Transparência", principle2: "Crédito responsável", principle3: "Proteção de dados", principle4: "Transações seguras", principle5: "Acessibilidade internacional", principle6: "Apoio ao cliente",
+    loansTitle: "Empréstimos", loansSubtitle: "Financiamento Adaptado às Suas Necessidades", loansText: "Clientes elegíveis podem candidatar-se a financiamento sem garantia entre 20.000 $ e 100.000 $.",
+    loanAmount: "Montante do empréstimo", interestRate: "Taxa de juro", repayment: "Prazo de reembolso", collateral: "Garantia", collateralValue: "Não exigida*", payment: "Pagamento",
+    loanDisclaimer: "*A elegibilidade final, preços, taxas, montante do empréstimo e condições de reembolso estão sujeitos a avaliação de crédito e às leis aplicáveis na jurisdição do mutuário.",
+    processTitle: "Como Funciona", processSubtitle: "Um Processo de Crédito Digital Simples",
+    step1Title: "01 — Registar", step1Text: "Crie a sua conta segura e forneça as suas informações básicas.",
+    step2Title: "02 — Verificar", step2Text: "Complete a verificação de identidade e financeira. Quando permitido, obtemos a sua autorização antes de aceder a informações de crédito relevantes através de fornecedores autorizados.",
+    step3Title: "03 — Candidatar", step3Text: "Selecione o montante do empréstimo e o prazo de reembolso desejados.",
+    step4Title: "04 — Avaliação", step4Text: "O nosso sistema de crédito avalia a sua candidatura, capacidade de pagamento e informações de crédito disponíveis.",
+    step5Title: "05 — Aprovação e Acordo", step5Text: "Se aprovado, receberá a sua oferta de empréstimo e os termos aplicáveis para revisão antes de aceitar.",
+    step6Title: "06 — Receber Fundos", step6Text: "Após a conclusão dos acordos e condições necessários, os fundos são transferidos utilizando o processo de pagamento suportado.",
+    step7Title: "07 — Reembolsar e Construir o Seu Histórico", step7Text: "Efetue reembolsos programados através da sua conta. Um histórico de reembolso bem-sucedido pode ser considerado para determinar a elegibilidade para financiamento futuro.",
+    faqTitle: "FAQ", faqSubtitle: "Perguntas Frequentes",
+    faq1q: "Quanto posso pedir emprestado?", faq1a: "Candidatos elegíveis podem candidatar-se a entre 20.000 $ e 100.000 $, sujeitos a avaliação de crédito e regulamentações de crédito aplicáveis.",
+    faq2q: "Qual é a taxa de juro?", faq2a: "A taxa padrão proposta da plataforma é de 10% ao ano, sujeita às leis aplicáveis, divulgações e ao acordo final de empréstimo.",
+    faq3q: "Preciso de garantia?", faq3a: "O produto proposto é sem garantia, o que significa que não é necessária garantia física. A aprovação está sujeita a elegibilidade e avaliação de crédito.",
+    faq4q: "Quanto tempo tenho para reembolsar?", faq4a: "Os prazos disponíveis são propostos de 12 a 24 meses, dependendo do empréstimo aprovado.",
+    faq5q: "Como é verificada a minha história de crédito?", faq5a: "Com a autorização necessária, informações relevantes podem ser verificadas através de fornecedores de informação de crédito autorizados e parceiros locais aprovados.",
+    faq6q: "Que informações preciso para me candidatar?", faq6a: "Os candidatos podem ser obrigados a fornecer identidade, contacto, residência, emprego/rendimento, banca/pagamento e outras informações necessárias para KYC, capacidade de pagamento e avaliação de crédito.",
+    faq7q: "Em que países operam?", faq7a: "O website deve listar apenas jurisdições onde a empresa ou a sua entidade/parceiro local relevante está legalmente autorizado a fornecer o serviço anunciado.",
+    faq8q: "Como faço os reembolsos?", faq8a: "Os métodos de reembolso disponíveis para um mutuário serão apresentados na sua conta. Se o seu negócio aceita apenas USDT e USDC, indique-o claramente nos termos e divulgações aplicáveis.",
+    contactTitle: "Contacto", contactSubtitle: "Estamos Aqui para Ajudar", contactText: "Tem alguma questão sobre a sua candidatura, conta ou reembolso?",
+    supportTitle: "Apoio ao Cliente", supportEmail: "Email: support@globalbridgefunding.com", supportOffice: "Sede: Porto, Portugal", supportHours: "Horário de Apoio: Segunda a Sexta, 09:00–18:00 WET",
+    formName: "Nome completo", formEmail: "Endereço de email", formPhone: "Número de telefone", formCountry: "País", formSubject: "Assunto", formMessage: "Mensagem", formSubmit: "Enviar",
+    footer: "© 2026 GlobalBridgeFunding. Todos os direitos reservados.",
+    formSuccess: "Obrigado! A sua mensagem foi recebida. Entraremos em contacto em breve."
+  },
+  fr: {
+    navAbout: "À propos", navLoans: "Prêts", navProcess: "Comment ça marche", navFaq: "FAQ", navContact: "Contact", navApply: "Postuler",
+    heroTitle: "Finance Sans Frontières", heroSubtitle: "Financement d'entreprise international via une expérience numérique sécurisée.", heroButton: "Demander un financement",
+    aboutTitle: "À propos", aboutSubtitle: "Finance Sans Frontières.", aboutText1: "GlobalBridge Finance est une plateforme de prêt internationale conçue pour connecter les emprunteurs éligibles à un financement via une expérience numérique sécurisée et des partenaires de vérification spécifiques à chaque pays.", aboutText2: "Notre plateforme se concentre sur le prêt transparent, l'évaluation responsable du crédit, la vérification sécurisée de l'identité et la gestion numérique pratique des prêts.",
+    principlesTitle: "Nos Principes", principle1: "Transparence", principle2: "Prêt responsable", principle3: "Protection des données", principle4: "Transactions sécurisées", principle5: "Accessibilité internationale", principle6: "Support client",
+    loansTitle: "Prêts", loansSubtitle: "Financement Adapté à Vos Besoins", loansText: "Les clients éligibles peuvent demander un financement non garanti allant de 20 000 $ à 100 000 $.",
+    loanAmount: "Montant du prêt", interestRate: "Taux d'intérêt", repayment: "Période de remboursement", collateral: "Garantie", collateralValue: "Non requis*", payment: "Paiement",
+    loanDisclaimer: "*L'éligibilité finale, les prix, les frais, le montant du prêt et les conditions de remboursement sont soumis à une évaluation de crédit et aux lois applicables dans la juridiction de l'emprunteur.",
+    processTitle: "Comment ça marche", processSubtitle: "Un Processus de Prêt Numérique Simple",
+    step1Title: "01 — S'inscrire", step1Text: "Créez votre compte sécurisé et fournissez vos informations de base.",
+    step2Title: "02 — Vérifier", step2Text: "Complétez la vérification d'identité et financière. Lorsque cela est autorisé, nous obtenons votre autorisation avant d'accéder aux informations de crédit pertinentes via des fournisseurs autorisés.",
+    step3Title: "03 — Postuler", step3Text: "Sélectionnez le montant du prêt et la période de remboursement souhaités.",
+    step4Title: "04 — Évaluation", step4Text: "Notre système de prêt évalue votre demande, votre capacité de remboursement et les informations de crédit disponibles.",
+    step5Title: "05 — Approbation et Accord", step5Text: "Si approuvé, vous recevrez votre offre de prêt et les conditions applicables à examiner avant d'accepter.",
+    step6Title: "06 — Recevoir les Fonds", step6Text: "Une fois les accords et conditions requis complétés, les fonds sont transférés via le processus de paiement pris en charge.",
+    step7Title: "07 — Rembourser et Construire Votre Historique", step7Text: "Effectuez des remboursements programmés via votre compte. Un historique de remboursement réussi peut être pris en compte pour déterminer l'éligibilité à un financement futur.",
+    faqTitle: "FAQ", faqSubtitle: "Questions Fréquemment Posées",
+    faq1q: "Combien puis-je emprunter ?", faq1a: "Les candidats éligibles peuvent demander entre 20 000 $ et 100 000 $, sous réserve d'une évaluation de crédit et des réglementations de prêt applicables.",
+    faq2q: "Quel est le taux d'intérêt ?", faq2a: "Le taux standard proposé par la plateforme est de 10 % par an, sous réserve des lois applicables, des divulgations et de l'accord de prêt final.",
+    faq3q: "Ai-je besoin d'une garantie ?", faq3a: "Le produit proposé est non garanti, ce qui signifie qu'aucune garantie physique n'est requise. L'approbation est soumise à l'éligibilité et à l'évaluation du crédit.",
+    faq4q: "Combien de temps ai-je pour rembourser ?", faq4a: "Les durées disponibles sont proposées de 12 à 24 mois, selon le prêt approuvé.",
+    faq5q: "Comment mon historique de crédit est-il vérifié ?", faq5a: "Avec l'autorisation requise, les informations pertinentes peuvent être vérifiées via des fournisseurs d'informations de crédit autorisés et des partenaires locaux approuvés.",
+    faq6q: "Quelles informations dois-je fournir pour postuler ?", faq6a: "Les candidats peuvent être tenus de fournir une identité, des coordonnées, une résidence, un emploi/revenu, des informations bancaires/de paiement et d'autres informations nécessaires pour le KYC, la capacité de remboursement et l'évaluation du crédit.",
+    faq7q: "Dans quels pays opérez-vous ?", faq7a: "Le site web ne doit lister que les juridictions où l'entreprise ou son entité/partenaire local pertinent est légalement autorisé à fournir le service annoncé.",
+    faq8q: "Comment effectuer les remboursements ?", faq8a: "Les méthodes de remboursement disponibles pour un emprunteur seront affichées dans son compte. Si votre entreprise n'accepte que USDT et USDC, indiquez-le clairement dans les conditions et divulgations applicables.",
+    contactTitle: "Contact", contactSubtitle: "Nous Sommes Là pour Vous Aider", contactText: "Avez-vous une question concernant votre demande, votre compte ou votre remboursement ?",
+    supportTitle: "Support Client", supportEmail: "Email : support@globalbridgefunding.com", supportOffice: "Siège : Porto, Portugal", supportHours: "Horaires de support : Lundi–Vendredi, 09:00–18:00 WET",
+    formName: "Nom complet", formEmail: "Adresse email", formPhone: "Numéro de téléphone", formCountry: "Pays", formSubject: "Sujet", formMessage: "Message", formSubmit: "Envoyer",
+    footer: "© 2026 GlobalBridgeFunding. Tous droits réservés.",
+    formSuccess: "Merci ! Votre message a été reçu. Nous vous contacterons bientôt."
+  },
+  es: {
+    navAbout: "Acerca de", navLoans: "Préstamos", navProcess: "Cómo Funciona", navFaq: "FAQ", navContact: "Contacto", navApply: "Solicitar",
+    heroTitle: "Finanzas Sin Fronteras", heroSubtitle: "Financiamiento empresarial internacional a través de una experiencia digital segura.", heroButton: "Solicitar Financiamiento",
+    aboutTitle: "Acerca de Nosotros", aboutSubtitle: "Finanzas Sin Fronteras.", aboutText1: "GlobalBridge Finance es una plataforma de préstamos internacional diseñada para conectar a prestatarios elegibles con financiamiento a través de una experiencia digital segura y socios de verificación específicos de cada país.", aboutText2: "Nuestra plataforma se centra en préstamos transparentes, evaluación responsable del crédito, verificación segura de identidad y gestión digital conveniente de préstamos.",
+    principlesTitle: "Nuestros Principios", principle1: "Transparencia", principle2: "Préstamo responsable", principle3: "Protección de datos", principle4: "Transacciones seguras", principle5: "Accesibilidad internacional", principle6: "Soporte al cliente",
+    loansTitle: "Préstamos", loansSubtitle: "Financiamiento Diseñado Según Sus Necesidades", loansText: "Los clientes elegibles pueden solicitar financiamiento sin garantía desde $20,000 hasta $100,000.",
+    loanAmount: "Monto del préstamo", interestRate: "Tasa de interés", repayment: "Período de pago", collateral: "Garantía", collateralValue: "No requerida*", payment: "Pago",
+    loanDisclaimer: "*La elegibilidad final, precios, tarifas, monto del préstamo y términos de pago están sujetos a evaluación crediticia y las leyes aplicables en la jurisdicción del prestatario.",
+    processTitle: "Cómo Funciona", processSubtitle: "Un Proceso de Préstamo Digital Simple",
+    step1Title: "01 — Registrarse", step1Text: "Cree su cuenta segura y proporcione su información básica.",
+    step2Title: "02 — Verificar", step2Text: "Complete la verificación de identidad y financiera. Cuando se permita, obtenemos su autorización antes de acceder a información crediticia relevante a través de proveedores autorizados.",
+    step3Title: "03 — Solicitar", step3Text: "Seleccione el monto del préstamo y el período de pago deseados.",
+    step4Title: "04 — Evaluación", step4Text: "Nuestro sistema de préstamos evalúa su solicitud, capacidad de pago e información crediticia disponible.",
+    step5Title: "05 — Aprobación y Acuerdo", step5Text: "Si se aprueba, recibirá su oferta de préstamo y los términos aplicables para revisar antes de aceptar.",
+    step6Title: "06 — Recibir Fondos", step6Text: "Una vez completados los acuerdos y condiciones requeridos, los fondos se transfieren utilizando el proceso de pago compatible.",
+    step7Title: "07 — Pagar y Construir Su Historial", step7Text: "Realice pagos programados a través de su cuenta. Un historial de pagos exitoso puede considerarse para determinar la elegibilidad para financiamiento futuro.",
+    faqTitle: "FAQ", faqSubtitle: "Preguntas Frecuentes",
+    faq1q: "¿Cuánto puedo pedir prestado?", faq1a: "Los solicitantes elegibles pueden solicitar entre $20,000 y $100,000, sujeto a evaluación crediticia y regulaciones de préstamos aplicables.",
+    faq2q: "¿Cuál es la tasa de interés?", faq2a: "La tasa estándar propuesta de la plataforma es del 10% anual, sujeta a las leyes aplicables, divulgaciones y el acuerdo final del préstamo.",
+    faq3q: "¿Necesito garantía?", faq3a: "El producto propuesto es sin garantía, lo que significa que no se requiere garantía física. La aprobación está sujeta a elegibilidad y evaluación crediticia.",
+    faq4q: "¿Cuánto tiempo tengo para pagar?", faq4a: "Los plazos disponibles se proponen de 12 a 24 meses, dependiendo del préstamo aprobado.",
+    faq5q: "¿Cómo se verifica mi historial crediticio?", faq5a: "Con la autorización requerida, la información relevante puede verificarse a través de proveedores de información crediticia autorizados y socios locales aprobados.",
+    faq6q: "¿Qué información necesito para solicitar?", faq6a: "Los solicitantes pueden estar obligados a proporcionar identidad, contacto, residencia, empleo/ingresos, banca/pago y otra información necesaria para KYC, capacidad de pago y evaluación crediticia.",
+    faq7q: "¿En qué países operan?", faq7a: "El sitio web debe enumerar solo las jurisdicciones donde la empresa o su entidad/socio local relevante está legalmente autorizado para proporcionar el servicio anunciado.",
+    faq8q: "¿Cómo hago los pagos?", faq8a: "Los métodos de pago disponibles para un prestatario se mostrarán en su cuenta. Si su negocio acepta únicamente USDT y USDC, indíquelo claramente en los términos y divulgaciones aplicables.",
+    contactTitle: "Contacto", contactSubtitle: "Estamos Aquí para Ayudar", contactText: "¿Tiene alguna pregunta sobre su solicitud, cuenta o pago?",
+    supportTitle: "Soporte al Cliente", supportEmail: "Email: support@globalbridgefunding.com", supportOffice: "Sede: Porto, Portugal", supportHours: "Horario de soporte: Lunes–Viernes, 09:00–18:00 WET",
+    formName: "Nombre completo", formEmail: "Dirección de email", formPhone: "Número de teléfono", formCountry: "País", formSubject: "Asunto", formMessage: "Mensaje", formSubmit: "Enviar",
+    footer: "© 2026 GlobalBridgeFunding. Todos los derechos reservados.",
+    formSuccess: "¡Gracias! Su mensaje ha sido recibido. Nos pondremos en contacto pronto."
+  }
+};
+
+function applyLanguage(lang) {
+  if (!translations[lang]) lang = "en";
+  localStorage.setItem("globalbridge_language", lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
     }
   });
+
+  const sel = document.getElementById("languageSelector");
+  if (sel) sel.value = lang;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("globalbridge_language") || "en";
+  applyLanguage(saved);
+
+  document.getElementById("languageSelector").addEventListener("change", function() {
+    applyLanguage(this.value);
+  });
+
+  // Contact form
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const lang = localStorage.getItem("globalbridge_language") || "en";
+    alert(translations[lang].formSuccess);
+    this.reset();
+  });
+});
 </script>
 
 </body>
