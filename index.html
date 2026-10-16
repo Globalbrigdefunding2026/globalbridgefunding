@@ -22,8 +22,7 @@
     h2 { font-size: 36px; text-align: center; margin-bottom: 12px; }
     .subtitle { font-size: 22px; color: #d9b66d; text-align: center; margin-bottom: 30px; font-weight: 600; }
     .card { background: #f8fafc; padding: 22px; border-radius: 12px; margin-bottom: 16px; }
-    .image-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
-    .image-row img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
+    .section-img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 12px; margin: 30px 0; }
     footer { background: #07172c; color: white; text-align: center; padding: 30px; font-size: 14px; }
     @media (max-width: 600px) { 
       .hero h1 { font-size: 32px; } 
@@ -36,7 +35,7 @@
 
 <header>
   <div class="logo">
-    <img src="images/logo.png" alt="GlobalBridgeFunding Logo">
+    <img src="images/logo.png" alt="GlobalBridgeFunding">
     <span>Global<span style="color:#d9b66d;">Bridge</span>Funding</span>
   </div>
   <nav>
@@ -55,23 +54,17 @@
   <a href="register.html" class="btn">Apply for Financing</a>
 </section>
 
-<!-- IMAGE GALLERY -->
-<section style="padding: 40px 20px; background: #f8fafc;">
-  <div class="container">
-    <div class="image-row">
-      <img src="images/finance-tower.jpg" alt="Finance Tower">
-      <img src="images/meeting.jpg" alt="Business Meeting">
-      <img src="images/trade-ships.jpg" alt="International Trade">
-      <img src="images/premium-office.jpg" alt="Premium Office">
-    </div>
-  </div>
-</section>
+<!-- Finance Tower under hero -->
+<div class="container" style="margin-top: -40px;">
+  <img src="images/finance-tower.jpg" class="section-img" alt="">
+</div>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
     <h2>About Us</h2>
     <p class="subtitle">Finance Without Borders.</p>
+    <img src="images/trade-ships.jpg" class="section-img" alt="">
     <p style="text-align:center; max-width:800px; margin:0 auto 20px;">GlobalBridge Finance is an international lending platform designed to connect eligible borrowers with financing through a secure digital experience and country-specific verification partners.</p>
     <p style="text-align:center; max-width:800px; margin:0 auto 40px;">Our platform focuses on transparent lending, responsible credit assessment, secure identity verification, and convenient digital loan management.</p>
     <h3 style="text-align:center; margin-bottom:20px;">Our Principles</h3>
@@ -108,6 +101,7 @@
   <div class="container">
     <h2>How It Works</h2>
     <p class="subtitle">A Simple Digital Lending Process</p>
+    <img src="images/meeting.jpg" class="section-img" alt="">
     <div style="max-width:800px; margin:0 auto;">
       <div class="card"><strong>01 — Register</strong><p>Create your secure account and provide your basic information.</p></div>
       <div class="card"><strong>02 — Verify</strong><p>Complete identity and financial verification. Where permitted, we obtain your authorization before accessing relevant credit information through authorized providers.</p></div>
@@ -143,6 +137,7 @@
   <div class="container">
     <h2>Contact</h2>
     <p class="subtitle">We’re Here to Help</p>
+    <img src="images/premium-office.jpg" class="section-img" alt="">
     <p style="text-align:center; margin-bottom:30px;">Have a question about your application, account or repayment?</p>
     <div class="card" style="max-width:600px; margin:0 auto 30px;">
       <p><strong>Customer Support</strong></p>
