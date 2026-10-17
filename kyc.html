@@ -232,12 +232,26 @@
         const { error } = await supabase.from("kyc_submissions").insert(payload);
         if (error) throw error;
 
+        // Send confirmation email
+        try {
+          await supabase.functions.invoke("send-kyc-email", {
+            body: {
+              to: user.email,
+              name: payload.full_name,
+              from: "support@globalbridgefunding.com"
+            }
+          });
+        } catch (emailErr) {
+          console.warn("Email confirmation failed:", emailErr);
+        }
+
         form.reset();
         formScreen.hidden = true;
         formScreen.style.display = "none";
         successScreen.hidden = false;
         successScreen.style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
+
       } catch (err) {
         console.error("KYC submission failed:", err);
         showError(tr("failed") + (err.message ? " " + err.message : ""));
