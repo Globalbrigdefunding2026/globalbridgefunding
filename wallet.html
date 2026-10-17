@@ -40,6 +40,7 @@
     .message.show{display:block}
     .message.success{background:#e9f8ef;color:#17683a}
     .message.error{background:#fff0f0;color:#a32929}
+    .message.info{background:#e7f5ff;color:#075985}
     .table-wrap{overflow-x:auto}
     table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px}
     th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -226,7 +227,9 @@
   }
 
   async function submitRequest(event, type) {
-    event.preventDefault(); clearMessage();
+    event.preventDefault();
+    clearMessage();
+
     const amountField = type === "deposit" ? $("depositAmount") : $("withdrawAmount");
     const amount = Number(amountField.value);
     const network = type === "deposit" ? $("depositNetwork").value : $("withdrawNetwork").value;
@@ -234,18 +237,51 @@
     const txHash = type === "deposit" ? $("depositHash").value.trim() : null;
     const form = event.currentTarget;
     const button = form.querySelector('button[type="submit"]');
-    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000000) { showMessage(t("requestError")); return; }
-    if (type === "withdrawal" && !walletAddress) { showMessage(t("enterAddress")); return; }
-    button.disabled = true; const oldText = button.textContent; button.textContent = t("processing");
+
+    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000000) {
+      showMessage(t("requestError"));
+      return;
+    }
+
+    if (type === "withdrawal" && !walletAddress) {
+      showMessage(t("enterAddress"));
+      return;
+    }
+
+    button.disabled = true;
+    const oldText = button.textContent;
+    button.textContent = t("processing");
+
     try {
-      const {data, error} = await client.rpc("submit_wallet_request", {
-        p_type: type, p_amount: amount, p_wallet_address: walletAddress, p_transaction_hash: txHash, p_network: network
+      const { data, error } = await client.rpc("submit_wallet_request", {
+        p_type: type,
+        p_amount: amount,
+        p_wallet_address: walletAddress,
+        p_transaction_hash: txHash,
+        p_network: network
       });
+
       if (error) throw error;
-      showMessage(t("requestSuccess") + " (" + String(data).slice(0,8) + ")", "success");
-      form.reset(); await loadWallet();
-    } catch (error) { console.error("Wallet request failed:", error); showMessage(error?.message || t("requestError")); }
-    finally { button.disabled = false; button.textContent = oldText; }
+
+      if (type === "withdrawal") {
+        showMessage(
+          "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request.",
+          "info"
+        );
+      } else {
+        showMessage(t("requestSuccess") + " (" + String(data).slice(0, 8) + ")", "success");
+      }
+
+      form.reset();
+      await loadWallet();
+
+    } catch (error) {
+      console.error("Wallet request failed:", error);
+      showMessage(error?.message || t("requestError"));
+    } finally {
+      button.disabled = false;
+      button.textContent = oldText;
+    }
   }
 
   $("depositForm").addEventListener("submit", event => submitRequest(event, "deposit"));
@@ -253,10 +289,19 @@
 
   async function init() {
     applyLanguage(getSavedLanguage());
-    const {data, error} = await client.auth.getUser();
-    if (error || !data?.user) { showMessage(t("signIn")); setTimeout(() => { window.location.href = "login.html"; }, 1200); return; }
+    const { data, error } = await client.auth.getUser();
+    if (error || !data?.user) {
+      showMessage(t("signIn"));
+      setTimeout(() => { window.location.href = "login.html"; }, 1200);
+      return;
+    }
     currentUser = data.user;
-    try { await loadWallet(); } catch (error) { console.error("Wallet load failed:", error); showMessage(t("loadError") + " " + (error?.message || ""), "error"); }
+    try {
+      await loadWallet();
+    } catch (error) {
+      console.error("Wallet load failed:", error);
+      showMessage(t("loadError") + " " + (error?.message || ""), "error");
+    }
   }
   init();
 })();
