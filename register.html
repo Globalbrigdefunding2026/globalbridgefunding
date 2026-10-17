@@ -99,8 +99,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const supabaseUrl = "YOUR_SUPABASE_URL";
-const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+const supabaseUrl = "https://siykgexfdsmkiqwyxker.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpeWtnZXhmZHNta2lxd3l4a2VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExNDM0NjEsImV4cCI6MjEwNjcxOTQ2MX0._1aN7LbUWQ_pk5U7jfKn6V9lYV0NyK_Cmg-lAZRQU2c";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 const registerForm = document.getElementById("registerForm");
@@ -151,9 +151,11 @@ registerForm.addEventListener("submit", async function(e) {
     if (data.user) {
       alert("Account created successfully! Please check your email and confirm your account before signing in.");
       registerForm.reset();
+    } else {
+      alert("Registration submitted. Please check your email.");
     }
   } catch (err) {
-    alert("An error occurred. Please try again.");
+    alert("An error occurred: " + err.message);
     console.error(err);
   }
 
