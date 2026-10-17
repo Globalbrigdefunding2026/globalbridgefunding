@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,204 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Wallet Administration | GlobalBridgeFunding</title>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
-    :root {
-      --navy: #071a35;
-      --blue: #36c2ff;
-      --bg: #f3f6fb;
-      --white: #fff;
-      --text: #17243a;
-      --muted: #64748b;
-      --border: #dce4ef;
-      --green: #087443;
-      --red: #b42318;
-      --orange: #a15c00;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-    }
-
-    header {
-      background: var(--navy);
-      color: white;
-      padding: 20px 16px;
-    }
-
-    .header-inner, main {
-      width: min(1180px, 100%);
-      margin: auto;
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    h1 { font-size: 22px; margin: 0 0 5px; }
-    h2 { font-size: 19px; margin: 0 0 16px; }
-    h3 { font-size: 15px; margin: 0 0 8px; }
-    p { line-height: 1.5; }
-    .subtitle { color: #cbd8e9; font-size: 13px; margin: 0; }
-
-    main { padding: 20px 14px 45px; }
-    .hidden { display: none !important; }
-
-    .notice {
-      padding: 13px 15px;
-      border-radius: 10px;
-      margin: 12px 0;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .info { background: #e7f5ff; color: #075985; }
-    .success { background: #e8f8ef; color: #087443; }
-    .error { background: #fff0ef; color: #b42318; }
-    .warning { background: #fff5df; color: #854d0e; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin: 18px 0;
-    }
-
-    .stat, .panel {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 17px;
-      box-shadow: 0 3px 12px rgba(7, 26, 53, .035);
-      min-width: 0;
-    }
-
-    .stat-label { color: var(--muted); font-size: 12px; }
-    .stat-value { font-size: 24px; font-weight: 750; margin-top: 7px; overflow-wrap: anywhere; }
-    .panel { margin: 16px 0; }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 650;
-      margin: 12px 0 6px;
-    }
-
-    input, select, textarea {
-      display: block;
-      width: 100%;
-      min-width: 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      padding: 12px;
-      font: inherit;
-      font-size: 14px;
-      background: white;
-      color: var(--text);
-    }
-
-    textarea { min-height: 85px; resize: vertical; }
-
-    button, .nav-link {
-      border: 0;
-      border-radius: 9px;
-      padding: 11px 14px;
-      font: inherit;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
-
-    button:disabled { opacity: .55; cursor: not-allowed; }
-    .primary { background: var(--blue); color: var(--navy); }
-    .dark { background: var(--navy); color: white; }
-    .light { background: #e8eef6; color: var(--navy); }
-    .approve { background: #d8f7e5; color: #08643b; }
-    .reject { background: #ffe3e0; color: #a21d14; }
-    .complete { background: #d9f1ff; color: #075985; }
-    .actions { display: flex; gap: 7px; flex-wrap: wrap; }
-    .small { font-size: 12px; color: var(--muted); }
-    .muted { color: var(--muted); }
-    .address { overflow-wrap: anywhere; word-break: break-word; }
-    .toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
-    .toolbar > div { flex: 1 1 170px; min-width: 0; }
-
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    table { border-collapse: collapse; width: 100%; min-width: 900px; background: white; }
-    th, td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-      vertical-align: top;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    th { background: #f6f8fc; color: #475569; font-size: 12px; }
-    tr:last-child td { border-bottom: 0; }
-
-    .pill {
-      display: inline-block;
-      border-radius: 30px;
-      padding: 4px 8px;
-      font-size: 11px;
-      font-weight: 750;
-      background: #e8eef6;
-      color: #334155;
-      text-transform: capitalize;
-    }
-
-    .pill.pending, .pill.approved { background: #fff1cc; color: #854d0e; }
-    .pill.completed { background: #d8f7e5; color: #08643b; }
-    .pill.rejected { background: #ffe3e0; color: #a21d14; }
-
-    .request-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      margin: 12px 0;
-      background: #fff;
-    }
-
-    .request-card p { margin: 7px 0; font-size: 13px; overflow-wrap: anywhere; }
-    .section-note { color: var(--muted); font-size: 13px; margin-top: -7px; }
-    .top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      h1 { font-size: 20px; }
-      main { padding: 14px 10px 32px; }
-      .panel { padding: 14px; }
-    }
-
-    @media (max-width: 420px) {
-      .grid { gap: 8px; }
-      .stat { padding: 12px; }
-      .stat-value { font-size: 20px; }
-    }
+    :root { --navy:#071a35; --blue:#36c2ff; --bg:#f3f6fb; --white:#fff; --text:#17243a; --muted:#64748b; --border:#dce4ef; --green:#087443; --red:#b42318; --orange:#a15c00; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; color:var(--text); background:var(--bg); }
+    header { background:var(--navy); color:white; padding:20px 16px; }
+    .header-inner, main { width:min(1180px,100%); margin:auto; }
+    .header-inner { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; }
+    h1 { font-size:22px; margin:0 0 5px; } h2 { font-size:19px; margin:0 0 16px; } h3 { font-size:15px; margin:0 0 8px; }
+    p { line-height:1.5; } .subtitle { color:#cbd8e9; font-size:13px; margin:0; }
+    main { padding:20px 14px 45px; } .hidden { display:none !important; }
+    .notice { padding:13px 15px; border-radius:10px; margin:12px 0; line-height:1.5; overflow-wrap:anywhere; }
+    .info { background:#e7f5ff; color:#075985; } .success { background:#e8f8ef; color:#087443; } .error { background:#fff0ef; color:#b42318; } .warning { background:#fff5df; color:#854d0e; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:18px 0; }
+    .stat, .panel { background:white; border:1px solid var(--border); border-radius:14px; padding:17px; box-shadow:0 3px 12px rgba(7,26,53,.035); min-width:0; }
+    .stat-label { color:var(--muted); font-size:12px; } .stat-value { font-size:24px; font-weight:750; margin-top:7px; overflow-wrap:anywhere; }
+    .panel { margin:16px 0; }
+    label { display:block; font-size:13px; font-weight:650; margin:12px 0 6px; }
+    input, select, textarea { display:block; width:100%; min-width:0; border:1px solid #cbd5e1; border-radius:9px; padding:12px; font:inherit; font-size:14px; background:white; color:var(--text); }
+    textarea { min-height:85px; resize:vertical; }
+    button, .nav-link { border:0; border-radius:9px; padding:11px 14px; font:inherit; font-weight:700; font-size:13px; cursor:pointer; text-decoration:none; display:inline-block; text-align:center; }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    .primary { background:var(--blue); color:var(--navy); } .dark { background:var(--navy); color:white; } .light { background:#e8eef6; color:var(--navy); }
+    .approve { background:#d8f7e5; color:#08643b; } .reject { background:#ffe3e0; color:#a21d14; } .complete { background:#d9f1ff; color:#075985; }
+    .actions { display:flex; gap:7px; flex-wrap:wrap; } .small { font-size:12px; color:var(--muted); } .muted { color:var(--muted); }
+    .address { overflow-wrap:anywhere; word-break:break-word; } .toolbar { display:flex; flex-wrap:wrap; align-items:end; gap:10px; } .toolbar > div { flex:1 1 170px; min-width:0; }
+    .table-wrap { width:100%; overflow-x:auto; border:1px solid var(--border); border-radius:10px; }
+    table { border-collapse:collapse; width:100%; min-width:900px; background:white; }
+    th, td { padding:12px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; font-size:13px; line-height:1.45; }
+    th { background:#f6f8fc; color:#475569; font-size:12px; } tr:last-child td { border-bottom:0; }
+    .pill { display:inline-block; border-radius:30px; padding:4px 8px; font-size:11px; font-weight:750; background:#e8eef6; color:#334155; text-transform:capitalize; }
+    .pill.pending, .pill.approved { background:#fff1cc; color:#854d0e; } .pill.completed { background:#d8f7e5; color:#08643b; } .pill.rejected { background:#ffe3e0; color:#a21d14; }
+    .request-card { border:1px solid var(--border); border-radius:12px; padding:14px; margin:12px 0; background:#fff; }
+    .request-card p { margin:7px 0; font-size:13px; overflow-wrap:anywhere; } .section-note { color:var(--muted); font-size:13px; margin-top:-7px; } .top-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    @media (max-width:720px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } h1 { font-size:20px; } main { padding:14px 10px 32px; } .panel { padding:14px; } }
+    @media (max-width:420px) { .grid { gap:8px; } .stat { padding:12px; } .stat-value { font-size:20px; } }
   </style>
 </head>
-
 <body>
 <header>
   <div class="header-inner">
@@ -219,42 +58,30 @@
 </header>
 
 <main>
-  <div id="pageMessage" class="notice info" role="status" aria-live="polite">
-    Verifying your administrator access…
-  </div>
-
+  <div id="pageMessage" class="notice info" role="status" aria-live="polite">Verifying your administrator access…</div>
   <div id="adminContent" class="hidden">
     <div id="actionMessage" class="notice hidden" role="status" aria-live="polite"></div>
 
     <div class="grid">
-      <div class="stat">
-        <div class="stat-label">Pending requests</div>
-        <div class="stat-value" id="pendingCount">0</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Approved requests</div>
-        <div class="stat-value" id="approvedCount">0</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Completed transactions</div>
-        <div class="stat-value" id="completedCount">0</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Rejected requests</div>
-        <div class="stat-value" id="rejectedCount">0</div>
-      </div>
+      <div class="stat"><div class="stat-label">Pending requests</div><div class="stat-value" id="pendingCount">0</div></div>
+      <div class="stat"><div class="stat-label">Approved requests</div><div class="stat-value" id="approvedCount">0</div></div>
+      <div class="stat"><div class="stat-label">Completed transactions</div><div class="stat-value" id="completedCount">0</div></div>
+      <div class="stat"><div class="stat-label">Rejected requests</div><div class="stat-value" id="rejectedCount">0</div></div>
     </div>
 
     <section class="panel">
       <h2>USDT deposit settings</h2>
-      <p class="section-note">This address is shown to clients who want to make a deposit.</p>
-      <label for="depositAddress">USDT TRC20 deposit address</label>
-      <textarea id="depositAddress" maxlength="250" placeholder="Enter your verified deposit wallet address"></textarea>
+      <p class="section-note">These addresses are shown to clients when they want to make a deposit.</p>
+      <label for="trc20Address">USDT TRC20 deposit address (Tron)</label>
+      <textarea id="trc20Address" maxlength="250" placeholder="Enter your verified TRC20 deposit wallet address"></textarea>
+      <label for="bep20Address">USDT BEP20 deposit address (BSC)</label>
+      <textarea id="bep20Address" maxlength="250" placeholder="Enter your verified BEP20 deposit wallet address"></textarea>
       <div class="actions" style="margin-top:10px">
-        <button type="button" class="primary" id="saveAddressButton">Save deposit address</button>
-        <button type="button" class="light" id="copyAddressButton">Copy address</button>
+        <button type="button" class="primary" id="saveAddressButton">Save deposit addresses</button>
+        <button type="button" class="light" id="copyTrc20Button">Copy TRC20</button>
+        <button type="button" class="light" id="copyBep20Button">Copy BEP20</button>
       </div>
-      <p class="small">Verify the address and network carefully before saving. Saving an address does not verify a blockchain payment.</p>
+      <p class="small">Verify the addresses and networks carefully before saving. Saving an address does not verify a blockchain payment.</p>
     </section>
 
     <section class="panel">
@@ -280,9 +107,7 @@
             <option value="rejected">Rejected</option>
           </select>
         </div>
-        <div>
-          <button type="button" class="dark" id="refreshButton">Refresh requests</button>
-        </div>
+        <div><button type="button" class="dark" id="refreshButton">Refresh requests</button></div>
       </div>
       <div id="requestsLoading" class="notice info hidden">Loading requests…</div>
       <div id="requestsList"><p class="muted">Requests will appear here.</p></div>
@@ -300,22 +125,19 @@
       <p class="section-note">Use this only after funds have actually been sent and the transaction has been verified.</p>
       <form id="disbursementForm">
         <label for="applicationSelect">Approved application</label>
-        <select id="applicationSelect" required>
-          <option value="">Choose an application</option>
-        </select>
-
+        <select id="applicationSelect" required><option value="">Choose an application</option></select>
         <label for="disbursementAmount">Amount in USDT</label>
         <input id="disbursementAmount" type="number" min="0.000001" max="1000000000" step="0.000001" required placeholder="e.g. 20000">
-
+        <label for="disbursementNetwork">Network</label>
+        <select id="disbursementNetwork">
+          <option value="TRC20">TRC20 (Tron)</option>
+          <option value="BEP20">BEP20 (BSC)</option>
+        </select>
         <label for="clientWalletAddress">Client receiving wallet address</label>
-        <input id="clientWalletAddress" maxlength="250" required placeholder="Client's verified USDT TRC20 address">
-
+        <input id="clientWalletAddress" maxlength="250" required placeholder="Client's verified USDT address">
         <label for="disbursementHash">Verified blockchain transaction hash</label>
         <input id="disbursementHash" maxlength="250" required placeholder="Actual transaction hash">
-
-        <div style="margin-top:14px">
-          <button type="submit" class="primary" id="recordDisbursementButton">Record completed transfer</button>
-        </div>
+        <div style="margin-top:14px"><button type="submit" class="primary" id="recordDisbursementButton">Record completed transfer</button></div>
       </form>
       <p class="small">This records a transfer; it does not send cryptocurrency. Never invent a transaction hash or record a transfer that has not occurred.</p>
     </section>
@@ -325,99 +147,32 @@
 <script>
 (() => {
   "use strict";
-
   const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  });
-
+  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
   const $ = id => document.getElementById(id);
   let currentAdminId = null;
   let walletRequests = [];
   let approvedApplications = [];
   let busy = false;
 
-  function escapeHtml(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-    })[char]);
-  }
-
-  function showMessage(id, message, type = "info") {
-    const el = $(id);
-    if (!el) return;
-    el.textContent = message;
-    el.className = "notice " + type;
-  }
-
-  function hideMessage(id) {
-    $(id).classList.add("hidden");
-  }
-
-  function formatDate(value) {
-    if (!value) return "—";
-    const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString();
-  }
-
-  function formatAmount(value) {
-    const n = Number(value);
-    return Number.isFinite(n)
-      ? n.toLocaleString(undefined, { maximumFractionDigits: 6 })
-      : "—";
-  }
-
-  function setBusy(value) {
-    busy = value;
-    document.querySelectorAll("button").forEach(button => {
-      if (button.id !== "signOutButton") button.disabled = value;
-    });
-  }
-
-  function statusPill(status) {
-    const safe = escapeHtml(String(status || "unknown").toLowerCase());
-    return `<span class="pill ${safe}">${safe.replaceAll("_", " ")}</span>`;
-  }
+  function escapeHtml(value) { return String(value ?? "").replace(/[&<>"']/g, char => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" })[char]); }
+  function showMessage(id, message, type = "info") { const el = $(id); if (!el) return; el.textContent = message; el.className = "notice " + type; }
+  function hideMessage(id) { $(id).classList.add("hidden"); }
+  function formatDate(value) { if (!value) return "—"; const date = new Date(value); return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString(); }
+  function formatAmount(value) { const n = Number(value); return Number.isFinite(n) ? n.toLocaleString(undefined, { maximumFractionDigits: 6 }) : "—"; }
+  function setBusy(value) { busy = value; document.querySelectorAll("button").forEach(button => { if (button.id !== "signOutButton") button.disabled = value; }); }
+  function statusPill(status) { const safe = escapeHtml(String(status || "unknown").toLowerCase()); return `<span class="pill ${safe}">${safe.replaceAll("_", " ")}</span>`; }
 
   async function requireFreshAdmin() {
-    // Re-check both the current authenticated session and administrator row
-    // immediately before any sensitive operation.
     const { data: sessionData, error: sessionError } = await client.auth.getSession();
     const session = sessionData?.session;
-
-    if (sessionError || !session?.user?.id) {
-      $("adminContent").classList.add("hidden");
-      location.replace("login.html");
-      throw new Error("Your session has expired. Sign in again.");
-    }
-
+    if (sessionError || !session?.user?.id) { $("adminContent").classList.add("hidden"); location.replace("login.html"); throw new Error("Your session has expired. Sign in again."); }
     const { data: userData, error: userError } = await client.auth.getUser();
     const user = userData?.user;
-
-    if (userError || !user || user.id !== session.user.id) {
-      $("adminContent").classList.add("hidden");
-      await client.auth.signOut();
-      location.replace("login.html");
-      throw new Error("Unable to verify your signed-in account.");
-    }
-
-    const { data: adminRow, error: adminError } = await client
-      .from("admin_users")
-      .select("user_id")
-      .eq("user_id", user.id)
-      .maybeSingle();
-
-    if (adminError || !adminRow || adminRow.user_id !== user.id) {
-      $("adminContent").classList.add("hidden");
-      throw new Error("Administrator access is required for this action.");
-    }
-
+    if (userError || !user || user.id !== session.user.id) { $("adminContent").classList.add("hidden"); await client.auth.signOut(); location.replace("login.html"); throw new Error("Unable to verify your signed-in account."); }
+    const { data: adminRow, error: adminError } = await client.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
+    if (adminError || !adminRow || adminRow.user_id !== user.id) { $("adminContent").classList.add("hidden"); throw new Error("Administrator access is required for this action."); }
     currentAdminId = user.id;
     return user;
   }
@@ -425,75 +180,39 @@
   async function checkAdmin() {
     $("adminContent").classList.add("hidden");
     showMessage("pageMessage", "Verifying your administrator access…", "info");
-
-    try {
-      const user = await requireFreshAdmin();
-      currentAdminId = user.id;
-      $("pageMessage").classList.add("hidden");
-      $("adminContent").classList.remove("hidden");
-      return true;
-    } catch (error) {
-      if (!currentAdminId) {
-        showMessage("pageMessage", error.message || "Access denied.", "error");
-      }
-      return false;
-    }
+    try { const user = await requireFreshAdmin(); currentAdminId = user.id; $("pageMessage").classList.add("hidden"); $("adminContent").classList.remove("hidden"); return true; }
+    catch (error) { if (!currentAdminId) showMessage("pageMessage", error.message || "Access denied.", "error"); return false; }
   }
 
   async function loadAddress() {
     await requireFreshAdmin();
-
-    const { data, error } = await client
-      .from("wallet_settings")
-      .select("*")
-      .eq("id", 1)
-      .maybeSingle();
-
+    const { data, error } = await client.from("wallet_settings").select("*").eq("id", 1).maybeSingle();
     if (error) throw error;
-
-    $("depositAddress").value =
-      data?.deposit_address || data?.wallet_address || data?.address || "";
+    $("trc20Address").value = data?.trc20_address || data?.deposit_address || "";
+    $("bep20Address").value = data?.bep20_address || "";
   }
 
   async function saveAddress() {
     await requireFreshAdmin();
-
-    const address = $("depositAddress").value.trim();
-    if (address.length < 20 || address.length > 250) {
-      throw new Error("Enter a valid-looking wallet address before saving.");
-    }
-
+    const trc20 = $("trc20Address").value.trim();
+    const bep20 = $("bep20Address").value.trim();
+    if (trc20 && (trc20.length < 20 || trc20.length > 250)) throw new Error("TRC20 address looks invalid.");
+    if (bep20 && (bep20.length < 20 || bep20.length > 250)) throw new Error("BEP20 address looks invalid.");
     const { error } = await client.from("wallet_settings").upsert({
-      id: 1,
-      deposit_address: address,
-      updated_at: new Date().toISOString(),
-      updated_by: currentAdminId
+      id: 1, trc20_address: trc20 || null, bep20_address: bep20 || null, deposit_address: trc20 || null,
+      updated_at: new Date().toISOString(), updated_by: currentAdminId
     }, { onConflict: "id" });
-
     if (error) throw error;
-    showMessage("actionMessage", "Deposit address saved.", "success");
+    showMessage("actionMessage", "Deposit addresses saved.", "success");
   }
 
   function requestActions(tx) {
     const id = escapeHtml(tx.id);
     const status = String(tx.status || "").toLowerCase();
-
-    if (tx.transaction_type === "loan_disbursement") {
-      return `<span class="small">Disbursement record</span>`;
-    }
-
+    if (tx.transaction_type === "loan_disbursement") return `<span class="small">Disbursement record</span>`;
     let buttons = "";
-
-    if (status === "pending") {
-      buttons += `<button class="approve" data-action="approve" data-id="${id}">Approve</button>`;
-      buttons += `<button class="reject" data-action="reject" data-id="${id}">Reject</button>`;
-    }
-
-    if (status === "approved") {
-      buttons += `<button class="complete" data-action="complete" data-id="${id}">Mark completed</button>`;
-      buttons += `<button class="reject" data-action="reject" data-id="${id}">Reject</button>`;
-    }
-
+    if (status === "pending") { buttons += `<button class="approve" data-action="approve" data-id="${id}">Approve</button>`; buttons += `<button class="reject" data-action="reject" data-id="${id}">Reject</button>`; }
+    if (status === "approved") { buttons += `<button class="complete" data-action="complete" data-id="${id}">Mark completed</button>`; buttons += `<button class="reject" data-action="reject" data-id="${id}">Reject</button>`; }
     if (!buttons) return `<span class="small">No available actions</span>`;
     return `<div class="actions">${buttons}</div>`;
   }
@@ -501,156 +220,94 @@
   function renderRequests() {
     const type = $("typeFilter").value;
     const status = $("statusFilter").value;
-
-    const filtered = walletRequests.filter(tx =>
-      (type === "all" || tx.transaction_type === type) &&
-      (status === "all" || tx.status === status)
-    );
-
+    const filtered = walletRequests.filter(tx => (type === "all" || tx.transaction_type === type) && (status === "all" || tx.status === status));
     $("pendingCount").textContent = walletRequests.filter(x => x.status === "pending").length;
     $("approvedCount").textContent = walletRequests.filter(x => x.status === "approved").length;
     $("completedCount").textContent = walletRequests.filter(x => x.status === "completed").length;
     $("rejectedCount").textContent = walletRequests.filter(x => x.status === "rejected").length;
-
-    if (!filtered.length) {
-      $("requestsList").innerHTML = `<p class="muted">No requests match the selected filters.</p>`;
-      return;
-    }
-
+    if (!filtered.length) { $("requestsList").innerHTML = `<p class="muted">No requests match the selected filters.</p>`; return; }
     if (window.matchMedia("(max-width: 720px)").matches) {
       $("requestsList").innerHTML = filtered.map(tx => `
         <article class="request-card">
           <h3>${escapeHtml(tx.transaction_type.replaceAll("_", " "))} · ${formatAmount(tx.amount)} USDT</h3>
           <p><strong>Status:</strong> ${statusPill(tx.status)}</p>
+          <p><strong>Network:</strong> ${escapeHtml(tx.network || "—")}</p>
           <p><strong>Request ID:</strong> ${escapeHtml(tx.id)}</p>
           <p><strong>User ID:</strong> ${escapeHtml(tx.user_id)}</p>
           <p><strong>Created:</strong> ${escapeHtml(formatDate(tx.created_at))}</p>
-          <p><strong>Recipient/deposit address:</strong><br><span class="address">${escapeHtml(tx.wallet_address || "—")}</span></p>
-          <p><strong>Transaction hash:</strong><br><span class="address">${escapeHtml(tx.transaction_hash || "—")}</span></p>
-          <p><strong>Admin note:</strong> ${escapeHtml(tx.admin_note || "—")}</p>
+          <p><strong>Address:</strong><br><span class="address">${escapeHtml(tx.wallet_address || "—")}</span></p>
+          <p><strong>Hash:</strong><br><span class="address">${escapeHtml(tx.transaction_hash || "—")}</span></p>
+          <p><strong>Note:</strong> ${escapeHtml(tx.admin_note || "—")}</p>
           ${requestActions(tx)}
-        </article>
-      `).join("");
+        </article>`).join("");
       return;
     }
-
     $("requestsList").innerHTML = `
-      <div class="table-wrap">
-        <table>
-          <thead><tr>
-            <th>Type / amount</th><th>Status</th><th>User ID</th>
-            <th>Wallet address</th><th>Transaction hash</th><th>Created</th><th>Actions</th>
-          </tr></thead>
-          <tbody>${filtered.map(tx => `
-            <tr>
-              <td>${escapeHtml(tx.transaction_type.replaceAll("_", " "))}<br><strong>${formatAmount(tx.amount)} USDT</strong><br><span class="small">${escapeHtml(tx.id)}</span></td>
-              <td>${statusPill(tx.status)}</td>
-              <td>${escapeHtml(tx.user_id)}</td>
-              <td class="address">${escapeHtml(tx.wallet_address || "—")}</td>
-              <td class="address">${escapeHtml(tx.transaction_hash || "—")}</td>
-              <td>${escapeHtml(formatDate(tx.created_at))}</td>
-              <td>${requestActions(tx)}</td>
-            </tr>
-          `).join("")}</tbody>
-        </table>
-      </div>`;
+      <div class="table-wrap"><table>
+        <thead><tr><th>Type / amount</th><th>Status</th><th>Network</th><th>User ID</th><th>Wallet address</th><th>Transaction hash</th><th>Created</th><th>Actions</th></tr></thead>
+        <tbody>${filtered.map(tx => `
+          <tr>
+            <td>${escapeHtml(tx.transaction_type.replaceAll("_", " "))}<br><strong>${formatAmount(tx.amount)} USDT</strong><br><span class="small">${escapeHtml(tx.id)}</span></td>
+            <td>${statusPill(tx.status)}</td>
+            <td>${escapeHtml(tx.network || "—")}</td>
+            <td>${escapeHtml(tx.user_id)}</td>
+            <td class="address">${escapeHtml(tx.wallet_address || "—")}</td>
+            <td class="address">${escapeHtml(tx.transaction_hash || "—")}</td>
+            <td>${escapeHtml(formatDate(tx.created_at))}</td>
+            <td>${requestActions(tx)}</td>
+          </tr>`).join("")}</tbody>
+      </table></div>`;
   }
 
   async function loadRequests() {
     await requireFreshAdmin();
     $("requestsLoading").classList.remove("hidden");
-
     try {
-      const { data, error } = await client
-        .from("wallet_transactions")
+      const { data, error } = await client.from("wallet_transactions")
         .select("id,user_id,transaction_type,amount,token,network,status,wallet_address,transaction_hash,source_application_id,admin_note,created_at,updated_at")
-        .order("created_at", { ascending: false })
-        .limit(500);
-
+        .order("created_at", { ascending: false }).limit(500);
       if (error) throw error;
       walletRequests = data || [];
       renderRequests();
-    } finally {
-      $("requestsLoading").classList.add("hidden");
-    }
+    } finally { $("requestsLoading").classList.add("hidden"); }
   }
 
   async function reviewRequest(id, action) {
     await requireFreshAdmin();
-
     const tx = walletRequests.find(item => item.id === id);
     if (!tx) throw new Error("This request is no longer in the loaded list.");
-
-    const nextStatus = action === "approve" ? "approved"
-      : action === "reject" ? "rejected"
-      : action === "complete" ? "completed" : null;
-
+    const nextStatus = action === "approve" ? "approved" : action === "reject" ? "rejected" : action === "complete" ? "completed" : null;
     if (!nextStatus) throw new Error("Invalid review action.");
-
-    if (action === "approve" && tx.status !== "pending") {
-      throw new Error("Only pending requests can be approved.");
-    }
-
-    if (action === "complete" && tx.status !== "approved") {
-      throw new Error("Only approved requests can be marked completed.");
-    }
-
-    if (action === "reject" && !["pending", "approved"].includes(tx.status)) {
-      throw new Error("This request can no longer be rejected.");
-    }
-
+    if (action === "approve" && tx.status !== "pending") throw new Error("Only pending requests can be approved.");
+    if (action === "complete" && tx.status !== "approved") throw new Error("Only approved requests can be marked completed.");
+    if (action === "reject" && !["pending", "approved"].includes(tx.status)) throw new Error("This request can no longer be rejected.");
     let hash = tx.transaction_hash || "";
     let note = "";
-
     if (action === "complete") {
       if (tx.transaction_type === "deposit") {
         hash = prompt("Enter the verified blockchain transaction hash for this deposit:", hash);
-        if (hash === null) return;
-        hash = hash.trim();
+        if (hash === null) return; hash = hash.trim();
         if (hash.length < 10) throw new Error("A verified transaction hash is required.");
         if (!confirm("Confirm that you independently verified this deposit on the correct blockchain and network?")) return;
       } else if (tx.transaction_type === "withdrawal") {
         hash = prompt("Enter the actual successful withdrawal transaction hash:", "");
-        if (hash === null) return;
-        hash = hash.trim();
+        if (hash === null) return; hash = hash.trim();
         if (hash.length < 10) throw new Error("The actual withdrawal transaction hash is required.");
         if (!confirm("Confirm that the withdrawal was actually sent to the client's wallet and verified on the correct network?")) return;
-      } else {
-        throw new Error("This transaction type cannot be completed here.");
-      }
+      } else throw new Error("This transaction type cannot be completed here.");
     }
-
     if (action === "reject") {
       note = prompt("Reason for rejecting this request (required):", "");
-      if (note === null) return;
-      note = note.trim();
+      if (note === null) return; note = note.trim();
       if (note.length < 3) throw new Error("Please provide a rejection reason.");
     }
-
     if (action === "approve" && !confirm("Approve this request? Approval does not mean a transfer has occurred.")) return;
     if (action === "reject" && !confirm("Reject this request?")) return;
-
-    const update = {
-      status: nextStatus,
-      admin_note: note || tx.admin_note || null,
-      reviewed_by: currentAdminId,
-      reviewed_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    };
-
+    const update = { status: nextStatus, admin_note: note || tx.admin_note || null, reviewed_by: currentAdminId, reviewed_at: new Date().toISOString(), updated_at: new Date().toISOString() };
     if (action === "complete") update.transaction_hash = hash;
-
-    const { data, error } = await client
-      .from("wallet_transactions")
-      .update(update)
-      .eq("id", id)
-      .eq("status", tx.status)
-      .select("id,status")
-      .maybeSingle();
-
+    const { data, error } = await client.from("wallet_transactions").update(update).eq("id", id).eq("status", tx.status).select("id,status").maybeSingle();
     if (error) throw error;
     if (!data) throw new Error("The request may have changed. Refresh and try again.");
-
     showMessage("actionMessage", `Request updated to ${nextStatus}.`, "success");
     await loadRequests();
   }
@@ -658,195 +315,85 @@
   async function loadApplications() {
     await requireFreshAdmin();
     $("applicationsLoading").classList.remove("hidden");
-
     try {
-      const { data: applications, error } = await client
-        .from("financing_applications")
-        .select("*")
-        .eq("status", "approved")
-        .order("created_at", { ascending: false })
-        .limit(300);
-
+      const { data: applications, error } = await client.from("financing_applications").select("*").eq("status", "approved").order("created_at", { ascending: false }).limit(300);
       if (error) throw error;
-
-      const { data: disbursements, error: txError } = await client
-        .from("wallet_transactions")
-        .select("source_application_id")
-        .eq("transaction_type", "loan_disbursement")
-        .in("status", ["completed", "approved"]);
-
+      const { data: disbursements, error: txError } = await client.from("wallet_transactions").select("source_application_id").eq("transaction_type", "loan_disbursement").in("status", ["completed", "approved"]);
       if (txError) throw txError;
-
-      const alreadyDisbursed = new Set(
-        (disbursements || []).map(row => row.source_application_id).filter(Boolean)
-      );
-
+      const alreadyDisbursed = new Set((disbursements || []).map(row => row.source_application_id).filter(Boolean));
       approvedApplications = (applications || []).filter(app => !alreadyDisbursed.has(app.id));
-
-      $("applicationSelect").innerHTML =
-        `<option value="">Choose an application</option>` +
-        approvedApplications.map(app => {
-          const amount = app.requested_amount ?? app.amount ?? app.financing_amount ?? "";
-          const business = app.business_name || app.company_name || "Business";
-          return `<option value="${escapeHtml(app.id)}" data-amount="${escapeHtml(amount)}">${escapeHtml(business)} — ${escapeHtml(amount)} USD — ${escapeHtml(app.id)}</option>`;
-        }).join("");
-
+      $("applicationSelect").innerHTML = `<option value="">Choose an application</option>` + approvedApplications.map(app => {
+        const amount = app.requested_amount ?? app.amount ?? app.financing_amount ?? "";
+        const business = app.business_name || app.company_name || "Business";
+        return `<option value="${escapeHtml(app.id)}" data-amount="${escapeHtml(amount)}">${escapeHtml(business)} — ${escapeHtml(amount)} USD — ${escapeHtml(app.id)}</option>`;
+      }).join("");
       $("applicationsList").innerHTML = (applications || []).length
-        ? `<div class="table-wrap"><table>
-          <thead><tr><th>Application</th><th>Business</th><th>Requested amount</th><th>Created</th><th>Disbursement record</th></tr></thead>
-          <tbody>${applications.map(app => `
-            <tr>
-              <td>${escapeHtml(app.id)}</td>
-              <td>${escapeHtml(app.business_name || app.company_name || "—")}</td>
-              <td>${formatAmount(app.requested_amount ?? app.amount ?? app.financing_amount)} USD</td>
-              <td>${escapeHtml(formatDate(app.created_at))}</td>
-              <td>${alreadyDisbursed.has(app.id) ? "Recorded" : "Not recorded"}</td>
-            </tr>`).join("")}</tbody>
-        </table></div>`
+        ? `<div class="table-wrap"><table><thead><tr><th>Application</th><th>Business</th><th>Requested amount</th><th>Created</th><th>Disbursement record</th></tr></thead><tbody>${applications.map(app => `<tr><td>${escapeHtml(app.id)}</td><td>${escapeHtml(app.business_name || app.company_name || "—")}</td><td>${formatAmount(app.requested_amount ?? app.amount ?? app.financing_amount)} USD</td><td>${escapeHtml(formatDate(app.created_at))}</td><td>${alreadyDisbursed.has(app.id) ? "Recorded" : "Not recorded"}</td></tr>`).join("")}</tbody></table></div>`
         : `<p class="muted">No approved financing applications found.</p>`;
-    } finally {
-      $("applicationsLoading").classList.add("hidden");
-    }
+    } finally { $("applicationsLoading").classList.add("hidden"); }
   }
 
   async function recordDisbursement(event) {
     event.preventDefault();
     await requireFreshAdmin();
-
     const appId = $("applicationSelect").value;
     const amount = Number($("disbursementAmount").value);
+    const network = $("disbursementNetwork").value;
     const address = $("clientWalletAddress").value.trim();
     const hash = $("disbursementHash").value.trim();
-
     if (!appId) throw new Error("Choose an approved application.");
-    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000000) {
-      throw new Error("Enter a valid disbursement amount.");
-    }
-    if (address.length < 20 || address.length > 250) {
-      throw new Error("Enter the client's verified wallet address.");
-    }
-    if (hash.length < 10 || hash.length > 250) {
-      throw new Error("Enter the actual blockchain transaction hash.");
-    }
-
+    if (!Number.isFinite(amount) || amount <= 0 || amount > 1000000000) throw new Error("Enter a valid disbursement amount.");
+    if (address.length < 20 || address.length > 250) throw new Error("Enter the client's verified wallet address.");
+    if (hash.length < 10 || hash.length > 250) throw new Error("Enter the actual blockchain transaction hash.");
     const application = approvedApplications.find(app => app.id === appId);
     if (!application) throw new Error("That application is no longer eligible. Refresh first.");
-
-    if (!confirm("Confirm that this approved client has actually received the stated USDT transfer and that the transaction hash is verified? This form records the transfer; it does not send funds.")) return;
-
-    const { data: existing, error: existingError } = await client
-      .from("wallet_transactions")
-      .select("id")
-      .eq("source_application_id", appId)
-      .eq("transaction_type", "loan_disbursement")
-      .limit(1);
-
+    if (!confirm("Confirm that this approved client has actually received the stated USDT transfer and that the transaction hash is verified?")) return;
+    const { data: existing, error: existingError } = await client.from("wallet_transactions").select("id").eq("source_application_id", appId).eq("transaction_type", "loan_disbursement").limit(1);
     if (existingError) throw existingError;
     if (existing?.length) throw new Error("A disbursement record already exists for this application.");
-
     const { error } = await client.from("wallet_transactions").insert({
-      user_id: application.user_id,
-      transaction_type: "loan_disbursement",
-      amount,
-      token: "USDT",
-      network: "TRC20",
-      status: "completed",
-      wallet_address: address,
-      transaction_hash: hash,
-      source_application_id: appId,
-      admin_note: "Recorded after administrator verified the actual transfer.",
-      reviewed_by: currentAdminId,
-      reviewed_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+      user_id: application.user_id, transaction_type: "loan_disbursement", amount, token: "USDT", network,
+      status: "completed", wallet_address: address, transaction_hash: hash, source_application_id: appId,
+      admin_note: "Recorded after administrator verified the actual transfer.", reviewed_by: currentAdminId,
+      reviewed_at: new Date().toISOString(), updated_at: new Date().toISOString()
     });
-
     if (error) throw error;
-
     showMessage("actionMessage", "Disbursement record created.", "success");
     $("disbursementForm").reset();
     await Promise.all([loadRequests(), loadApplications()]);
   }
 
   async function runAction(fn) {
-    if (busy) return;
-    setBusy(true);
-    hideMessage("actionMessage");
-    try {
-      await fn();
-    } catch (error) {
-      showMessage("actionMessage", error?.message || "The operation failed.", "error");
-    } finally {
-      setBusy(false);
-    }
+    if (busy) return; setBusy(true); hideMessage("actionMessage");
+    try { await fn(); } catch (error) { showMessage("actionMessage", error?.message || "The operation failed.", "error"); } finally { setBusy(false); }
   }
 
   $("saveAddressButton").addEventListener("click", () => runAction(saveAddress));
-
-  $("copyAddressButton").addEventListener("click", () => runAction(async () => {
-    const address = $("depositAddress").value.trim();
-    if (!address) throw new Error("There is no address to copy.");
-    await navigator.clipboard.writeText(address);
-    showMessage("actionMessage", "Deposit address copied.", "success");
+  $("copyTrc20Button").addEventListener("click", () => runAction(async () => {
+    const address = $("trc20Address").value.trim(); if (!address) throw new Error("No TRC20 address to copy.");
+    await navigator.clipboard.writeText(address); showMessage("actionMessage", "TRC20 address copied.", "success");
   }));
-
+  $("copyBep20Button").addEventListener("click", () => runAction(async () => {
+    const address = $("bep20Address").value.trim(); if (!address) throw new Error("No BEP20 address to copy.");
+    await navigator.clipboard.writeText(address); showMessage("actionMessage", "BEP20 address copied.", "success");
+  }));
   $("refreshButton").addEventListener("click", () => runAction(async () => {
     await Promise.all([loadRequests(), loadApplications(), loadAddress()]);
     showMessage("actionMessage", "Wallet administration refreshed.", "success");
   }));
-
   $("typeFilter").addEventListener("change", renderRequests);
   $("statusFilter").addEventListener("change", renderRequests);
+  $("requestsList").addEventListener("click", event => { const button = event.target.closest("button[data-action]"); if (!button) return; runAction(() => reviewRequest(button.dataset.id, button.dataset.action)); });
+  $("applicationSelect").addEventListener("change", () => { const option = $("applicationSelect").selectedOptions[0]; if (option?.dataset.amount) $("disbursementAmount").value = option.dataset.amount; });
+  $("disbursementForm").addEventListener("submit", event => runAction(() => recordDisbursement(event)));
+  $("signOutButton").addEventListener("click", async () => { $("adminContent").classList.add("hidden"); const { error } = await client.auth.signOut(); if (error) { showMessage("pageMessage", "Could not sign out. Please try again.", "error"); return; } location.replace("login.html"); });
 
-  $("requestsList").addEventListener("click", event => {
-    const button = event.target.closest("button[data-action]");
-    if (!button) return;
-    runAction(() => reviewRequest(button.dataset.id, button.dataset.action));
-  });
-
-  $("applicationSelect").addEventListener("change", () => {
-    const option = $("applicationSelect").selectedOptions[0];
-    if (option?.dataset.amount) $("disbursementAmount").value = option.dataset.amount;
-  });
-
-  $("disbursementForm").addEventListener("submit", event => {
-    runAction(() => recordDisbursement(event));
-  });
-
-  $("signOutButton").addEventListener("click", async () => {
-    $("adminContent").classList.add("hidden");
-    const { error } = await client.auth.signOut();
-    if (error) {
-      showMessage("pageMessage", "Could not sign out. Please try again.", "error");
-      return;
-    }
-    location.replace("login.html");
-  });
-
-  // Never render administrator content before server-confirmed session and role checks.
   async function init() {
-    const allowed = await checkAdmin();
-    if (!allowed) return;
-
-    try {
-      await Promise.all([loadAddress(), loadRequests(), loadApplications()]);
-    } catch (error) {
-      $("adminContent").classList.add("hidden");
-      showMessage("pageMessage",
-        "Administrator data could not be loaded. Check the database permissions and sign in again. " +
-        (error?.message || ""),
-        "error"
-      );
-    }
+    const allowed = await checkAdmin(); if (!allowed) return;
+    try { await Promise.all([loadAddress(), loadRequests(), loadApplications()]); }
+    catch (error) { $("adminContent").classList.add("hidden"); showMessage("pageMessage", "Administrator data could not be loaded. " + (error?.message || ""), "error"); }
   }
-
-  // If the session expires or the user signs out in another tab, hide sensitive UI.
-  client.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT" || !session?.user?.id) {
-      $("adminContent").classList.add("hidden");
-      location.replace("login.html");
-    }
-  });
-
+  client.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_OUT" || !session?.user?.id) { $("adminContent").classList.add("hidden"); location.replace("login.html"); } });
   init();
 })();
 </script>
