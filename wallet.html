@@ -62,12 +62,9 @@
     <select id="language" aria-label="Language">
       <option value="en">English</option>
       <option value="pt">Português</option>
-      <option value="vi">Tiếng Việt</option>
-      <option value="fa">فارسی</option>
-      <option value="id">Bahasa Indonesia</option>
       <option value="fr">Français</option>
-      <option value="fi">Suomi</option>
       <option value="es">Español</option>
+      <option value="fa">فارسی</option>
     </select>
   </div>
 </header>
@@ -121,6 +118,7 @@
         <input id="withdrawAddress" type="text" minlength="10" maxlength="200" required placeholder="Enter your USDT address">
         <div class="field-help" data-i18n="addressHelp">Check the address carefully. Crypto transfers are generally irreversible.</div>
         <button class="btn primary" type="submit" style="margin-top:15px;width:100%" data-i18n="submitWithdraw">Request withdrawal</button>
+        <div id="withdrawMessage" class="message" style="margin-top:12px;"></div>
       </form>
       <div class="notice" data-i18n="withdrawWarning">Your available balance is checked by the database. Pending withdrawals reserve funds until rejected or processed.</div>
     </section>
@@ -161,7 +159,96 @@
   let selectedNetwork = "TRC20";
 
   const translations = {
-    en: { title:"My Wallet", subtitle:"Manage your USDT wallet and transactions.", dashboard:"Back to Dashboard", available:"Available balance", balanceNote:"USDT • Pending requests are not available funds.", depositTitle:"Deposit USDT", depositIntro:"Choose your network and send USDT only on that network.", depositAddress:"Official deposit address", copy:"Copy address", amount:"Amount (USDT)", txHash:"Transaction hash (optional)", submitDeposit:"Submit deposit for review", withdrawTitle:"Withdraw USDT", withdrawIntro:"Withdrawals are reviewed manually before processing.", destination:"Destination wallet address", addressHelp:"Check the address carefully. Crypto transfers are generally irreversible.", submitWithdraw:"Request withdrawal", withdrawWarning:"Your available balance is checked by the database. Pending withdrawals reserve funds until rejected or processed.", history:"Transaction history", date:"Date", type:"Type", status:"Status", reference:"Reference", loading:"Loading transactions…", historyNote:"Only completed deposits and recorded loan disbursements count toward your balance.", footer:"Secure account access", noTransactions:"No transactions yet.", noAddress:"The administrator has not configured a deposit address yet.", signIn:"Please sign in to access your wallet.", loadError:"Could not load wallet information.", copied:"Address copied.", copyFailed:"Could not copy automatically. Press and hold the address to copy it.", requestSuccess:"Your request was submitted for manual review.", requestError:"Could not submit your request.", enterAddress:"Enter a destination wallet address.", deposit:"Deposit", withdrawal:"Withdrawal", loan:"Loan disbursement", pending:"Pending", approved:"Approved", rejected:"Rejected", completed:"Completed", processing:"Submitting…" }
+    en: {
+      title: "My Wallet", subtitle: "Manage your USDT wallet and transactions.", dashboard: "Back to Dashboard",
+      available: "Available balance", balanceNote: "USDT • Pending requests are not available funds.",
+      depositTitle: "Deposit USDT", depositIntro: "Choose your network and send USDT only on that network.",
+      depositAddress: "Official deposit address", copy: "Copy address", amount: "Amount (USDT)",
+      txHash: "Transaction hash (optional)", submitDeposit: "Submit deposit for review",
+      withdrawTitle: "Withdraw USDT", withdrawIntro: "Withdrawals are reviewed manually before processing.",
+      destination: "Destination wallet address", addressHelp: "Check the address carefully. Crypto transfers are generally irreversible.",
+      submitWithdraw: "Request withdrawal", withdrawWarning: "Your available balance is checked by the database. Pending withdrawals reserve funds until rejected or processed.",
+      history: "Transaction history", date: "Date", type: "Type", status: "Status", reference: "Reference",
+      loading: "Loading transactions…", historyNote: "Only completed deposits and recorded loan disbursements count toward your balance.",
+      footer: "Secure account access", noTransactions: "No transactions yet.", noAddress: "The administrator has not configured a deposit address yet.",
+      signIn: "Please sign in to access your wallet.", loadError: "Could not load wallet information.",
+      copied: "Address copied.", copyFailed: "Could not copy automatically.", requestSuccess: "Your request was submitted for manual review.",
+      requestError: "Could not submit your request.", enterAddress: "Enter a destination wallet address.",
+      deposit: "Deposit", withdrawal: "Withdrawal", loan: "Loan disbursement",
+      pending: "Pending", approved: "Approved", rejected: "Rejected", completed: "Completed", processing: "Submitting…"
+    },
+    pt: {
+      title: "Minha Carteira", subtitle: "Gerencie sua carteira USDT e transações.", dashboard: "Voltar ao Painel",
+      available: "Saldo disponível", balanceNote: "USDT • Solicitações pendentes não são fundos disponíveis.",
+      depositTitle: "Depositar USDT", depositIntro: "Escolha a rede e envie USDT apenas nessa rede.",
+      depositAddress: "Endereço oficial de depósito", copy: "Copiar endereço", amount: "Valor (USDT)",
+      txHash: "Hash da transação (opcional)", submitDeposit: "Enviar depósito para análise",
+      withdrawTitle: "Sacar USDT", withdrawIntro: "Saques são revisados manualmente antes do processamento.",
+      destination: "Endereço da carteira de destino", addressHelp: "Verifique o endereço com cuidado. Transferências de cripto são geralmente irreversíveis.",
+      submitWithdraw: "Solicitar saque", withdrawWarning: "Seu saldo disponível é verificado pelo banco de dados. Saques pendentes reservam fundos até serem rejeitados ou processados.",
+      history: "Histórico de transações", date: "Data", type: "Tipo", status: "Status", reference: "Referência",
+      loading: "Carregando transações…", historyNote: "Apenas depósitos concluídos e desembolsos de empréstimo registrados contam para o saldo.",
+      footer: "Acesso seguro à conta", noTransactions: "Nenhuma transação ainda.", noAddress: "O administrador ainda não configurou um endereço de depósito.",
+      signIn: "Faça login para acessar sua carteira.", loadError: "Não foi possível carregar as informações da carteira.",
+      copied: "Endereço copiado.", copyFailed: "Não foi possível copiar automaticamente.", requestSuccess: "Sua solicitação foi enviada para análise manual.",
+      requestError: "Não foi possível enviar sua solicitação.", enterAddress: "Digite um endereço de carteira de destino.",
+      deposit: "Depósito", withdrawal: "Saque", loan: "Desembolso de empréstimo",
+      pending: "Pendente", approved: "Aprovado", rejected: "Rejeitado", completed: "Concluído", processing: "Enviando…"
+    },
+    fr: {
+      title: "Mon Portefeuille", subtitle: "Gérez votre portefeuille USDT et vos transactions.", dashboard: "Retour au tableau de bord",
+      available: "Solde disponible", balanceNote: "USDT • Les demandes en attente ne sont pas des fonds disponibles.",
+      depositTitle: "Déposer des USDT", depositIntro: "Choisissez votre réseau et envoyez des USDT uniquement sur ce réseau.",
+      depositAddress: "Adresse officielle de dépôt", copy: "Copier l’adresse", amount: "Montant (USDT)",
+      txHash: "Hash de transaction (facultatif)", submitDeposit: "Soumettre le dépôt pour examen",
+      withdrawTitle: "Retirer des USDT", withdrawIntro: "Les retraits sont examinés manuellement avant traitement.",
+      destination: "Adresse du portefeuille de destination", addressHelp: "Vérifiez attentivement l’adresse. Les transferts crypto sont généralement irréversibles.",
+      submitWithdraw: "Demander un retrait", withdrawWarning: "Votre solde disponible est vérifié par la base de données. Les retraits en attente réservent les fonds jusqu’à rejet ou traitement.",
+      history: "Historique des transactions", date: "Date", type: "Type", status: "Statut", reference: "Référence",
+      loading: "Chargement des transactions…", historyNote: "Seuls les dépôts terminés et les décaissements de prêt enregistrés comptent dans le solde.",
+      footer: "Accès sécurisé au compte", noTransactions: "Aucune transaction pour le moment.", noAddress: "L’administrateur n’a pas encore configuré d’adresse de dépôt.",
+      signIn: "Veuillez vous connecter pour accéder à votre portefeuille.", loadError: "Impossible de charger les informations du portefeuille.",
+      copied: "Adresse copiée.", copyFailed: "Impossible de copier automatiquement.", requestSuccess: "Votre demande a été soumise pour examen manuel.",
+      requestError: "Impossible de soumettre votre demande.", enterAddress: "Entrez une adresse de portefeuille de destination.",
+      deposit: "Dépôt", withdrawal: "Retrait", loan: "Décaissement de prêt",
+      pending: "En attente", approved: "Approuvé", rejected: "Rejeté", completed: "Terminé", processing: "Envoi…"
+    },
+    es: {
+      title: "Mi Cartera", subtitle: "Administra tu cartera USDT y transacciones.", dashboard: "Volver al panel",
+      available: "Saldo disponible", balanceNote: "USDT • Las solicitudes pendientes no son fondos disponibles.",
+      depositTitle: "Depositar USDT", depositIntro: "Elige tu red y envía USDT solo en esa red.",
+      depositAddress: "Dirección oficial de depósito", copy: "Copiar dirección", amount: "Importe (USDT)",
+      txHash: "Hash de transacción (opcional)", submitDeposit: "Enviar depósito para revisión",
+      withdrawTitle: "Retirar USDT", withdrawIntro: "Los retiros se revisan manualmente antes de procesarse.",
+      destination: "Dirección de la cartera de destino", addressHelp: "Revisa la dirección con cuidado. Las transferencias de cripto suelen ser irreversibles.",
+      submitWithdraw: "Solicitar retiro", withdrawWarning: "Tu saldo disponible es verificado por la base de datos. Los retiros pendientes reservan fondos hasta que se rechacen o procesen.",
+      history: "Historial de transacciones", date: "Fecha", type: "Tipo", status: "Estado", reference: "Referencia",
+      loading: "Cargando transacciones…", historyNote: "Solo los depósitos completados y los desembolsos de préstamo registrados cuentan para el saldo.",
+      footer: "Acceso seguro a la cuenta", noTransactions: "Aún no hay transacciones.", noAddress: "El administrador aún no ha configurado una dirección de depósito.",
+      signIn: "Inicia sesión para acceder a tu cartera.", loadError: "No se pudo cargar la información de la cartera.",
+      copied: "Dirección copiada.", copyFailed: "No se pudo copiar automáticamente.", requestSuccess: "Tu solicitud fue enviada para revisión manual.",
+      requestError: "No se pudo enviar tu solicitud.", enterAddress: "Ingresa una dirección de cartera de destino.",
+      deposit: "Depósito", withdrawal: "Retiro", loan: "Desembolso de préstamo",
+      pending: "Pendiente", approved: "Aprobado", rejected: "Rechazado", completed: "Completado", processing: "Enviando…"
+    },
+    fa: {
+      title: "کیف پول من", subtitle: "مدیریت کیف پول و تراکنش‌های USDT", dashboard: "بازگشت به داشبورد",
+      available: "موجودی قابل استفاده", balanceNote: "USDT • درخواست‌های در انتظار، موجودی قابل استفاده نیستند.",
+      depositTitle: "واریز USDT", depositIntro: "شبکه خود را انتخاب کنید و فقط در همان شبکه USDT ارسال کنید.",
+      depositAddress: "آدرس رسمی واریز", copy: "کپی آدرس", amount: "مبلغ (USDT)",
+      txHash: "هش تراکنش (اختیاری)", submitDeposit: "ارسال واریز برای بررسی",
+      withdrawTitle: "برداشت USDT", withdrawIntro: "برداشت‌ها به‌صورت دستی بررسی می‌شوند.",
+      destination: "آدرس کیف پول مقصد", addressHelp: "آدرس را با دقت بررسی کنید. انتقال رمزارز معمولاً برگشت‌ناپذیر است.",
+      submitWithdraw: "درخواست برداشت", withdrawWarning: "موجودی قابل استفاده شما توسط پایگاه داده بررسی می‌شود. برداشت‌های در انتظار وجه را تا زمان رد یا پردازش رزرو می‌کنند.",
+      history: "تاریخچه تراکنش‌ها", date: "تاریخ", type: "نوع", status: "وضعیت", reference: "شناسه",
+      loading: "در حال بارگذاری تراکنش‌ها…", historyNote: "فقط واریزهای تکمیل‌شده و پرداخت‌های ثبت‌شده وام در موجودی حساب می‌شوند.",
+      footer: "دسترسی امن به حساب", noTransactions: "هنوز تراکنشی وجود ندارد.", noAddress: "مدیر هنوز آدرس واریز را تنظیم نکرده است.",
+      signIn: "لطفاً برای دسترسی به کیف پول وارد شوید.", loadError: "بارگذاری اطلاعات کیف پول ناموفق بود.",
+      copied: "آدرس کپی شد.", copyFailed: "کپی خودکار ناموفق بود.", requestSuccess: "درخواست شما برای بررسی دستی ارسال شد.",
+      requestError: "ارسال درخواست ناموفق بود.", enterAddress: "آدرس کیف پول مقصد را وارد کنید.",
+      deposit: "واریز", withdrawal: "برداشت", loan: "پرداخت وام",
+      pending: "در انتظار", approved: "تأیید شده", rejected: "رد شده", completed: "تکمیل شده", processing: "در حال ارسال…"
+    }
   };
 
   function t(key) { return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.en[key] || key; }
@@ -264,10 +351,9 @@
       if (error) throw error;
 
       if (type === "withdrawal") {
-        showMessage(
-          "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request.",
-          "info"
-        );
+        const withdrawMsg = document.getElementById("withdrawMessage");
+        withdrawMsg.textContent = "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request.";
+        withdrawMsg.className = "message show info";
       } else {
         showMessage(t("requestSuccess") + " (" + String(data).slice(0, 8) + ")", "success");
       }
