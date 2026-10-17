@@ -96,6 +96,11 @@
             <div class="help" data-t="documentHelp">Enter the number on your identity document. Never enter your password or bank PIN.</div>
           </div>
           <div class="field">
+            <label for="document_file" data-t="documentFile">Upload document photo *</label>
+            <input id="document_file" type="file" accept="image/*,.pdf" required>
+            <div class="help" data-t="fileHelp">Upload a clear photo or PDF of your selected identity document. Maximum size 5MB.</div>
+          </div>
+          <div class="field">
             <label for="business_name" data-t="businessName">Business name</label>
             <input id="business_name" maxlength="200">
           </div>
@@ -145,9 +150,8 @@
     const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     const words = {
-      en: { title:"KYC Verification", intro:"Provide your details for identity and business verification.", notice:"Your information will be reviewed manually. Submission does not mean approval.", emailLabel:"Account email", fullName:"Full legal name *", residence:"Country of residence *", documentType:"Identity document type *", choose:"Select an option", passport:"Passport", nationalId:"National ID", drivingLicence:"Driving licence", other:"Other", documentNumber:"Document number *", documentHelp:"Enter the number on your identity document. Never enter your password or bank PIN.", businessName:"Business name", businessCountry:"Business registration country", businessType:"Business type", additional:"Additional information", consent:"I confirm that my information is accurate and understand it will be reviewed manually. *", submit:"Submit for manual review", sending:"Submitting securely…", back:"Back to Dashboard", secureNote:"Your submission is linked to your signed-in account.", successTitle:"KYC Submitted Successfully!", successMessage:"Your KYC details have been received and saved successfully.", pending:"PENDING VERIFICATION", nextTitle:"What happens next?", nextMessage:"Your details are waiting for manual review. This is not an approval of your identity or financing application.", footer:"GlobalBridgeFunding · Secure account verification", login:"Please sign in to submit your KYC details.", failed:"Your details could not be saved. Please try again.", sessionFailed:"Your session could not be verified. Please sign in again." },
-      pt: { title:"Verificação KYC", intro:"Forneça os seus dados para verificação de identidade e da empresa.", notice:"As informações serão analisadas manualmente. O envio não significa aprovação.", emailLabel:"E-mail da conta", fullName:"Nome legal completo *", residence:"País de residência *", documentType:"Tipo de documento de identidade *", choose:"Selecione uma opção", passport:"Passaporte", nationalId:"Documento de identidade nacional", drivingLicence:"Carta de condução", other:"Outro", documentNumber:"Número do documento *", documentHelp:"Introduza o número do documento. Nunca introduza a sua palavra-passe ou PIN bancário.", businessName:"Nome da empresa", businessCountry:"País de registo da empresa", businessType:"Tipo de empresa", additional:"Informações adicionais", consent:"Confirmo que as informações são corretas e compreendo que serão analisadas manualmente. *", submit:"Enviar para análise manual", sending:"A enviar com segurança…", back:"Voltar ao painel", secureNote:"O envio está associado à sua conta autenticada.", successTitle:"KYC enviado com sucesso!", successMessage:"Os seus dados foram recebidos e guardados.", pending:"VERIFICAÇÃO PENDENTE", nextTitle:"O que acontece a seguir?", nextMessage:"Os seus dados aguardam análise manual. Isto não significa aprovação da identidade ou do financiamento.", footer:"GlobalBridgeFunding · Verificação segura da conta", login:"Inicie sessão para enviar os seus dados KYC.", failed:"Não foi possível guardar os dados. Tente novamente.", sessionFailed:"Não foi possível verificar a sessão. Inicie sessão novamente." },
-      fa: { title:"تأیید هویت KYC", intro:"اطلاعات خود را برای تأیید هویت و کسب‌وکار وارد کنید.", notice:"اطلاعات شما به‌صورت دستی بررسی می‌شود. ارسال فرم به معنی تأیید نیست.", emailLabel:"ایمیل حساب", fullName:"نام قانونی کامل *", residence:"کشور محل اقامت *", documentType:"نوع مدرک هویتی *", choose:"یک گزینه انتخاب کنید", passport:"گذرنامه", nationalId:"کارت شناسایی ملی", drivingLicence:"گواهینامه رانندگی", other:"سایر", documentNumber:"شماره مدرک *", documentHelp:"شماره مدرک هویتی را وارد کنید. رمز عبور یا PIN بانکی را وارد نکنید.", businessName:"نام کسب‌وکار", businessCountry:"کشور ثبت کسب‌وکار", businessType:"نوع کسب‌وکار", additional:"اطلاعات تکمیلی", consent:"تأیید می‌کنم اطلاعات صحیح است و می‌دانم دستی بررسی می‌شود. *", submit:"ارسال برای بررسی", sending:"در حال ارسال امن…", back:"بازگشت به داشبورد", secureNote:"درخواست به حساب واردشده شما متصل است.", successTitle:"اطلاعات KYC با موفقیت ارسال شد!", successMessage:"اطلاعات شما دریافت و ذخیره شد.", pending:"در انتظار تأیید", nextTitle:"مرحله بعد چیست؟", nextMessage:"اطلاعات شما در انتظار بررسی دستی است. این به معنی تأیید هویت یا تأمین مالی نیست.", footer:"GlobalBridgeFunding · تأیید امن حساب", login:"برای ارسال اطلاعات KYC ابتدا وارد شوید.", failed:"ذخیره اطلاعات ناموفق بود. دوباره تلاش کنید.", sessionFailed:"تأیید ورود ممکن نیست. دوباره وارد شوید." }
+      en: { title:"KYC Verification", intro:"Provide your details for identity and business verification.", notice:"Your information will be reviewed manually. Submission does not mean approval.", emailLabel:"Account email", fullName:"Full legal name *", residence:"Country of residence *", documentType:"Identity document type *", choose:"Select an option", passport:"Passport", nationalId:"National ID", drivingLicence:"Driving licence", other:"Other", documentNumber:"Document number *", documentHelp:"Enter the number on your identity document. Never enter your password or bank PIN.", documentFile:"Upload document photo *", fileHelp:"Upload a clear photo or PDF of your selected identity document. Maximum size 5MB.", businessName:"Business name", businessCountry:"Business registration country", businessType:"Business type", additional:"Additional information", consent:"I confirm that my information is accurate and understand it will be reviewed manually. *", submit:"Submit for manual review", sending:"Submitting securely…", back:"Back to Dashboard", secureNote:"Your submission is linked to your signed-in account.", successTitle:"KYC Submitted Successfully!", successMessage:"Your KYC details have been received and saved successfully.", pending:"PENDING VERIFICATION", nextTitle:"What happens next?", nextMessage:"Your details are waiting for manual review. This is not an approval of your identity or financing application.", footer:"GlobalBridgeFunding · Secure account verification", login:"Please sign in to submit your KYC details.", failed:"Your details could not be saved. Please try again.", sessionFailed:"Your session could not be verified. Please sign in again.", fileTooLarge:"File is too large. Maximum size is 5MB.", noFile:"Please upload a document photo." },
+      fa: { title:"تأیید هویت KYC", intro:"اطلاعات خود را برای تأیید هویت و کسب‌وکار وارد کنید.", notice:"اطلاعات شما به‌صورت دستی بررسی می‌شود. ارسال فرم به معنی تأیید نیست.", emailLabel:"ایمیل حساب", fullName:"نام قانونی کامل *", residence:"کشور محل اقامت *", documentType:"نوع مدرک هویتی *", choose:"یک گزینه انتخاب کنید", passport:"گذرنامه", nationalId:"کارت شناسایی ملی", drivingLicence:"گواهینامه رانندگی", other:"سایر", documentNumber:"شماره مدرک *", documentHelp:"شماره مدرک هویتی را وارد کنید. رمز عبور یا PIN بانکی را وارد نکنید.", documentFile:"بارگذاری عکس مدرک *", fileHelp:"عکس یا PDF واضح از مدرک هویتی خود بارگذاری کنید. حداکثر حجم ۵ مگابایت.", businessName:"نام کسب‌وکار", businessCountry:"کشور ثبت کسب‌وکار", businessType:"نوع کسب‌وکار", additional:"اطلاعات تکمیلی", consent:"تأیید می‌کنم اطلاعات صحیح است و می‌دانم دستی بررسی می‌شود. *", submit:"ارسال برای بررسی", sending:"در حال ارسال امن…", back:"بازگشت به داشبورد", secureNote:"درخواست به حساب واردشده شما متصل است.", successTitle:"اطلاعات KYC با موفقیت ارسال شد!", successMessage:"اطلاعات شما دریافت و ذخیره شد.", pending:"در انتظار تأیید", nextTitle:"مرحله بعد چیست؟", nextMessage:"اطلاعات شما در انتظار بررسی دستی است. این به معنی تأیید هویت یا تأمین مالی نیست.", footer:"GlobalBridgeFunding · تأیید امن حساب", login:"برای ارسال اطلاعات KYC ابتدا وارد شوید.", failed:"ذخیره اطلاعات ناموفق بود. دوباره تلاش کنید.", sessionFailed:"تأیید ورود ممکن نیست. دوباره وارد شوید.", fileTooLarge:"حجم فایل زیاد است. حداکثر ۵ مگابایت.", noFile:"لطفاً عکس مدرک را بارگذاری کنید." }
     };
     const formScreen = document.getElementById("formScreen");
     const successScreen = document.getElementById("successScreen");
@@ -186,23 +190,48 @@
       errorBox.style.display = "none";
       if (!user) { showError(tr("login")); return; }
       if (!form.reportValidity()) return;
+
+      const fileInput = document.getElementById("document_file");
+      const file = fileInput.files[0];
+      if (!file) { showError(tr("noFile")); return; }
+      if (file.size > 5 * 1024 * 1024) { showError(tr("fileTooLarge")); return; }
+
       submitButton.disabled = true;
       submitButton.querySelector("span").textContent = tr("sending");
-      const payload = {
-        user_id: user.id,
-        full_name: document.getElementById("full_name").value.trim(),
-        country_of_residence: document.getElementById("country_of_residence").value.trim(),
-        document_type: document.getElementById("document_type").value,
-        document_number: document.getElementById("document_number").value.trim(),
-        business_name: document.getElementById("business_name").value.trim() || null,
-        business_country: document.getElementById("business_country").value.trim() || null,
-        business_type: document.getElementById("business_type").value.trim() || null,
-        additional_information: document.getElementById("additional_information").value.trim() || null,
-        status: "pending"
-      };
+
       try {
+        const fileExt = file.name.split(".").pop();
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("kyc-documents")
+          .upload(fileName, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: urlData } = supabase.storage
+          .from("kyc-documents")
+          .getPublicUrl(fileName);
+
+        const documentUrl = urlData.publicUrl;
+
+        const payload = {
+          user_id: user.id,
+          full_name: document.getElementById("full_name").value.trim(),
+          country_of_residence: document.getElementById("country_of_residence").value.trim(),
+          document_type: document.getElementById("document_type").value,
+          document_number: document.getElementById("document_number").value.trim(),
+          document_url: documentUrl,
+          business_name: document.getElementById("business_name").value.trim() || null,
+          business_country: document.getElementById("business_country").value.trim() || null,
+          business_type: document.getElementById("business_type").value.trim() || null,
+          additional_information: document.getElementById("additional_information").value.trim() || null,
+          status: "pending"
+        };
+
         const { error } = await supabase.from("kyc_submissions").insert(payload);
         if (error) throw error;
+
         form.reset();
         formScreen.hidden = true;
         formScreen.style.display = "none";
