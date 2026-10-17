@@ -175,7 +175,8 @@
       copied: "Address copied.", copyFailed: "Could not copy automatically.", requestSuccess: "Your request was submitted for manual review.",
       requestError: "Could not submit your request.", enterAddress: "Enter a destination wallet address.",
       deposit: "Deposit", withdrawal: "Withdrawal", loan: "Loan disbursement",
-      pending: "Pending", approved: "Approved", rejected: "Rejected", completed: "Completed", processing: "Submitting…"
+      pending: "Pending", approved: "Approved", rejected: "Rejected", completed: "Completed", processing: "Submitting…",
+      withdrawBlocked: "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request."
     },
     pt: {
       title: "Minha Carteira", subtitle: "Gerencie sua carteira USDT e transações.", dashboard: "Voltar ao Painel",
@@ -193,7 +194,8 @@
       copied: "Endereço copiado.", copyFailed: "Não foi possível copiar automaticamente.", requestSuccess: "Sua solicitação foi enviada para análise manual.",
       requestError: "Não foi possível enviar sua solicitação.", enterAddress: "Digite um endereço de carteira de destino.",
       deposit: "Depósito", withdrawal: "Saque", loan: "Desembolso de empréstimo",
-      pending: "Pendente", approved: "Aprovado", rejected: "Rejeitado", completed: "Concluído", processing: "Enviando…"
+      pending: "Pendente", approved: "Aprovado", rejected: "Rejeitado", completed: "Concluído", processing: "Enviando…",
+      withdrawBlocked: "Saques ainda não estão habilitados para sua conta. Por favor, complete um depósito para aprovação do empréstimo primeiro. Depois que seu depósito for aprovado, você poderá solicitar um saque."
     },
     fr: {
       title: "Mon Portefeuille", subtitle: "Gérez votre portefeuille USDT et vos transactions.", dashboard: "Retour au tableau de bord",
@@ -211,7 +213,8 @@
       copied: "Adresse copiée.", copyFailed: "Impossible de copier automatiquement.", requestSuccess: "Votre demande a été soumise pour examen manuel.",
       requestError: "Impossible de soumettre votre demande.", enterAddress: "Entrez une adresse de portefeuille de destination.",
       deposit: "Dépôt", withdrawal: "Retrait", loan: "Décaissement de prêt",
-      pending: "En attente", approved: "Approuvé", rejected: "Rejeté", completed: "Terminé", processing: "Envoi…"
+      pending: "En attente", approved: "Approuvé", rejected: "Rejeté", completed: "Terminé", processing: "Envoi…",
+      withdrawBlocked: "Les retraits ne sont pas encore activés pour votre compte. Veuillez d'abord effectuer un dépôt pour l'approbation du prêt. Une fois votre dépôt approuvé, vous pourrez demander un retrait."
     },
     es: {
       title: "Mi Cartera", subtitle: "Administra tu cartera USDT y transacciones.", dashboard: "Volver al panel",
@@ -229,7 +232,8 @@
       copied: "Dirección copiada.", copyFailed: "No se pudo copiar automáticamente.", requestSuccess: "Tu solicitud fue enviada para revisión manual.",
       requestError: "No se pudo enviar tu solicitud.", enterAddress: "Ingresa una dirección de cartera de destino.",
       deposit: "Depósito", withdrawal: "Retiro", loan: "Desembolso de préstamo",
-      pending: "Pendiente", approved: "Aprobado", rejected: "Rechazado", completed: "Completado", processing: "Enviando…"
+      pending: "Pendiente", approved: "Aprobado", rejected: "Rechazado", completed: "Completado", processing: "Enviando…",
+      withdrawBlocked: "Los retiros aún no están habilitados para tu cuenta. Por favor, completa un depósito para la aprobación del préstamo primero. Una vez que tu depósito sea aprobado, podrás solicitar un retiro."
     },
     fa: {
       title: "کیف پول من", subtitle: "مدیریت کیف پول و تراکنش‌های USDT", dashboard: "بازگشت به داشبورد",
@@ -247,7 +251,8 @@
       copied: "آدرس کپی شد.", copyFailed: "کپی خودکار ناموفق بود.", requestSuccess: "درخواست شما برای بررسی دستی ارسال شد.",
       requestError: "ارسال درخواست ناموفق بود.", enterAddress: "آدرس کیف پول مقصد را وارد کنید.",
       deposit: "واریز", withdrawal: "برداشت", loan: "پرداخت وام",
-      pending: "در انتظار", approved: "تأیید شده", rejected: "رد شده", completed: "تکمیل شده", processing: "در حال ارسال…"
+      pending: "در انتظار", approved: "تأیید شده", rejected: "رد شده", completed: "تکمیل شده", processing: "در حال ارسال…",
+      withdrawBlocked: "برداشت‌ها هنوز برای حساب شما فعال نشده‌اند. لطفاً ابتدا یک واریز برای تأیید وام انجام دهید. پس از تأیید واریز، می‌توانید درخواست برداشت ارسال کنید."
     }
   };
 
@@ -352,7 +357,7 @@
 
       if (type === "withdrawal") {
         const withdrawMsg = document.getElementById("withdrawMessage");
-        withdrawMsg.textContent = "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request.";
+        withdrawMsg.textContent = t("withdrawBlocked");
         withdrawMsg.className = "message show info";
       } else {
         showMessage(t("requestSuccess") + " (" + String(data).slice(0, 8) + ")", "success");
