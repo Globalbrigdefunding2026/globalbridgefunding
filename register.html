@@ -190,8 +190,6 @@ const translations = {
   }
 };
 
-const languageSelector = document.getElementById("languageSelector");
-
 function applyLanguage(lang) {
   const t = translations[lang] || translations.en;
   document.documentElement.lang = lang;
@@ -213,14 +211,16 @@ function applyLanguage(lang) {
   document.getElementById("alreadyHaveAccount").textContent = t.alreadyHaveAccount;
   document.getElementById("signInLink").textContent = t.signInLink;
 
-  languageSelector.value = lang;
+  document.getElementById("languageSelector").value = lang;
 }
 
-const saved = localStorage.getItem("globalbridge_language") || "en";
-applyLanguage(saved);
+document.addEventListener("DOMContentLoaded", function() {
+  const saved = localStorage.getItem("globalbridge_language") || "en";
+  applyLanguage(saved);
 
-languageSelector.addEventListener("change", function() {
-  applyLanguage(this.value);
+  document.getElementById("languageSelector").addEventListener("change", function() {
+    applyLanguage(this.value);
+  });
 });
 
 const registerForm = document.getElementById("registerForm");
