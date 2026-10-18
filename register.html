@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account | GlobalBridgeFunding</title>
-  <script src="language.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: Arial, Helvetica, sans-serif; background: #f5f8fc; color: #172033; min-height: 100vh; }
@@ -13,7 +12,6 @@
     .logo span { color: #36c2ff; }
     .header-right { display: flex; align-items: center; gap: 14px; }
     .back { color: white; text-decoration: none; font-size: 14px; white-space: nowrap; }
-    .back:hover { text-decoration: underline; }
     .language-selector { padding: 7px 9px; border-radius: 7px; border: 1px solid rgba(255,255,255,.35); background: white; color: #071a35; font-size: 13px; cursor: pointer; }
     .container { max-width: 520px; margin: 45px auto; padding: 0 20px; }
     .card { background: white; padding: 35px; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
@@ -36,38 +34,44 @@
   <div class="logo">Global<span>Bridge</span>Funding</div>
   <div class="header-right">
     <a href="index.html" class="back">← Back to Home</a>
-    <select id="languageSelector" class="language-selector"></select>
+    <select id="languageSelector" class="language-selector">
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="fa">فارسی</option>
+    </select>
   </div>
 </header>
 
 <div class="container">
   <div class="card">
-    <h1 data-key="createAccount">Create Account</h1>
-    <p class="subtitle" data-key="createAccountSubtitle">Join GlobalBridgeFunding to apply for financing.</p>
+    <h1 id="pageTitle">Create Account</h1>
+    <p class="subtitle" id="pageSubtitle">Join GlobalBridgeFunding to apply for financing.</p>
 
     <form id="registerForm">
       <div class="form-group">
-        <label data-key="firstName">First name</label>
+        <label id="labelFirstName">First name</label>
         <input type="text" id="firstName" required>
       </div>
       <div class="form-group">
-        <label data-key="lastName">Last name</label>
+        <label id="labelLastName">Last name</label>
         <input type="text" id="lastName" required>
       </div>
       <div class="form-group">
-        <label data-key="email">Email address</label>
+        <label id="labelEmail">Email address</label>
         <input type="email" id="email" required>
       </div>
       <div class="form-group">
-        <label data-key="country">Country</label>
+        <label id="labelCountry">Country</label>
         <input type="text" id="country" required>
       </div>
       <div class="form-group">
-        <label data-key="phone">Phone number</label>
+        <label id="labelPhone">Phone number</label>
         <input type="tel" id="phone">
       </div>
       <div class="form-group">
-        <label data-key="preferredLanguage">Preferred language</label>
+        <label id="labelPreferredLanguage">Preferred language</label>
         <select id="language">
           <option value="en">English</option>
           <option value="pt">Português</option>
@@ -77,22 +81,22 @@
         </select>
       </div>
       <div class="form-group">
-        <label data-key="password">Password</label>
+        <label id="labelPassword">Password</label>
         <input type="password" id="password" required>
       </div>
       <div class="form-group">
-        <label data-key="confirmPassword">Confirm password</label>
+        <label id="labelConfirmPassword">Confirm password</label>
         <input type="password" id="confirmPassword" required>
       </div>
       <div class="terms">
         <input type="checkbox" id="terms" required>
-        <label for="terms" data-key="terms">I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.</label>
+        <label for="terms" id="labelTerms">I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.</label>
       </div>
-      <button type="submit" id="registerButton" data-key="createAccount">Create Account</button>
+      <button type="submit" id="registerButton">Create Account</button>
     </form>
 
     <div class="login-link">
-      <span data-key="alreadyHaveAccount">Already have an account?</span> <a href="login.html" data-key="signIn">Sign in</a>
+      <span id="alreadyHaveAccount">Already have an account?</span> <a href="login.html" id="signInLink">Sign in</a>
     </div>
   </div>
 </div>
@@ -103,53 +107,124 @@ const supabaseUrl = "https://siykgexfdsmkiqwyxker.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpeWtnZXhmZHNta2lxd3l4a2VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExNDM0NjEsImV4cCI6MjEwNjcxOTQ2MX0._1aN7LbUWQ_pk5U7jfKn6V9lYV0NyK_Cmg-lAZRQU2c";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-const registerForm = document.getElementById("registerForm");
-const registerButton = document.getElementById("registerButton");
+const translations = {
+  en: {
+    pageTitle: "Create Account",
+    pageSubtitle: "Join GlobalBridgeFunding to apply for financing.",
+    labelFirstName: "First name",
+    labelLastName: "Last name",
+    labelEmail: "Email address",
+    labelCountry: "Country",
+    labelPhone: "Phone number",
+    labelPreferredLanguage: "Preferred language",
+    labelPassword: "Password",
+    labelConfirmPassword: "Confirm password",
+    labelTerms: "I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.",
+    registerButton: "Create Account",
+    alreadyHaveAccount: "Already have an account?",
+    signInLink: "Sign in"
+  },
+  pt: {
+    pageTitle: "Criar Conta",
+    pageSubtitle: "Junte-se à GlobalBridgeFunding para solicitar financiamento.",
+    labelFirstName: "Nome",
+    labelLastName: "Sobrenome",
+    labelEmail: "Endereço de e-mail",
+    labelCountry: "País",
+    labelPhone: "Número de telefone",
+    labelPreferredLanguage: "Idioma preferido",
+    labelPassword: "Senha",
+    labelConfirmPassword: "Confirmar senha",
+    labelTerms: "Concordo com os termos aplicáveis e reconheço que as informações enviadas podem ser analisadas como parte do processo de candidatura.",
+    registerButton: "Criar Conta",
+    alreadyHaveAccount: "Já tem uma conta?",
+    signInLink: "Entrar"
+  },
+  fr: {
+    pageTitle: "Créer un compte",
+    pageSubtitle: "Rejoignez GlobalBridgeFunding pour demander un financement.",
+    labelFirstName: "Prénom",
+    labelLastName: "Nom",
+    labelEmail: "Adresse e-mail",
+    labelCountry: "Pays",
+    labelPhone: "Numéro de téléphone",
+    labelPreferredLanguage: "Langue préférée",
+    labelPassword: "Mot de passe",
+    labelConfirmPassword: "Confirmer le mot de passe",
+    labelTerms: "J'accepte les conditions applicables et reconnais que les informations soumises peuvent être examinées dans le cadre du processus de demande.",
+    registerButton: "Créer un compte",
+    alreadyHaveAccount: "Vous avez déjà un compte ?",
+    signInLink: "Se connecter"
+  },
+  es: {
+    pageTitle: "Crear cuenta",
+    pageSubtitle: "Únete a GlobalBridgeFunding para solicitar financiación.",
+    labelFirstName: "Nombre",
+    labelLastName: "Apellido",
+    labelEmail: "Dirección de correo electrónico",
+    labelCountry: "País",
+    labelPhone: "Número de teléfono",
+    labelPreferredLanguage: "Idioma preferido",
+    labelPassword: "Contraseña",
+    labelConfirmPassword: "Confirmar contraseña",
+    labelTerms: "Acepto los términos aplicables y reconozco que la información enviada puede ser revisada como parte del proceso de solicitud.",
+    registerButton: "Crear cuenta",
+    alreadyHaveAccount: "¿Ya tienes una cuenta?",
+    signInLink: "Iniciar sesión"
+  },
+  fa: {
+    pageTitle: "ایجاد حساب",
+    pageSubtitle: "برای درخواست تأمین مالی به GlobalBridgeFunding بپیوندید.",
+    labelFirstName: "نام",
+    labelLastName: "نام خانوادگی",
+    labelEmail: "آدرس ایمیل",
+    labelCountry: "کشور",
+    labelPhone: "شماره تلفن",
+    labelPreferredLanguage: "زبان ترجیحی",
+    labelPassword: "رمز عبور",
+    labelConfirmPassword: "تأیید رمز عبور",
+    labelTerms: "من با شرایط قابل اجرا موافقم و تأیید می‌کنم که اطلاعات ارسال‌شده ممکن است به‌عنوان بخشی از فرآیند درخواست بررسی شود.",
+    registerButton: "ایجاد حساب",
+    alreadyHaveAccount: "قبلاً حساب دارید؟",
+    signInLink: "ورود"
+  }
+};
+
 const languageSelector = document.getElementById("languageSelector");
 
-const languages = [
-  { code: "en", name: "English" },
-  { code: "pt", name: "Português" },
-  { code: "fr", name: "Français" },
-  { code: "es", name: "Español" },
-  { code: "fa", name: "فارسی" }
-];
-
-function populateLanguageSelector() {
-  languageSelector.innerHTML = "";
-  languages.forEach(lang => {
-    const option = document.createElement("option");
-    option.value = lang.code;
-    option.textContent = lang.name;
-    languageSelector.appendChild(option);
-  });
-}
-
 function applyLanguage(lang) {
-  if (window.GlobalBridgeLanguage && typeof window.GlobalBridgeLanguage.setLanguage === "function") {
-    window.GlobalBridgeLanguage.setLanguage(lang);
-  }
-  localStorage.setItem("globalbridge_language", lang);
+  const t = translations[lang] || translations.en;
   document.documentElement.lang = lang;
   document.documentElement.dir = (lang === "fa") ? "rtl" : "ltr";
+  localStorage.setItem("globalbridge_language", lang);
 
-  document.querySelectorAll("[data-key]").forEach(el => {
-    const key = el.getAttribute("data-key");
-    if (window.translations && window.translations[lang] && window.translations[lang][key]) {
-      el.textContent = window.translations[lang][key];
-    }
-  });
+  document.getElementById("pageTitle").textContent = t.pageTitle;
+  document.getElementById("pageSubtitle").textContent = t.pageSubtitle;
+  document.getElementById("labelFirstName").textContent = t.labelFirstName;
+  document.getElementById("labelLastName").textContent = t.labelLastName;
+  document.getElementById("labelEmail").textContent = t.labelEmail;
+  document.getElementById("labelCountry").textContent = t.labelCountry;
+  document.getElementById("labelPhone").textContent = t.labelPhone;
+  document.getElementById("labelPreferredLanguage").textContent = t.labelPreferredLanguage;
+  document.getElementById("labelPassword").textContent = t.labelPassword;
+  document.getElementById("labelConfirmPassword").textContent = t.labelConfirmPassword;
+  document.getElementById("labelTerms").textContent = t.labelTerms;
+  document.getElementById("registerButton").textContent = t.registerButton;
+  document.getElementById("alreadyHaveAccount").textContent = t.alreadyHaveAccount;
+  document.getElementById("signInLink").textContent = t.signInLink;
 
-  if (languageSelector) languageSelector.value = lang;
+  languageSelector.value = lang;
 }
 
-populateLanguageSelector();
-const savedLang = localStorage.getItem("globalbridge_language") || "en";
-applyLanguage(savedLang);
+const saved = localStorage.getItem("globalbridge_language") || "en";
+applyLanguage(saved);
 
 languageSelector.addEventListener("change", function() {
   applyLanguage(this.value);
 });
+
+const registerForm = document.getElementById("registerForm");
+const registerButton = document.getElementById("registerButton");
 
 registerForm.addEventListener("submit", async function(e) {
   e.preventDefault();
