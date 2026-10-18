@@ -30,13 +30,14 @@
     .dashboard-button { margin-top:12px; background:var(--navy); color:white; }
     #errorMessage { display:none; padding:13px; margin-bottom:17px; border:1px solid #f4b8b3; border-radius:10px; background:#fff1f0; color:#b42318; font-size:13px; line-height:1.5; overflow-wrap:anywhere; }
     .small-note { text-align:center; font-size:12px; margin-bottom:0; }
-    #successScreen { text-align:center; }
+    #successScreen, #verifiedScreen { text-align:center; }
     .check-circle { width:100px; height:100px; display:flex; align-items:center; justify-content:center; margin:7px auto 23px; border-radius:50%; background:#e4f7eb; border:2px solid #b5e8c8; }
     .check-circle svg { width:61px; height:61px; }
-    #successScreen h2 { font-size:27px; line-height:1.25; margin:0 0 10px; }
+    #successScreen h2, #verifiedScreen h2 { font-size:27px; line-height:1.25; margin:0 0 10px; }
     .success-subtitle { margin-bottom:17px; }
     .status { display:inline-flex; align-items:center; gap:8px; margin:5px 0 17px; padding:10px 15px; border-radius:30px; border:1px solid #f1d58c; background:#fff4d8; color:#865b00; font-size:13px; font-weight:800; }
     .status-dot { width:9px; height:9px; background:#d49a19; border-radius:50%; }
+    .verified-badge { display:inline-flex; align-items:center; gap:8px; margin:10px 0 20px; padding:12px 18px; border-radius:30px; background:#e4f7eb; color:#16834a; font-weight:700; font-size:14px; }
     .next-steps { text-align:left; margin:17px 0 23px; padding:16px; border:1px solid var(--border); background:#f7fafc; border-radius:12px; font-size:14px; line-height:1.65; }
     .next-steps p { margin-bottom:0; }
     footer { padding:0 15px 25px; text-align:center; color:var(--muted); font-size:12px; }
@@ -126,6 +127,7 @@
         </form>
       </div>
     </section>
+
     <section id="successScreen" class="card" hidden aria-live="polite">
       <div class="check-circle" aria-hidden="true">
         <svg viewBox="0 0 64 64" fill="none">
@@ -142,62 +144,98 @@
       </div>
       <a href="dashboard.html" class="button" data-t="back">Back to Dashboard</a>
     </section>
+
+    <section id="verifiedScreen" class="card" hidden>
+      <div class="check-circle" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="28" stroke="#16834a" stroke-width="4"/>
+          <path d="M17 33L27 43L48 21" stroke="#16834a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Verified User</h2>
+      <div class="verified-badge">✓ KYC Verified</div>
+      <p class="success-subtitle">Your identity has been successfully verified.</p>
+      <p>You can now proceed with your financing application.</p>
+      <a href="dashboard.html" class="button" style="margin-top:20px;">Back to Dashboard</a>
+    </section>
   </main>
-  <footer data-t="footer">GlobalBridgeFunding · Secure account verification</footer>
+  <footer>GlobalBridgeFunding · Secure account verification</footer>
+
   <script type="module">
     import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
     const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
     const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-    const words = {
-      en: { title:"KYC Verification", intro:"Provide your details for identity and business verification.", notice:"Your information will be reviewed manually. Submission does not mean approval.", emailLabel:"Account email", fullName:"Full legal name *", residence:"Country of residence *", documentType:"Identity document type *", choose:"Select an option", passport:"Passport", nationalId:"National ID", drivingLicence:"Driving licence", other:"Other", documentNumber:"Document number *", documentHelp:"Enter the number on your identity document. Never enter your password or bank PIN.", documentFile:"Upload document photo *", fileHelp:"Upload a clear photo or PDF of your selected identity document. Maximum size 5MB.", businessName:"Business name", businessCountry:"Business registration country", businessType:"Business type", additional:"Additional information", consent:"I confirm that my information is accurate and understand it will be reviewed manually. *", submit:"Submit for manual review", sending:"Submitting securely…", back:"Back to Dashboard", secureNote:"Your submission is linked to your signed-in account.", successTitle:"KYC Submitted Successfully!", successMessage:"Your KYC details have been received and saved successfully.", pending:"PENDING VERIFICATION", nextTitle:"What happens next?", nextMessage:"Your details are waiting for manual review. This is not an approval of your identity or financing application.", footer:"GlobalBridgeFunding · Secure account verification", login:"Please sign in to submit your KYC details.", failed:"Your details could not be saved. Please try again.", sessionFailed:"Your session could not be verified. Please sign in again.", fileTooLarge:"File is too large. Maximum size is 5MB.", noFile:"Please upload a document photo." },
-      fa: { title:"تأیید هویت KYC", intro:"اطلاعات خود را برای تأیید هویت و کسب‌وکار وارد کنید.", notice:"اطلاعات شما به‌صورت دستی بررسی می‌شود. ارسال فرم به معنی تأیید نیست.", emailLabel:"ایمیل حساب", fullName:"نام قانونی کامل *", residence:"کشور محل اقامت *", documentType:"نوع مدرک هویتی *", choose:"یک گزینه انتخاب کنید", passport:"گذرنامه", nationalId:"کارت شناسایی ملی", drivingLicence:"گواهینامه رانندگی", other:"سایر", documentNumber:"شماره مدرک *", documentHelp:"شماره مدرک هویتی را وارد کنید. رمز عبور یا PIN بانکی را وارد نکنید.", documentFile:"بارگذاری عکس مدرک *", fileHelp:"عکس یا PDF واضح از مدرک هویتی خود بارگذاری کنید. حداکثر حجم ۵ مگابایت.", businessName:"نام کسب‌وکار", businessCountry:"کشور ثبت کسب‌وکار", businessType:"نوع کسب‌وکار", additional:"اطلاعات تکمیلی", consent:"تأیید می‌کنم اطلاعات صحیح است و می‌دانم دستی بررسی می‌شود. *", submit:"ارسال برای بررسی", sending:"در حال ارسال امن…", back:"بازگشت به داشبورد", secureNote:"درخواست به حساب واردشده شما متصل است.", successTitle:"اطلاعات KYC با موفقیت ارسال شد!", successMessage:"اطلاعات شما دریافت و ذخیره شد.", pending:"در انتظار تأیید", nextTitle:"مرحله بعد چیست؟", nextMessage:"اطلاعات شما در انتظار بررسی دستی است. این به معنی تأیید هویت یا تأمین مالی نیست.", footer:"GlobalBridgeFunding · تأیید امن حساب", login:"برای ارسال اطلاعات KYC ابتدا وارد شوید.", failed:"ذخیره اطلاعات ناموفق بود. دوباره تلاش کنید.", sessionFailed:"تأیید ورود ممکن نیست. دوباره وارد شوید.", fileTooLarge:"حجم فایل زیاد است. حداکثر ۵ مگابایت.", noFile:"لطفاً عکس مدرک را بارگذاری کنید." }
-    };
+
     const formScreen = document.getElementById("formScreen");
     const successScreen = document.getElementById("successScreen");
+    const verifiedScreen = document.getElementById("verifiedScreen");
     const form = document.getElementById("kycForm");
     const errorBox = document.getElementById("errorMessage");
     const submitButton = document.getElementById("submitButton");
-    const languageSelect = document.getElementById("language");
-    let language = "en";
     let user = null;
-    function tr(key) { return (words[language] && words[language][key]) || words.en[key] || key; }
-    function setLanguage(value) {
-      language = words[value] ? value : "en";
-      document.documentElement.lang = language;
-      document.documentElement.dir = language === "fa" ? "rtl" : "ltr";
-      languageSelect.value = language;
-      document.querySelectorAll("[data-t]").forEach(el => { const key = el.dataset.t; if (tr(key)) el.textContent = tr(key); });
-      document.title = tr("title") + " | GlobalBridgeFunding";
-      try { localStorage.setItem("globalBridge_language", language); } catch (_) {}
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.style.display = "block";
     }
-    let savedLanguage = "en";
-    try { savedLanguage = localStorage.getItem("globalBridge_language") || "en"; } catch (_) {}
-    setLanguage(savedLanguage);
-    languageSelect.addEventListener("change", () => setLanguage(languageSelect.value));
-    function showError(message) { errorBox.textContent = message; errorBox.style.display = "block"; }
+
+    async function checkKYCStatus() {
+      const { data, error } = await supabase
+        .from("kyc_submissions")
+        .select("status")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error) console.error(error);
+
+      if (data?.status === "approved") {
+        formScreen.hidden = true;
+        formScreen.style.display = "none";
+        verifiedScreen.hidden = false;
+        verifiedScreen.style.display = "block";
+        return true;
+      }
+      return false;
+    }
+
     async function initialise() {
       try {
         const { data, error } = await supabase.auth.getSession();
-        if (error || !data.session) { showError(tr("login")); submitButton.disabled = true; return; }
+        if (error || !data.session) {
+          showError("Please sign in to submit your KYC details.");
+          submitButton.disabled = true;
+          return;
+        }
         user = data.session.user;
         document.getElementById("email").value = user.email || "";
-      } catch (err) { console.error(err); showError(tr("sessionFailed")); submitButton.disabled = true; }
+
+        const isVerified = await checkKYCStatus();
+        if (isVerified) return;
+      } catch (err) {
+        console.error(err);
+        showError("Your session could not be verified. Please sign in again.");
+        submitButton.disabled = true;
+      }
     }
+
     await initialise();
+
     form.addEventListener("submit", async event => {
       event.preventDefault();
       errorBox.style.display = "none";
-      if (!user) { showError(tr("login")); return; }
+      if (!user) { showError("Please sign in."); return; }
       if (!form.reportValidity()) return;
 
       const fileInput = document.getElementById("document_file");
       const file = fileInput.files[0];
-      if (!file) { showError(tr("noFile")); return; }
-      if (file.size > 5 * 1024 * 1024) { showError(tr("fileTooLarge")); return; }
+      if (!file) { showError("Please upload a document photo."); return; }
+      if (file.size > 5 * 1024 * 1024) { showError("File is too large. Maximum size is 5MB."); return; }
 
       submitButton.disabled = true;
-      submitButton.querySelector("span").textContent = tr("sending");
+      submitButton.querySelector("span").textContent = "Submitting securely…";
 
       try {
         const fileExt = file.name.split(".").pop();
@@ -238,32 +276,11 @@
             body: {
               to: user.email,
               subject: "KYC Submission Received – GlobalBridgeFunding",
-              html: `
-                <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff; border: 1px solid #e4e9f0; border-radius: 8px; overflow: hidden;">
-                  <div style="background: #071a35; padding: 28px 30px; text-align: center;">
-                    <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 700;">GlobalBridgeFunding</h1>
-                  </div>
-                  <div style="padding: 36px 30px; color: #17253b; line-height: 1.6;">
-                    <h2 style="margin: 0 0 16px; font-size: 20px; color: #071a35;">KYC Submission Received</h2>
-                    <p style="margin: 0 0 16px;">Dear ${payload.full_name},</p>
-                    <p style="margin: 0 0 16px;">Thank you for submitting your Know Your Customer (KYC) information. We have successfully received your details and supporting document.</p>
-                    <p style="margin: 0 0 16px;">Your submission is currently under review. Our team will carefully assess the information provided. Please note that submission of your KYC does not constitute approval.</p>
-                    <p style="margin: 0 0 24px;">You will receive a further notification once the review process has been completed.</p>
-                    <div style="background: #f5f7fb; padding: 16px; border-radius: 6px; font-size: 14px; color: #64748b;">
-                      If you have any questions regarding your submission, please contact our support team at 
-                      <a href="mailto:support@globalbridgefunding.com" style="color: #36c2ff; text-decoration: none;">support@globalbridgefunding.com</a>.
-                    </div>
-                  </div>
-                  <div style="background: #f8fafc; padding: 20px 30px; text-align: center; font-size: 12px; color: #94a3b8; border-top: 1px solid #e4e9f0;">
-                    <p style="margin: 0 0 6px;">GlobalBridgeFunding</p>
-                    <p style="margin: 0;">This is an automated message. Please do not reply directly to this email.</p>
-                  </div>
-                </div>
-              `
+              html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;"><h2>KYC Submission Received</h2><p>Dear ${payload.full_name},</p><p>We have received your KYC submission and it is under review.</p><p>Thank you,<br>GlobalBridgeFunding</p></div>`
             }
           });
         } catch (emailErr) {
-          console.warn("Email confirmation failed:", emailErr);
+          console.warn("Email failed:", emailErr);
         }
 
         form.reset();
@@ -275,9 +292,9 @@
 
       } catch (err) {
         console.error("KYC submission failed:", err);
-        showError(tr("failed") + (err.message ? " " + err.message : ""));
+        showError("Your details could not be saved. Please try again. " + (err.message || ""));
         submitButton.disabled = false;
-        submitButton.querySelector("span").textContent = tr("submit");
+        submitButton.querySelector("span").textContent = "Submit for manual review";
       }
     });
   </script>
