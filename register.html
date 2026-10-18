@@ -105,6 +105,51 @@ const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 const registerForm = document.getElementById("registerForm");
 const registerButton = document.getElementById("registerButton");
+const languageSelector = document.getElementById("languageSelector");
+
+const languages = [
+  { code: "en", name: "English" },
+  { code: "pt", name: "Português" },
+  { code: "fr", name: "Français" },
+  { code: "es", name: "Español" },
+  { code: "fa", name: "فارسی" }
+];
+
+function populateLanguageSelector() {
+  languageSelector.innerHTML = "";
+  languages.forEach(lang => {
+    const option = document.createElement("option");
+    option.value = lang.code;
+    option.textContent = lang.name;
+    languageSelector.appendChild(option);
+  });
+}
+
+function applyLanguage(lang) {
+  if (window.GlobalBridgeLanguage && typeof window.GlobalBridgeLanguage.setLanguage === "function") {
+    window.GlobalBridgeLanguage.setLanguage(lang);
+  }
+  localStorage.setItem("globalbridge_language", lang);
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "fa") ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (window.translations && window.translations[lang] && window.translations[lang][key]) {
+      el.textContent = window.translations[lang][key];
+    }
+  });
+
+  if (languageSelector) languageSelector.value = lang;
+}
+
+populateLanguageSelector();
+const savedLang = localStorage.getItem("globalbridge_language") || "en";
+applyLanguage(savedLang);
+
+languageSelector.addEventListener("change", function() {
+  applyLanguage(this.value);
+});
 
 registerForm.addEventListener("submit", async function(e) {
   e.preventDefault();
