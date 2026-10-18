@@ -344,12 +344,64 @@ async function updateKYC(id) {
   const button = document.getElementById(`kyc-btn-${id}`);
   button.disabled = true;
   button.textContent = "Saving...";
+
   try {
-    const { error } = await supabaseClient.from("kyc_submissions").update({ status }).eq("id", id);
+    const { data: kyc, error: fetchError } = await supabaseClient
+      .from("kyc_submissions")
+      .select("full_name, user_id")
+      .eq("id", id)
+      .single();
+
+    if (fetchError) throw fetchError;
+
+    const { error } = await supabaseClient
+      .from("kyc_submissions")
+      .update({ status })
+      .eq("id", id);
+
     if (error) throw error;
+
+    if (status === "approved") {
+      const { data: profile } = await supabaseClient
+        .from("profiles")
+        .select("email")
+        .eq("id", kyc.user_id)
+        .maybeSingle();
+
+      const clientEmail = profile?.email;
+
+      if (clientEmail) {
+        await supabaseClient.functions.invoke("send-client-email", {
+          body: {
+            to: clientEmail,
+            subject: "KYC Approved – Please Upload Your Identity Document",
+            html: `<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e4e9f0;border-radius:8px;overflow:hidden;">
+              <div style="background:#071a35;padding:28px 30px;text-align:center;">
+                <h1 style="color:#ffffff;margin:0;font-size:22px;font-weight:700;">GlobalBridgeFunding</h1>
+              </div>
+              <div style="padding:36px 30px;color:#17253b;line-height:1.6;">
+                <h2 style="margin:0 0 16px;font-size:20px;color:#071a35;">KYC Submission Approved</h2>
+                <p style="margin:0 0 16px;">Dear ${escapeHtml(kyc.full_name || "Client")},</p>
+                <p style="margin:0 0 16px;">We are pleased to inform you that your KYC (Know Your Customer) submission has been approved.</p>
+                <p style="margin:0 0 16px;">To complete the verification process, please log in to your GlobalBridgeFunding account and upload a clear image of your identity document using the <strong>KYC document upload</strong> section available on your dashboard.</p>
+                <p style="margin:0 0 16px;">Once the document has been successfully uploaded, our team will finalize your verification.</p>
+                <p style="margin:0 0 24px;">If you have any questions or require assistance, please contact our support team at <a href="mailto:support@globalbridgefunding.com" style="color:#36c2ff;text-decoration:none;">support@globalbridgefunding.com</a>.</p>
+                <p style="margin:0;">Thank you for choosing GlobalBridgeFunding.</p>
+              </div>
+              <div style="background:#f8fafc;padding:20px 30px;text-align:center;font-size:12px;color:#94a3b8;border-top:1px solid #e4e9f0;">
+                <p style="margin:0 0 6px;">GlobalBridgeFunding</p>
+                <p style="margin:0;">This is an automated message. Please do not reply directly to this email.</p>
+              </div>
+            </div>`
+          }
+        });
+      }
+    }
+
     showSuccess("KYC status updated successfully.");
     loadKYC();
   } catch (err) {
+    console.error(err);
     showError("Unable to update KYC: " + err.message);
   } finally {
     button.disabled = false;
