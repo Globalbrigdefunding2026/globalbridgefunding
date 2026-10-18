@@ -1,338 +1,289 @@
-/*
-  GlobalBridgeFunding
-  Central Website Language System
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | GlobalBridgeFunding</title>
+  <script src="language.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; background: #f5f8fc; color: #172033; min-height: 100vh; }
+    header { background: #071a35; padding: 18px 6%; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .logo { color: white; font-size: 21px; font-weight: 800; white-space: nowrap; }
+    .logo span { color: #36c2ff; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .back { color: white; text-decoration: none; font-size: 14px; white-space: nowrap; }
+    .back:hover { text-decoration: underline; }
+    .language-selector { padding: 7px 9px; border-radius: 7px; border: 1px solid rgba(255,255,255,.35); background: white; color: #071a35; font-size: 13px; cursor: pointer; }
+    .container { max-width: 520px; margin: 45px auto; padding: 0 20px; }
+    .card { background: white; padding: 35px; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    h1 { font-size: 26px; margin-bottom: 8px; }
+    .subtitle { color: #64748b; margin-bottom: 25px; font-size: 15px; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+    input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
+    button { width: 100%; padding: 14px; background: #36c2ff; color: #071a35; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 8px; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .login-link { text-align: center; margin-top: 18px; font-size: 14px; }
+    .login-link a { color: #36c2ff; font-weight: 600; }
+    .terms { font-size: 13px; color: #64748b; margin: 12px 0; }
+    .terms input { width: auto; margin-right: 6px; }
+  </style>
+</head>
+<body>
 
-  Supported languages:
-  en = English
-  pt = Português
-  vi = Tiếng Việt
-  fa = فارسی
-  id = Bahasa Indonesia
-  fr = Français
-  fi = Suomi
-  es = Español
+<header>
+  <div class="logo">Global<span>Bridge</span>Funding</div>
+  <div class="header-right">
+    <a href="index.html" class="back">← Back to Home</a>
+    <select id="languageSelector" class="language-selector"></select>
+  </div>
+</header>
 
-  The selected language is stored in:
-  globalbridge_language
-*/
+<div class="container">
+  <div class="card">
+    <h1 data-key="createAccount">Create Account</h1>
+    <p class="subtitle" data-key="createAccountSubtitle">Join GlobalBridgeFunding to apply for financing.</p>
 
-(function () {
+    <form id="registerForm">
+      <div class="form-group">
+        <label data-key="firstName">First name</label>
+        <input type="text" id="firstName" required>
+      </div>
+      <div class="form-group">
+        <label data-key="lastName">Last name</label>
+        <input type="text" id="lastName" required>
+      </div>
+      <div class="form-group">
+        <label data-key="email">Email address</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label data-key="country">Country</label>
+        <input type="text" id="country" required>
+      </div>
+      <div class="form-group">
+        <label data-key="phone">Phone number</label>
+        <input type="tel" id="phone">
+      </div>
+      <div class="form-group">
+        <label data-key="preferredLanguage">Preferred language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="fa">فارسی</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-key="password">Password</label>
+        <input type="password" id="password" required>
+      </div>
+      <div class="form-group">
+        <label data-key="confirmPassword">Confirm password</label>
+        <input type="password" id="confirmPassword" required>
+      </div>
+      <div class="terms">
+        <input type="checkbox" id="terms" required>
+        <label for="terms" data-key="terms">I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.</label>
+      </div>
+      <button type="submit" id="registerButton" data-key="createAccount">Create Account</button>
+    </form>
 
-  const LANGUAGE_KEY = "globalbridge_language";
+    <div class="login-link">
+      <span data-key="alreadyHaveAccount">Already have an account?</span> <a href="login.html" data-key="signIn">Sign in</a>
+    </div>
+  </div>
+</div>
 
-  const SUPPORTED_LANGUAGES = [
-    "en",
-    "pt",
-    "vi",
-    "fa",
-    "id",
-    "fr",
-    "fi",
-    "es"
-  ];
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseUrl = "https://siykgexfdsmkiqwyxker.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpeWtnZXhmZHNta2lxd3l4a2VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExNDM0NjEsImV4cCI6MjEwNjcxOTQ2MX0._1aN7LbUWQ_pk5U7jfKn6V9lYV0NyK_Cmg-lAZRQU2c";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-  const LANGUAGE_NAMES = {
-    en: "English",
-    pt: "Português",
-    vi: "Tiếng Việt",
-    fa: "فارسی",
-    id: "Bahasa Indonesia",
-    fr: "Français",
-    fi: "Suomi",
-    es: "Español"
-  };
+const translations = {
+  en: {
+    createAccount: "Create Account",
+    createAccountSubtitle: "Join GlobalBridgeFunding to apply for financing.",
+    firstName: "First name",
+    lastName: "Last name",
+    email: "Email address",
+    country: "Country",
+    phone: "Phone number",
+    preferredLanguage: "Preferred language",
+    password: "Password",
+    confirmPassword: "Confirm password",
+    terms: "I agree to the applicable terms and acknowledge that submitted information may be reviewed as part of the application process.",
+    alreadyHaveAccount: "Already have an account?",
+    signIn: "Sign in"
+  },
+  pt: {
+    createAccount: "Criar Conta",
+    createAccountSubtitle: "Junte-se à GlobalBridgeFunding para solicitar financiamento.",
+    firstName: "Nome",
+    lastName: "Sobrenome",
+    email: "Endereço de e-mail",
+    country: "País",
+    phone: "Número de telefone",
+    preferredLanguage: "Idioma preferido",
+    password: "Senha",
+    confirmPassword: "Confirmar senha",
+    terms: "Concordo com os termos aplicáveis e reconheço que as informações enviadas podem ser analisadas como parte do processo de candidatura.",
+    alreadyHaveAccount: "Já tem uma conta?",
+    signIn: "Entrar"
+  },
+  fr: {
+    createAccount: "Créer un compte",
+    createAccountSubtitle: "Rejoignez GlobalBridgeFunding pour demander un financement.",
+    firstName: "Prénom",
+    lastName: "Nom",
+    email: "Adresse e-mail",
+    country: "Pays",
+    phone: "Numéro de téléphone",
+    preferredLanguage: "Langue préférée",
+    password: "Mot de passe",
+    confirmPassword: "Confirmer le mot de passe",
+    terms: "J'accepte les conditions applicables et reconnais que les informations soumises peuvent être examinées dans le cadre du processus de demande.",
+    alreadyHaveAccount: "Vous avez déjà un compte ?",
+    signIn: "Se connecter"
+  },
+  es: {
+    createAccount: "Crear cuenta",
+    createAccountSubtitle: "Únete a GlobalBridgeFunding para solicitar financiación.",
+    firstName: "Nombre",
+    lastName: "Apellido",
+    email: "Dirección de correo electrónico",
+    country: "País",
+    phone: "Número de teléfono",
+    preferredLanguage: "Idioma preferido",
+    password: "Contraseña",
+    confirmPassword: "Confirmar contraseña",
+    terms: "Acepto los términos aplicables y reconozco que la información enviada puede ser revisada como parte del proceso de solicitud.",
+    alreadyHaveAccount: "¿Ya tienes una cuenta?",
+    signIn: "Iniciar sesión"
+  },
+  fa: {
+    createAccount: "ایجاد حساب",
+    createAccountSubtitle: "برای درخواست تأمین مالی به GlobalBridgeFunding بپیوندید.",
+    firstName: "نام",
+    lastName: "نام خانوادگی",
+    email: "آدرس ایمیل",
+    country: "کشور",
+    phone: "شماره تلفن",
+    preferredLanguage: "زبان ترجیحی",
+    password: "رمز عبور",
+    confirmPassword: "تأیید رمز عبور",
+    terms: "من با شرایط قابل اجرا موافقم و تأیید می‌کنم که اطلاعات ارسال‌شده ممکن است به‌عنوان بخشی از فرآیند درخواست بررسی شود.",
+    alreadyHaveAccount: "قبلاً حساب دارید؟",
+    signIn: "ورود"
+  }
+};
 
+const registerForm = document.getElementById("registerForm");
+const registerButton = document.getElementById("registerButton");
+const languageSelector = document.getElementById("languageSelector");
 
-  /*
-    Get the currently saved language.
-  */
+const languages = [
+  { code: "en", name: "English" },
+  { code: "pt", name: "Português" },
+  { code: "fr", name: "Français" },
+  { code: "es", name: "Español" },
+  { code: "fa", name: "فارسی" }
+];
 
-  function getLanguage() {
+function populateLanguageSelector() {
+  languageSelector.innerHTML = "";
+  languages.forEach(lang => {
+    const option = document.createElement("option");
+    option.value = lang.code;
+    option.textContent = lang.name;
+    languageSelector.appendChild(option);
+  });
+}
 
-    const saved =
-      localStorage.getItem(LANGUAGE_KEY);
+function applyRegisterLanguage(lang) {
+  if (!translations[lang]) lang = "en";
+  localStorage.setItem("globalbridge_language", lang);
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "fa") ? "rtl" : "ltr";
 
-    if (
-      saved &&
-      SUPPORTED_LANGUAGES.includes(saved)
-    ) {
-      return saved;
+  document.querySelectorAll("[data-key]").forEach(el => {
+    const key = el.getAttribute("data-key");
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
     }
+  });
 
-    /*
-      Migration support for the old homepage key.
-    */
+  if (languageSelector) languageSelector.value = lang;
+}
 
-    const oldLanguage =
-      localStorage.getItem("selectedLanguage");
+populateLanguageSelector();
+const savedLang = localStorage.getItem("globalbridge_language") || "en";
+applyRegisterLanguage(savedLang);
 
-    if (
-      oldLanguage &&
-      SUPPORTED_LANGUAGES.includes(oldLanguage)
-    ) {
+languageSelector.addEventListener("change", function() {
+  applyRegisterLanguage(this.value);
+});
 
-      localStorage.setItem(
-        LANGUAGE_KEY,
-        oldLanguage
-      );
+registerForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
 
-      return oldLanguage;
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const country = document.getElementById("country").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const language = document.getElementById("language").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-    }
-
-    return "en";
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
   }
 
+  registerButton.disabled = true;
+  registerButton.textContent = "Creating account...";
 
-  /*
-    Save the selected language.
-  */
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          country: country,
+          phone: phone,
+          preferred_language: language
+        }
+      }
+    });
 
-  function setLanguage(language) {
-
-    if (
-      !SUPPORTED_LANGUAGES.includes(language)
-    ) {
-      language = "en";
-    }
-
-    localStorage.setItem(
-      LANGUAGE_KEY,
-      language
-    );
-
-    /*
-      Keep the old homepage key temporarily
-      so existing homepage code continues
-      working during the transition.
-    */
-
-    localStorage.setItem(
-      "selectedLanguage",
-      language
-    );
-
-    applyLanguage(language);
-
-  }
-
-
-  /*
-    Apply language settings to the page.
-  */
-
-  function applyLanguage(language) {
-
-    if (
-      !SUPPORTED_LANGUAGES.includes(language)
-    ) {
-      language = "en";
-    }
-
-
-    document.documentElement.lang =
-      language;
-
-
-    /*
-      Persian is the only RTL language
-      currently supported.
-    */
-
-    if (language === "fa") {
-
-      document.documentElement.dir =
-        "rtl";
-
-      document.body.classList.add(
-        "rtl-language"
-      );
-
-    } else {
-
-      document.documentElement.dir =
-        "ltr";
-
-      document.body.classList.remove(
-        "rtl-language"
-      );
-
-    }
-
-
-    /*
-      Keep every language selector on the
-      current page synchronized.
-    */
-
-    document
-      .querySelectorAll(
-        "[data-language-selector]"
-      )
-      .forEach(selector => {
-
-        selector.value = language;
-
-      });
-
-
-    document
-      .querySelectorAll(
-        "#languageSelector"
-      )
-      .forEach(selector => {
-
-        selector.value = language;
-
-      });
-
-  }
-
-
-  /*
-    Create the language selector.
-
-    Pages can use:
-
-    <div data-language-container></div>
-
-    or
-
-    <select id="languageSelector">
-  */
-
-  function createLanguageSelector(
-    container
-  ) {
-
-    if (!container) {
+    if (error) {
+      alert("Registration failed: " + error.message);
+      registerButton.disabled = false;
+      registerButton.textContent = "Create Account";
       return;
     }
 
-
-    const select =
-      document.createElement("select");
-
-
-    select.id =
-      "languageSelector";
-
-
-    select.setAttribute(
-      "data-language-selector",
-      "true"
-    );
-
-
-    select.setAttribute(
-      "aria-label",
-      "Language"
-    );
-
-
-    Object.keys(LANGUAGE_NAMES)
-      .forEach(code => {
-
-        const option =
-          document.createElement("option");
-
-        option.value = code;
-
-        option.textContent =
-          LANGUAGE_NAMES[code];
-
-        select.appendChild(option);
-
-      });
-
-
-    select.addEventListener(
-      "change",
-      function () {
-
-        setLanguage(this.value);
-
-      }
-    );
-
-
-    container.innerHTML = "";
-
-    container.appendChild(select);
-
+    if (data.user) {
+      alert("Account created successfully! Please check your email and confirm your account before signing in.");
+      registerForm.reset();
+    } else {
+      alert("Registration submitted. Please check your email.");
+    }
+  } catch (err) {
+    alert("An error occurred: " + err.message);
+    console.error(err);
   }
 
+  registerButton.disabled = false;
+  registerButton.textContent = "Create Account";
+});
+</script>
 
-  /*
-    Public language functions.
-  */
-
-  window.GlobalBridgeLanguage = {
-
-    getLanguage,
-
-    setLanguage,
-
-    applyLanguage,
-
-    createLanguageSelector,
-
-    supportedLanguages:
-      SUPPORTED_LANGUAGES,
-
-    languageNames:
-      LANGUAGE_NAMES
-
-  };
-
-
-  /*
-    Initialize when the page is ready.
-  */
-
-  function initializeLanguage() {
-
-    const language =
-      getLanguage();
-
-
-    /*
-      Automatically create selectors if
-      a page has a language container.
-    */
-
-    document
-      .querySelectorAll(
-        "[data-language-container]"
-      )
-      .forEach(container => {
-
-        createLanguageSelector(
-          container
-        );
-
-      });
-
-
-    applyLanguage(language);
-
-  }
-
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeLanguage
-    );
-
-  } else {
-
-    initializeLanguage();
-
-  }
-
-})();
+</body>
+</html>
