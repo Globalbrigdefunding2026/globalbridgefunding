@@ -2,13 +2,54 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loan Disbursement</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f7fb; }
+    .box { background: white; padding: 14px; border-radius: 8px; margin: 8px 0; }
+    .error { background: #fee4e2; color: #b42318; }
+  </style>
 </head>
 <body>
-  <h1>Test Page</h1>
-  <p id="msg">Waiting...</p>
+  <h1>Loan Disbursement</h1>
+  <div id="log"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    document.getElementById("msg").textContent = "JavaScript is working";
+    const log = document.getElementById("log");
+    function add(msg, isError) {
+      const div = document.createElement("div");
+      div.className = isError ? "box error" : "box";
+      div.textContent = msg;
+      log.appendChild(div);
+    }
+
+    add("Page loaded");
+
+    if (!window.supabase) {
+      add("Supabase library did not load", true);
+    } else {
+      add("Supabase library loaded");
+
+      try {
+        const supabase = window.supabase.createClient(
+          "https://siykgexfdsmkiqwyxker.supabase.co",
+          "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
+        );
+        add("Client created");
+
+        supabase.auth.getUser().then(({ data, error }) => {
+          if (error) add("Auth error: " + error.message, true);
+          else if (!data.user) add("Not logged in", true);
+          else add("Logged in as: " + data.user.email);
+        }).catch(err => {
+          add("Auth call failed: " + err.message, true);
+        });
+
+      } catch (err) {
+        add("Client error: " + err.message, true);
+      }
+    }
   </script>
 </body>
 </html>
