@@ -7,22 +7,16 @@
 <body>
   <h1>Test</h1>
   <div id="result">Starting...</div>
+  <script>
+    document.getElementById("result").textContent = "Script started";
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const result = document.getElementById("result");
-    const supabase = window.supabase.createClient(
-      "https://siykgexfdsmkiqwyxker.supabase.co",
-      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
-    );
-
-    supabase.from("financing_applications").select("id").limit(1)
-      .then(({ data, error }) => {
-        if (error) result.textContent = "ERROR: " + error.message;
-        else result.textContent = "Success. Rows: " + (data?.length || 0);
-      })
-      .catch(err => {
-        result.textContent = "CATCH: " + err.message;
-      });
+    if (window.supabase) {
+      document.getElementById("result").textContent = "Supabase loaded";
+    } else {
+      document.getElementById("result").textContent = "Supabase failed to load";
+    }
   </script>
 </body>
 </html>
