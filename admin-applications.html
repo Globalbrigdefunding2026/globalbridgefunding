@@ -5,224 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Applications | GlobalBridgeFunding</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, Helvetica, sans-serif; background: #f4f7fb; color: #172033; }
-    header { background: #0b1f3a; color: white; padding: 18px 20px; }
-    .header-inner { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-    .brand { font-size: 20px; font-weight: 700; }
-    main { max-width: 1100px; margin: 30px auto; padding: 0 18px 50px; }
-    h1 { font-size: 28px; margin-bottom: 8px; }
-    h2 { font-size: 22px; margin: 36px 0 14px; }
-    .intro { color: #667085; margin-bottom: 20px; }
-    .message { padding: 14px 16px; border-radius: 10px; margin-bottom: 16px; display: none; }
-    .error { background: #fee4e2; color: #b42318; }
-    .success { background: #dcfae6; color: #067647; }
-    .loading { background: white; padding: 20px; border-radius: 12px; text-align: center; color: #667085; }
-    .application { background: white; border-radius: 14px; padding: 20px; margin-bottom: 16px; border: 1px solid #e6eaf0; }
-    .application-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
-    .reference { font-size: 13px; color: #667085; word-break: break-all; }
-    .status { padding: 6px 12px; border-radius: 20px; background: #fff4cc; color: #8a5b00; font-size: 13px; font-weight: 700; }
-    .details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
-    .detail { background: #f8fafc; padding: 12px; border-radius: 8px; }
-    .detail-label { font-size: 12px; color: #667085; margin-bottom: 4px; }
-    .detail-value { font-weight: 600; }
-    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-    select, input { width: 100%; padding: 10px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 14px; }
-    button { background: #0b5cab; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 8px; }
-    button:disabled { opacity: 0.6; }
-    .empty { background: white; padding: 30px; border-radius: 12px; text-align: center; color: #667085; }
-    .disbursement-card { background: white; border-radius: 14px; padding: 20px; border: 1px solid #e6eaf0; }
+    body { font-family: Arial, sans-serif; background: #f4f7fb; color: #172033; padding: 20px; }
+    .error { background: #fee4e2; color: #b42318; padding: 14px; border-radius: 8px; margin: 10px 0; }
+    .loading { background: white; padding: 20px; border-radius: 10px; text-align: center; }
+    button { background: #0b5cab; color: white; border: none; padding: 10px 16px; border-radius: 8px; }
   </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="brand">GlobalBridgeFunding</div>
-    <div>Administrator Portal</div>
-  </div>
-</header>
+  <h1>Admin Applications</h1>
+  <div id="status" class="loading">Loading...</div>
+  <div id="errorBox" class="error" style="display:none;"></div>
+  <div id="content"></div>
 
-<main>
-  <h1>Application Review</h1>
-  <p class="intro">Review applications, KYC, and record disbursements.</p>
-  <div id="errorMessage" class="message error"></div>
-  <div id="successMessage" class="message success"></div>
-  <div id="loading" class="loading">Loading...</div>
-  <div id="applications"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  <h2>KYC Review</h2>
-  <div id="kycList"><div class="loading">Loading KYC...</div></div>
+    const statusEl = document.getElementById("status");
+    const errorBox = document.getElementById("errorBox");
+    const content = document.getElementById("content");
 
-  <h2>Loan Disbursement</h2>
-  <div class="disbursement-card">
-    <label>Select Approved Application</label>
-    <select id="disbursementApplication"><option value="">Loading...</option></select>
-    <label style="margin-top:12px;">Amount (USD)</label>
-    <input type="number" id="disbursementAmount" step="0.01">
-    <label style="margin-top:12px;">Transaction Hash (optional)</label>
-    <input type="text" id="disbursementHash">
-    <button id="disbursementButton" onclick="recordDisbursement()">Record Disbursement</button>
-  </div>
-</main>
+    function showError(msg) {
+      statusEl.style.display = "none";
+      errorBox.style.display = "block";
+      errorBox.textContent = msg;
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
-const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    async function init() {
+      try {
+        statusEl.textContent = "Checking login...";
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        
+        if (userError) throw new Error("Auth error: " + userError.message);
+        if (!user) {
+          showError("Not logged in. Please log in first.");
+          return;
+        }
 
-function showError(msg) {
-  const el = document.getElementById("errorMessage");
-  el.textContent = msg;
-  el.style.display = "block";
-  document.getElementById("successMessage").style.display = "none";
-}
-function showSuccess(msg) {
-  const el = document.getElementById("successMessage");
-  el.textContent = msg;
-  el.style.display = "block";
-  document.getElementById("errorMessage").style.display = "none";
-  setTimeout(() => el.style.display = "none", 4000);
-}
-function formatMoney(n) { return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n || 0); }
-function escapeHtml(s) { return s == null ? "" : String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"})[c]); }
+        statusEl.textContent = "Checking admin access...";
+        const { data: admin, error: adminError } = await supabase
+          .from("admin_users")
+          .select("user_id")
+          .eq("user_id", user.id)
+          .maybeSingle();
 
-async function init() {
-  const loading = document.getElementById("loading");
-  try {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { location.href = "login.html"; return; }
+        if (adminError) throw new Error("Admin check error: " + adminError.message);
+        if (!admin) {
+          showError("Access denied. This account is not an administrator.");
+          return;
+        }
 
-    const { data: admin } = await supabase.from("admin_users").select("user_id").eq("user_id", user.id).maybeSingle();
-    if (!admin) { showError("Access denied. Not an administrator."); loading.style.display = "none"; return; }
+        statusEl.style.display = "none";
+        content.innerHTML = "<p>Admin access confirmed. Loading data...</p>";
 
-    loading.style.display = "none";
-    await Promise.all([loadApplications(), loadKYC(), loadApproved()]);
-  } catch (err) {
-    loading.style.display = "none";
-    showError("Error: " + err.message);
-    console.error(err);
-  }
-}
+        // Load applications
+        const { data: apps, error: appsError } = await supabase
+          .from("financing_applications")
+          .select("id, business_name, status, requested_amount")
+          .limit(10);
 
-async function loadApplications() {
-  const { data, error } = await supabase.from("financing_applications").select("*").order("created_at", { ascending: false });
-  const container = document.getElementById("applications");
-  if (error) { container.innerHTML = `<div class="empty">Error loading applications</div>`; return; }
-  if (!data?.length) { container.innerHTML = `<div class="empty">No applications found</div>`; return; }
+        if (appsError) throw new Error("Applications error: " + appsError.message);
 
-  container.innerHTML = data.map(app => `
-    <div class="application">
-      <div class="application-header">
-        <div class="reference"><strong>ID:</strong> ${escapeHtml(app.id)}</div>
-        <div class="status">${escapeHtml(app.status || "pending")}</div>
-      </div>
-      <div class="details">
-        <div class="detail"><div class="detail-label">Amount</div><div class="detail-value">${formatMoney(app.requested_amount)}</div></div>
-        <div class="detail"><div class="detail-label">Business</div><div class="detail-value">${escapeHtml(app.business_name)}</div></div>
-        <div class="detail"><div class="detail-label">Type</div><div class="detail-value">${escapeHtml(app.business_type)}</div></div>
-      </div>
-      <label>Status</label>
-      <select id="status-${app.id}">
-        <option value="pending" ${app.status==="pending"?"selected":""}>Pending</option>
-        <option value="under_review" ${app.status==="under_review"?"selected":""}>Under Review</option>
-        <option value="approved" ${app.status==="approved"?"selected":""}>Approved</option>
-        <option value="rejected" ${app.status==="rejected"?"selected":""}>Rejected</option>
-        <option value="disbursed" ${app.status==="disbursed"?"selected":""}>Disbursed</option>
-      </select>
-      <button onclick="updateApp('${app.id}')">Save</button>
-    </div>
-  `).join("");
-}
+        content.innerHTML += `<p>Found ${apps?.length || 0} applications.</p>`;
 
-async function updateApp(id) {
-  const status = document.getElementById("status-" + id).value;
-  const { error } = await supabase.from("financing_applications").update({ status }).eq("id", id);
-  if (error) showError(error.message);
-  else { showSuccess("Updated"); loadApplications(); loadApproved(); }
-}
+        // Load KYC
+        const { data: kyc, error: kycError } = await supabase
+          .from("kyc_submissions")
+          .select("id, full_name, status")
+          .limit(10);
 
-async function loadKYC() {
-  const { data, error } = await supabase.from("kyc_submissions").select("*").order("created_at", { ascending: false });
-  const container = document.getElementById("kycList");
-  if (error || !data?.length) { container.innerHTML = `<div class="empty">No KYC submissions</div>`; return; }
+        if (kycError) throw new Error("KYC error: " + kycError.message);
 
-  container.innerHTML = data.map(kyc => `
-    <div class="application">
-      <div class="application-header">
-        <div class="reference"><strong>KYC:</strong> ${escapeHtml(kyc.id)}</div>
-        <div class="status">${escapeHtml(kyc.status || "pending")}</div>
-      </div>
-      <div class="details">
-        <div class="detail"><div class="detail-label">Name</div><div class="detail-value">${escapeHtml(kyc.full_name)}</div></div>
-        <div class="detail"><div class="detail-label">Document</div><div class="detail-value">${kyc.document_url ? `<a href="${escapeHtml(kyc.document_url)}" target="_blank">View</a>` : "None"}</div></div>
-      </div>
-      <select id="kyc-${kyc.id}">
-        <option value="pending" ${kyc.status==="pending"?"selected":""}>Pending</option>
-        <option value="approved" ${kyc.status==="approved"?"selected":""}>Approved</option>
-        <option value="rejected" ${kyc.status==="rejected"?"selected":""}>Rejected</option>
-      </select>
-      <button onclick="updateKYC('${kyc.id}')">Save KYC</button>
-    </div>
-  `).join("");
-}
+        content.innerHTML += `<p>Found ${kyc?.length || 0} KYC records.</p>`;
+        content.innerHTML += `<p style="color:green;">Basic checks passed. The full page can now be restored.</p>`;
 
-async function updateKYC(id) {
-  const status = document.getElementById("kyc-" + id).value;
-  const { error } = await supabase.from("kyc_submissions").update({ status }).eq("id", id);
-  if (error) showError(error.message);
-  else { showSuccess("KYC updated"); loadKYC(); }
-}
+      } catch (err) {
+        console.error(err);
+        showError(err.message || "Unknown error");
+      }
+    }
 
-async function loadApproved() {
-  const select = document.getElementById("disbursementApplication");
-  const { data, error } = await supabase.from("financing_applications").select("id, business_name, requested_amount").eq("status", "approved");
-  if (error) { select.innerHTML = `<option value="">Error loading</option>`; return; }
-  select.innerHTML = `<option value="">Select approved application</option>` + (data || []).map(a => 
-    `<option value="${a.id}" data-amount="${a.requested_amount}">${escapeHtml(a.business_name)} (${formatMoney(a.requested_amount)})</option>`
-  ).join("");
-}
-
-async function recordDisbursement() {
-  const appId = document.getElementById("disbursementApplication").value;
-  const amount = document.getElementById("disbursementAmount").value;
-  const hash = document.getElementById("disbursementHash").value.trim();
-  const btn = document.getElementById("disbursementButton");
-
-  if (!appId || !amount) { showError("Select application and enter amount"); return; }
-
-  btn.disabled = true;
-  btn.textContent = "Saving...";
-
-  try {
-    const { error: insertError } = await supabase.from("loan_disbursements").insert({
-      application_id: appId,
-      amount: parseFloat(amount),
-      transaction_hash: hash || null
-    });
-    if (insertError) throw insertError;
-
-    await supabase.from("financing_applications").update({ status: "disbursed" }).eq("id", appId);
-
-    showSuccess("Disbursement recorded");
-    document.getElementById("disbursementAmount").value = "";
-    document.getElementById("disbursementHash").value = "";
-    loadApplications();
-    loadApproved();
-  } catch (err) {
-    showError(err.message);
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Record Disbursement";
-  }
-}
-
-document.getElementById("disbursementApplication").addEventListener("change", e => {
-  const opt = e.target.selectedOptions[0];
-  if (opt?.dataset.amount) document.getElementById("disbursementAmount").value = opt.dataset.amount;
-});
-
-init();
-</script>
+    init();
+  </script>
 </body>
 </html>
