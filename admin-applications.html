@@ -3,158 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Applications | GlobalBridgeFunding</title>
+  <title>Admin Applications</title>
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #172033; }
-    header { background: #0b1f3a; color: white; padding: 16px 20px; }
-    .header-inner { max-width: 1100px; margin: auto; }
-    main { max-width: 1100px; margin: 24px auto; padding: 0 16px 40px; }
-    h1 { font-size: 26px; margin-bottom: 6px; }
-    h2 { font-size: 20px; margin: 30px 0 12px; }
-    .card { background: white; border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid #e6eaf0; }
-    .row { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-    .status { background: #fff4cc; color: #8a5b00; padding: 4px 10px; border-radius: 12px; font-size: 13px; font-weight: 700; }
-    label { display: block; font-size: 13px; font-weight: 600; margin: 10px 0 5px; }
-    select, input { width: 100%; padding: 10px; border: 1px solid #d0d5dd; border-radius: 8px; }
-    button { background: #0b5cab; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; margin-top: 10px; cursor: pointer; }
-    .empty { text-align: center; color: #667085; padding: 20px; }
-    .error { background: #fee4e2; color: #b42318; padding: 12px; border-radius: 8px; margin-bottom: 12px; display: none; }
+    body { font-family: Arial; padding: 20px; background: #f4f7fb; }
+    .box { background: white; padding: 16px; border-radius: 10px; margin: 10px 0; }
+    .error { background: #fee4e2; color: #b42318; }
   </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <strong>GlobalBridgeFunding</strong> — Administrator
-  </div>
-</header>
-<main>
-  <h1>Application Review</h1>
-  <div id="error" class="error"></div>
-  <div id="apps">Loading applications...</div>
+  <h1>Admin Applications</h1>
+  <div id="log" class="box">Starting...</div>
 
-  <h2>KYC Review</h2>
-  <div id="kyc">Loading KYC...</div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const log = document.getElementById("log");
+    function add(msg, isError) {
+      const div = document.createElement("div");
+      div.className = isError ? "box error" : "box";
+      div.textContent = msg;
+      log.appendChild(div);
+    }
 
-  <h2>Loan Disbursement</h2>
-  <div class="card">
-    <label>Approved Application</label>
-    <select id="appSelect"><option>Loading...</option></select>
-    <label>Amount (USD)</label>
-    <input type="number" id="amount" step="0.01">
-    <label>Transaction Hash (optional)</label>
-    <input type="text" id="hash">
-    <button onclick="disburse()">Record Disbursement</button>
-  </div>
-</main>
+    const supabase = window.supabase.createClient(
+      "https://siykgexfdsmkiqwyxker.supabase.co",
+      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
+    );
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const supabase = window.supabase.createClient(
-  "https://siykgexfdsmkiqwyxker.supabase.co",
-  "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
-);
+    async function test() {
+      add("Checking login...");
+      const { data: { user }, error: userErr } = await supabase.auth.getUser();
+      if (userErr || !user) { add("Not logged in", true); return; }
+      add("Logged in as: " + user.email);
 
-const errorEl = document.getElementById("error");
-function showError(msg) { errorEl.style.display = "block"; errorEl.textContent = msg; }
+      add("Loading financing_applications...");
+      const { data: apps, error: appErr } = await supabase.from("financing_applications").select("*").limit(5);
+      if (appErr) add("Applications error: " + appErr.message, true);
+      else add("Applications found: " + (apps?.length || 0));
 
-async function load() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) { location.href = "login.html"; return; }
+      add("Loading kyc_submissions...");
+      const { data: kyc, error: kycErr } = await supabase.from("kyc_submissions").select("*").limit(5);
+      if (kycErr) add("KYC error: " + kycErr.message, true);
+      else add("KYC found: " + (kyc?.length || 0));
 
-  const { data: apps, error: appErr } = await supabase.from("financing_applications").select("*").order("created_at", { ascending: false });
-  const appsEl = document.getElementById("apps");
-  if (appErr) { appsEl.innerHTML = `<div class="empty">Error: ${appErr.message}</div>`; }
-  else if (!apps?.length) { appsEl.innerHTML = `<div class="empty">No applications</div>`; }
-  else {
-    appsEl.innerHTML = apps.map(a => `
-      <div class="card">
-        <div class="row">
-          <div><strong>${a.business_name || "—"}</strong><br><small>${a.id}</small></div>
-          <div class="status">${a.status || "pending"}</div>
-        </div>
-        <div>Amount: $${a.requested_amount || 0}</div>
-        <label>Change Status</label>
-        <select id="s-${a.id}">
-          <option value="pending" ${a.status==="pending"?"selected":""}>Pending</option>
-          <option value="approved" ${a.status==="approved"?"selected":""}>Approved</option>
-          <option value="rejected" ${a.status==="rejected"?"selected":""}>Rejected</option>
-          <option value="disbursed" ${a.status==="disbursed"?"selected":""}>Disbursed</option>
-        </select>
-        <button onclick="updateApp('${a.id}')">Save</button>
-      </div>
-    `).join("");
-  }
+      add("Done.");
+    }
 
-  const { data: kyc, error: kycErr } = await supabase.from("kyc_submissions").select("*").order("created_at", { ascending: false });
-  const kycEl = document.getElementById("kyc");
-  if (kycErr) { kycEl.innerHTML = `<div class="empty">Error: ${kycErr.message}</div>`; }
-  else if (!kyc?.length) { kycEl.innerHTML = `<div class="empty">No KYC</div>`; }
-  else {
-    kycEl.innerHTML = kyc.map(k => `
-      <div class="card">
-        <div class="row">
-          <div><strong>${k.full_name || "—"}</strong></div>
-          <div class="status">${k.status || "pending"}</div>
-        </div>
-        ${k.document_url ? `<a href="${k.document_url}" target="_blank">View Document</a>` : "No document"}
-        <label>Status</label>
-        <select id="k-${k.id}">
-          <option value="pending" ${k.status==="pending"?"selected":""}>Pending</option>
-          <option value="approved" ${k.status==="approved"?"selected":""}>Approved</option>
-          <option value="rejected" ${k.status==="rejected"?"selected":""}>Rejected</option>
-        </select>
-        <button onclick="updateKYC('${k.id}')">Save KYC</button>
-      </div>
-    `).join("");
-  }
-
-  const select = document.getElementById("appSelect");
-  const approved = (apps || []).filter(a => a.status === "approved");
-  select.innerHTML = `<option value="">Select</option>` + approved.map(a => 
-    `<option value="${a.id}" data-amount="${a.requested_amount}">${a.business_name} ($${a.requested_amount})</option>`
-  ).join("");
-}
-
-async function updateApp(id) {
-  const status = document.getElementById("s-" + id).value;
-  const { error } = await supabase.from("financing_applications").update({ status }).eq("id", id);
-  if (error) showError(error.message);
-  else load();
-}
-
-async function updateKYC(id) {
-  const status = document.getElementById("k-" + id).value;
-  const { error } = await supabase.from("kyc_submissions").update({ status }).eq("id", id);
-  if (error) showError(error.message);
-  else load();
-}
-
-async function disburse() {
-  const id = document.getElementById("appSelect").value;
-  const amount = document.getElementById("amount").value;
-  const hash = document.getElementById("hash").value;
-  if (!id || !amount) { showError("Select application and amount"); return; }
-
-  const { error } = await supabase.from("loan_disbursements").insert({
-    application_id: id,
-    amount: parseFloat(amount),
-    transaction_hash: hash || null
-  });
-  if (error) { showError(error.message); return; }
-
-  await supabase.from("financing_applications").update({ status: "disbursed" }).eq("id", id);
-  document.getElementById("amount").value = "";
-  document.getElementById("hash").value = "";
-  load();
-}
-
-document.getElementById("appSelect").addEventListener("change", e => {
-  const opt = e.target.selectedOptions[0];
-  if (opt?.dataset.amount) document.getElementById("amount").value = opt.dataset.amount;
-});
-
-load();
-</script>
+    test();
+  </script>
 </body>
 </html>
