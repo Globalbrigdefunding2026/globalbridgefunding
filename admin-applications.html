@@ -1,93 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Applications | GlobalBridgeFunding</title>
+  <title>Admin Test</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f7fb; color: #172033; padding: 20px; }
-    .error { background: #fee4e2; color: #b42318; padding: 14px; border-radius: 8px; margin: 10px 0; }
-    .loading { background: white; padding: 20px; border-radius: 10px; text-align: center; }
-    button { background: #0b5cab; color: white; border: none; padding: 10px 16px; border-radius: 8px; }
+    body { font-family: Arial; padding: 20px; background: #f4f7fb; }
+    .box { background: white; padding: 20px; border-radius: 10px; margin: 10px 0; }
+    .error { background: #fee4e2; color: #b42318; }
   </style>
 </head>
 <body>
-  <h1>Admin Applications</h1>
-  <div id="status" class="loading">Loading...</div>
-  <div id="errorBox" class="error" style="display:none;"></div>
-  <div id="content"></div>
+  <h1>Admin Test</h1>
+  <div id="result" class="box">Starting...</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const SUPABASE_URL = "https://siykgexfdsmkiqwyxker.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6";
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const result = document.getElementById("result");
 
-    const statusEl = document.getElementById("status");
-    const errorBox = document.getElementById("errorBox");
-    const content = document.getElementById("content");
-
-    function showError(msg) {
-      statusEl.style.display = "none";
-      errorBox.style.display = "block";
-      errorBox.textContent = msg;
+    function show(msg, isError) {
+      result.textContent = msg;
+      result.className = isError ? "box error" : "box";
     }
 
-    async function init() {
+    async function run() {
       try {
-        statusEl.textContent = "Checking login...";
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
-        
-        if (userError) throw new Error("Auth error: " + userError.message);
-        if (!user) {
-          showError("Not logged in. Please log in first.");
+        show("Script started");
+
+        if (!window.supabase) {
+          show("Supabase library failed to load", true);
           return;
         }
 
-        statusEl.textContent = "Checking admin access...";
-        const { data: admin, error: adminError } = await supabase
-          .from("admin_users")
-          .select("user_id")
-          .eq("user_id", user.id)
-          .maybeSingle();
+        const supabase = window.supabase.createClient(
+          "https://siykgexfdsmkiqwyxker.supabase.co",
+          "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
+        );
 
-        if (adminError) throw new Error("Admin check error: " + adminError.message);
-        if (!admin) {
-          showError("Access denied. This account is not an administrator.");
+        show("Checking login...");
+
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+          show("Auth error: " + error.message, true);
           return;
         }
 
-        statusEl.style.display = "none";
-        content.innerHTML = "<p>Admin access confirmed. Loading data...</p>";
+        if (!data.user) {
+          show("You are not logged in. Go to login.html first.", true);
+          return;
+        }
 
-        // Load applications
-        const { data: apps, error: appsError } = await supabase
-          .from("financing_applications")
-          .select("id, business_name, status, requested_amount")
-          .limit(10);
-
-        if (appsError) throw new Error("Applications error: " + appsError.message);
-
-        content.innerHTML += `<p>Found ${apps?.length || 0} applications.</p>`;
-
-        // Load KYC
-        const { data: kyc, error: kycError } = await supabase
-          .from("kyc_submissions")
-          .select("id, full_name, status")
-          .limit(10);
-
-        if (kycError) throw new Error("KYC error: " + kycError.message);
-
-        content.innerHTML += `<p>Found ${kyc?.length || 0} KYC records.</p>`;
-        content.innerHTML += `<p style="color:green;">Basic checks passed. The full page can now be restored.</p>`;
+        show("Logged in as: " + data.user.email);
 
       } catch (err) {
-        console.error(err);
-        showError(err.message || "Unknown error");
+        show("Error: " + err.message, true);
       }
     }
 
-    init();
+    run();
   </script>
 </body>
 </html>
