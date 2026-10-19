@@ -1,87 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Loan Disbursement</title>
+  <title>Loan Disbursement | GlobalBridgeFunding</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #f4f7fb; }
-    .box { background: white; padding: 16px; border-radius: 10px; margin: 10px 0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #172033; }
+    header { background: #0b1f3a; color: white; padding: 16px 20px; }
+    .header-inner { max-width: 700px; margin: auto; }
+    main { max-width: 700px; margin: 24px auto; padding: 0 16px 40px; }
+    h1 { font-size: 24px; margin-bottom: 16px; }
+    .card { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e6eaf0; }
+    label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; }
+    select, input { width: 100%; padding: 12px; border: 1px solid #d0d5dd; border-radius: 8px; font-size: 15px; }
+    button { background: #0b5cab; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: 700; margin-top: 16px; cursor: pointer; width: 100%; font-size: 15px; }
+    button:disabled { opacity: 0.6; }
+    .msg { padding: 12px; border-radius: 8px; margin-bottom: 12px; display: none; }
     .error { background: #fee4e2; color: #b42318; }
-    label { display: block; margin: 12px 0 6px; font-weight: 600; }
-    select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
-    button { background: #0b5cab; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; margin-top: 16px; font-weight: 700; }
+    .success { background: #dcfae6; color: #067647; }
   </style>
 </head>
 <body>
-  <h1>Loan Disbursement</h1>
-  <div id="log"></div>
-  <div id="form" style="display:none;" class="box">
+<header>
+  <div class="header-inner"><strong>GlobalBridgeFunding</strong> — Loan Disbursement</div>
+</header>
+<main>
+  <h1>Record Loan Disbursement</h1>
+  <div id="msg" class="msg"></div>
+  <div class="card">
     <label>Approved Application</label>
-    <select id="appSelect"></select>
+    <select id="appSelect"><option value="">Loading approved applications...</option></select>
     <label>Amount (USD)</label>
-    <input type="number" id="amount" step="0.01">
+    <input type="number" id="amount" step="0.01" placeholder="0.00">
     <label>Transaction Hash (optional)</label>
-    <input type="text" id="hash">
-    <button onclick="disburse()">Record Disbursement</button>
+    <input type="text" id="hash" placeholder="Optional">
+    <button id="btn" onclick="disburse()">Record Disbursement</button>
   </div>
+</main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const log = document.getElementById("log");
-    function add(msg, isError) {
-      const div = document.createElement("div");
-      div.className = isError ? "box error" : "box";
-      div.textContent = msg;
-      log.appendChild(div);
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabase = window.supabase.createClient(
+  "https://siykgexfdsmkiqwyxker.supabase.co",
+  "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
+);
 
-    const supabase = window.supabase.createClient(
-      "https://siykgexfdsmkiqwyxker.supabase.co",
-      "sb_publishable_z2GEofJ5eZlSk88IVCjLNg_bmjt6xe6"
-    );
+const msg = document.getElementById("msg");
+const select = document.getElementById("appSelect");
+const amountInput = document.getElementById("amount");
+const hashInput = document.getElementById("hash");
+const btn = document.getElementById("btn");
 
-    async function load() {
-      add("Loading approved applications...");
-      const { data, error } = await supabase
-        .from("financing_applications")
-        .select("id, business_name, requested_amount")
-        .eq("status", "approved");
+function show(text, type) {
+  msg.className = "msg " + type;
+  msg.style.display = "block";
+  msg.textContent = text;
+}
 
-      if (error) { add("Error: " + error.message, true); return; }
+async function loadApps() {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) { location.href = "login.html"; return; }
 
-      add("Found " + (data?.length || 0) + " approved applications.");
+  const { data, error } = await supabase
+    .from("financing_applications")
+    .select("id, business_name, requested_amount")
+    .eq("status", "approved")
+    .order("created_at", { ascending: false });
 
-      const select = document.getElementById("appSelect");
-      select.innerHTML = `<option value="">Select an application</option>` +
-        (data || []).map(a => `<option value="${a.id}" data-amount="${a.requested_amount}">${a.business_name} ($${a.requested_amount})</option>`).join("");
+  if (error) {
+    show("Error loading applications: " + error.message, "error");
+    select.innerHTML = `<option value="">Error</option>`;
+    return;
+  }
 
-      document.getElementById("form").style.display = "block";
-    }
+  if (!data || data.length === 0) {
+    select.innerHTML = `<option value="">No approved applications</option>`;
+    return;
+  }
 
-    async function disburse() {
-      const id = document.getElementById("appSelect").value;
-      const amount = document.getElementById("amount").value;
-      const hash = document.getElementById("hash").value.trim();
+  select.innerHTML = `<option value="">Select an approved application</option>` +
+    data.map(a => `<option value="${a.id}" data-amount="${a.requested_amount || 0}">${a.business_name || "Application"} ($${a.requested_amount || 0})</option>`).join("");
+}
 
-      if (!id || !amount) { add("Please select an application and enter an amount.", true); return; }
+async function disburse() {
+  const id = select.value;
+  const amount = amountInput.value;
+  const hash = hashInput.value.trim();
 
-      const { error } = await supabase.from("loan_disbursements").insert({
-        application_id: id,
-        amount: parseFloat(amount),
-        transaction_hash: hash || null
-      });
+  if (!id) { show("Please select an application.", "error"); return; }
+  if (!amount) { show("Please enter an amount.", "error"); return; }
 
-      if (error) { add("Disbursement error: " + error.message, true); return; }
+  btn.disabled = true;
+  btn.textContent = "Saving...";
 
-      await supabase.from("financing_applications").update({ status: "disbursed" }).eq("id", id);
-      add("Disbursement recorded successfully.");
-      document.getElementById("amount").value = "";
-      document.getElementById("hash").value = "";
-      load();
-    }
+  const { error } = await supabase.from("loan_disbursements").insert({
+    application_id: id,
+    amount: parseFloat(amount),
+    transaction_hash: hash || null
+  });
 
-    load();
-  </script>
+  if (error) {
+    show("Failed: " + error.message, "error");
+    btn.disabled = false;
+    btn.textContent = "Record Disbursement";
+    return;
+  }
+
+  await supabase.from("financing_applications").update({ status: "disbursed" }).eq("id", id);
+
+  show("Disbursement recorded successfully.", "success");
+  amountInput.value = "";
+  hashInput.value = "";
+  btn.disabled = false;
+  btn.textContent = "Record Disbursement";
+  loadApps();
+}
+
+select.addEventListener("change", () => {
+  const opt = select.selectedOptions[0];
+  if (opt && opt.dataset.amount) amountInput.value = opt.dataset.amount;
+});
+
+loadApps();
+</script>
 </body>
 </html>
